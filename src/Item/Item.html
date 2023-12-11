@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>LoL itemss</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <div id="itemss"></div>
@@ -26,7 +27,10 @@
 
             // 'requiredChampion' 속성을 가지지 않은 아이템만 선택
             var filteredallItems = allItems.filter(function(items) {
-                return !items.requiredChampion && items.description.includes('rarityMythic') && items.inStore !== false;
+                return !items.requiredChampion  // 챔피언 전용템 제외
+                    && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+                    && items.inStore !== false // 스토어 : false인 item 제외
+                    && items.maps["11"] === true; // 소환사의 협곡맵("11")만 출력
             });
                 console.log(filteredallItems.length)
 
@@ -59,7 +63,7 @@
                 console.log(filteredallItems[i].name)
                 var items = filteredallItems[i];
                 // 'from' 필드가 존재하는 경우 건너뛰기
-                if (items.from) continue;
+                // if (items.from) continue;
                 // if (items.into) continue;
                 // if (items.name)
                 var imgURL = "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + items.image.full;
