@@ -1,0 +1,784 @@
+.sprite-Aatrox, .sprite-Ahri, .sprite-Akali, .sprite-Alistar, .sprite-Amumu, .sprite-Anivia, .sprite-Annie, .sprite-Aphelios, .sprite-Ashe, .sprite-AurelionSol, .sprite-Azir, .sprite-Bard, .sprite-Blitzcrank, .sprite-Brand, .sprite-Braum, .sprite-Caitlyn, .sprite-Camille, .sprite-Cassiopeia, .sprite-Chogath, .sprite-Corki, .sprite-Darius, .sprite-Diana, .sprite-Draven, .sprite-DrMundo, .sprite-Ekko, .sprite-Elise, .sprite-Evelynn, .sprite-Ezreal, .sprite-Fiddlesticks, .sprite-Fiora, .sprite-Fizz, .sprite-Galio, .sprite-Gangplank, .sprite-Garen, .sprite-Gnar, .sprite-Gragas, .sprite-Graves, .sprite-Gwen, .sprite-Hecarim, .sprite-Heimerdinger, .sprite-Illaoi, .sprite-Irelia, .sprite-Ivern, .sprite-Janna, .sprite-JarvanIV, .sprite-Jax, .sprite-Jayce, .sprite-Jhin, .sprite-Jinx, .sprite-Kaisa, .sprite-Kalista, .sprite-Karma, .sprite-Karthus, .sprite-Kassadin, .sprite-Katarina, .sprite-Kayle, .sprite-Kayn, .sprite-Kennen, .sprite-Khazix, .sprite-Kindred, .sprite-Kled, .sprite-KogMaw, .sprite-Leblanc, .sprite-LeeSin, .sprite-Leona, .sprite-Lillia, .sprite-Lissandra, .sprite-Lucian, .sprite-Lulu, .sprite-Lux, .sprite-Malphite, .sprite-Malzahar, .sprite-Maokai, .sprite-MasterYi, .sprite-MissFortune, .sprite-MonkeyKing, .sprite-Mordekaiser, .sprite-Morgana, .sprite-Nami, .sprite-Nasus, .sprite-Nautilus, .sprite-Neeko, .sprite-Nidalee, .sprite-Nocturne, .sprite-Nunu, .sprite-Olaf, .sprite-Orianna, .sprite-Ornn, .sprite-Pantheon, .sprite-Poppy, .sprite-Pyke, .sprite-Qiyana, .sprite-Quinn, .sprite-Rakan, .sprite-Rammus, .sprite-RekSai, .sprite-Rell, .sprite-Renekton, .sprite-Rengar, .sprite-Riven, .sprite-Rumble, .sprite-Ryze, .sprite-Samira, .sprite-Sejuani, .sprite-Senna, .sprite-Seraphine, .sprite-Sett, .sprite-Shaco, .sprite-Shen, .sprite-Shyvana, .sprite-Singed, .sprite-Sion, .sprite-Sivir, .sprite-Skarner, .sprite-Sona, .sprite-Soraka, .sprite-Swain, .sprite-Sylas, .sprite-Syndra, .sprite-TahmKench, .sprite-Taliyah, .sprite-Talon, .sprite-Taric, .sprite-Teemo, .sprite-Thresh, .sprite-Tristana, .sprite-Trundle, .sprite-Tryndamere, .sprite-TwistedFate, .sprite-Twitch, .sprite-Udyr, .sprite-Urgot, .sprite-Varus, .sprite-Vayne, .sprite-Veigar, .sprite-Velkoz, .sprite-Vi, .sprite-Viego, .sprite-Viktor, .sprite-Vladimir, .sprite-Volibear, .sprite-Warwick, .sprite-Xayah, .sprite-Xerath, .sprite-XinZhao, .sprite-Yasuo, .sprite-Yone, .sprite-Yorick, .sprite-Yuumi, .sprite-Zac, .sprite-Zed, .sprite-Ziggs, .sprite-Zilean, .sprite-Zoe, .sprite-Zyra {
+    max-width: 100%;
+    background-size: 100% 15500%;
+    background-image: url(../resource/img/champion-sprites.jpg);
+    display: block;
+    background-repeat: no-repeat;
+    width: 100%;
+    padding-top: 100%;
+}
+
+.sprite-Aatrox {
+    background-position: 0 0.0%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Ahri {
+    background-position: 0 0.6493506493506493%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Akali {
+    background-position: 0 1.2987012987012987%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Alistar {
+    background-position: 0 1.948051948051948%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Amumu {
+    background-position: 0 2.5974025974025974%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Anivia {
+    background-position: 0 3.2467532467532467%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Annie {
+    background-position: 0 3.896103896103896%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Aphelios {
+    background-position: 0 4.545454545454546%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Ashe {
+    background-position: 0 5.194805194805195%;
+    background-size: 100% 15500%;
+}
+
+.sprite-AurelionSol {
+    background-position: 0 5.8441558441558445%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Azir {
+    background-position: 0 6.4935064935064934%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Bard {
+    background-position: 0 7.142857142857143%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Blitzcrank {
+    background-position: 0 7.792207792207792%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Brand {
+    background-position: 0 8.441558441558442%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Braum {
+    background-position: 0 9.090909090909092%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Caitlyn {
+    background-position: 0 9.74025974025974%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Camille {
+    background-position: 0 10.38961038961039%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Cassiopeia {
+    background-position: 0 11.03896103896104%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Chogath {
+    background-position: 0 11.688311688311689%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Corki {
+    background-position: 0 12.337662337662337%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Darius {
+    background-position: 0 12.987012987012987%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Diana {
+    background-position: 0 13.636363636363637%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Draven {
+    background-position: 0 14.285714285714286%;
+    background-size: 100% 15500%;
+}
+
+.sprite-DrMundo {
+    background-position: 0 14.935064935064934%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Ekko {
+    background-position: 0 15.584415584415584%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Elise {
+    background-position: 0 16.233766233766232%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Evelynn {
+    background-position: 0 16.883116883116884%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Ezreal {
+    background-position: 0 17.532467532467532%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Fiddlesticks {
+    background-position: 0 18.181818181818183%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Fiora {
+    background-position: 0 18.83116883116883%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Fizz {
+    background-position: 0 19.48051948051948%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Galio {
+    background-position: 0 20.12987012987013%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Gangplank {
+    background-position: 0 20.77922077922078%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Garen {
+    background-position: 0 21.428571428571427%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Gnar {
+    background-position: 0 22.07792207792208%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Gragas {
+    background-position: 0 22.727272727272727%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Graves {
+    background-position: 0 23.376623376623378%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Gwen {
+    background-position: 0 24.025974025974026%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Hecarim {
+    background-position: 0 24.675324675324674%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Heimerdinger {
+    background-position: 0 25.324675324675326%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Illaoi {
+    background-position: 0 25.974025974025974%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Irelia {
+    background-position: 0 26.623376623376622%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Ivern {
+    background-position: 0 27.272727272727273%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Janna {
+    background-position: 0 27.92207792207792%;
+    background-size: 100% 15500%;
+}
+
+.sprite-JarvanIV {
+    background-position: 0 28.571428571428573%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Jax {
+    background-position: 0 29.22077922077922%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Jayce {
+    background-position: 0 29.87012987012987%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Jhin {
+    background-position: 0 30.51948051948052%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Jinx {
+    background-position: 0 31.16883116883117%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Kaisa {
+    background-position: 0 31.818181818181817%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Kalista {
+    background-position: 0 32.467532467532465%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Karma {
+    background-position: 0 33.116883116883116%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Karthus {
+    background-position: 0 33.76623376623377%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Kassadin {
+    background-position: 0 34.41558441558441%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Katarina {
+    background-position: 0 35.064935064935064%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Kayle {
+    background-position: 0 35.714285714285715%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Kayn {
+    background-position: 0 36.36363636363637%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Kennen {
+    background-position: 0 37.01298701298701%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Khazix {
+    background-position: 0 37.66233766233766%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Kindred {
+    background-position: 0 38.311688311688314%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Kled {
+    background-position: 0 38.96103896103896%;
+    background-size: 100% 15500%;
+}
+
+.sprite-KogMaw {
+    background-position: 0 39.61038961038961%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Leblanc {
+    background-position: 0 40.25974025974026%;
+    background-size: 100% 15500%;
+}
+
+.sprite-LeeSin {
+    background-position: 0 40.90909090909091%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Leona {
+    background-position: 0 41.55844155844156%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Lillia {
+    background-position: 0 42.20779220779221%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Lissandra {
+    background-position: 0 42.857142857142854%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Lucian {
+    background-position: 0 43.506493506493506%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Lulu {
+    background-position: 0 44.15584415584416%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Lux {
+    background-position: 0 44.8051948051948%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Malphite {
+    background-position: 0 45.45454545454545%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Malzahar {
+    background-position: 0 46.103896103896105%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Maokai {
+    background-position: 0 46.753246753246756%;
+    background-size: 100% 15500%;
+}
+
+.sprite-MasterYi {
+    background-position: 0 47.4025974025974%;
+    background-size: 100% 15500%;
+}
+
+.sprite-MissFortune {
+    background-position: 0 48.05194805194805%;
+    background-size: 100% 15500%;
+}
+
+.sprite-MonkeyKing {
+    background-position: 0 48.701298701298704%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Mordekaiser {
+    background-position: 0 49.35064935064935%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Morgana {
+    background-position: 0 50.0%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Nami {
+    background-position: 0 50.64935064935065%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Nasus {
+    background-position: 0 51.298701298701296%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Nautilus {
+    background-position: 0 51.94805194805195%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Neeko {
+    background-position: 0 52.5974025974026%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Nidalee {
+    background-position: 0 53.246753246753244%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Nocturne {
+    background-position: 0 53.896103896103895%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Nunu {
+    background-position: 0 54.54545454545455%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Olaf {
+    background-position: 0 55.1948051948052%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Orianna {
+    background-position: 0 55.84415584415584%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Ornn {
+    background-position: 0 56.493506493506494%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Pantheon {
+    background-position: 0 57.142857142857146%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Poppy {
+    background-position: 0 57.79220779220779%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Pyke {
+    background-position: 0 58.44155844155844%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Qiyana {
+    background-position: 0 59.09090909090909%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Quinn {
+    background-position: 0 59.74025974025974%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Rakan {
+    background-position: 0 60.38961038961039%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Rammus {
+    background-position: 0 61.03896103896104%;
+    background-size: 100% 15500%;
+}
+
+.sprite-RekSai {
+    background-position: 0 61.688311688311686%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Rell {
+    background-position: 0 62.33766233766234%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Renekton {
+    background-position: 0 62.98701298701299%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Rengar {
+    background-position: 0 63.63636363636363%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Riven {
+    background-position: 0 64.28571428571429%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Rumble {
+    background-position: 0 64.93506493506493%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Ryze {
+    background-position: 0 65.58441558441558%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Samira {
+    background-position: 0 66.23376623376623%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Sejuani {
+    background-position: 0 66.88311688311688%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Senna {
+    background-position: 0 67.53246753246754%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Seraphine {
+    background-position: 0 68.18181818181819%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Sett {
+    background-position: 0 68.83116883116882%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Shaco {
+    background-position: 0 69.48051948051948%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Shen {
+    background-position: 0 70.12987012987013%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Shyvana {
+    background-position: 0 70.77922077922078%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Singed {
+    background-position: 0 71.42857142857143%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Sion {
+    background-position: 0 72.07792207792208%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Sivir {
+    background-position: 0 72.72727272727273%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Skarner {
+    background-position: 0 73.37662337662337%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Sona {
+    background-position: 0 74.02597402597402%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Soraka {
+    background-position: 0 74.67532467532467%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Swain {
+    background-position: 0 75.32467532467533%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Sylas {
+    background-position: 0 75.97402597402598%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Syndra {
+    background-position: 0 76.62337662337663%;
+    background-size: 100% 15500%;
+}
+
+.sprite-TahmKench {
+    background-position: 0 77.27272727272727%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Taliyah {
+    background-position: 0 77.92207792207792%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Talon {
+    background-position: 0 78.57142857142857%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Taric {
+    background-position: 0 79.22077922077922%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Teemo {
+    background-position: 0 79.87012987012987%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Thresh {
+    background-position: 0 80.51948051948052%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Tristana {
+    background-position: 0 81.16883116883118%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Trundle {
+    background-position: 0 81.81818181818181%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Tryndamere {
+    background-position: 0 82.46753246753246%;
+    background-size: 100% 15500%;
+}
+
+.sprite-TwistedFate {
+    background-position: 0 83.11688311688312%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Twitch {
+    background-position: 0 83.76623376623377%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Udyr {
+    background-position: 0 84.41558441558442%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Urgot {
+    background-position: 0 85.06493506493507%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Varus {
+    background-position: 0 85.71428571428571%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Vayne {
+    background-position: 0 86.36363636363636%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Veigar {
+    background-position: 0 87.01298701298701%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Velkoz {
+    background-position: 0 87.66233766233766%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Vi {
+    background-position: 0 88.31168831168831%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Viego {
+    background-position: 0 88.96103896103897%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Viktor {
+    background-position: 0 89.6103896103896%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Vladimir {
+    background-position: 0 90.25974025974025%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Volibear {
+    background-position: 0 90.9090909090909%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Warwick {
+    background-position: 0 91.55844155844156%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Xayah {
+    background-position: 0 92.20779220779221%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Xerath {
+    background-position: 0 92.85714285714286%;
+    background-size: 100% 15500%;
+}
+
+.sprite-XinZhao {
+    background-position: 0 93.50649350649351%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Yasuo {
+    background-position: 0 94.15584415584415%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Yone {
+    background-position: 0 94.8051948051948%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Yorick {
+    background-position: 0 95.45454545454545%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Yuumi {
+    background-position: 0 96.1038961038961%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Zac {
+    background-position: 0 96.75324675324676%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Zed {
+    background-position: 0 97.40259740259741%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Ziggs {
+    background-position: 0 98.05194805194805%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Zilean {
+    background-position: 0 98.7012987012987%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Zoe {
+    background-position: 0 99.35064935064935%;
+    background-size: 100% 15500%;
+}
+
+.sprite-Zyra {
+    background-position: 0 100.0%;
+    background-size: 100% 15500%;
+}
