@@ -69,7 +69,7 @@ $.ajax({
                             clickItemBox.empty(); // 이미지가 이미 있으면, 초기화
                             selectedMythicItem = false; // 신화 아이템 선택 상태 업데이트
 
-                            $(".cost_ds_flex p").text(": 0원"); // 아이템 가격을 초기화
+                            $(".cost p").text(": 0원"); // 아이템 가격을 초기화
                         } else {
                             // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
                             if (selectedMythicItem) {
@@ -82,7 +82,7 @@ $.ajax({
                             selectedMythicItem = true; // 신화 아이템 선택 상태 업데이트
 
                             var itemPrice = item.gold.total; // 아이템의 total 값을 추출
-                            $(".cost_ds_flex p").text(": " + itemPrice + " 원"); // 아이템 가격을 HTML에 적용
+                            $(".cost p").text(": " + itemPrice + " 원"); // 아이템 가격을 HTML에 적용
                         }
                 });
 
