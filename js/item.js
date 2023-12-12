@@ -1,8 +1,3 @@
-function startsWithKorean(name) {
-    var firstChar = name.charAt(0);
-    return firstChar >= '가' && firstChar <= '힣';
-}
-
 // API 가져오기
 $.ajax({
     type: "get",
@@ -18,6 +13,11 @@ $.ajax({
         });
         // console.log(filteredallItems.length)
 
+/*                         정렬                                             */
+        function startsWithKorean(name) {
+            var firstChar = name.charAt(0);
+            return firstChar >= '가' && firstChar <= '힣';
+        }
         // 아이템 알파벳순 정렬
         filteredallItems.sort(function (a, b) {
             var nameA = a.name.toUpperCase();
@@ -41,12 +41,11 @@ $.ajax({
             }
             return 0;
         });
+/*                         정렬 end                                             */
 
+
+/*                           아이템 각종 기능 구현                                 */
         var clickItemBox;
-
-
-        var container = $("<div class='item_container'></div>"); // 컨테이너 생성
-
 function printItems(filteredallItems) {
             $("#newBox").empty(); // newBox의 초기 값 공백
             for (var i = 0; i < filteredallItems.length; i++) {
@@ -65,7 +64,7 @@ function printItems(filteredallItems) {
 
                 // 아이템 이미지 버튼을 클릭하면, 선택한 아이템 박스에 이미지를 설정하고, 다시 클릭하면 초기화
         function setItemClickEvent(itemButton, item, iBoxIndex){
-                itemButton.click(function () {
+                    itemButton.click(function () { // 마우스 클릭시 이벤트
                     var imgSrc = $(this).find('img').attr('src');
 
                     // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
@@ -89,6 +88,25 @@ function printItems(filteredallItems) {
                             var itemPrice = item.gold.total; // 아이템의 total 값을 추출
                             $(".cost p").text(": " + itemPrice + " 원"); // 아이템 가격을 HTML에 적용
                 });
+
+                    itemButton.mouseover(function (){ // 마우스 올리면 이벤트
+                        var imgSrc = $(this).find('img').attr('src');
+                        var imgName = imgSrc.split('/').pop(); // 이미지 파일 이름 추출
+                        // 마우스를 올린 이미지와 API에서 가져온 아이템의 이미지가 일치하는지 확인
+                        if (imgName === item.image.full) {
+                            var description = item.description;
+                            // HTML 태그 제거
+                            description = description.replace(/(<([^>]+)>)/ig, "");
+                            // 필요 없는 문자 제거
+                            description = description.replace(/\r?\n|\r/g, "");
+
+                            // 모든 description 출력
+                            $("#newBox").append('<p>' + description + '</p>');
+                        }
+                    });
+                    itemButton.mouseout(function (){ // 마우스 내리면 이벤트
+                        $("#newBox p").remove();
+                    });
             }
 
         // 6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
