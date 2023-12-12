@@ -70,8 +70,10 @@ input[type="number"] {
     display: flex;
 }
 
+
+/* 챔피언 목록창 */
 .dropdown-multicol{
-    min-width: 24em;
+    min-width: 50em;
 }
 
 
@@ -135,7 +137,7 @@ input[type="number"] {
 }
 
 .champ-img {
-    width: 45%;
+    width: 100%;
 }
 
 .item-img {
@@ -310,10 +312,14 @@ td.stat-col {
     width: 60%;
 }
 
+
+/* 챔피언 검색창 */
 .sticky {
     /* Safari */
     position: -webkit-sticky;
     position: sticky;
+    height: 30px;
+    font-size: 20px;
     top: 0;
     background-color: white;
     z-index: 1;

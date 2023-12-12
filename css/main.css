@@ -48,11 +48,13 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
 #main #sectionB { position: relative; }
 #main #sectionB .video { width: 100%;}
 
-#main #sectionF { position: absolute; top: 200px; width: 100%; height: 700px; display: flex; justify-content: center; }
-#main #sectionF #dealmeterL { padding-left: 15px; width:calc(100%/3); background: rgba(255, 255, 255, .8); border-right: 1px solid;}
+#main #sectionF { position: absolute; top: 120px; width: 100%; height: 800px; display: flex; justify-content: center; }
+#main #sectionF #dealmeterL { padding: 10px 0 0 50px; width:calc(100%/3); background: rgba(255, 255, 255, .8); border-right: 1px solid;}
 
 .ul_main_L { padding: 0 30px 0 0; }
 
+
+/* 게이지 창 */
 .health-box {
     /*background-color: lightgray;*/
     position: relative;
@@ -90,11 +92,18 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
 .resourceless {
     background-color: rgb(0, 101, 252);
 }
+/* 게이지 창 E */
 
-.share_Btn { width: 50px; height: 30px; background: #bbff00; color: #000000; font-size: small;}
-.txt_player { margin-left: 2px; border: 1px; width: 160px; height: 30px; background: #3967ff; color: #fff; text-align: center;}
+/* 공유버튼 */
+.share_Btn { width: 50px; height: 50px; background: #bbff00; color: #000000; font-size: small;}
 
+/* 플레이어표시 */
+.txt_player { margin-left: 2px; border: 1px; width: 160px; height: 50px; background: #3967ff; color: #fff; text-align: center;}
+
+/* 아이템 저장버튼 */
 .item_save { padding: 0 0 5px 0; }
+
+/* 공격버튼 */
 .LV_BA { padding: 0 0 5px 0; }
 
 #main #sectionF #dealmeterL .saveItemBtn { margin-top: 4px ; width: 50px; height: 50px; background: #598EFF; text-align: center; }
@@ -107,23 +116,33 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
 .LV_Button { width : 30px; height: 50px; background: turquoise; }
 .BA_button { width: 126px; height: 50px; background: #598EFF; color: #fff;}
 
+/* 스킬창 */
+.skill_pan { padding: 10px 0 10px 0; }
+/* 스킬버튼 */
 .skill_Btn { width: 50px; height: 50px; background: #598EFF;}
+/* 스킬 레벨 업다운 버튼 */
 .skill_Lv_Btn { margin-top: 5px; width: 10px; height: 20px; background: #598EFF; color: #fff;}
+/* 스킬 레벨 표시창 */
 .LV_Num { margin-top: 5px; border: 1px solid #000; width: 20px; height: 20px; }
+/* 스킬 레벨 업다운버튼 종류 */
 .dropdown-toggle-up { position: relative; }
 .dropdown-toggle::after { position: absolute; transform: rotate(180deg); }
 
-.skill_pan { padding: 0 0 5px 0; }
-
-.stat { width: 215px; height: 255px; background-color: rgb(255, 255, 255); }
+/* 스탯창 */
+.stat { width: 215px; height: 255px; margin-top: 20px; background-color: rgb(255, 255, 255); }
+.stat td { height: 30px;}
 .stat_name { width: 54px; background: #00ddff; }
 .stat_value { width: 54px; background: #78edff;  }
 
-.ul_main_R { width: 310px;}
+.ul_main_R { width: 280px; }
 .cost { padding: 0 0 5px; }
+
+/* 아이템창 */
 .item_pan { display: flex; flex-wrap: wrap; justify-content: space-between; }
-.item_box { width: 100px; height: 100px; background: #ad0099; justify-content: space-between;}
-.log_pan { width: 100%; height: 350px; padding: 20px; background: #2c2e3e; color: #ffffff; }
+.item_box { width: 90px; height: 90px; background: #ad0099; justify-content: space-between;}
+
+/* 로그창 */
+.log_pan { width: 100%; height: 450px; padding: 20px; background: #2c2e3e; color: #ffffff; }
 
 
 
