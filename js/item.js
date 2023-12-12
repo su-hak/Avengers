@@ -68,7 +68,8 @@ function printItems(filteredallItems) {
                     var imgSrc = $(this).find('img').attr('src');
 
                     // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
-                    if (selectedMythicItem.some((selectedMythicItem, index) => selectedMythicItem !== null && index !== iBoxIndex)) {
+                    if (selectedMythicItem.some((selectedMythicItem, index)
+                        => selectedMythicItem !== null && index !== iBoxIndex)) {
                         alert("신화 아이템은 하나만 선택가능합니다.");
                         return;
                     }
