@@ -44,8 +44,8 @@ $.ajax({
 
         var clickItemBox;
 
-        // var selectedMythicItem = false; // 신화 아이템이 이미 선택됐는지 확인하는 변수
 
+        var container = $("<div class='item_container'></div>"); // 컨테이너 생성
 
 function printItems(filteredallItems) {
             $("#newBox").empty(); // newBox의 초기 값 공백
@@ -74,11 +74,11 @@ function printItems(filteredallItems) {
                         return;
                     }
                             // 이미지와 X 버튼을 생성
-                            clickItemBox.html("<img src='" + imgSrc + "'><button class='removeBtn'>X</button>");
+                            clickItemBox.html("<img src='" + imgSrc + "'><button class='itemRemoveBtn'>X</button>");
                             $("#newBox").remove(); // 아이템을 선택하면 #newBox 제거
 
                             // X 버튼 클릭 이벤트
-                            $('.removeBtn').click(function (){
+                            $('.itemRemoveBtn').click(function (){
                                 clickItemBox.empty();
                                 selectedMythicItem[iBoxIndex] = null;
                                 $(".cost p").text(": 0원"); // 아이템 가격 초기화
