@@ -42,11 +42,12 @@ $.ajax({
             return 0;
         });
 
-        var clickItemBox
+        var clickItemBox;
 
-        var selectedMythicItem = false; // 신화 아이템이 이미 선택됐는지 확인하는 변수
+        // var selectedMythicItem = false; // 신화 아이템이 이미 선택됐는지 확인하는 변수
 
-        function printItems(filteredallItems) {
+
+function printItems(filteredallItems) {
             $("#newBox").empty(); // newBox의 초기 값 공백
             for (var i = 0; i < filteredallItems.length; i++) {
                 var item = filteredallItems[i];
@@ -54,40 +55,41 @@ $.ajax({
                 var itemButton = $("<button type='button' class='item_box'><img src='" + imgURL + "' alt='" + item.name + "'></button>" + item.name)
 
                 // 아이템 이미지 버튼에 클릭 이벤트를 설정
-                setItemClickEvent(itemButton, item);
+                setItemClickEvent(itemButton, item, clickItemBox.attr('id').replace('iBox', '') -1);
 
                 $("#newBox").append(itemButton);
             }
         }
+        // 각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
+        var selectedMythicItem = [null, null, null, null, null, null]
 
                 // 아이템 이미지 버튼을 클릭하면, 선택한 아이템 박스에 이미지를 설정하고, 다시 클릭하면 초기화
-                function setItemClickEvent(itemButton, item){
+        function setItemClickEvent(itemButton, item, iBoxIndex){
                 itemButton.click(function () {
                     var imgSrc = $(this).find('img').attr('src');
 
-                        if (clickItemBox.find('img').length > 0) {
-                            clickItemBox.empty(); // 이미지가 이미 있으면, 초기화
-                            selectedMythicItem = false; // 신화 아이템 선택 상태 업데이트
+                    // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
+                    if (selectedMythicItem.some((selectedMythicItem, index) => selectedMythicItem !== null && index !== iBoxIndex)) {
+                        alert("신화 아이템은 하나만 선택가능합니다.");
+                        return;
+                    }
+                            // 이미지와 X 버튼을 생성
+                            clickItemBox.html("<img src='" + imgSrc + "'><button class='removeBtn'>X</button>");
+                            $("#newBox").remove(); // 아이템을 선택하면 #newBox 제거
 
-                            $(".cost p").text(": 0원"); // 아이템 가격을 초기화
-                        } else {
-                            // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
-                            if (selectedMythicItem) {
-                                alert("신화 아이템은 하나만 선택가능합니다.");
-                                return;
-                            }
+                            // X 버튼 클릭 이벤트
+                            $('.removeBtn').click(function (){
+                                clickItemBox.empty();
+                                selectedMythicItem[iBoxIndex] = null;
+                                $(".cost p").text(": 0원"); // 아이템 가격 초기화
+                            });
 
-                            clickItemBox.html("<img src='" + imgSrc + "'>"); // 이미지가 없으면 설정
-                            $("#newBox").remove(); // 아이템을 저장하면 #newBox 제거
-                            selectedMythicItem = true; // 신화 아이템 선택 상태 업데이트
+                            selectedMythicItem[iBoxIndex] = item; // 신화 아이템 선택 상태 업데이트
 
                             var itemPrice = item.gold.total; // 아이템의 total 값을 추출
                             $(".cost p").text(": " + itemPrice + " 원"); // 아이템 가격을 HTML에 적용
-                        }
                 });
-
             }
-
 
         // 6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
             for (var i = 1; i <= 6; i++) {
