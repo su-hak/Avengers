@@ -49,37 +49,28 @@ $.ajax({
             for (var i = 0; i < filteredallItems.length; i++) {
                 var item = filteredallItems[i];
                 var imgURL = "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + item.image.full;
-                var itemButton = $("<button><img src='" + imgURL + "' alt='" + item.name + "'></button>"+ item.name)
+                var itemButton = $("<button type='button' class='item_box'><img src='" + imgURL + "' alt='" + item.name + "'></button>"+ item.name)
+                var selectedItems = Array(6).fill(null); // 배열로 각 iBox의 상태를 관리
 
                 // 아이템 이미지 버튼을 클릭하면, 선택한 아이템 박스에 이미지를 설정하고, 다시 클릭하면 초기화
                 itemButton.click(function () {
                     var itemName = $(this).find('img').attr('alt');
-                    var isDuplicate = false;
+                    var imgSrc = $(this).find('img').attr('src');
 
-                    // #iBox1~#iBox6에서 중복된 아이템이 있는지 확인
-                    for (var i = 1; i <= 6; i++) {
-                        if ($("#iBox" + i).find('img').attr('alt') === itemName) {
-                            isDuplicate = true;
-                            break;
-                        }
-                    }
-
-                    // 중복된 아이템이 없을 경우에만 저장
-                    if (!isDuplicate) {
-                        var imgSrc = $(this).find('img').attr('src');
+                    // 선택하려는 아이템이 이미 선택된 아이템인지 확인
+                    if (selectedItems.includes(itemName)) {
+                        alert("신화템은 중복 될 수 없습니다.");
+                    } else {
                         if (clickItemBox.find('img').length > 0) {
-                            clickItemBox.html("<img src='" + imgSrc + "' alt='" + itemName + "'>");  // 이미지 변경
+                            // clickItemBox.empty(); // 이미지가 이미 있으면, 초기화
+                            clickItemBox.html("<img src='" + imgSrc + "'>"); // 이미지 변경
                         } else {
-                            clickItemBox.html("<img src='" + imgSrc + "' alt='" + itemName + "'>"); // 이미지 설정
+                            clickItemBox.html("<img src='" + imgSrc + "'>"); // 이미지가 없으면 설정
                             $("#newBox").remove(); // 아이템을 저장하면 #newBox 제거
                         }
-                    }
-                    if (clickItemBox.find('img').length > 0) {
-                        // clickItemBox.empty(); // 이미지가 이미 있으면, 초기화
-                        clickItemBox.html("<img src='" + imgSrc + "'>"); // 이미지 변경
-                    } else {
-                        clickItemBox.html("<img src='" + imgSrc + "'>"); // 이미지가 없으면 설정
-                        $("#newBox").remove(); // 아이템을 저장하면 #newBox 제거
+                        // 클릭한 iBox의 인덱스를 가져와 해당 위치에 아이템을 저장합니다.
+                        var iBoxIndex = parseInt(clickItemBox.attr('id').replace('iBox', ''), 10) - 1;
+                        selectedItems[iBoxIndex] = itemName;
                     }
                 });
                 $("#newBox").append(itemButton);
