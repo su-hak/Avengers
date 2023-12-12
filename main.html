@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <!-- 파비콘 -->
 
@@ -16,10 +14,9 @@
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 
     <title>Calc.lol</title> <!-- 타이틀 -->
 </head>
@@ -100,20 +97,47 @@
         
                                         <div class="dropright"> <!-- 챔피언 박스 -->
                                             <button class="btn btn-blue mt-1" type="button" id="left-champ-dropdown"
-                                                data-toggle="dropdown">
+                                                data-toggle="dropdown" onclick="createBoxes()" aria-haspopup="true" aria-expanded="false">
                                                 <img class="portrait img-fluid mx-auto champ-img" src="" name=""
                                                     id="left-champ-portrait" data-toggle="tooltip"
                                                     data-placement="bottom">
                                             </button>
+                                            <div class="dropdown-menu dropdown-multicol" id="left-champ-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(228px, 0px, 0px);">
+                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-champ-search" autocomplete="off">
+                                                <div class="row mx-auto" id="boxContainer">
+                                                    <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
+                                                </div>
+                                            </div>
                                         </div> <!-- 챔피언 박스 E-->
                                     </div>
                                 </li>
                             </ul>
         
                             <ul class="LV_BA ds_flex">
-                                <li class="LV_Show">5</li> <!-- 챔피언 레벨표시 -->
-                                <li class="LV_Button">4</li> <!-- 챔피언 레벨 업다운 버튼 -->
-                                <li>
+                                <li class="LV_Show">  <!-- 챔피언 레벨표시 -->                                     
+                                    <select name="LV" id="champ_lv" style="width: 100%; height: 100%;">
+                                        <option value="LV">LV</option>
+                                        <option value="1">01</option>
+                                        <option value="2">02</option>
+                                        <option value="3">03</option>
+                                        <option value="4">04</option>
+                                        <option value="5">05</option>
+                                        <option value="6">06</option>
+                                        <option value="7">07</option>
+                                        <option value="8">08</option>
+                                        <option value="9">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                    </select>
+                                </li>
+                                                                <li>
                                     <button type="button" class="BA_button">BasicAttack</button> <!-- 베이직 어택 -->
                                 </li>
                             </ul>
@@ -250,7 +274,10 @@
                                         <li><button type="button" id="iBox5" class="item_box"></button></li>
                                         <li><button type="button" id="iBox6" class="item_box"></button></li>
                                     </ul>
-                                    <li class="cost ds_flex" style="align-items:center;"><img src="/resource/img/coin.png" width="40px" ><p>: 1000원</p></li>
+                                    <ul>
+                                        <li class="cost ds_flex" style="align-items:center;"><img src="/resource/img/coin.png" width="40px" ><p>: 1000원</p></li>
+                                    </ul>
+                                    
                                 </li>
                                 <li class="log_pan">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.
@@ -289,6 +316,7 @@
 
         </main>
         <script src="js/page.js"></script>
+        <script src="js/test.js"></script>
         <!-- 메인영역 E -->
 
         <!-- 푸터영역 -->
