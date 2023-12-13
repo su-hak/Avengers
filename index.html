@@ -278,8 +278,20 @@
                             <ul>
                                 <li>
                                     <ul class="item_pan">
-                                        <li><button type="button" id="iBox1" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                        <li><button type="button" id="iBox2" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
+                                        <li><button type="button" id="iBox1" class="item_box">
+                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50">
+                                            </iconify-icon>
+                                        </button>
+                                        </li>
+                                        <li><button type="button" id="iBox2" class="item_box" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(2)">
+                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
+                                            <div class="dropdown-menu2 dropdown-multicol2 show2" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
+                                                <div class="row mx-auto" id="itemContainer2">
+                                                    <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
+                                                </div>
+                                            </div>
+                                        </li>
                                         <li><button type="button" id="iBox3" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
                                         <li><button type="button" id="iBox4" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
                                         <li><button type="button" id="iBox5" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
@@ -323,8 +335,12 @@
                             <ul>
                                 <li>
                                     <ul class="item_pan">
-                                        <li><button type="button" id="iBox1_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                        <li><button type="button" id="iBox2_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
+                                        <li><button type="button" id="iBox1_R" class="item_box">
+                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                        </button>
+                                            </li>
+                                        <li><button type="button" id="iBox2_R" class="item_box">
+                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
                                         <li><button type="button" id="iBox3_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
                                         <li><button type="button" id="iBox4_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
                                         <li><button type="button" id="iBox5_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
