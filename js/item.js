@@ -16,7 +16,7 @@ $.ajax({
         /* 정렬 */
         function startsWithKorean(name){
             var firstChar=name.charAt(0);
-            returnfirstChar>='가'&&firstChar<='힣';
+            return firstChar>='가'&&firstChar<='힣';
         }
         //아이템알파벳순정렬
         filteredallItems.sort(function(a,b){
@@ -47,10 +47,10 @@ $.ajax({
         var clickItemBox;
         function printItems(filteredallItems){
             $("#newBox").empty();//newBox의초기값공백
-            for(vari=0;i<filteredallItems.length;i++){
+            for(var i=0;i<filteredallItems.length;i++){
                 var item=filteredallItems[i];
                 var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
-                var itemButton=$("<button type='button' class='item_box'><imgsrc='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
+                var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
 
                 //아이템 이미지 버튼에 클릭 이벤트를 설정
                 setItemClickEvent(itemButton,item,clickItemBox.attr('id').replace('iBox','')-1);
@@ -62,9 +62,9 @@ $.ajax({
         var selectedMythicItem=[null,null,null,null,null,null]
 
 //아이템이미지버튼을클릭하면,선택한아이템박스에이미지를설정하고,다시클릭하면초기화
-        functionsetItemClickEvent(itemButton,item,iBoxIndex){
+        function setItemClickEvent(itemButton,item,iBoxIndex){
             itemButton.click(function(){//마우스클릭시이벤트
-                var imgSrc=$(this).find('img').attr('src');
+                var imgSrc= $(this).find('img').attr('src');
 
 //이미신화아이템이선택된상태라면팝업을띄우고함수종료
                 if(selectedMythicItem.some((selectedMythicItem,index)=>
@@ -73,20 +73,20 @@ $.ajax({
                     return;
                 }
 //이미지와X버튼을생성
-                clickItemBox.html("<imgsrc='"+imgSrc+"'><buttonclass='itemRemoveBtn'>X</button>");
+                clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
                 $("#newBox").remove();//아이템을선택하면#newBox제거
 
 //X버튼클릭이벤트
                 clickItemBox.find('.itemRemoveBtn').off().click(function(){//off()함수는이전에등록된클릭이벤트를제거함
                     clickItemBox.empty();
                     selectedMythicItem[iBoxIndex]=null;
-                    $(".costp").text(":0원");//아이템가격초기화
+                    $(".cost p").text(":0원");//아이템가격초기화
                 });
 
                 selectedMythicItem[iBoxIndex]=item;//신화아이템선택상태업데이트
 
-                varitemPrice=item.gold.total;//아이템의total값을추출
-                $(".costp").text(":"+itemPrice+"원");//아이템가격을HTML에적용
+                var itemPrice=item.gold.total;//아이템의total값을추출
+                $(".cost p").text(": "+itemPrice+" 원");//아이템가격을HTML에적용
             });
 
             itemButton.mouseover(function(){//마우스올리면이벤트
@@ -105,7 +105,7 @@ $.ajax({
                 }
             });
             itemButton.mouseout(function(){//마우스내리면이벤트
-                $("#newBoxp").remove();
+                $("#newBox p").remove();
             });
         }
 
@@ -114,8 +114,8 @@ $.ajax({
 //버튼을 클릭하면 아이템 출력
             $("#iBox"+i).click(function(){
                 if($("#newBox").length===0){
-                    $("body").append('<divid="newBox"></div>');//새로운박스생성
-                }elseif(clickItemBox&&clickItemBox[0]===this){
+                    $("body").append('<div id="newBox"></div>');//새로운박스생성
+                }else if(clickItemBox&&clickItemBox[0]===this){
                     $("#newBox").remove();//#iBox1~#iBox6을재클릭하면#newBox제거
                     return;//이후코드실행방지
                 }
