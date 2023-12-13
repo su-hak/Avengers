@@ -11,12 +11,13 @@
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/dropdowns.css">
-    <link rel="stylesheet" type="text/css" href="css/item.css">
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
 
     <title>Calc.lol</title> <!-- 타이틀 -->
 </head>
@@ -100,7 +101,7 @@
                                                 data-toggle="dropdown" onclick="createBoxes()" aria-haspopup="true" aria-expanded="false">
                                                 <img class="portrait img-fluid mx-auto champ-img" src="" name=""
                                                     id="left-champ-portrait" data-toggle="tooltip"
-                                                    data-placement="bottom">
+                                                    data-placement="bottom" >
                                             </button>
                                             <div class="dropdown-menu dropdown-multicol" id="left-champ-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(228px, 0px, 0px);">
                                                 <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-champ-search" autocomplete="off">
@@ -263,24 +264,25 @@
                         </li>
 
                         <!-- 아이템 & 로그 창 -->
-                        <li class="ul_main_R">
+                        <li class="left_panel_ul_main_R">
                             <ul>
                                 <li>
                                     <ul class="item_pan">
-                                        <li><button type="button" id="iBox1" class="item_box"></button></li>
-                                        <li><button type="button" id="iBox2" class="item_box"></button></li>
-                                        <li><button type="button" id="iBox3" class="item_box"></button></li>
-                                        <li><button type="button" id="iBox4" class="item_box"></button></li>
-                                        <li><button type="button" id="iBox5" class="item_box"></button></li>
-                                        <li><button type="button" id="iBox6" class="item_box"></button></li>
+                                        <li><button type="button" id="iBox1" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
+                                        <li><button type="button" id="iBox2" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></button></li>
+                                        <li><button type="button" id="iBox3" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></button></li>
+                                        <li><button type="button" id="iBox4" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></button></li>
+                                        <li><button type="button" id="iBox5" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></button></li>
+                                        <li><button type="button" id="iBox6" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></button></li>
                                     </ul>
                                     <ul>
-                                        <li class="cost ds_flex" style="align-items:center;"><img src="/resource/img/coin.png" width="40px" ><p>: 0원</p></li>
+                                        <li class="cost ds_flex" style="align-items:center;"><img src="/resource/img/coin.png" width="40px" ><p>: 1000원</p></li>
                                     </ul>
                                     
                                 </li>
                                 <li class="log_pan">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.
+                                    
                                 </li>
                             </ul>
                             

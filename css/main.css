@@ -19,7 +19,7 @@ ul,ol { list-style: none;}
 a { text-decoration: none; color: #000;}
 em, address { font-style : normal ; }
 
-button { border: 0 ; background: transparent;} /* 버튼 보더 배경 지우기 */
+button { border: 0 ; margin: 0; padding: 0; background: transparent;} /* 버튼 보더 배경 지우기 */
 
 /* form 테두리 영역 없애기 */
 fieldset,input,textarea,select { vertical-align: middle; border: 0;}
@@ -33,25 +33,50 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
 
 /* 초기화  E */
 
+/* 헤더영역 */
 #header { align-items: center;  background: #598EFF; color: rgb(255, 255, 255);}
 #header .inner { padding: 20px; display: flex; align-items: center; }
 #header .inner a {text-decoration: none; }
 #header .inner h1 { padding: 0px 50px 0px 0px; font-size: 30px; font-weight: bold; color: #fff; }
+
+/* 헤더 네비 */
 #header .gnb { margin: 0; display: flex; gap: 30px; align-items: center; }
 #header .gnb a { color: rgb(255, 255, 255); text-decoration: none; }
 #header .gnb a:hover { color:rgb(255, 38, 0)}
+
+/* 로그인 회원가입 */
 #header .util { display: flex; margin: 0 0 0 auto; gap: 20px;}
 #header .util button { width: 80px ; height: 35px ; background: #ffffff; font-size: 15px; font-weight: 700; text-align: center; border-radius: 10px}
 #header .util .joinBtn { width: 110px ; height: 35px ; border: 2px solid #ffdd57; color: #fff; background: #ff00e1; font-size: 15px; font-weight: 700; text-align: center; border-radius: 10px}
 #header .util .joinBtn:hover { background: #ad0099; } 
 
+
+/* 메인영역 */
+
+/* 배경페이지 */
 #main #sectionB { position: relative; }
 #main #sectionB .video { width: 100%;}
 
-#main #sectionF { position: absolute; top: 120px; width: 100%; height: 800px; display: flex; justify-content: center; }
-#main #sectionF #dealmeterL { padding: 10px 0 0 50px; width:calc(100%/3); background: rgba(255, 255, 255, .8); border-right: 1px solid;}
+/* 배경 위 메인 페이지 */
+#main #sectionF { 
+    position: absolute; 
+    top: 120px; 
+    width: 100%; 
+    height: 800px; 
+    display: flex; 
+    justify-content: center; 
+}
+#main #sectionF #dealmeterL { 
+    padding: 10px 0 0 50px; 
+    width:calc(100%/3.3); 
+    background: rgba(255, 255, 255, .8); 
+    border-right: 1px solid;
+}
 
-.ul_main_L { padding: 0 30px 0 0; }
+
+.ul_main_L { 
+    padding: 0 30px 0 0; 
+}
 
 
 /* 게이지 창 */
@@ -94,20 +119,56 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
 }
 /* 게이지 창 E */
 
+/* 공유 및 플레이어 */
+.share_ul { 
+    padding: 0 0 5px 0;
+}
+
 /* 공유버튼 */
-.share_Btn { width: 50px; height: 50px; background: #bbff00; color: #000000; font-size: small;}
+.share_Btn { 
+    width: 50px; 
+    height: 50px; 
+    background: #bbff00; 
+    color: #000000; 
+    font-size: small;
+}
 
 /* 플레이어표시 */
-.txt_player { margin-left: 2px; border: 1px; width: 160px; height: 50px; background: #3967ff; color: #fff; text-align: center;}
+.txt_player { 
+    margin-left: 2px; 
+    border: 1px; 
+    width: 160px; 
+    height: 50px; 
+    background: #3967ff; 
+    color: #fff; 
+    text-align: center;
+}
+.txt_player p { 
+    padding: 12px 0 0 0 ;
+}
 
 /* 아이템 저장버튼 */
-.item_save { padding: 0 0 5px 0; }
+.item_save { 
+    padding: 0 0 5px 0; 
+}
 
 /* 공격버튼 */
-.LV_BA { padding: 0 0 5px 0; }
+.LV_BA { 
+    padding: 0 0 5px 0; 
+}
 
-#main #sectionF #dealmeterL .saveItemBtn { margin-top: 4px ; width: 50px; height: 50px; background: #598EFF; text-align: center; }
-#main #sectionF #dealmeterL .saveItemBtn:hover { background: #0d34b4; color: #fff;}
+.saveItemBtn { 
+    margin-top: 4px ; 
+    width: 50px; 
+    height: 50px; 
+    background: #598EFF; 
+    text-align: center; 
+}
+
+#main #sectionF #dealmeterL .saveItemBtn:hover { 
+    background: #0d34b4; 
+    color: #fff;
+}
 
 .dealmeterLL { width: 50%; }
 .ds_flex { display: flex; gap: 5px;}
@@ -116,37 +177,114 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
 .LV_Button { width : 30px; height: 50px; background: turquoise; }
 .BA_button { width: 126px; height: 50px; background: #598EFF; color: #fff;}
 
+/* 크리티컬 체크박스 */
+.cri_check { width: 30px; height: 50px; background-color: #3967ff; text-align: center; color: #FFF;}
+
 /* 스킬창 */
-.skill_pan { padding: 10px 0 10px 0; }
+.skill_pan { 
+    padding: 0 0 10px 0; 
+}
 /* 스킬버튼 */
-.skill_Btn { width: 50px; height: 50px; background: #598EFF;}
+.skill_Btn { 
+    width: 50px; 
+    height: 50px; 
+    background: #598EFF;
+}
 /* 스킬 레벨 업다운 버튼 */
-.skill_Lv_Btn { margin-top: 5px; width: 10px; height: 20px; background: #598EFF; color: #fff;}
+.skill_Lv_Btn { 
+    margin-top: 5px; 
+    width: 10px; 
+    height: 20px; 
+    background: #598EFF; 
+    color: #fff;
+    font-size: 10px; 
+    font-size: 15px;
+}
 /* 스킬 레벨 표시창 */
-.LV_Num { margin-top: 5px; border: 1px solid #000; width: 20px; height: 20px; }
-/* 스킬 레벨 업다운버튼 종류 */
-.dropdown-toggle-up { position: relative; }
-.dropdown-toggle::after { position: absolute; transform: rotate(180deg); }
+.LV_Num { 
+    margin-top: 5px; 
+    border: 1px solid #000; 
+    width: 20px; 
+    height: 20px; 
+}
+
 
 /* 스탯창 */
-.stat { width: 215px; height: 255px; margin-top: 20px; background-color: rgb(255, 255, 255); }
-.stat td { height: 30px;}
-.stat_name { width: 54px; background: #00ddff; }
-.stat_value { width: 54px; background: #78edff;  }
+.stat { 
+    width: 215px; 
+    height: 255px; 
+    background-color: rgb(255, 255, 255); 
+}
+.stat td { 
+    height: 30px;
+}
+.stat_name { 
+    width: 54px; 
+    background: #00ddff; 
+}
+.stat_value { 
+    width: 54px; 
+    background: #78edff;  
+}
 
-.ul_main_R { width: 280px; }
-.cost { padding: 0 0 5px; }
+/* 아이템 & 로그 패널 */
+.left_panel_ul_main_R { 
+    width: 220px; 
+}
+
+/* 돈 이미지 */
+.cost { 
+    padding: 0 0 5px;
+    align-items : center; 
+    text-align: center;
+    align-content: center;
+}
 
 /* 아이템창 */
 .item_pan { display: flex; flex-wrap: wrap; justify-content: space-between; }
-.item_box {margin-bottom: 5px; width: 90px; height: 90px; background: #ad0099; justify-content: space-between;}
+.item_box { width: 70px; height: 70px; background: #ffffff; margin-bottom: 10px ;  }
 
 /* 로그창 */
-.log_pan { width: 100%; height: 450px; padding: 20px; background: #2c2e3e; color: #ffffff; }
+.log_pan { 
+    width: 100%; 
+    height: 460px; 
+    padding: 20px; 
+    background: #2c2e3e; 
+    color: #ffffff; 
+}
 
 
+/* 오른쪽 딜미터기 */
 
+#main #sectionF #dealmeterR { 
+    padding: 10px 0 0 50px; 
+    width:calc(100%/3.3); 
+    background: rgba(255, 255, 255, .8); 
+    border-right: 1px solid;
+}
 
-#main #sectionF #dealmeterR { padding: 20px; width:calc(100%/3); height: 700px; background: rgba(255, 255, 255, .8);}
+.ds_flex_R { display: flex; justify-content: right; gap: 5px;}
+
+.right_panel_ul_main_L { 
+    width: 220px;     
+}
+
+.ul_main_R { 
+    padding: 0 0 0 30px; 
+}
+
+.txt_cpu { 
+    margin-left: 2px; 
+    border: 1px; 
+    width: 160px; 
+    height: 50px; 
+    background: rgb(255, 56, 56); 
+    color: #fff; 
+    text-align: center;
+}
+
+.txt_cpu p { 
+    padding: 12px 0 0 0 ;
+}
 
 

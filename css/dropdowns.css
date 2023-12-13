@@ -47,17 +47,21 @@ input[type="number"] {
     border : 0px solid black;
     width: 160px;
     height: 160px;
+
 }
 
 .btn-blue:hover, .btn-blue:focus, .btn-blue:active {
     color : white;
     background-color : rgb(26, 21, 62);
+    
 }
 
 .btn-red {
-    background-color : rgb(76, 8, 5);
+    background-color : rgb(255, 56, 56);
     color : white;
-    border : 1px solid black;
+    border : 0px solid black;
+    width: 160px;
+    height: 160px;
 }
 
 .btn-red:hover, .btn-red:focus, .btn-red:active {
