@@ -1,0 +1,79 @@
+강철심장
+강철의 솔라리 펜던트
+광휘의 미덕
+구인수의 격노검
+균열 생성기
+나보리 신속검
+돌풍
+드락사르의 황혼검
+루덴의 폭풍
+리안드리의 고뇌
+마법공학 로켓 벨트
+만년서리
+무한의 대검
+발걸음 분쇄기
+밤의 수확자
+부서진 여왕의 왕관
+삼위일체
+//선혈포식자
+슈렐리아의 군가
+신성한 파괴자
+얼어붙은 건틀릿
+영겁의 지팡이
+요우무의 유령검
+월석 재생기
+월식
+저녁갑주
+해신 작쇼
+헬리아의 메아리
+
+"6630": {
+			"name": "선혈포식자",
+			"description": "<mainText><stats>공격력 <attention>55</attention><br>체력 <attention>400</attention><br>스킬 가속 <attention>20</attention><br>모든 피해 흡혈 <attention>8%</attention></stats><br><br><active>사용 시 -</active> <active>갈망의 가르기:</active> 주변 적에게 피해를 입힙니다. 챔피언을 맞힐 때마다 체력을 회복합니다.<br><br><rarityMythic>신화급 기본 지속 효과:</rarityMythic> 다른 모든 <rarityLegendary>전설급</rarityLegendary> 아이템에 체력 및 스킬 가속</mainText><br>",
+			"colloq": "",
+			"plaintext": "",
+			"from": [
+				"6029",
+				"3044",
+				"3067"
+			],
+			"into": [
+				"7015"
+			],
+			"image": {
+				"full": "6630.png",
+				"sprite": "item3.png",
+				"group": "item",
+				"x": 336,
+				"y": 432,
+				"w": 48,
+				"h": 48
+			},
+			"gold": {
+				"base": 200,
+				"purchasable": true,
+				"total": 3200,
+				"sell": 2240
+			},
+			"tags": [
+				"Health",
+				"Damage",
+				"LifeSteal",
+				"Active",
+				"CooldownReduction",
+				"SpellVamp",
+				"AbilityHaste"
+			],
+			"maps": {
+				"11": true,
+				"12": true,
+				"21": true,
+				"22": false,
+				"30": false
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"FlatHPPoolMod": 400
+			},
+			"depth": 3
+		},
