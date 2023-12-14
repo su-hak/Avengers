@@ -22,34 +22,19 @@ $.ajax({
         });
         /*===========================정렬end==========================*/
 
-        var filteredallItems=items.filter(function(items){
+        var filterItems=items.filter(function(items){
             return !items.requiredChampion // 챔피언전용템제외
-                && items.description.includes('rarityMythic') //신화급아이템만출력
-                && items.inStore!==false //스토어:false인item제외
-                && items.maps["11"]===true; //소환사의협곡맵("11")만출력
+                && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+                && items.inStore!==false // 스토어: false인 item 제외
+                && items.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
         });
-
-        //=======================아이템 가나다 순 정렬
-        items.sort(function(a,b){
-            var nameA=a.name.toUpperCase();
-            var nameB=b.name.toUpperCase();
-
-            if(nameA<nameB){
-                return -1;
-            }
-            if(nameA>nameB){
-                return 1;
-            }
-            return 0;
-        });
-        /*===========================정렬end==========================*/
 
         /* 아이템 출력 기능 구현 */
         var clickItemBox;
-        function printItems(filteredallItems){
+        function printItems(filterItems){
             $("#newBox").empty();//newBox의초기값공백
-            for(var i=0;i<filteredallItems.length;i++){
-                var item=filteredallItems[i];
+            for(var i=0;i<filterItems.length;i++){
+                var item=filterItems[i];
                 var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
                 var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
 
@@ -116,14 +101,15 @@ $.ajax({
         for(var i=1;i<=6;i++){
             //버튼을 클릭하면 아이템 출력
             $("#iBox"+i).click(function(){
-                if($("#newBox").length===0){
-                    $("body").append('<div id="newBox"></div>');//새로운박스생성
+                var containerId = "itemContainer" + i; // 현재 반복 수에 따른 itemContainer의 id를 생성
+                if($("#"+ containerId).children().length===0){
+                    $("#" + containerId).append('<div id="newBox"></div>');//새로운 박스 생성
                 }else if(clickItemBox&&clickItemBox[0]===this){
                     $("#newBox").remove();//#iBox1~#iBox6을재클릭하면#newBox제거
                     return;//이후코드실행방지
                 }
                 clickItemBox=$(this);//현재클릭한아이템박스를저장
-                printItems(filteredallItems);//아이템출력을새로운박스안으로변경
+                printItems(filterItems);//아이템출력을새로운박스안으로변경
             });
         }
     }
