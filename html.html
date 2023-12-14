@@ -278,59 +278,78 @@
                             <ul>
                                 <li>
                                     <ul class="item_pan">
-                                        <li><button type="button" id="iBox1" class="item_box btn-blue mt-1" data-toggle="dropdown" onclick="createItemBoxes()" aria-haspopup="true" aria-expanded="true" >
-                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"><img class="portrait img-fluid mx-auto champ-img" src="" name=""
-                                                                                                                                      id="left-item-portrait" data-toggle="tooltip"
-                                                                                                                                      data-placement="bottom" ></iconify-icon></button>
-                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
-                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
-                                                <div class="row mx-auto" id="itemContainer">
+                                        <li>
+                                            <button type="button" id="iBox1" class="item_box">
+                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
+                                                 aria-labelledby="dropdownMenuButton" x-placement="right-start"
+                                                 style="position: absolute; will-change:transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px); ">
+                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search1" autocomplete="off">
+                                            <div class="row mx-auto" id="itemContainer1">
                                                     <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                                </div>
-                                            </div>
+                                                </div></div>
                                         </li>
-                                        <li><button type="button" id="iBox2" class="item_box" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(2)">
-                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
-                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-list2" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                        <li>
+                                            <button type="button" id="iBox2" class="item_box">
+                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
+                                                 aria-labelledby="dropdownMenuButton" x-placement="right-start"
+                                                 style="position: absolute; will-change:transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px); ">
                                                 <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search2" autocomplete="off">
-                                                <div class="row mx-auto" id="itemContainer2">
+                                            <div class="row mx-auto" id="itemContainer2">
                                                     <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                                </div>
-                                            </div>
+                                                </div></div>
                                         </li>
-                                        <li><button type="button" id="iBox3" class="item_box" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(3)">
-                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
-                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-list3" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                        <li>
+                                            <button type="button" id="iBox3" class="item_box">
+                                                <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
+                                                 aria-labelledby="dropdownMenuButton" x-placement="right-start"
+                                                 style="position: absolute; will-change:transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px); ">
                                                 <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search3" autocomplete="off">
                                                 <div class="row mx-auto" id="itemContainer3">
                                                     <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                                </div>
-                                            </div>
-                                        </li><li><button type="button" id="iBox4" class="item_box" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(4)">
-                                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
-                                        <div class="dropdown-menu dropdown-multicol show" id="left-item-list4" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
-                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search4" autocomplete="off">
-                                            <div class="row mx-auto" id="itemContainer4">
-                                                <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                            </div>
-                                        </div>
-                                    </li><li><button type="button" id="iBox5" class="item_box" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(5)">
-                                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
-                                        <div class="dropdown-menu dropdown-multicol show" id="left-item-list5" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
-                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search5" autocomplete="off">
-                                            <div class="row mx-auto" id="itemContainer5">
-                                                <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                            </div>
-                                        </div>
-                                    </li><li><button type="button" id="iBox6" class="item_box" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(6)">
-                                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
-                                        <div class="dropdown-menu dropdown-multicol show" id="left-item-list6" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
-                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search6" autocomplete="off">
-                                            <div class="row mx-auto" id="itemContainer6">
-                                                <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                            </div>
-                                        </div>
-                                    </li>
+                                                </div></div>
+                                        </li>
+                                        <li>
+                                            <button type="button" id="iBox4" class="item_box">
+                                                <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
+                                                 aria-labelledby="dropdownMenuButton" x-placement="right-start"
+                                                 style="position: absolute; will-change:transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px); ">
+                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search4" autocomplete="off">
+                                                <div class="row mx-auto" id="itemContainer4">
+                                                    <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
+                                                </div></div>
+                                        </li>
+                                        <li>
+                                            <button type="button" id="iBox5" class="item_box">
+                                                <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
+                                                 aria-labelledby="dropdownMenuButton" x-placement="right-start"
+                                                 style="position: absolute; will-change:transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px); ">
+                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search5" autocomplete="off">
+                                                <div class="row mx-auto" id="itemContainer5">
+                                                    <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
+                                                </div></div>
+                                        </li>
+                                        <li>
+                                            <button type="button" id="iBox6" class="item_box">
+                                                <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
+                                                 aria-labelledby="dropdownMenuButton" x-placement="right-start"
+                                                 style="position: absolute; will-change:transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px); ">
+                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search6" autocomplete="off">
+                                                <div class="row mx-auto" id="itemContainer6">
+                                                    <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
+                                                </div></div>
+                                        </li>
                                     </ul>
                                     <ul> <!-- 왼쪽 동전 이미지 -->
                                         <li class="cost ds_flex">
@@ -591,8 +610,8 @@
 
         <script src="./js/test.js"></script>
 
-        <script src="./js/itemBox.js"></script>
-        <script src="./js/item.js"></script>
+        <!--<script src="./js/itemBox.js"></script>-->
+        <script src="./js/item2.js"></script>
         <!-- 메인영역 E -->
 
         <!-- 푸터영역 -->

@@ -32,7 +32,7 @@ $.ajax({
         /* 아이템 출력 기능 구현 */
         var clickItemBox;
         function printItems(filterItems){
-            $("#newBox").empty();//newBox의초기값공백
+            $("#newBox").empty();//newBox의 초기 값 공백
             for(var i=0;i<filterItems.length;i++){
                 var item=filterItems[i];
                 var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
@@ -47,24 +47,26 @@ $.ajax({
         //각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
         var selectedMythicItem=[null,null,null,null,null,null]
 
-        //아이템 이미지 버튼을 클릭하면,선택한아이템박스에 이미지를설정하고,다시클릭하면초기화
+        // 아이템 이미지 버튼을 클릭하면,선택한 아이템 박스에 이미지를 설정하고,다시 클릭하면초기화
         function setItemClickEvent(itemButton,item,iBoxIndex){
             itemButton.click(function(){//마우스클릭시이벤트
                 var imgSrc= $(this).find('img').attr('src');
+                var iBoxIndex = containerId.replace("itemContainer", "");
+                var iBox = $("#iBox" + iBoxIndex);
 
-                //이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
+                // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
                 if(selectedMythicItem.some((selectedMythicItem,index)=>
                     selectedMythicItem!==null&&index!==iBoxIndex)){
-                    alert("신화아이템은하나만선택가능합니다.");
+                    alert("신화 아이템은 하나만 선택 가능 합니다.");
                     return;
                 }
 
                 // 이미지와 X버튼을 생성
-                clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
+                iBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
                 $("#newBox").remove();//아이템을선택하면#newBox제거
 
                 // X버튼 클릭 이벤트
-                clickItemBox.find('.itemRemoveBtn').click(function(){//off()함수는이전에등록된클릭이벤트를제거함
+                iBox.find('.itemRemoveBtn').click(function(){//off()함수는이전에등록된클릭이벤트를제거함
                     $(this).siblings('img').remove(); // 현재 'X' 버튼과 동일한 iBox의 이미지만 제거
                     $(this).remove(); // 'X' 버튼 제거
                     selectedMythicItem[iBoxIndex] = null;
@@ -98,18 +100,16 @@ $.ajax({
         }
 
         //6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
-        for(var i=1;i<=6;i++){
-            //버튼을 클릭하면 아이템 출력
-            $("#iBox"+i).click(function(){
-                var containerId = "itemContainer" + i; // 현재 반복 수에 따른 itemContainer의 id를 생성
-                if($("#"+ containerId).children().length===0){
-                    $("#" + containerId).append('<div id="newBox"></div>');//새로운 박스 생성
-                }else if(clickItemBox&&clickItemBox[0]===this){
-                    $("#newBox").remove();//#iBox1~#iBox6을재클릭하면#newBox제거
-                    return;//이후코드실행방지
+        for (var i = 1; i <= 6; i++) {
+            $("#iBox" + i).click(function() {
+                if ($("#newBox").length === 0) {
+                    $("body").append('<div id="newBox"></div>');
+                } else if (clickItemBox && clickItemBox[0] === this) {
+                    $("#newBox").remove();
+                    return;
                 }
-                clickItemBox=$(this);//현재클릭한아이템박스를저장
-                printItems(filterItems);//아이템출력을새로운박스안으로변경
+                clickItemBox= $(this);//현재 클릭한 아이템 박스를 저장
+                printItems(filterItems);//아이템 출력을 새로운 박스 안으로 변경
             });
         }
     }
