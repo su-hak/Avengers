@@ -104,10 +104,10 @@
                                     <div class="col px-1">
                                         <div class="dropright"> <!-- 챔피언 박스 -->
                                             <button class="btn btn-blue mt-1" type="button" id="left-champ-dropdown"
-                                                data-toggle="dropdown" onclick="createBoxes()" aria-haspopup="true" aria-expanded="false">
+                                                          data-toggle="dropdown" onclick="createBoxes()" aria-haspopup="true" aria-expanded="false">
                                                 <img class="portrait img-fluid mx-auto champ-img" src="" name=""
-                                                    id="left-champ-portrait" data-toggle="tooltip"
-                                                    data-placement="bottom" >
+                                                     id="left-champ-portrait" data-toggle="tooltip"
+                                                     data-placement="bottom" >
                                             </button>
                                             <div class="dropdown-menu dropdown-multicol" id="left-champ-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(228px, 0px, 0px);">
                                                 <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-champ-search" autocomplete="off">
@@ -278,24 +278,57 @@
                             <ul>
                                 <li>
                                     <ul class="item_pan">
-                                        <li><button type="button" id="iBox1" class="item_box">
-                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50">
-                                            </iconify-icon>
-                                        </button>
-                                        </li>
-                                        <li><button type="button" id="iBox2" class="item_box" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(2)">
+                                        <li><button type="button" id="iBox1" class="item_box"> <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(1)"-->>
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
-                                            <div class="dropdown-menu2 dropdown-multicol2 show2" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                            <!--<div class="dropdown-menu dropdown-multicol show" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
+                                                <div class="row mx-auto" id="itemContainer">
+                                                    &lt;!&ndash; JavaScript로 후처리될 요소를 동적으로 생성 &ndash;&gt;
+                                                </div>
+                                            </div>-->
+                                        </li>
+                                        <li><button type="button" id="iBox2" class="item_box" ><!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(2)"-->>
+                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
+                                            <!--<div class="dropdown-menu2 dropdown-multicol2 show2" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
                                                 <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
                                                 <div class="row mx-auto" id="itemContainer2">
-                                                    <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
+                                                    &lt;!&ndash; JavaScript로 후처리될 요소를 동적으로 생성 &ndash;&gt;
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </li>
-                                        <li><button type="button" id="iBox3" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                        <li><button type="button" id="iBox4" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                        <li><button type="button" id="iBox5" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                        <li><button type="button" id="iBox6" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
+                                        <li><button type="button" id="iBox3" class="item_box" ><!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(3)"-->>
+                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
+                                            <!--<div class="dropdown-menu2 dropdown-multicol2 show2" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                                <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
+                                                <div class="row mx-auto" id="itemContainer3">
+                                                    &lt;!&ndash; JavaScript로 후처리될 요소를 동적으로 생성 &ndash;&gt;
+                                                </div>
+                                            </div>-->
+                                        </li><li><button type="button" id="iBox4" class="item_box"> <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(2)"-->>
+                                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
+                                        <!--<div class="dropdown-menu2 dropdown-multicol2 show2" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
+                                            <div class="row mx-auto" id="itemContainer4">
+                                                &lt;!&ndash; JavaScript로 후처리될 요소를 동적으로 생성 &ndash;&gt;
+                                            </div>
+                                        </div>-->
+                                    </li><li><button type="button" id="iBox5" class="item_box" ><!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(2)"-->>
+                                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
+                                       <!-- <div class="dropdown-menu2 dropdown-multicol2 show2" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
+                                            <div class="row mx-auto" id="itemContainer5">
+                                                &lt;!&ndash; JavaScript로 후처리될 요소를 동적으로 생성 &ndash;&gt;
+                                            </div>
+                                        </div>-->
+                                    </li><li><button type="button" id="iBox6" class="item_box"> <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="createItemBoxes(2)"-->>
+                                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button>
+                                       <!-- <div class="dropdown-menu2 dropdown-multicol2 show2" id="left-item-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px);">
+                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
+                                            <div class="row mx-auto" id="itemContainer6">
+                                                &lt;!&ndash; JavaScript로 후처리될 요소를 동적으로 생성 &ndash;&gt;
+                                            </div>
+                                        </div>-->
+                                    </li>
                                     </ul>
                                     <ul> <!-- 왼쪽 동전 이미지 -->
                                         <li class="cost ds_flex">
