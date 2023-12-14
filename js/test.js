@@ -1,6 +1,24 @@
 // 챔피언 정보 ajax로 받아오기
 let champ; // 전역 변수로 선언
 
+
+
+
+$.ajax({
+    url: 'https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json',
+    method: 'GET',
+    success: function(data) {
+        console.log("CDN 데이터 :: ",data);
+        // 요청이 성공적으로 완료되었을 때 처리할 코드를 작성합니다.
+        // response 변수에 응답 데이터가 들어있습니다.
+        // ...
+    },
+    error: function(xhr, status, error) {
+        // 요청이 실패한 경우에 대한 처리를 작성합니다.
+        // ...
+    }
+});
+
 $.ajax({
     type: "get",
     url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion.json",
@@ -118,21 +136,125 @@ function setChampSpells(id){
     });
 }
 
+// 선택한 레벨 받아오기
+function getSelectedLevel() {
+    const selectElement = document.getElementById('champ_lv');
+    const selectedValue = selectElement.value;
+    return selectedValue;
+}
+
+
 // 선택한 챔피언의 스탯 긁어오기
-function setChampStats(id){
-    console.log("setChampStats 진입성공")
-    // var champion = champ.find(function(champion) {
-    //     return champion.id === id;
-    // });
-    // console.log(champion.id);
+// function setChampStats(id) {
+//     console.log("setChampStats 진입성공");
+//
+//     detailedChamp(id, function(dtch) {
+//         const baseAttackDamage = dtch[0].stats.attackdamage; // 기본 공격력 값 저장
+//         let attackDamageMultiplier = 0; //
+//
+//         const statValues = {
+//             'attackdamage': baseAttackDamage,
+//             'abilitypower': 0,
+//             'armor': dtch[0].stats.armor,
+//             'spellblock': dtch[0].stats.spellblock,
+//             'attackspeed': dtch[0].stats.attackspeed,
+//             'movespeed': dtch[0].stats.movespeed,
+//             'mpregen': dtch[0].stats.mpregen,
+//             'hpregen': dtch[0].stats.hpregen,
+//             'crit': dtch[0].stats.crit
+//         };
+//
+//         function updateStats(selectedLevel) {
+//             if (selectedLevel > 1) {
+//                 for (let i = 1; i < selectedLevel; i++) {
+//                     attackDamageMultiplier += Math.round(baseAttackDamage * (dtch[0].stats.attackdamageperlevel * 0.01));
+//
+//                 }
+//                 statValues['attackdamage'] = baseAttackDamage + attackDamageMultiplier;
+//             } else {
+//                 statValues['attackdamage'] = baseAttackDamage;
+//             }
+//
+//             for (const id in statValues) {
+//                 const element = document.getElementById(id);
+//                 let value = statValues[id]; // 소수점 이하를 제거합니다
+//                 value = Math.floor(value);
+//
+//                 if (element) {
+//                     element.nextElementSibling.textContent = value;
+//                 }
+//             }
+//         }
+//         // 초기 레벨 설정
+//         const selectedLevel = getSelectedLevel();
+//         updateStats(selectedLevel);
+//
+//         // 레벨 변경 시 업데이트
+//         document.getElementById('champ_lv').onchange = function() {
+//             const selectedLevel = getSelectedLevel();
+//             console.log(selectedLevel); // 선택된 레벨 값 출력
+//             updateStats(selectedLevel);
+//         };
+//     });
+// }
+
+
+function setChampStats(id) {
+    console.log("setChampStats 진입성공");
 
     detailedChamp(id, function(dtch) {
+        const baseAttackDamage = dtch[0].stats.attackdamage; // 기본 공격력 값 저장
+        const statValues = {
+            'attackdamage': baseAttackDamage,
+            'abilitypower': 0,
+            'armor': dtch[0].stats.armor,
+            'spellblock': dtch[0].stats.spellblock,
+            'attackspeed': dtch[0].stats.attackspeed,
+            'movespeed': dtch[0].stats.movespeed,
+            'mpregen': dtch[0].stats.mpregen,
+            'hpregen': dtch[0].stats.hpregen,
+            'crit': dtch[0].stats.crit
+        };
 
-        console.log(dtch[0].stats);
-        // dtch.stats를 활용하여 필요한 작업을 수행합니다.
-        // console.log(dtch.stats);
+        function updateStats(selectedLevel) {
+            if (selectedLevel > 1) {
+                let attackDamageMultiplier = 0;
+                for (let i = 1; i < selectedLevel; i++) {
+                    attackDamageMultiplier += baseAttackDamage * (dtch[0].stats.attackdamageperlevel * 0.01);
+                }
+                statValues['attackdamage'] = baseAttackDamage + attackDamageMultiplier;
+            } else {
+                statValues['attackdamage'] = baseAttackDamage;
+            }
+
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                // let value = Math.floor(statValues[id]); // 소수점 이하 버림
+                let value = statValues[id]; // 소수점 이하 버림
+                // value = value.toFixed(0); // 소수점 이하 제거
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+
+        // 초기 레벨 설정
+        const selectedLevel = getSelectedLevel();
+        updateStats(selectedLevel);
+
+        // 레벨 변경 시 업데이트
+        document.getElementById('champ_lv').onchange = function() {
+            const selectedLevel = getSelectedLevel();
+            console.log(selectedLevel); // 선택된 레벨 값 출력
+            updateStats(selectedLevel);
+        };
     });
 }
+
+
+
+
+
 
 // 챔피언 선택시 초상화 해당 챔피언으로 변경하는 함수
 function changeLeftChampPortraitSrc(newSrc) {
@@ -159,10 +281,10 @@ function createBoxes() {
     boxContainer.innerHTML = ""; // 기존 요소 초기화
     for(var i=0; boxes.length; i++){
 
-            let championName = boxes[i].name;
-            // console.log(boxes[i].name);
+        let championName = boxes[i].name;
+        // console.log(boxes[i].name);
 
-         // 예시로 사용되는 챔피언 이름
+        // 예시로 사용되는 챔피언 이름
         // console.log(championName);
 
         // 검색어가 존재하고 현재 챔피언 이름에 검색어가 포함되지 않으면 요소를 생성하지 않음
@@ -184,8 +306,8 @@ function createBoxes() {
         var imgElement = document.createElement("img");
         imgElement.src = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/"+champ[i].id+".png";
         imgElement.classList.add("portrait", "sprite");
-         // imgElement.style.width = "90%"; // 이미지 크기 지정
-         // imgElement.style.height = "90%"; // 이미지 크기 지정
+        // imgElement.style.width = "90%"; // 이미지 크기 지정
+        // imgElement.style.height = "90%"; // 이미지 크기 지정
         imgElement.id = champ[i].id; // 이미지에 id 할당
         colElement.appendChild(imgElement);
 
@@ -208,6 +330,7 @@ function createBoxes() {
 // 챔피언 초상화 클릭후 search에서 이름으로 검색하는 함수들
 $(document).ready(function () {
     enableSearch("#left-champ-search");
+
 });
 
 function enableSearch(parent) {
