@@ -47,12 +47,11 @@ $.ajax({
         //각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
         var selectedMythicItem=[null,null,null,null,null,null]
 
-        // 아이템 이미지 버튼을 클릭하면,선택한 아이템 박스에 이미지를 설정하고,다시 클릭하면초기화
+        // 아이템 이미지 버튼을 클릭하면,선택한 아이템 박스에 이미지를 설정하고,다시 클릭하면 초기화
         function setItemClickEvent(itemButton,item,iBoxIndex){
             itemButton.click(function(){//마우스클릭시이벤트
                 var imgSrc= $(this).find('img').attr('src');
-                var iBoxIndex = containerId.replace("itemContainer", "");
-                var iBox = $("#iBox" + iBoxIndex);
+
 
                 // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
                 if(selectedMythicItem.some((selectedMythicItem,index)=>
@@ -62,11 +61,11 @@ $.ajax({
                 }
 
                 // 이미지와 X버튼을 생성
-                iBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
+                clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
                 $("#newBox").remove();//아이템을선택하면#newBox제거
 
                 // X버튼 클릭 이벤트
-                iBox.find('.itemRemoveBtn').click(function(){//off()함수는이전에등록된클릭이벤트를제거함
+                clickItemBox.find('.itemRemoveBtn').click(function(){//off()함수는이전에등록된클릭이벤트를제거함
                     $(this).siblings('img').remove(); // 현재 'X' 버튼과 동일한 iBox의 이미지만 제거
                     $(this).remove(); // 'X' 버튼 제거
                     selectedMythicItem[iBoxIndex] = null;
@@ -101,9 +100,11 @@ $.ajax({
 
         //6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
         for (var i = 1; i <= 6; i++) {
+            var container = "itemContainer"
             $("#iBox" + i).click(function() {
-                if ($("#newBox").length === 0) {
-                    $("body").append('<div id="newBox"></div>');
+                var containerId = "itemContainer";
+                if ($("#" + container).children().length === 0) {
+                    $("#" + container).append('<div id="newBox"></div>');
                 } else if (clickItemBox && clickItemBox[0] === this) {
                     $("#newBox").remove();
                     return;
@@ -114,6 +115,7 @@ $.ajax({
         }
     }
 });
+
 $(document).mouseup(function(e){
     var container=$("#newBox");
 
