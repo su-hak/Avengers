@@ -1,23 +1,8 @@
 // 챔피언 정보 ajax로 받아오기
+
 let champ; // 전역 변수로 선언
 
 
-
-
-$.ajax({
-    url: 'https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json',
-    method: 'GET',
-    success: function(data) {
-        console.log("CDN 데이터 :: ",data);
-        // 요청이 성공적으로 완료되었을 때 처리할 코드를 작성합니다.
-        // response 변수에 응답 데이터가 들어있습니다.
-        // ...
-    },
-    error: function(xhr, status, error) {
-        // 요청이 실패한 경우에 대한 처리를 작성합니다.
-        // ...
-    }
-});
 
 $.ajax({
     type: "get",
@@ -216,37 +201,127 @@ function setChampStats(id) {
             'crit': dtch[0].stats.crit
         };
 
-        function updateStats(selectedLevel) {
+        function updateAttackStats(selectedLevel) {
             if (selectedLevel > 1) {
-                let attackDamageMultiplier = 0;
+                let coefficient = dtch[0].stats.attackdamageperlevel;
+                let a = [];
+                a[0] = baseAttackDamage;
+                let level = 1;
                 for (let i = 1; i < selectedLevel; i++) {
-                    attackDamageMultiplier += baseAttackDamage * (dtch[0].stats.attackdamageperlevel * 0.01);
+                    a[i] = a[i-1]+(coefficient* (0.65+(0.035*(i+1))));
                 }
-                statValues['attackdamage'] = baseAttackDamage + attackDamageMultiplier;
-            } else {
+                // statValues['attackdamage'] = Math.round(a[selectedLevel - 1]);
+                const value = new Decimal(a[selectedLevel - 1]);
+                const roundedValue = value.toDecimalPlaces(2);
+                const realRoundedValue = roundedValue.toDecimalPlaces(1);
+                statValues['attackdamage'] = Math.round(realRoundedValue);
+                // statValues['attackdamage'] = realRoundedValue;
+                console.log(a);
+            } else if (selectedLevel === 1) {
                 statValues['attackdamage'] = baseAttackDamage;
             }
-
             for (const id in statValues) {
                 const element = document.getElementById(id);
-                // let value = Math.floor(statValues[id]); // 소수점 이하 버림
-                let value = statValues[id]; // 소수점 이하 버림
-                // value = value.toFixed(0); // 소수점 이하 제거
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+        function updateArmorStats(selectedLevel) {
+            if (selectedLevel > 1) {
+                let coefficient = dtch[0].stats.armorperlevel;
+                let a = [];
+                a[0] = dtch[0].stats.armor;
+                let level = 1;
+                for (let i = 1; i < selectedLevel; i++) {
+                    a[i] = a[i-1]+(coefficient* (0.65+(0.035*(i+1))));
+                }
+                const value = new Decimal(a[selectedLevel - 1]);
+                const roundedValue = value.toDecimalPlaces(2);
+                const realRoundedValue = roundedValue.toDecimalPlaces(1);
+                statValues['armor'] = Math.round(realRoundedValue);
+                // statValues['attackdamage'] = realRoundedValue;
+                console.log(a);
+            } else if (selectedLevel === 1) {
+                statValues['armor'] = dtch[0].stats.armor;
+            }
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+        function updateSpellblockStats(selectedLevel) {
+            if (selectedLevel > 1) {
+                let coefficient = dtch[0].stats.spellblockperlevel;
+                let a = [];
+                a[0] = dtch[0].stats.spellblock;
+                let level = 1;
+                for (let i = 1; i < selectedLevel; i++) {
+                    a[i] = a[i-1]+(coefficient* (0.65+(0.035*(i+1))));
+                }
+                const value = new Decimal(a[selectedLevel - 1]);
+                const roundedValue = value.toDecimalPlaces(2);
+                const realRoundedValue = roundedValue.toDecimalPlaces(1);
+                statValues['spellblock'] = Math.round(realRoundedValue);
+                // statValues['attackdamage'] = realRoundedValue;
+                console.log(a);
+            } else if (selectedLevel === 1) {
+                statValues['spellblock'] = dtch[0].stats.spellblock;
+            }
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+        function updateAttackspeedStats(selectedLevel) {
+            if (selectedLevel > 1) {
+                let coefficient = dtch[0].stats.attackspeedperlevel;
+                let a = [];
+                a[0] = dtch[0].stats.attackspeed;
+                let level = 1;
+                for (let i = 1; i < selectedLevel; i++) {
+                    a[i] = a[i-1]+(coefficient* (0.65+(0.035*(i+1))));
+                }
+                const value = new Decimal(a[selectedLevel - 1]);
+                const roundedValue = value.toDecimalPlaces(2);
+                const realRoundedValue = roundedValue.toDecimalPlaces(1);
+                statValues['attackspeed'] = Math.round(realRoundedValue);
+                // statValues['attackdamage'] = realRoundedValue;
+                console.log(a);
+            } else if (selectedLevel === 1) {
+                statValues['attackspeed'] = dtch[0].stats.attackspeed;
+            }
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
                 if (element) {
                     element.nextElementSibling.textContent = value;
                 }
             }
         }
 
-        // 초기 레벨 설정
+// 초기 레벨 설정
         const selectedLevel = getSelectedLevel();
-        updateStats(selectedLevel);
+        updateAttackStats(selectedLevel);
+        updateArmorStats(selectedLevel);
+        updateSpellblockStats(selectedLevel);
+        updateAttackspeedStats(selectedLevel)
 
-        // 레벨 변경 시 업데이트
+// 레벨 변경 시 업데이트
         document.getElementById('champ_lv').onchange = function() {
             const selectedLevel = getSelectedLevel();
             console.log(selectedLevel); // 선택된 레벨 값 출력
-            updateStats(selectedLevel);
+            updateAttackStats(selectedLevel);
+            updateArmorStats(selectedLevel);
+            updateSpellblockStats(selectedLevel);
+            updateAttackspeedStats(selectedLevel)
         };
     });
 }
@@ -365,3 +440,4 @@ function searchItems(input, parent) {
     }
 }
 // end
+

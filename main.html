@@ -17,12 +17,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src='js/decimal.js'></script>
+
+
+
 
 
 
     <title>Calc.lol</title> <!-- 타이틀 -->
 </head>
+<script>
+    $.ajax({
+        type: "get",
+        url: "https://universe-meeps.leagueoflegends.com/v1/en_us/champion-browse/index.json",
+        success: function (data) {
+            var champions = Object.values(data.data); // 챔피언 데이터 배열 추출
+            champ = champions;
 
+            console.log(champ);
+        }
+    });
+</script>
 <body>
     <div id="wrap">
         <!-- 헤더영역 -->
