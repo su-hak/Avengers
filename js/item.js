@@ -1,135 +1,100 @@
+function startsWithKorean(name) {
+    var firstChar = name.charAt(0);
+    return firstChar >= '가' && firstChar <= '힣';
+}
+
 // API 가져오기
 $.ajax({
-    type:"get",
-    url:"http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
-    success:function(data){
-        var allItems=Object.values(data.data);//챔피언데이터배열추출
+    type: "get",
+    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+    success: function (data) {
+        var allItems = Object.values(data.data); // 챔피언 데이터 배열 추출
 
-        var filteredallItems=allItems.filter(function(items){
-            return !items.requiredChampion // 챔피언전용템제외
-                && items.description.includes('rarityMythic') //신화급아이템만출력
-                && items.inStore!==false //스토어:false인item제외
-                && items.maps["11"]===true; //소환사의협곡맵("11")만출력
+        var filteredallItems = allItems.filter(function (items) {
+            return !items.requiredChampion  // 챔피언 전용템 제외
+                && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+                && items.inStore !== false // 스토어 : false인 item 제외
+                && items.maps["11"] === true; // 소환사의 협곡맵("11")만 출력
         });
+        console.log(filteredallItems.length)
 
+        // 아이템 알파벳순 정렬
+        filteredallItems.sort(function (a, b) {
+            var nameA = a.name.toUpperCase();
+            var nameB = b.name.toUpperCase();
 
-        /* 정렬 */
-        function startsWithKorean(name){
-            var firstChar=name.charAt(0);
-            return firstChar>='가'&&firstChar<='힣';
-        }
-        //아이템알파벳순정렬
-        filteredallItems.sort(function(a,b){
-            var nameA=a.name.toUpperCase();
-            var nameB=b.name.toUpperCase();
+            var aStartsWithKorean = startsWithKorean(nameA);
+            var bStartsWithKorean = startsWithKorean(nameB);
 
-            var aStartsWithKorean=startsWithKorean(nameA);
-            var bStartsWithKorean=startsWithKorean(nameB);
-
-            if(aStartsWithKorean&&!bStartsWithKorean){
+            if (aStartsWithKorean && !bStartsWithKorean) {
                 return -1;
             }
-            if(!aStartsWithKorean&&bStartsWithKorean){
+            if (!aStartsWithKorean && bStartsWithKorean) {
                 return 1;
             }
 
-            if(nameA<nameB){
+            if (nameA < nameB) {
                 return -1;
             }
-            if(nameA>nameB){
+            if (nameA > nameB) {
                 return 1;
             }
             return 0;
         });
-        /*정렬end*/
 
-        /* 아이템 각종 기능 구현 */
-        var clickItemBox;
-        function printItems(filteredallItems){
-            $("#newBox").empty();//newBox의초기값공백
-            for(var i=0;i<filteredallItems.length;i++){
-                var item=filteredallItems[i];
-                var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
-                var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
+        var clickItemBox
 
-                //아이템 이미지 버튼에 클릭 이벤트를 설정
-                setItemClickEvent(itemButton,item,clickItemBox.attr('id').replace('iBox','')-1);
-
-                $("#newBox").append(itemButton);
-            }
-        }
-//각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
-        var selectedMythicItem=[null,null,null,null,null,null]
-
-//아이템이미지버튼을클릭하면,선택한아이템박스에이미지를설정하고,다시클릭하면초기화
-        function setItemClickEvent(itemButton,item,iBoxIndex){
-            itemButton.click(function(){//마우스클릭시이벤트
-                var imgSrc= $(this).find('img').attr('src');
-
-//이미신화아이템이선택된상태라면팝업을띄우고함수종료
-                if(selectedMythicItem.some((selectedMythicItem,index)=>
-                    selectedMythicItem!==null&&index!==iBoxIndex)){
-                    alert("신화아이템은하나만선택가능합니다.");
-                    return;
+        // 6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
+        for (var i = 1; i <= 6; i++) {
+            // 버튼을 클릭하면 아이템 출력
+            $("#iBox" + i).click(function () {
+                // 새로운 박스 생성
+                if ($("#newBox").length === 0) {
+                    $("body").append('<div id="newBox" class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(228px, 0px, 0px);"></div>');
                 }
-//이미지와X버튼을생성
-                clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
-                $("#newBox").remove();//아이템을선택하면#newBox제거
+                clickItemBox = $(this);  // 현재 클릭한 아이템 박스를 저장
+                printItems(filteredallItems, clickItemBox); // 아이템 출력을 새로운 박스 안으로 변경
+            });
+        }
 
-//X버튼클릭이벤트
-                clickItemBox.find('.itemRemoveBtn').off().click(function(){//off()함수는이전에등록된클릭이벤트를제거함
-                    clickItemBox.empty();
-                    selectedMythicItem[iBoxIndex]=null;
-                    $(".cost p").text(":0원");//아이템가격초기화
+        function printItems(filteredallItems, clickItemBox) {
+            // 클릭한 iBox에 새로운 item_pan 생성
+            clickItemBox.find("#left-item-boxContainer").remove();
+            clickItemBox.append('<div id="left-item-boxContainer" class="row mx-auto"></div>');
+
+            for (var i = 0; i < filteredallItems.length; i++) {
+                var item = filteredallItems[i];
+                var imgURL = "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + item.image.full;
+                var itemButton = $("<button type='button' class='item_box'><img src='" + imgURL + "' alt='" + item.name + "'></button>" + item.name)
+
+                // 아이템 이미지 버튼을 클릭하면, 선택한 아이템 박스에 이미지를 설정하고, 다시 클릭하면 초기화
+                itemButton.click(function () {
+                    var imgSrc = $(this).find('img').attr('src');
+                    var itemPan = clickItemBox.find(".item_pan");
+
+                    if (itemPan.find('img').length > 0) {
+                        // 이미지가 이미 있으면, 초기화하고 newBox 제거
+                        itemPan.find('img').remove();
+                        $("#newBox").remove();
+                    } else {
+                        // 이미지가 없으면 설정
+                        itemPan.html("<img src='" + imgSrc + "' style='border: solid #ff00e1'>");
+                    }
                 });
 
-                selectedMythicItem[iBoxIndex]=item;//신화아이템선택상태업데이트
+                clickItemBox.find(".item_pan").append(itemButton);
+            }
 
-                var itemPrice=item.gold.total;//아이템의total값을추출
-                $(".cost p").text(": "+itemPrice+" 원");//아이템가격을HTML에적용
-            });
-
-            itemButton.mouseover(function(){//마우스올리면이벤트
-                var imgSrc=$(this).find('img').attr('src');
-                var imgName=imgSrc.split('/').pop();//이미지파일이름추출
-//마우스를올린이미지와API에서가져온아이템의이미지가일치하는지확인
-                if(imgName===item.image.full){
-                    var description=item.description;
-//HTML태그제거
-                    description=description.replace(/(<([^>]+)>)/ig,"");
-//필요없는문자제거
-                    description=description.replace(/\r?\n|\r/g,"");
-
-//모든description출력
-                    $("#newBox").append('<p>'+description+'</p>');
-                }
-            });
-            itemButton.mouseout(function(){//마우스내리면이벤트
-                $("#newBox p").remove();
-            });
         }
 
-//6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
-        for(var i=1;i<=6;i++){
-//버튼을 클릭하면 아이템 출력
-            $("#iBox"+i).click(function(){
-                if($("#newBox").length===0){
-                    $("body").append('<div id="newBox"></div>');//새로운박스생성
-                }else if(clickItemBox&&clickItemBox[0]===this){
-                    $("#newBox").remove();//#iBox1~#iBox6을재클릭하면#newBox제거
-                    return;//이후코드실행방지
-                }
-                clickItemBox=$(this);//현재클릭한아이템박스를저장
-                printItems(filteredallItems);//아이템출력을새로운박스안으로변경
-            });
-        }
+
     }
 });
-$(document).mouseup(function(e){
-    varcontainer=$("#newBox");
+$(document).mouseup(function (e) {
+    var container = $("#newBox");
 
-//newBox와 item_pan를 제외한 부분을 클릭 했을 경우 newBox닫기
-    if(!container.is(e.target)&&container.has(e.target).length===0&&!$(".item_pan").is(e.target)&&$(".item_pan").has(e.target).length===0){
+    // newBox와 item_pan를 제외한 부분을 클릭했을 경우 newBox 닫기
+    if (!container.is(e.target) && container.has(e.target).length === 0 && !$(".item_pan").is(e.target) && $(".item_pan").has(e.target).length === 0) {
         container.remove();
     }
 });

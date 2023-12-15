@@ -95,6 +95,30 @@ input[type="number"] {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+/* 임시 */
+.champion-box {
+    max-height: 50em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.champion-img {
+    width:100%;
+    /* height: 30px;
+    margin-right: 10px; */
+}
+
+#champion-list {
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-self: start;   
+    align-items: baseline;
+}
+/* 임시 끝 */
+
+
+
 
 .dropdown-item {
     word-wrap: break-word;
