@@ -47,9 +47,10 @@ $.ajax({
         //각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
         var selectedMythicItem=[null,null,null,null,null,null]
 
+
         // 아이템 이미지 버튼을 클릭하면,선택한 아이템 박스에 이미지를 설정하고,다시 클릭하면 초기화
         function setItemClickEvent(itemButton,item,iBoxIndex){
-            itemButton.click(function(){//마우스클릭시이벤트
+            itemButton.click(function(){// 마우스 클릭 시 이벤트
                 var imgSrc= $(this).find('img').attr('src');
 
 
@@ -64,6 +65,7 @@ $.ajax({
                 clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
                 $("#newBox").remove();//아이템을선택하면#newBox제거
 
+
                 // X버튼 클릭 이벤트
                 clickItemBox.find('.itemRemoveBtn').click(function(){//off()함수는이전에등록된클릭이벤트를제거함
                     $(this).siblings('img').remove(); // 현재 'X' 버튼과 동일한 iBox의 이미지만 제거
@@ -76,6 +78,8 @@ $.ajax({
 
                 var itemPrice=item.gold.total; // 아이템의 total값을 추출
                 $(".cost p").text(": "+itemPrice+" 원");//아이템 가격을 HTML에 적용
+
+
             });
 
             itemButton.mouseover(function(){//마우스 올리면 이벤트
@@ -100,9 +104,8 @@ $.ajax({
 
         //6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
         for (var i = 1; i <= 6; i++) {
-            var container = "itemContainer"
             $("#iBox" + i).click(function() {
-                var containerId = "itemContainer";
+                var container = "itemContainer";
                 if ($("#" + container).children().length === 0) {
                     $("#" + container).append('<div id="newBox"></div>');
                 } else if (clickItemBox && clickItemBox[0] === this) {
@@ -113,6 +116,7 @@ $.ajax({
                 printItems(filterItems);//아이템 출력을 새로운 박스 안으로 변경
             });
         }
+        console.log(1)
     }
 });
 
