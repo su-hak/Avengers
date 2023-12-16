@@ -98,7 +98,7 @@ input[type="number"] {
 /* 임시 */
 .champion-box {
     max-height: 50em;
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 
@@ -108,12 +108,19 @@ input[type="number"] {
     margin-right: 10px; */
 }
 
+#champion-search {
+    font-size: 16px;
+}
+
 #champion-list {
     width: 500px;
     display: flex;
     flex-wrap: wrap; 
-    justify-self: start;   
+    justify-self: flex-start;  
     align-items: baseline;
+    gap: 4px;
+    font-size: 16px;
+    text-align: center;
 }
 /* 임시 끝 */
 
