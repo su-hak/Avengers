@@ -211,8 +211,8 @@ input[type="number"] {
 
 #left-item-filter-options {
     position: absolute;
-    max-height: 22.65em;
-    width: 15em;
+    max-height: 82.65em;
+    width: 35em;
     margin-top: 2.5em;
     overflow-x: auto;
 }

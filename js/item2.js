@@ -7,6 +7,25 @@ $.ajax({
         var allItems=Object.values(data.data);//챔피언 데이터 배열 추출
         items = allItems;
 
+        //6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
+        for (var i = 1; i <= 6; i++) {
+            $("#iBox" + i).click(function() {
+                var parentContainer = "left-item-filter-options";
+                var container = "itemContainer";
+                if ($("#" + container).children().length === 0) {
+                    $("#" + container).append('<div id="newBox"></div>');
+                } else if (clickItemBox && clickItemBox[0] === this) {
+                    $("#newBox").remove();
+                    $("#" + parentContainer).hide(); // left-item-filter-options 숨기기
+                    return;
+                }
+                clickItemBox= $(this);//현재 클릭한 아이템 박스를 저장
+                $("#" + parentContainer).show(); // left-item-filter-options 열고 닫기
+                printItems(filterItems);//아이템 출력을 새로운 박스 안으로 변경
+
+            });
+        }
+
         //=======================아이템 가나다 순 정렬
         items.sort(function(a,b){
             var nameA=a.name.toUpperCase();
@@ -37,15 +56,18 @@ $.ajax({
         /* 아이템 출력 기능 구현 */
         var clickItemBox;
         function printItems(filterItems){
-            $("#newBox").empty();//newBox의 초기 값 공백
-            for(var i=0;i<filterItems.length;i++){
-                var item=filterItems[i];
+            $("#newBox").empty();// newBox의 초기 값
+
+            for(var i=0; i<filterItems.length; i++){
+                var item = filterItems[i];
                 var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
                 var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
 
-                //아이템 이미지 버튼에 클릭 이벤트를 설정
-                setItemClickEvent(itemButton,item,clickItemBox.attr('id').replace('iBox','')-1);
 
+                //아이템 이미지 버튼에 클릭 이벤트를 설정
+                setItemClickEvent(itemButton,item,i);
+
+                // 버튼에 이미지와 텍스트 추가
                 $("#newBox").append(itemButton);
             }
         }
@@ -72,7 +94,7 @@ $.ajax({
 
                 // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
                 if(selectedMythicItem.some((selectedMythicItem,index)=>
-                    selectedMythicItem!==null&&index!==iBoxIndex)){
+                    selectedMythicItem !== null && index !== iBoxIndex)){
                     alert("신화 아이템은 하나만 선택 가능 합니다.");
                     return;
                 }
@@ -132,8 +154,9 @@ $.ajax({
                                 $("#moveSpeedL").next().text(moveSpeed + parseInt(statValue));
                                 break;
                             case "방어구 관통력":
-                                var arPen = parseInt($("#arPenL").next().text());
-                                $("#arPenL").next().text(arPen + parseInt(statValue).toFixed(2) + "%");
+                                var arPen = parseFloat($("#arPenL").next().text().replace(/[^0-9.]/g, "")); // 숫자와 소수점만 추출하여 파싱 , 08.00% -> 8.00%로 표시
+                                var newArPen = (arPen + parseFloat(statValue)).toFixed(0).replace(/^0+/, ""); // 소수점 표시 안 함
+                                $("#arPenL").next().text(newArPen + "%");
                                 break;
                             case "물리 관통력":
                                 var adPen = parseInt($("#adPenL").next().text());
@@ -148,9 +171,9 @@ $.ajax({
                                 $("#critL").next().text(crit + parseInt(statValue));
                                 break;
                             case "모든 피해 흡혈":
-                                var omniVamp = parseInt($("#vampL").next().text());
-                                $("#vampL").next().text(omniVamp + parseInt(statValue).toFixed(2) + "%");
-                                break;
+                                var omniVamp = parseFloat($("#vampL").next().text().replace(/[^0-9.]/g, "")); // 숫자와 소수점만 추출하여 파싱
+                                var newOmniVamp = (omniVamp + parseFloat(statValue)).toFixed(0).replace(/^0+/, ""); // 수정된 부분
+                                $("#vampL").next().text(newOmniVamp + "%");
                             case "스킬 가속":
                                 var cooltime = parseInt($("#cooltimeL").next().text());
                                 $("#cooltimeL").next().text(cooltime + parseInt(statValue));
@@ -170,41 +193,70 @@ $.ajax({
             });
 
             itemButton.mouseover(function(){    //마우스 올리면 이벤트
-                var imgSrc=$(this).find('img').attr('src');
-                var imgName=imgSrc.split('/').pop();    //이미지 파일 이름 추출
-                // 마우스를 올린 이미지와 API에서 가져 온 아이템의 이미지가 일치하는지 확인
-                if(imgName===item.image.full){
-                    var description=item.description;
-                    // HTML 태그 제거
-                    description=description.replace(/(<([^>]+)>)/ig,"");
-                    // 필요 없는 문자 제거
-                    description=description.replace(/\r?\n|\r/g,"");
+                var imgSrc = $(this).find('img').attr('src');
+                var imgName = imgSrc.split('/').pop();    //이미지 파일 이름 추출
 
-                    // 모든 description 출력
-                    $("#newBox").append('<p>'+description+'</p>');
+                // 마우스를 올린 이미지와 API에서 가져 온 아이템의 이미지가 일치하는지 확인
+                if(imgName === item.image.full) {
+                    var description = item.description;
+
+                    description = description.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
+                    description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+
+
+                    var newDiv = $("<div></div>"); // 새로운 div 박스 생성 및 description 해당 위치에 출력
+
+
+                    var buttonOffset = $(this).offset();
+                    var mouseX = event.pageX - buttonOffset.left; // x 좌표에 이미지 버튼의 폭을 더해 우측에 보이도록 함
+                    var mouseY = event.pageY - buttonOffset.bottom; // y 좌표에 이미지 버튼의 높이를 더해 하단에 보이도록 함
+
+                    newDiv.css({
+                        'position': 'absolute',
+                        'top': mouseY,
+                        'left': mouseX,
+                        'background-color': 'white',
+                        'border': '1px solid black',
+                        'padding': '5px',
+                        'z-index': '9999'
+                    });
+
+
+                    newDiv.html('<p>' + description + '</p>'); // description 정보 업데이트
+
+
+                    $(this).find('div').remove(); // #newBox -> div 초기화
+                    $(this).append(newDiv); // #newBox에 div 박스 추가
+
+
+                    // #newBox의 width와 height 값과 비교하여 newDiv 위치 조정
+                    var newBoxOffset = $("#newBox").offset();
+                    var newBoxWidth = $("#newBox").outerWidth();
+                    var newBoxHeight = $("#newBox").outerHeight();
+                    var newDivWidth = newDiv.outerWidth();
+                    var newDivHeight = newDiv.outerHeight();
+
+                    // newDiv가 #newBox의 width를 넘어가려고 할 경우
+                    if (mouseX + newDivWidth > newBoxOffset.left + newBoxWidth) {
+                        mouseX = -newDivWidth; // 이벤트 핸들러의 좌측 하단을 기준으로 한 x 좌표
+                        newDiv.css('left', mouseX); // newDiv 위치를 이벤트 핸들러의 우측 하단으로 조정
+                    }
+
+                    // newDiv가 #newBox의 height를 넘어가려고 할 경우
+                    if (mouseY + newDivHeight > newBoxOffset.top + newBoxHeight) {
+                        mouseY = event.pageY - buttonOffset.top - newDivHeight; // 이벤트 핸들러의 우측 하단을 기준으로 한 y 좌표
+                        newDiv.css('top', mouseY); // newDiv 위치를 이벤트 핸들러의 우측 상단으로 조정
+                    }
+
+
                 }
             });
-            itemButton.mouseout(function(){     //마우스내리면이벤트
-                $("#newBox p").remove();
+            itemButton.mouseout(function(){     // 마우스 내리면 이벤트
+                $(this).find('div').remove(); // description 정보 초기화
             });
         }
         // 아이템 이미지 클릭 이벤트 End
-        
-        //6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
-        for (var i = 1; i <= 6; i++) {
-            $("#iBox" + i).click(function() {
-                var container = "itemContainer";
-                if ($("#" + container).children().length === 0) {
-                    $("#" + container).append('<div id="newBox"></div>');
-                } else if (clickItemBox && clickItemBox[0] === this) {
-                    $("#newBox").remove();
-                    return;
-                }
-                clickItemBox= $(this);//현재 클릭한 아이템 박스를 저장
-                printItems(filterItems);//아이템 출력을 새로운 박스 안으로 변경
 
-            });
-        }
         // 스탯 초기화 함수
         function resetStats() {
             // 스탯 초기화 작업을 수행하세요.
@@ -229,12 +281,20 @@ $.ajax({
 
 
 $(document).mouseup(function(e){
-    var container=$("#newBox");
+    var container = $("#newBox");
 
     //newBox와 item_pan를 제외한 부분을 클릭 했을 경우 newBox닫기
-    if(!container.is(e.target)&&container.has(e.target).length===0&&!$(".item_pan").is(e.target)&&$(".item_pan").has(e.target).length===0){
+    if(!container.is(e.target) && container.has(e.target).length===0
+        && !$(".item_pan").is(e.target)
+        && $(".item_pan").has(e.target).length===0){
         container.remove();
     }
 });
 
 
+// <div id="newBox">
+//     <button type="button" className="item_box">
+//         <img src="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/3084.png" alt="강철심장">
+//             <div style="position: absolute; top: 183.333px; left: 161.333px; background-color: white; border: 1px solid black; padding: 5px; z-index: 9999;">
+//                 <p>…</p>
+//             </div>
