@@ -12,9 +12,7 @@ function getChampionList() {
             });
 
             displayChampionList(champions);            
-        }
-
-        
+        }        
     });
 }
 

@@ -37,8 +37,8 @@ function showTooltip(content, x, y) {
     var tooltipContent = document.getElementById('tooltip-content');
 
     tooltipContent.innerHTML = content;
-    tooltip.style.left = x-20 + 'px';
-    tooltip.style.top = y-100 + 'px';
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
     tooltip.style.display = 'block';
 }
 

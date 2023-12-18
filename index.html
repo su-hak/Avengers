@@ -2,562 +2,703 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <!-- 파비콘 -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <!-- 파비콘 -->
 
+  <link rel="stylesheet" type="text/css" href="css/dropdowns.css" />
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <link rel="stylesheet" type="text/css" href="css/item.css" />
 
-    <link rel="stylesheet" type="text/css" href="css/dropdowns.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/item.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-
-
-
-    <title>Calc.lol</title> <!-- 타이틀 -->
+  <title>Calc.lol</title>
+  <!-- 타이틀 -->
 </head>
 
 <body>
-<div id="wrap">
+  <div id="wrap">
     <!-- 헤더영역 -->
     <header id="header">
-        <div class="inner">
-            <!-- 로고 -->
-            <a href="#">
-                <h1>calc.lol</h1>
-            </a>
+      <div class="inner">
+        <!-- 로고 -->
+        <a href="#">
+          <h1>calc.lol</h1>
+        </a>
 
-            <!-- 메뉴 -->
-            <nav>
-                <ul class="gnb">
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">딜미터기</a></li>
-                    <li><a href="#">커뮤니티</a></li>
-                </ul>              
-            </nav>
+        <!-- 메뉴 -->
+        <nav>
+          <ul class="gnb">
+            <li><a href="#">공지사항</a></li>
+            <li><a href="#">딜미터기</a></li>
+            <li><a href="#">커뮤니티</a></li>
+          </ul>
+        </nav>
 
-            <!-- 작은 화면용 팝업창-->
+        <!-- 작은 화면용 팝업창-->
 
-            <!--로그인 회원가입 버튼 -->
-            <ul class="util">
-                <li><button type="button" value="로그인">로그인</button></li>
-                <li><button class="joinBtn" type="button" value="회원가입">회원가입</button></li>
-            </ul>
-            
-        </div>
-        <iconify-icon id="fullscreen-trigger" icon="fa:navicon" class="navimg" style="color: white;" width="30"></iconify-icon>
-        <iconify-icon icon="vaadin:close" class="navcloseimg" style="color: white;" width="30"></iconify-icon>
+        <!--로그인 회원가입 버튼 -->
+        <ul class="util">
+          <li><button type="button" value="로그인">로그인</button></li>
+          <li>
+            <button class="joinBtn" type="button" value="회원가입">
+              회원가입
+            </button>
+          </li>
+        </ul>
+      </div>
+      <!-- 모바일 화면 시 메뉴 버튼 -->
+      <iconify-icon id="fullscreen-trigger" icon="fa:navicon" class="navimg" style="color: white"
+        width="30"></iconify-icon>
+      <!-- 모바일 화면 시 메뉴 닫기 버튼 -->
+      <iconify-icon icon="vaadin:close" class="navcloseimg" style="color: white" width="30"></iconify-icon>
     </header>
     <!-- 헤더영역 E -->
 
     <!-- 메인영역 -->
     <main id="main">
-        <section id="sectionB"> <!-- 배경영상 -->
-            <video class="video" src="./resource/mov/bgMove.webm" autoplay muted loop playsinline></video>
+      <!-- 배경 섹션 -->
+      <section id="sectionB">
+        <!-- 배경영상 -->
+        <video class="video" src="./resource/mov/bgMove.webm" autoplay muted loop playsinline></video>
+      </section>
+      <!-- 배경영상 E -->
+      <section id="sectionF">
+        <!-- 왼쪽 챔피언 전체 패널 -->
+        <div id="dealmeterL" class="">
+          <ul class="ul_top">
+            <!-- 왼쪽 게이지 박스 -->
+            <li>
+              <div class="health-box rounded">
+                <!-- 왼쪽 HP 박스 -->
+                <div id="left-hp-bar" class="row ml-0 health-bar rounded" style="width: 100%">
+                  <!-- 왼쪽 HP 게이지 -->
+                </div>
+              </div>
+              <div class="resource-box rounded">
+                <!-- 왼쪽 MP 박스 -->
+                <div id="left-rsc-bar" class="resource-bar rounded resourceless" style="width: 100%"></div>
+              </div>
+            </li>
+          </ul>
+          <!-- 왼쪽 게이지 박스 E -->
 
-        </section> <!-- 배경영상 E -->
-        <section id="sectionF">
-            <div id="dealmeterL" class="">
-                <ul class="ul_top"> <!-- 게이지 박스 -->
+          <ul class="ul_main ds_flex">
+            <!-- 왼쪽 챔피언창 라인 -->
+            <li class="ul_main_L">
+              <ul class="share_ul ds_flex">
+                <!-- 왼쪽 플레이어 표시 및 공유버튼 -->
+                <li>
+                  <button id="left-share-btn" type="button" class="share_Btn">
+                    <iconify-icon icon="octicon:share-16" width="25px"></iconify-icon>
+                  </button>
+                </li>
+                <li class="txt_player">
+                  <p>Player</p>
+                </li>
+              </ul>
+              <!-- 플레이어 표시 및 공유버튼 E -->
+
+              <ul class="item_save ds_flex">
+                <li>
+                  <ul>
+                    <!-- 왼쪽 아이템 저장버튼 -->
                     <li>
-                        <div class="health-box rounded"> <!-- HP 박스 -->
-                            <div class="row ml-0 health-bar rounded" id="left-hp-bar" style="width: 100%;">
-                                <!-- HP 게이지 -->
-
-                            </div>
-
-                        </div>
-                        <div class="resource-box rounded"> <!-- MP 박스 -->
-                            <div class="resource-bar rounded resourceless" id="left-rsc-bar" style="width: 10%;">
-                            </div>
-                        </div>
+                      <button type="button" class="saveItemBtn">S1</button>
                     </li>
-                </ul> <!-- 게이지 박스 E -->
-
-                <ul class="ul_main ds_flex">
-                    <!-- 챔피언창 라인 -->
-                    <li class="ul_main_L">
-                        <ul class="share_ul ds_flex"> <!-- 플레이어 표시 및 공유버튼 -->
-                            <li><button type="button" class="share_Btn">공유</button></li>
-                            <li class="txt_player">
-                                <p>Player</p>
-                            </li>
-                        </ul> <!-- 플레이어 표시 및 공유버튼 E -->
-
-                        <ul class="item_save ds_flex">
-                            <li>
-                                <ul> <!-- 아이템 저장버튼 -->
-                                    <li><button type="button" class="saveItemBtn">S1</button></li>
-                                    <li><button type="button" class="saveItemBtn">S2</button></li>
-                                    <li><button type="button" class="saveItemBtn">S3</button></li>
-                                </ul> <!-- 아이템 저장버튼 E-->
-                            </li>
-
-                            <li>
-                                <div class="col px-1">
-                                    <div class="dropright"> <!-- 챔피언 박스 -->
-                                        <button class="btn btn-blue mt-1" type="button" id="champion-btn" data-toggle="dropdown">
-                                            <img class="portrait img-fluid mx-auto champion-img" src="" name=""
-                                                 id="left-champ-portrait" data-toggle="tooltip"
-                                                 data-placement="bottom" >
-                                        </button>
-                                        <div class="dropdown-menu" id="champion-dropdown">
-                                            <input class="form-control mx-auto my-2" type="text" placeholder="챔피언 검색" id="champion-search">
-                                            <div id="champion-list" class="mx-auto">
-                                                <!-- 챔피언 목록이 들어갈 자리 -->
-                                            </div>
-                                        </div>
-                                    </div> <!-- 챔피언 박스 E-->
-                                </div>
-                            </li>
-                        </ul>
-                        
-
-                        <ul class="LV_BA ds_flex">
-                            <li class="LV_Show">  <!-- 챔피언 레벨표시 -->
-                                <select name="LV" id="champ_lv" style="width: 100%; height: 100%;">
-                                    <option value="LV">LV</option>
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                </select>
-                            </li>
-                            <li>
-                                <button type="button" class="BA_button">BasicAttack</button> <!-- 베이직 어택 -->
-                            </li>
-                            <li class="cri_check">
-                                <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
-                                <input type="checkbox" id="critical" name="critical" value="critical">
-                            </li>
-                        </ul>
-
-                        <!-- 스킬 박스 -->
-                        <ul class="skill_pan ds_flex">
-                            <li class="skill">
-                                <!-- 스킬 이미지1 -->
-                                <button type="button" id="skill1" class="skill_Btn"></button>
-                                <ul>
-                                    <li class="skill ds_flex">
-                                        <!-- 스킬1 레벨 다운 -->
-                                        <button type="button" id="skill_Q_Lv_Down"
-                                                class="skill_Q skill_Lv_Btn">-</button>
-                                        <input class="skill_Q LV_Num" type="number" min="0" max="6">
-                                        <!-- 스킬4 레벨 업 -->
-                                        <button type="button" class="skill_Q skill_Lv_Btn">+</button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="skill">
-                                <!-- 스킬 이미지2 -->
-                                <button type="button" id="skill2" class="skill_Btn"></button>
-                                <ul>
-                                    <li class="skill  ds_flex">
-                                        <!-- 스킬2 레벨 다운 -->
-                                        <button type="button" id="skill_W_Lv_Down"
-                                                class="skill_W skill_Lv_Btn">-</button>
-                                        <input class="skill_W LV_Num" type="number" min="0" max="6">
-                                        <!-- 스킬4 레벨 업 -->
-                                        <button type="button" id="skill_W_Lv_Up"
-                                                class="skill_W skill_Lv_Btn">+</button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="skill">
-                                <!-- 스킬 이미지3 -->
-                                <button type="button" id="skill3"  class="skill_Btn"></button>
-                                <ul>
-                                    <li class="skill ds_flex">
-                                        <!-- 스킬3 레벨 다운 -->
-                                        <button type="button" id="skill_E_Lv_Down"
-                                                class="skill_E skill_Lv_Btn">-</button>
-                                        <input class="skill_E LV_Num" type="number" min="0" max="6">
-                                        <!-- 스킬4 레벨 업 -->
-                                        <button type="button" id="skill_E_Lv_Up" class="skill_E skill_Lv_Btn">+</button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="skill">
-                                <!-- 스킬 이미지4 -->
-                                <button type="button" id="skill4" class="skill_Btn"></button>
-                                <ul>
-                                    <li class="skill ds_flex">
-                                        <!-- 스킬4 레벨 다운 -->
-                                        <button type="button" id="skill_R_Lv_Down"
-                                                class="skill_R skill_Lv_Btn">-</button>
-                                        <input class="skill_R LV_Num" type="number" min="0" max="6">
-                                        <!-- 스킬4 레벨 업 -->
-                                        <button type="button" class="skill_R skill_Lv_Btn">+</button>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!-- 스킬 박스 E -->
-
-                        <div class="stat">
-                            <!-- 스탯 박스 -->
-                            <table style="text-align: center;">
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-
-                            </table>
-
-
-                        </div>
-                    </li>
-
-                    <!-- 아이템 & 로그 패널 -->
-                    <li class="left_panel_ul_main_R">
-                        <ul>
-                            <li>
-                                <ul class="item_pan">
-                                    <li><button type="button" id="iBox1" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox2" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox3" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox4" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox5" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox6" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                </ul>
-
-                                <ul> <!-- 왼쪽 동전 이미지 -->
-                                    <li class="cost ds_flex">
-                                        <img src="/resource/img/coin.png" width="40px" ><p id="cost_L" style="margin: 0;">: 1000원</p>
-                                    </li>
-                                </ul>
-
-                            </li>
-                            <li class="log_pan">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.
-
-                            </li>
-                        </ul>
-
-                    </li>
-                </ul>
-            </div>
-            <div id="dealmeterR">
-                <ul class="ul_top"> <!-- 게이지 박스 -->
                     <li>
-                        <div class="health-box rounded ds_flex ds_flex_R"> <!-- HP 박스 -->
-                            <div class="row ml-0 health-bar rounded" id="right-hp-bar"
-                                 style="width: 60%; margin-right: 0">
-                                <!-- HP 게이지 -->
-                            </div>
-                        </div>
-                        <div class="resource-box rounded ds_flex ds_flex_R"> <!-- MP 박스 -->
-                            <div class="resource-bar rounded resourceless" id="right-rsc-bar"
-                                 style="width: 50%; margin-right: 0">
-                            </div>
-                        </div>
+                      <button type="button" class="saveItemBtn">S2</button>
                     </li>
-                </ul> <!-- 게이지 박스 E -->
-
-                <ul class="ul_main ds_flex">
-                    <!-- 아이템 & 로그 창 -->
-                    <li class="right_panel_ul_main_L">
-                        <ul>
-                            <li>
-                                <ul class="item_pan">
-                                    <li><button type="button" id="iBox1_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox2_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox3_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox4_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox5_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                    <li><button type="button" id="iBox6_R" class="item_box"><iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon></button></li>
-                                </ul>
-                                <ul><!-- 오른쪽 동전 이미지 -->
-                                    <li class="cost ds_flex"><img src="/resource/img/coin.png" width="40px" ><p id="cost_R" style="margin: 0;">: 1000원</p></li>
-                                </ul>
-
-                            </li>
-                            <li class="log_pan">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.
-
-                            </li>
-                        </ul>
-
+                    <li>
+                      <button type="button" class="saveItemBtn">S3</button>
                     </li>
+                    <!-- 왼쪽 아이템 저장버튼 E-->
+                  </ul>
+                </li>
 
-                    <!-- 챔피언창 라인 -->
-                    <li class="ul_main_R">
-                        <ul class="share_ul ds_flex"> <!-- 플레이어 표시 및 공유버튼 -->
-                            <li class="txt_cpu">
-                                <p>CPU</p>
-                            </li>
-                            <li><button type="button" class="share_Btn">공유</button></li>
-                        </ul> <!-- 플레이어 표시 및 공유버튼 E -->
-
-                        <ul class="item_save ds_flex">
-                            <li>
-                                <div class="col px-1">
-
-                                    <div class="dropright"> <!-- 챔피언 박스 -->
-                                        <button class="btn btn-red mt-1" type="button" id="right-champ-dropdown"
-                                                data-toggle="dropdown" onclick="createBoxes()" aria-haspopup="true" aria-expanded="false">
-                                            <img class="portrait img-fluid mx-auto champ-img" src="" name=""
-                                                 id="right-champ-portrait" data-toggle="tooltip"
-                                                 data-placement="bottom" >
-                                        </button>
-                                        <div class="dropdown-menu dropdown-multicol" id="right-champ-list" aria-labelledby="dropdownMenuButton" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(228px, 0px, 0px);">
-                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="right-champ-search" autocomplete="off">
-                                            <div class="row mx-auto" id="boxContainer_R">
-                                                <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                            </div>
-                                        </div>
-                                    </div> <!-- 챔피언 박스 E-->
-                                </div>
-                            </li>
-                            <li>
-                                <ul> <!-- 아이템 저장버튼 -->
-                                    <li><button type="button" class="saveItemBtn">S1</button></li>
-                                    <li><button type="button" class="saveItemBtn">S2</button></li>
-                                    <li><button type="button" class="saveItemBtn">S3</button></li>
-                                </ul> <!-- 아이템 저장버튼 E-->
-                            </li>
-                        </ul>
-
-                        <ul class="LV_BA ds_flex">
-                            <li class="LV_Show">  <!-- 챔피언 레벨표시 -->
-                                <select name="LV" id="right_champ_lv" style="width: 100%; height: 100%;">
-                                    <option value="LV">LV</option>
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                </select>
-                            </li>
-                            <li>
-                                <button type="button" class="BA_button">BasicAttack</button> <!-- 베이직 어택 -->
-                            </li>
-                            <li class="cri_check">
-                                <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
-                                <input type="checkbox" id="right_critical" name="critical" value="critical">
-                            </li>
-                        </ul>
-
-                        <!-- 스킬 박스 -->
-                        <ul class="skill_pan ds_flex">
-                            <li class="skill">
-                                <button type="button" id="right_skill11" class="skill_Btn"></button>
-                                <ul>
-                                    <li class="skill ds_flex">
-                                        <button type="button" id="right_skill_Q_Lv_Down"
-                                                class="skill_Q skill_Lv_Btn">-</button>
-                                        <input class="skill_Q LV_Num" type="number" min="0" max="6">
-                                        <button type="button" class="skill_Q skill_Lv_Btn">+</button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="skill">
-                                <button type="button" id="right_skill2" class="skill_Btn"></button>
-                                <ul>
-                                    <li class="skill  ds_flex">
-                                        <button type="button" id="right_skill_W_Lv_Down"
-                                                class="skill_W skill_Lv_Btn">-</button>
-                                        <input class="skill_W LV_Num" type="number" min="0" max="6">
-                                        <button type="button"
-                                                class="skill_W skill_Lv_Btn">+</button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="skill">
-                                <button type="button" id="right_skill3"  class="skill_Btn"></button>
-                                <ul>
-                                    <li class="skill ds_flex">
-                                        <button type="button" id="right_skill_E_Lv_Down"
-                                                class="skill_E skill_Lv_Btn">-</button>
-                                        <input class="skill_E LV_Num" type="number" min="0" max="6">
-                                        <button type="button" class="skill_E skill_Lv_Btn">+</button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="skill">
-                                <button type="button" id="right_skill4" class="skill_Btn"></button>
-                                <ul>
-                                    <li class="skill ds_flex">
-                                        <button type="button" id="right_skill_R_Lv_Down"
-                                                class="skill_R skill_Lv_Btn">-</button>
-                                        <input class="skill_R LV_Num" type="number" min="0" max="6">
-                                        <button type="button" class="skill_R skill_Lv_Btn">+</button>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!--스킬 설명창-->
-                        <div id="tooltip" class="hidden">
-                            <p id="tooltip-content"></p>
+                <li>
+                  <div class="">
+                    <!-- 왼쪽 챔피언 박스 -->
+                    <div class="dropright">
+                      <button class="btn btn-blue mt-1" type="button" id="champion-btn" data-toggle="dropdown">
+                        <img class="portrait img-fluid mx-auto champion-img" src="" name="" id="left-champ-portrait"
+                          data-toggle="tooltip" data-placement="bottom" />
+                      </button>
+                      <!-- 왼쪽 챔피언 목록 -->
+                      <div class="dropdown-menu" id="champion-dropdown">
+                        <!-- 왼쪽 챔피언 목록 속 검색창 -->
+                        <input class="form-control mx-auto my-2" type="text" placeholder="챔피언 검색"
+                          id="champion-search" />
+                        <div id="champion-list" class="mx-auto">
+                          <!-- 왼쪽 챔피언 목록이 들어갈 자리 -->
                         </div>
-                        <!-- 스킬 박스 E -->
+                      </div>
+                    </div>
+                    <!-- 왼쪽 챔피언 박스 E-->
+                  </div>
+                </li>
+              </ul>
 
-                        <div class="stat">
-                            <!-- 스탯 박스 -->
-                            <table style="text-align: center;">
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name">공격</td>
-                                    <td class="stat_value">60</td>
-                                    <td class="stat_name">수비</td>
-                                    <td class="stat_value">60</td>
-                                </tr>
+              <ul class="LV_BA ds_flex">
+                <li class="LV_Show">
+                  <!-- 왼쪽 챔피언 레벨표시 -->
+                  <select name="LV" id="champ_lv" style="width: 100%; height: 100%">
+                    <option value="LV">LV</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                    <option value="7">07</option>
+                    <option value="8">08</option>
+                    <option value="9">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                  </select>
+                  <!-- 왼쪽 챔피언 레벨표시 E -->
+                </li>
+                <li>
+                  <button type="button" class="BA_button">BasicAttack</button>
+                  <!-- 베이직 어택 -->
+                </li>
+                <!-- 크리티컬 체크박스 -->
+                <li class="cri_check">
+                  <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
+                  <input type="checkbox" id="critical" name="critical" value="critical" />
+                </li>
+              </ul>
 
-                            </table>
-
-
-                        </div>
+              <!-- 스킬 박스 -->
+              <ul class="skill_pan ds_flex">
+                <li class="skill">
+                  <!-- 스킬 이미지1 -->
+                  <button type="button" id="skill1" class="skill_Btn"></button>
+                  <ul>
+                    <li class="skill ds_flex">
+                      <!-- 스킬1 레벨 다운 -->
+                      <button type="button" id="skill_Q_Lv_Down" class="skill_Q skill_Lv_Btn">
+                        -
+                      </button>
+                      <input class="skill_Q LV_Num" type="number" min="0" max="6" />
+                      <!-- 스킬1 레벨 업 -->
+                      <button type="button" class="skill_Q skill_Lv_Btn">
+                        +
+                      </button>
                     </li>
-                </ul>
-            </div>
-        </section>
+                  </ul>
+                </li>
+                <li class="skill">
+                  <!-- 스킬 이미지2 -->
+                  <button type="button" id="skill2" class="skill_Btn"></button>
+                  <ul>
+                    <li class="skill ds_flex">
+                      <!-- 스킬2 레벨 다운 -->
+                      <button type="button" id="skill_W_Lv_Down" class="skill_W skill_Lv_Btn">
+                        -
+                      </button>
+                      <input class="skill_W LV_Num" type="number" min="0" max="6" />
+                      <!-- 스킬2 레벨 업 -->
+                      <button type="button" id="skill_W_Lv_Up" class="skill_W skill_Lv_Btn">
+                        +
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+                <li class="skill">
+                  <!-- 스킬 이미지3 -->
+                  <button type="button" id="skill3" class="skill_Btn"></button>
+                  <ul>
+                    <li class="skill ds_flex">
+                      <!-- 스킬3 레벨 다운 -->
+                      <button type="button" id="skill_E_Lv_Down" class="skill_E skill_Lv_Btn">
+                        -
+                      </button>
+                      <input class="skill_E LV_Num" type="number" min="0" max="6" />
+                      <!-- 스킬3 레벨 업 -->
+                      <button type="button" id="skill_E_Lv_Up" class="skill_E skill_Lv_Btn">
+                        +
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+                <li class="skill">
+                  <!-- 스킬 이미지4 -->
+                  <button type="button" id="skill4" class="skill_Btn"></button>
+                  <ul>
+                    <li class="skill ds_flex">
+                      <!-- 스킬4 레벨 다운 -->
+                      <button type="button" id="skill_R_Lv_Down" class="skill_R skill_Lv_Btn">
+                        -
+                      </button>
+                      <input class="skill_R LV_Num" type="number" min="0" max="6" />
+                      <!-- 스킬4 레벨 업 -->
+                      <button type="button" class="skill_R skill_Lv_Btn">
+                        +
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <!-- 스킬 박스 E -->
+
+              <div class="stat">
+                <!-- 스탯 박스 -->
+                <table style="text-align: center">
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+
+            <!-- 아이템 & 로그 패널 -->
+            <li class="left_panel_ul_main_R">
+              <ul>
+                <li>
+                  <ul class="item_pan">
+                    <li>
+                      <button type="button" id="iBox1" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox2" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox3" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox4" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox5" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox6" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                  </ul>
+
+                  <ul>
+                    <!-- 왼쪽 동전 이미지 -->
+                    <li class="cost ds_flex">
+                      <img src="/resource/img/coin.png" width="40px" />
+                      <p id="cost_L" style="margin: 0">: 1000원</p>
+                    </li>
+                  </ul>
+                </li>
+                <li class="log_pan">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                  quod, distinctio perferendis provident ipsum quis. Soluta
+                  provident magnam eveniet nobis sed. Deleniti, perferendis.
+                  Optio accusantium laboriosam architecto deleniti assumenda?
+                  Tempore.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- 왼쪽 챔피언 전체 패널 E -->
+
+        <!-- 오른쪽 챔피언 전체 패널   -->
+        <div id="dealmeterR" class="">
+          <ul class="ul_top float-right">
+            <!-- 게이지 박스 -->
+            <li>
+              <div class="health-box rounded ds_flex ds_flex_R">
+                <!-- HP 박스 -->
+                <div class="row ml-0 health-bar rounded" id="right-hp-bar" style="width: 100%; margin-right: 0">
+                  <!-- HP 게이지 -->
+                </div>
+              </div>
+              <div class="resource-box-R rounded ds_flex ds_flex_R float-right">
+                <!-- MP 박스 -->
+                <div class="resource-bar-R rounded resourceless" id="right-rsc-bar" style="width: 100%;">
+                </div>
+              </div>
+            </li>
+          </ul>
+          <!-- 게이지 박스 E -->
+
+          <ul class="ul_main ds_flex float-right">
+            <!-- 아이템 & 로그 창 -->
+            <li class="right_panel_ul_main_L">
+              <ul>
+                <li>
+                  <ul class="item_pan">
+                    <li>
+                      <button type="button" id="iBox1_R" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox2_R" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox3_R" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox4_R" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox5_R" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" id="iBox6_R" class="item_box">
+                        <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
+                          height="50"></iconify-icon>
+                      </button>
+                    </li>
+                  </ul>
+                  <ul>
+                    <!-- 오른쪽 동전 이미지 -->
+                    <li class="cost ds_flex">
+                      <img src="/resource/img/coin.png" width="40px" />
+                      <p id="cost_R" style="margin: 0">: 1000원</p>
+                    </li>
+                  </ul>
+                </li>
+                <li class="log_pan">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                  quod, distinctio perferendis provident ipsum quis. Soluta
+                  provident magnam eveniet nobis sed. Deleniti, perferendis.
+                  Optio accusantium laboriosam architecto deleniti assumenda?
+                  Tempore.
+                </li>
+              </ul>
+            </li>
+
+            <!-- 오른쪽 챔피언창 라인 -->
+            <li class="ul_main_R">
+              <ul class="share_ul ds_flex">
+                <!-- 오른쪽 챔피언 표시 및 공유버튼 -->
+                <li class="txt_cpu">
+                  <p>CPU</p>
+                </li>
+                <li>
+                  <button id="right-share-btn" type="button" class="share_Btn">
+                    <iconify-icon icon="octicon:share-16" width="25px"></iconify-icon>
+                  </button>
+                </li>
+              </ul>
+              <!-- 오른쪽 챔피언 표시 및 공유버튼 E -->
+
+              <ul class="item_save ds_flex">
+                <li>
+                  <div class="">
+                    <!-- 오른쪽 챔피언 박스 -->
+                    <div class="dropright">
+                      <button class="btn btn-red mt-1" type="button" id="right-champion-btn" data-toggle="dropdown">
+                        <img class="portrait img-fluid mx-auto champion-img" src="" name="" id="right-champ-portrait"
+                          data-toggle="tooltip" data-placement="bottom" />
+                      </button>
+                      <!-- 오른쪽 챔피언 목록 -->
+                      <div class="dropdown-menu" id="champion-dropdown">
+                        <!-- 오른쪽 챔피언 목록 속 검색창 -->
+                        <input class="form-control mx-auto my-2" type="text" placeholder="챔피언 검색"
+                          id="champion-search" />
+                        <div id="champion-list" class="mx-auto">
+                          <!-- 오른쪽 챔피언 목록이 들어갈 자리 -->
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 오른쪽 챔피언 박스 E-->
+                  </div>
+                </li>
+                <li>
+                  <ul>
+                    <!-- 아이템 저장버튼 -->
+                    <li>
+                      <button type="button" class="saveItemBtn">S1</button>
+                    </li>
+                    <li>
+                      <button type="button" class="saveItemBtn">S2</button>
+                    </li>
+                    <li>
+                      <button type="button" class="saveItemBtn">S3</button>
+                    </li>
+                  </ul>
+                  <!-- 아이템 저장버튼 E-->
+                </li>
+              </ul>
+
+              <ul class="LV_BA ds_flex">
+                <li class="LV_Show">
+                  <!-- 챔피언 레벨표시 -->
+                  <select name="LV" id="right_champ_lv" style="width: 100%; height: 100%">
+                    <option value="LV">LV</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                    <option value="7">07</option>
+                    <option value="8">08</option>
+                    <option value="9">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                  </select>
+                </li>
+                <li>
+                  <button type="button" class="BA_button">BasicAttack</button>
+                  <!-- 베이직 어택 -->
+                </li>
+                <li class="cri_check">
+                  <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
+                  <input type="checkbox" id="right_critical" name="critical" value="critical" />
+                </li>
+              </ul>
+
+              <!-- 스킬 박스 -->
+              <ul class="skill_pan ds_flex">
+                <li class="skill">
+                  <button type="button" id="right_skill11" class="skill_Btn"></button>
+                  <ul>
+                    <li class="skill ds_flex">
+                      <button type="button" id="right_skill_Q_Lv_Down" class="skill_Q skill_Lv_Btn">
+                        -
+                      </button>
+                      <input class="skill_Q LV_Num" type="number" min="0" max="6" />
+                      <button type="button" class="skill_Q skill_Lv_Btn">
+                        +
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+                <li class="skill">
+                  <button type="button" id="right_skill2" class="skill_Btn"></button>
+                  <ul>
+                    <li class="skill ds_flex">
+                      <button type="button" id="right_skill_W_Lv_Down" class="skill_W skill_Lv_Btn">
+                        -
+                      </button>
+                      <input class="skill_W LV_Num" type="number" min="0" max="6" />
+                      <button type="button" class="skill_W skill_Lv_Btn">
+                        +
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+                <li class="skill">
+                  <button type="button" id="right_skill3" class="skill_Btn"></button>
+                  <ul>
+                    <li class="skill ds_flex bg-red">
+                      <button type="button" id="right_skill_E_Lv_Down" class="skill_E skill_Lv_Btn">
+                        -
+                      </button>
+                      <input class="skill_E LV_Num" type="number" min="0" max="6" />
+                      <button type="button" class="skill_E skill_Lv_Btn">
+                        +
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+                <li class="skill">
+                  <button type="button" id="right_skill4" class="skill_Btn"></button>
+                  <ul>
+                    <li class="skill ds_flex">
+                      <button type="button" id="right_skill_R_Lv_Down" class="skill_R skill_Lv_Btn">
+                        -
+                      </button>
+                      <input class="skill_R LV_Num" type="number" min="0" max="6" />
+                      <button type="button" class="skill_R skill_Lv_Btn">
+                        +
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <!--스킬 설명창-->
+              <div id="tooltip" class="hidden">
+                <p id="tooltip-content"></p>
+              </div>
+              <!-- 스킬 박스 E -->
+
+              <div class="stat">
+                <!-- 스탯 박스 -->
+                <table style="text-align: center">
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                  <tr>
+                    <td class="stat_name">공격</td>
+                    <td class="stat_value">60</td>
+                    <td class="stat_name">수비</td>
+                    <td class="stat_value">60</td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- 오른쪽 챔피언 전체 패널 E -->
+      </section>
     </main>
 
     <script src="./js/test.js"></script>
@@ -566,11 +707,9 @@
     <!-- 메인영역 E -->
 
     <!-- 푸터영역 -->
-    <footer>
-
-    </footer>
+    <footer></footer>
     <!-- 푸터영역 E -->
-</div>
+  </div>
 </body>
 
 </html>
