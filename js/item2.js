@@ -1,4 +1,5 @@
 let items;
+var clickItemBox;// 아이템 출력 기능 구현
 // API 가져오기
 $.ajax({
     type:"get",
@@ -11,7 +12,7 @@ $.ajax({
         for (var i = 1; i <= 6; i++) {
             $("#iBox" + i).click(function() {
                 var parentContainer = "left-item-filter-options";
-                var container = "itemContainer";
+                var container = "itemContainer" ;
                 if ($("#" + container).children().length === 0) {
                     $("#" + container).append('<div id="newBox"></div>');
                 } else if (clickItemBox && clickItemBox[0] === this) {
@@ -19,9 +20,9 @@ $.ajax({
                     $("#" + parentContainer).hide(); // left-item-filter-options 숨기기
                     return;
                 }
-                clickItemBox = $(this);//현재 클릭한 아이템 박스를 저장
+                clickItemBox = $(this); // 현재 클릭한 아이템 박스를 저장
                 $("#" + parentContainer).show(); // left-item-filter-options 열고 닫기
-                printItems(filterItems);//아이템 출력을 새로운 박스 안으로 변경
+                printItems(filterItems); // 아이템 출력을 새로운 박스 안으로 변경
 
             });
         }
@@ -51,10 +52,8 @@ $.ajax({
         // 아이템 필터링 End
 
         // description 값 확인
-        console.log(filterItems.ma)
+        console.log(filterItems)
 
-        /* 아이템 출력 기능 구현 */
-        var clickItemBox;
         function printItems(filterItems){
             $("#newBox").empty();// newBox의 초기 값
 
@@ -65,20 +64,20 @@ $.ajax({
 
 
                 // 아이템 이미지 버튼에 클릭 이벤트를 설정
-                setItemClickEvent(itemButton,item,i);
+                setItemClickEvent(itemButton,item,clickItemBox.attr('id').replace('iBox','')-1);
 
                 // 버튼에 이미지와 텍스트 추가
                 $("#newBox").append(itemButton);
             }
         }
-        //각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
+        // 각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
         var selectedMythicItem=[null,null,null,null,null,null]
         
 
         // 아이템 이미지 클릭 이벤트
         // 아이템 이미지 버튼을 클릭하면,선택한 아이템 박스에 이미지를 설정하고,다시 클릭하면 초기화
         function setItemClickEvent(itemButton,item,iBoxIndex){
-            itemButton.click(function(){// 마우스 클릭 시 이벤트
+            itemButton.click(function(){ // 마우스 클릭 시 이벤트
                 var imgSrc= $(this).find('img').attr('src');
                 //
                 var description = item.description;
@@ -92,12 +91,12 @@ $.ajax({
                 //
 
 
-                // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
-                if(selectedMythicItem.some((selectedMythicItem,index)=>
-                    selectedMythicItem !== null && index !== iBoxIndex)){
-                    alert("신화 아이템은 하나만 선택 가능 합니다.");
-                    return;
-                }
+                // // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
+                // if(selectedMythicItem.some((selectedMythicItem,index)=>
+                //     selectedMythicItem !== null && index !== iBoxIndex)){
+                //     alert("신화 아이템은 하나만 선택 가능 합니다.");
+                //     return;
+                // }
                 // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료 End
 
                 // 이미지와 X버튼을 생성
@@ -116,7 +115,7 @@ $.ajax({
                 });
                 // X버튼 클릭 이벤트 End
 
-                selectedMythicItem[iBoxIndex] = item;//신화 아이템 선택 상태 업데이트
+                selectedMythicItem[iBoxIndex] = item; // 신화 아이템 선택 상태 업데이트
 
                 var itemPrice=item.gold.total; // 아이템의 total값을 추출
                 $(".cost p").text(": "+ itemPrice + " 원");//아이템 가격을 HTML에 적용
@@ -277,6 +276,58 @@ $.ajax({
             $("#mpRegenL").next().text("0");
 
         }
+
+        // iBox1~6에서 선택한 아이템들의 키 배열
+        var iBoxItems = [];
+
+// iBox1~6에 출력 중인 아이템들의 키를 iBoxItems 배열에 추가
+        for (var i = 0; i < 6; i++) {
+            var iBoxId = "#iBox" + (i + 1);
+            var itemKey = $(iBoxId).attr('data-item-key');
+            iBoxItems.push(itemKey);
+        }
+
+// iBoxItems 배열을 활용하여 해당 아이템들을 가져옴
+        var filteredItems = iBoxItems.map(function(key) {
+            return allItems[key];
+        });
+
+// 아이템 출력
+        printItems(filteredItems);
+
+// iBox1~6에서 아이템을 선택할 때마다 스탯 합 업데이트
+        function updateStats() {
+            var totalStats = {
+                FlatAttackDamageL: parseInt($("#attackDamageL").next().text()),
+                FlatAbilityPowerL: parseInt($("#abilityPowerL").next().text(),
+                // 필요한 스탯 추가
+            };
+
+            // 선택한 아이템들의 스탯 합 구하기
+            filteredItems.forEach(function(item) {
+                var itemStats = item.stats;
+
+                // 각 스탯을 totalStats에 더해줌
+                for (var stat in totalStats) {
+                    if (itemStats.hasOwnProperty(stat)) {
+                        totalStats[stat] += itemStats[stat];
+                    }
+                }
+            });
+
+            // 스탯 합 출력
+            console.log("선택한 아이템들의 스탯 합:");
+            for (var stat in totalStats) {
+                console.log(stat + ": " + totalStats[stat]);
+            }
+
+            // 나머지 코드...
+        }
+
+// iBox1~6에서 아이템을 선택할 때마다 스탯 합 업데이트 호출
+        $(document).on('click', '.item_box', function() {
+            updateStats();
+        });
     }
 });
 
