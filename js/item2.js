@@ -19,7 +19,7 @@ $.ajax({
                     $("#" + parentContainer).hide(); // left-item-filter-options 숨기기
                     return;
                 }
-                clickItemBox= $(this);//현재 클릭한 아이템 박스를 저장
+                clickItemBox = $(this);//현재 클릭한 아이템 박스를 저장
                 $("#" + parentContainer).show(); // left-item-filter-options 열고 닫기
                 printItems(filterItems);//아이템 출력을 새로운 박스 안으로 변경
 
@@ -64,7 +64,7 @@ $.ajax({
                 var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
 
 
-                //아이템 이미지 버튼에 클릭 이벤트를 설정
+                // 아이템 이미지 버튼에 클릭 이벤트를 설정
                 setItemClickEvent(itemButton,item,i);
 
                 // 버튼에 이미지와 텍스트 추가
@@ -102,7 +102,8 @@ $.ajax({
 
                 // 이미지와 X버튼을 생성
                 clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
-                $("#newBox").remove();//아이템을선택하면#newBox제거
+                $("#newBox").remove();// 아이템을 선택하면 #newBox제거
+                $("#left-item-filter-options").hide();
                 // 이미지와 X버튼을 생성 End
 
                 // X버튼 클릭 이벤트
@@ -115,10 +116,10 @@ $.ajax({
                 });
                 // X버튼 클릭 이벤트 End
 
-                selectedMythicItem[iBoxIndex]=item;//신화 아이템 선택 상태 업데이트
+                selectedMythicItem[iBoxIndex] = item;//신화 아이템 선택 상태 업데이트
 
                 var itemPrice=item.gold.total; // 아이템의 total값을 추출
-                $(".cost p").text(": "+itemPrice+" 원");//아이템 가격을 HTML에 적용
+                $(".cost p").text(": "+ itemPrice + " 원");//아이템 가격을 HTML에 적용
 
                 resetStats(); // 스텟 초기화 호출
 
@@ -282,19 +283,13 @@ $.ajax({
 
 $(document).mouseup(function(e){
     var container = $("#newBox");
+    var filterOptions = $("#left-item-filter-options");
 
     //newBox와 item_pan를 제외한 부분을 클릭 했을 경우 newBox닫기
     if(!container.is(e.target) && container.has(e.target).length===0
         && !$(".item_pan").is(e.target)
         && $(".item_pan").has(e.target).length===0){
         container.remove();
+        filterOptions.hide(); // left-item-filter-options 숨기기
     }
 });
-
-
-// <div id="newBox">
-//     <button type="button" className="item_box">
-//         <img src="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/3084.png" alt="강철심장">
-//             <div style="position: absolute; top: 183.333px; left: 161.333px; background-color: white; border: 1px solid black; padding: 5px; z-index: 9999;">
-//                 <p>…</p>
-//             </div>
