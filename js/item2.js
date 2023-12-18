@@ -91,12 +91,12 @@ $.ajax({
                 //
 
 
-                // // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
-                // if(selectedMythicItem.some((selectedMythicItem,index)=>
-                //     selectedMythicItem !== null && index !== iBoxIndex)){
-                //     alert("신화 아이템은 하나만 선택 가능 합니다.");
-                //     return;
-                // }
+                // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
+                if(selectedMythicItem.some((selectedMythicItem,index)=>
+                    selectedMythicItem !== null && index !== iBoxIndex)){
+                    alert("신화 아이템은 하나만 선택 가능 합니다.");
+                    return;
+                }
                 // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료 End
 
                 // 이미지와 X버튼을 생성
