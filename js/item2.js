@@ -299,7 +299,7 @@ $.ajax({
         function updateStats() {
             var totalStats = {
                 FlatAttackDamageL: parseInt($("#attackDamageL").next().text()),
-                FlatAbilityPowerL: parseInt($("#abilityPowerL").next().text(),
+                FlatAbilityPowerL: parseInt($("#abilityPowerL").next().text())
                 // 필요한 스탯 추가
             };
 
