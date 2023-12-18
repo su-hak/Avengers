@@ -600,3 +600,46 @@ body {
 .txt_cpu p {
     padding: 12px 0 0 0;
 }
+#left-hp-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 체력 숫자 */
+#left-hp-num {
+    position: absolute;
+    top: 4px;
+    font-weight: 700;
+
+}
+
+#left-rsc-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 마나 or  숫자 */
+#left-rsc-num {
+    position: absolute;
+    top: 1px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+#right-hp-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 체력 숫자 */
+#right-hp-num {
+    position: absolute;
+    top: 4px;
+    font-weight: 700;
+
+}
+
+#right-rsc-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 마나 or  숫자 */
+#right-rsc-num {
+    position: absolute;
+    top: 1px;
+    font-size: 10px;
+    font-weight: 700;
+}

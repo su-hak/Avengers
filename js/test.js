@@ -106,7 +106,8 @@ function setChampStats(id) {
             'movespeed': dtch[0].stats.movespeed,
             'mpregen': Math.round(dtch[0].stats.mpregen),
             'hpregen': Math.round(dtch[0].stats.hpregen),
-            'crit': dtch[0].stats.crit
+            'crit': dtch[0].stats.crit,
+            'hp' : dtch[0].stats.hp
         };
 
         function updateAttackStats(selectedLevel) {
@@ -288,6 +289,66 @@ function setChampStats(id) {
                 }
             }
         }
+        // function updateHpStats(selectedLevel){
+        //     const totalHp = document.getElementById("left-hp-total");
+        //     // console.log(dtch[0].stats.hp);
+        //     // console.log(dtch[0].stats.hpperlevel);
+        //     if (selectedLevel > 1) {
+        //         let coefficient = dtch[0].stats.hpperlevel;
+        //         let a = [];
+        //         let itemHp = 0;
+        //         a[0] = dtch[0].stats.hp;
+        //         let level = 1;
+        //         for (let i = 1; i < selectedLevel; i++) {
+        //             a[i] = Math.round((a[i-1]+(coefficient* (0.65+(0.035*(i+1)))))+itemHp);
+        //         }
+        //         const value = new Decimal(a[selectedLevel - 1]);
+        //         const roundedValue = value.toDecimalPlaces(2);
+        //         const realRoundedValue = roundedValue.toDecimalPlaces(1);
+        //         statValues['hp'] = Math.round(realRoundedValue);
+        //         console.log(a);
+        //     } else if (selectedLevel < 2) {
+        //         statValues['hp'] = Math.round(dtch[0].stats.hp);
+        //     }
+        //     for (const id in statValues) {
+        //         const element = document.getElementById(id);
+        //         let value = statValues[id];
+        //         if (element) {
+        //             totalHp.textContent = value;
+        //         }
+        //     }
+        //
+        // }
+        function updateHpStats(selectedLevel) {
+            const totalHp = document.getElementById("left-hp-total");
+            if (totalHp) { // totalHp가 null이 아닌 경우에만 처리
+                if (selectedLevel > 1) {
+                    let coefficient = dtch[0].stats.hpperlevel;
+                    let a = [];
+                    let itemHp = 0;
+                    a[0] = dtch[0].stats.hp;
+                    let level = 1;
+                    for (let i = 1; i < selectedLevel; i++) {
+                        a[i] = (a[i - 1] + Math.round((coefficient * (0.65 + (0.035 * (i + 1)))) + itemHp));
+                    }
+                    const value = new Decimal(a[selectedLevel - 1]);
+                    const roundedValue = value.toDecimalPlaces(2);
+                    const realRoundedValue = roundedValue.toDecimalPlaces(1);
+                    statValues['hp'] = Math.round(realRoundedValue);
+                    console.log(a);
+                } else if (selectedLevel < 2) {
+                    statValues['hp'] = Math.round(dtch[0].stats.hp);
+                }
+                // for (const id in statValues) {
+                //     const element = document.getElementById(id);
+                //     let value = statValues[id];
+                //     if (element) {
+                //         totalHp.textContent = value;
+                //     }
+                // }
+                totalHp.textContent = statValues[id];
+            }
+        }
 
 
         function updateCritStats(){
@@ -315,7 +376,7 @@ function setChampStats(id) {
                 }
             }
         }
-        function updateAbilitypower(){
+        function updateAbilitypowerStats(){
             let itemAp = 0;
             let a = 0;
             a = a+itemAp;
@@ -337,9 +398,10 @@ function setChampStats(id) {
         updateAttackspeedStats(selectedLevel);
         updateHpregenStats(selectedLevel);
         updateMpregenStats(selectedLevel);
+        updateHpStats(selectedLevel)
         updateCritStats();
         updateMovespeedStats();
-        updateAbilitypower();
+        updateAbilitypowerStats();
 
 // 레벨 변경 시 업데이트
         document.getElementById('champ_lv').onchange = function() {
@@ -351,9 +413,10 @@ function setChampStats(id) {
             updateAttackspeedStats(selectedLevel);
             updateHpregenStats(selectedLevel);
             updateMpregenStats(selectedLevel);
+            updateHpStats(selectedLevel)
             updateCritStats();
             updateMovespeedStats();
-            updateAbilitypower();
+            updateAbilitypowerStats();
         };
     });
 }
