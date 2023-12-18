@@ -1,17 +1,16 @@
-// 이미지를 클릭하면 전체 화면 창을 나타내는 함수
-document.getElementById('fullscreen-trigger').addEventListener('click', function() {
-    var overlay = document.getElementById('fullscreen-overlay');
-    overlay.style.display = 'block'; // 화면에 보이도록 변경
-    setTimeout(function() {
-        overlay.style.opacity = 1; // 천천히 나타나도록 변경
-    }, 10);
-});
+// // JavaScript 코드를 문서의 로딩이 완료된 후에 실행
+// document.addEventListener('DOMContentLoaded', function() {
+//     const triggerButton = document.getElementById('fullscreen-trigger');
+//     const closeButton = document.getElementById('fullscreen-closed');
+//     const overlay = document.getElementById('fullscreen-overlay');
 
-// 전체 화면 창을 클릭하면 창을 닫는 함수
-document.getElementById('fullscreen-overlay').addEventListener('click', function() {
-    var overlay = document.getElementById('fullscreen-overlay');
-    overlay.style.opacity = 0; // 천천히 사라지도록 변경
-    setTimeout(function() {
-        overlay.style.display = 'none'; // 화면에서 숨김
-    }, 500); // 0.5초 후에 실행 (opacity transition 시간과 동일하게 설정)
-});
+//     triggerButton.addEventListener('click', function() {
+//       overlay.style.display = 'block';
+//       triggerButton.style.display = 'none';
+//     });
+
+//     closeButton.addEventListener('click', function() {
+//       overlay.style.display = 'none';
+//       triggerButton.style.display = 'block';
+//     });
+//   });

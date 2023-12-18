@@ -96,11 +96,11 @@ input[type="number"] {
     overflow-x: hidden;
 }
 /* 임시 */
-.champion-box {
+/* .champion-box {
     max-height: 50em;
     overflow-y: hidden;
     overflow-x: hidden;
-}
+} */
 
 .champion-img {
     width:100%;

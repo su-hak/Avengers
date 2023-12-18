@@ -82,6 +82,7 @@ body {
     font-size: 1.6rem;
     line-height: 1.6;
     color: #000;
+    overflow-x: hidden;
 }
 
 .inner {
@@ -97,6 +98,7 @@ body {
 /* 헤더영역 */
 #header {
     width: 100%;
+    height: 80px;
     align-items: center;
     background: #598EFF;
     color: rgb(255, 255, 255);
@@ -157,41 +159,71 @@ body {
 }
 
 
-/* 메뉴열기 아이콘 이미지 평소크기에 안보이게*/
-.navimg {
-    position: relative;
-    display: none;
+
+/* 작은 화면일 때 메뉴 설정 */
+
+/* 큰 화면시 메뉴바 버튼 안보이게 */
+#fullscreen-trigger {
+    display: none;   
 }
-/* 메뉴닫기 아이콘 이미지 평소크기에 안보이게*/
-.navcloseimg {
+
+/* 작은 화면시 전체창 메뉴 큰 화면시 안보이게 */
+#fullscreen-overlay {
+    display: none;
+    background: rgba(0, 0, 0, 0.900);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 30px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;    
+}
+/* 작은 화면 메뉴 닫기 버튼 */
+#fullscreen-closed {
     position: absolute;
-    display: none;
+    top: 30px;
+    right: 30px;
 }
 
+/* 작은 화면 메뉴 목록 */
+#fullscreen-overlay ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 50px;
+}
 
+#fullscreen-overlay ul li {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+/* 작은화면 메뉴창 링크 스타일 */
+#fullscreen-overlay a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+/* 화면 줄일 시 메뉴바 사이즈 조정 */
 @media (max-width : 1000px) {
     #header .gnb { gap : 1rem}
 }
+
+/* 화면 줄일 시 메뉴바 안보이고 메뉴버튼 나오게 */
 @media (max-width : 768px) {
     /* 화면 줄어들면 메뉴 사라짐*/
     #header .gnb {
         display: none;
-    }
-    /* 메뉴아이콘 클릭시 메뉴바 보이게 */
-    .gnb_show {
-        display: block flex;
-        justify-content: center;
-    }
-    /* 화면 줄어들면 메뉴아이콘 생성*/
-    .navimg {
+    }  
+    /* 화면 줄어들면 작은 화면 메뉴 활성화 */
+    #fullscreen-trigger {
+        display: block ;
         position: absolute;
-        top: 3rem;
-        right: 3rem;
-        display: block;
-    }
+        top: 30px;
+        right: 30px;
+    }    
 }
-
-
 
 /* 로그인 회원가입 */
 #header .util {
@@ -210,6 +242,7 @@ body {
     border-radius: 10px
 }
 
+/* 회원 가입 버튼 */
 #header .util .joinBtn {
     width: 110px;
     height: 35px;
@@ -221,19 +254,48 @@ body {
     text-align: center;
     border-radius: 10px
 }
-
+/* 회원기입버튼 마우스 올렸을때 */
 #header .util .joinBtn:hover {
     background: #ad0099;
-}
 
+}
+/* 화면 줄일 시 유틸창 사라지게 */
 @media (max-width : 768px) {
     #header .util {
         display: none;
     }
 }
+/* 작은 화면 로그인 버튼 */
+.mobileLoginBtn{
+    width: 110px;
+    height: 35px;
+    color: #000;
+    background-color: #FFF;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
+/* 작은 화면  회원가입 버튼 */
+.mobileJoinBtn {
+    width: 110px;
+    height: 35px;
+    color: #fff;
+    background-color: #ff00e1;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px    
+}
 
 
 /* 메인영역 */
+
+.ds_flex_center {
+    display: flex; 
+    justify-content: center;
+}
+
 
 /* 배경페이지 */
 #main #sectionB {
@@ -241,7 +303,12 @@ body {
 }
 
 #main #sectionB .video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 1080px;
+    object-fit: cover;
 }
 
 /* 배경 위 메인 페이지 */
@@ -261,6 +328,7 @@ body {
     }
 
     #main #sectionF {
+        width: 100%;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -278,10 +346,10 @@ body {
 @media (max-width : 768px) {
 
     #main #sectionF #dealmeterL {
-        width: 575px;
+        width: 475px;
         padding: 0;
         background: none;
-        margin: 700px 0 0 0;
+        margin: 680px auto 0 auto;
         border-right: none;
     }
 }
@@ -355,6 +423,53 @@ body {
     margin-right: 0;
 }
 
+
+#left-hp-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 체력 숫자 */
+#left-hp-num {
+    position: absolute;
+    top: 4px;    
+    font-weight: 700;
+    
+}
+
+#left-rsc-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 마나 or  숫자 */
+#left-rsc-num {
+    position: absolute;
+    top: 1px;    
+    font-size: 10px;
+    font-weight: 700;    
+}
+
+#right-hp-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 체력 숫자 */
+#right-hp-num {
+    position: absolute;
+    top: 4px;    
+    font-weight: 700;
+    
+}
+
+#right-rsc-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 마나 or  숫자 */
+#right-rsc-num {
+    position: absolute;
+    top: 1px;    
+    font-size: 10px;
+    font-weight: 700;    
+}
+
+
+
 /*.resourceless {*/
 /*    background-color: rgb(0, 101, 252);*/
 /*}*/
@@ -426,17 +541,19 @@ body {
     gap: 5px;
 }
 
+/* 왼쪽 챔피언 레벨 표시창 */
 .LV_Show {
     width: 50px;
     height: 50px;
-    background: turquoise;
+    /* background: turquoise; */
+}
+.chmap_Lv {
+    /* background: #f1f1f1; */
+    border: 1px solid #000;
+    color: #000;
 }
 
-.LV_Button {
-    width: 30px;
-    height: 50px;
-    background: turquoise;
-}
+
 
 .BA_button {
     width: 126px;
@@ -490,9 +607,9 @@ body {
 }
 
 /*스킬 설명창*/
-#tooltip {
+#left-tooltip {
     position: absolute;
-    z-index: 0;
+    z-index: 9999;
     width: 300px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -506,6 +623,7 @@ body {
     width: 215px;
     height: 255px;
     background-color: rgb(255, 255, 255);
+    font-size: 12px;
 }
 
 .stat td {
@@ -513,13 +631,16 @@ body {
 }
 
 .stat_name {
-    width: 54px;
-    background: #00ddff;
+    width: 65.5px;    /* 기본 54px */
+    background: #598EFF;
+    /* color: #000000; */
+
 }
 
 .stat_value {
-    width: 54px;
-    background: #78edff;
+    width: 45px; 
+    background: #97d0ff;
+    /* color: #461f44 */
 }
 
 /* 아이템 & 로그 패널 */
@@ -550,12 +671,20 @@ body {
 }
 
 /* 로그창 */
-.log_pan {
+.log_pan_css {
     width: 100%;
-    height: 460px;
-    padding: 20px;
+    height: 460px !important;
+    box-sizing: border-box; /* padding과 border를 요소의 크기에 포함 */
+    padding: 10px;
     background: #2c2e3e;
     color: #ffffff;
+    font-size: 12px;
+    /* overflow: scroll; 무조건 스크롤바를 표시 */
+    scrollbar-width: 6px; /* 스크롤바의 너비를 얇게 설정 (크롬, 파이어폭스 등 최신 브라우저에서 적용) */
+    scrollbar-color: transparent transparent; /* 스크롤바 색상을 투명으로 설정 */
+}
+.log_pan_css::-webkit-scrollbar {
+    width: 6px; /* 스크롤바의 너비 */
 }
 
 
@@ -570,8 +699,11 @@ body {
 
 @media (max-width : 768px) {
     #main #sectionF #dealmeterR {
+        width: 475px;
+        padding: 0;
         background: none;
-        padding: 50px 0 0 0;
+        margin: 10px auto 0 auto;
+        border-right: none;
     }
 }
 

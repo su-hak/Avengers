@@ -25,11 +25,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-
-    <script src="./js/test.js"></script>
-    <script src="./js/item.js"></script>    
-    <script src="./js/decimal.js"></script>
-    <!-- <script src="./js/web.js"></script> -->
     
 
     <title>Calc.lol</title>
@@ -67,26 +62,11 @@
                 </li>
             </ul>
         </div>
-        <button id="fullscreen-trigger">
-            <iconify-icon icon="fa:navicon" style="color: white" width="30"></iconify-icon>
-        </button>      
-        
-        <div id="fullscreen-overlay">
-            <button id="fullscreen-closed" class="text-right">
-                <iconify-icon icon="vaadin:close" style="color: white" width="30"></iconify-icon>
-            </button>
-            <ul>
-              <li><a href="#">공지사항</a></li>
-              <li><a href="#">딜미터기</a></li>
-              <li><a href="#">커뮤니티</a></li>
-              <li>
-                <button id="loginBtn" class="btn mobileLoginBtn" type="button" value="로그인">로그인</button>
-              </li>
-              <li>
-                <button id="joinBtn" class="btn mobileJoinBtn" type="button" value="회원가입">회원가입</button>
-              </li>
-            </ul>
-        </div>
+        <!-- 모바일 화면 시 메뉴 버튼 -->
+        <iconify-icon id="fullscreen-trigger" icon="fa:navicon" class="navimg" style="color: white"
+                      width="30"></iconify-icon>
+        <!-- 모바일 화면 시 메뉴 닫기 버튼 -->
+        <iconify-icon icon="vaadin:close" class="navcloseimg" style="color: white" width="30"></iconify-icon>
     </header>
     <!-- 헤더영역 E -->
 
@@ -98,28 +78,21 @@
             <video class="video" src="./resource/mov/bgMove.webm" autoplay muted loop playsinline></video>
         </section>
         <!-- 배경영상 E -->
-        <section id="sectionF" >
+        <section id="sectionF">
             <!-- 왼쪽 챔피언 전체 패널 -->
             <div id="dealmeterL" class="">
                 <ul class="ul_top">
                     <!-- 왼쪽 게이지 박스 -->
                     <li>
                         <div class="health-box rounded">
-                            <!-- 왼쪽 HP 박스 -->                             
-                            <!-- 왼쪽 HP 게이지 --> 
-                            <div id="left-hp-bar" class="row ml-0 health-bar rounded" style="width: 50% ;"></div>
-                            <!-- 왼쪽 HP 숫자--> 
-                            <div id="left-hp-num" class="centered-title">
-                                <span id="left-hp-value">0</span> / <span id="left-hp-total">0</span>
-                            </div> 
+                            <!-- 왼쪽 HP 박스 -->
+                            <div id="left-hp-bar" class="row ml-0 health-bar rounded" style="width: 100%">
+                                <!-- 왼쪽 HP 게이지 -->
+                            </div>
                         </div>
                         <div class="resource-box rounded">
-                            <!-- 왼쪽 MP/리소스 박스 : MP일때 와 리소스 일때 색깔 변경 하도록-->
-                            <div id="left-rsc-bar" class="resource-bar rounded resourceless" style="width: 10%"></div>
-                            <!-- 왼쪽 HP 숫자--> 
-                            <div id="left-rsc-num" class="centered-title">
-                                <span id="left-rsc-value">0</span> / <span id="left-rsc-total">0</span>
-                            </div> 
+                            <!-- 왼쪽 MP 박스 -->
+                            <div id="left-rsc-bar" class="resource-bar rounded resourceless" style="width: 100%"></div>
                         </div>
                     </li>
                 </ul>
@@ -184,7 +157,7 @@
                         <ul class="LV_BA ds_flex">
                             <li class="LV_Show">
                                 <!-- 왼쪽 챔피언 레벨표시 -->
-                                <select name="LV" id="left_champ_lv" class="chmap_Lv" style="width: 100%; height: 100%">
+                                <select name="LV" id="champ_lv" style="width: 100%; height: 100%">
                                     <option value="LV">LV</option>
                                     <option value="1">01</option>
                                     <option value="2">02</option>
@@ -290,11 +263,6 @@
                             </li>
                         </ul>
                         <!-- 스킬 박스 E -->
-                        <!--스킬 설명창-->
-                        <div id="left-tooltip" class="hidden">
-                            <p id="left-tooltip-content"></p>
-                        </div>
-                        <!-- 스킬 박스 E -->
 
                         <div class="stat">
                             <!-- 스탯 박스 -->
@@ -325,39 +293,39 @@
                                 </tr>
                                 <tr>
                                     <td class="stat_name" id="crit">치명타</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                             </table>
                         </div>
@@ -414,33 +382,13 @@
                                     </li>
                                 </ul>
                             </li>
-                            <textarea id="left-log_pan" class="log_pan_css" name="" cols="30" rows="10">
+                            <li class="log_pan">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
                                 quod, distinctio perferendis provident ipsum quis. Soluta
                                 provident magnam eveniet nobis sed. Deleniti, perferendis.
                                 Optio accusantium laboriosam architecto deleniti assumenda?
                                 Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                            </textarea>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -454,22 +402,14 @@
                     <li>
                         <div class="health-box rounded ds_flex ds_flex_R">
                             <!-- HP 박스 -->
-                            <!-- 오른쪽 HP 게이지 -->
                             <div class="row ml-0 health-bar rounded" id="right-hp-bar" style="width: 100%; margin-right: 0">
+                                <!-- HP 게이지 -->
                             </div>
-                            <!-- 오른쪽 HP 숫자--> 
-                            <div id="right-hp-num" class="centered-title">
-                                <span id="right-hp-value">0</span> / <span id="right-hp-total">0</span>
-                            </div> 
                         </div>
                         <div class="resource-box-R rounded ds_flex ds_flex_R float-right">
-                            <!-- 오른쪽 MP 박스 -->
+                            <!-- MP 박스 -->
                             <div class="resource-bar-R rounded resourceless" id="right-rsc-bar" style="width: 100%;">
                             </div>
-                            <!-- 오른쪽 MP 숫자--> 
-                            <div id="left-rsc-num" class="centered-title">
-                                <span id="left-rsc-value">0</span> / <span id="left-rsc-total">0</span>
-                            </div> 
                         </div>
                     </li>
                 </ul>
@@ -526,33 +466,13 @@
                                     </li>
                                 </ul>
                             </li>
-                            <textarea id="right-log_pan" class="log_pan_css" name="" cols="30" rows="10">
+                            <li class="log_pan">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
                                 quod, distinctio perferendis provident ipsum quis. Soluta
                                 provident magnam eveniet nobis sed. Deleniti, perferendis.
                                 Optio accusantium laboriosam architecto deleniti assumenda?
                                 Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                            </textarea>
+                            </li>
                         </ul>
                     </li>
 
@@ -613,7 +533,7 @@
                         <ul class="LV_BA ds_flex">
                             <li class="LV_Show">
                                 <!-- 챔피언 레벨표시 -->
-                                <select name="LV" id="right_champ_lv" class="chmap_Lv" style="width: 100%; height: 100%">
+                                <select name="LV" id="right_champ_lv" style="width: 100%; height: 100%">
                                     <option value="LV">LV</option>
                                     <option value="1">01</option>
                                     <option value="2">02</option>
@@ -705,8 +625,8 @@
                             </li>
                         </ul>
                         <!--스킬 설명창-->
-                        <div id="right-tooltip" class="hidden">
-                            <p id="right-tooltip-content"></p>
+                        <div id="tooltip" class="hidden">
+                            <p id="tooltip-content"></p>
                         </div>
                         <!-- 스킬 박스 E -->
 
@@ -714,64 +634,64 @@
                             <!-- 스탯 박스 -->
                             <table style="text-align: center">
                                 <tr>
-                                    <td class="stat_name" id="attackdamage">공격력</td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="abilitypower">주문력</td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="armor">방어력</td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="spellblock">마법방어력</td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="attackspeed">공격속도</td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="movespeed">이동속도</td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="mpregen">마나 재생률</td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="hpregen">체력 재생률</td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="crit">치명타</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_name">공격</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name">공격</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
                                     <td class="stat_name">수비</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value">60</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat_name">공격</td>
+                                    <td class="stat_value">60</td>
+                                    <td class="stat_name">수비</td>
+                                    <td class="stat_value">60</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat_name">공격</td>
+                                    <td class="stat_value">60</td>
+                                    <td class="stat_name">수비</td>
+                                    <td class="stat_value">60</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat_name">공격</td>
+                                    <td class="stat_value">60</td>
+                                    <td class="stat_name">수비</td>
+                                    <td class="stat_value">60</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat_name">공격</td>
+                                    <td class="stat_value">60</td>
+                                    <td class="stat_name">수비</td>
+                                    <td class="stat_value">60</td>
                                 </tr>
                             </table>
                         </div>
@@ -782,7 +702,10 @@
         </section>
     </main>
 
-    
+    <script src="./js/test.js"></script>
+    <script src="./js/item.js"></script>
+    <script src="./js/skill.js"></script>
+    <script src="./js/decimal.js"></script>
     <!-- 메인영역 E -->
 
     <!-- 푸터영역 -->
