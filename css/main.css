@@ -9,73 +9,289 @@ font-family: 'DM Serif Text', serif; */
 
 /* 초기화 */
 
-html { font-size: 62.5%; }
+html {
+    font-size: 62.5%;
+}
 
-* { margin: 0; padding: 0; box-sizing: border-box }
-table { border-collapse: collapse; width: 100%; }
-h1,h2,h3,h4,h5,h6 { font-size: 100%; }
-img { vertical-align: top;}
-ul,ol { list-style: none;}
-a { text-decoration: none; color: #000;}
-em, address { font-style : normal ; }
+* {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box */
+}
 
-button { border: 0 ; margin: 0; padding: 0; background: transparent;} /* 버튼 보더 배경 지우기 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+
+img {
+    vertical-align: top;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+em,
+address {
+    font-style: normal;
+}
+
+button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+/* 버튼 보더 배경 지우기 */
 
 /* form 테두리 영역 없애기 */
-fieldset,input,textarea,select { vertical-align: middle; border: 0;}
-legend,caption { display: none;}
+fieldset,
+input,
+textarea,
+select {
+    vertical-align: middle;
+    border: 0;
+}
+
+legend,
+caption {
+    display: none;
+}
 
 
-body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size: 1.6rem; line-height: 1.6; color: #000;}
+body {
+    word-break: keep-all;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: #000;
+}
 
-.inner { max-width: calc(100% - 200px); margin: 0 auto; }
+.inner {
+    max-width: calc(100% - 200px);
+    margin: 0 auto;
+}
+
+
 
 
 /* 초기화  E */
 
 /* 헤더영역 */
-#header { align-items: center;  background: #598EFF; color: rgb(255, 255, 255);}
-#header .inner { padding: 20px; display: flex; align-items: center; }
-#header .inner a {text-decoration: none; }
-#header .inner h1 { padding: 0px 50px 0px 0px; font-size: 30px; font-weight: bold; color: #fff; }
+#header {
+    width: 100%;
+    align-items: center;
+    background: #598EFF;
+    color: rgb(255, 255, 255);
+}
+
+#header .inner {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+@media (max-width : 768px) {
+    #header .inner {
+        display: block;
+        padding: 20px 0;
+    }
+}
+
+#header .inner a {
+    text-decoration: none;
+}
+
+#header .inner h1 {
+    padding: 0px 50px 0px 0px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+}
+
+@media (max-width : 1000px) {
+    #header .inner h1 { padding: 0 25px 0 0; }
+}
+@media (max-width : 768px) {
+    #header .inner h1 {
+        text-align: center;
+        align-items: center;
+        align-content: center;
+        padding: 0;
+
+        /*display: none; !*테스트용*!*/
+    }
+}
 
 /* 헤더 네비 */
-#header .gnb { margin: 0; display: flex; gap: 30px; align-items: center; }
-#header .gnb a { color: rgb(255, 255, 255); text-decoration: none; }
-#header .gnb a:hover { color:rgb(255, 38, 0)}
+#header .gnb {
+    margin: 0;
+    display: flex;
+    gap: 1.875rem;
+    align-items: center;
+}
+/* 메뉴 기본 스타일 */
+#header .gnb a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+/*매뉴에 마우스 올리면 스타일 변경*/
+#header .gnb a:hover {
+    color: rgb(255, 38, 0)
+}
+
+
+/* 메뉴열기 아이콘 이미지 평소크기에 안보이게*/
+.navimg {
+    position: relative;
+    display: none;
+}
+/* 메뉴닫기 아이콘 이미지 평소크기에 안보이게*/
+.navcloseimg {
+    position: absolute;
+    display: none;
+}
+
+
+@media (max-width : 1000px) {
+    #header .gnb { gap : 1rem}
+}
+@media (max-width : 768px) {
+    /* 화면 줄어들면 메뉴 사라짐*/
+    #header .gnb {
+        display: none;
+    }
+    /* 메뉴아이콘 클릭시 메뉴바 보이게 */
+    .gnb_show {
+        display: block flex;
+        justify-content: center;
+    }
+    /* 화면 줄어들면 메뉴아이콘 생성*/
+    .navimg {
+        position: absolute;
+        top: 3rem;
+        right: 3rem;
+        display: block;
+    }
+}
+
+
 
 /* 로그인 회원가입 */
-#header .util { display: flex; margin: 0 0 0 auto; gap: 20px;}
-#header .util button { width: 80px ; height: 35px ; background: #ffffff; font-size: 15px; font-weight: 700; text-align: center; border-radius: 10px}
-#header .util .joinBtn { width: 110px ; height: 35px ; border: 2px solid #ffdd57; color: #fff; background: #ff00e1; font-size: 15px; font-weight: 700; text-align: center; border-radius: 10px}
-#header .util .joinBtn:hover { background: #ad0099; } 
+#header .util {
+    display: flex;
+    margin: 0 0 0 auto;
+    gap: 20px;
+}
+
+#header .util button {
+    width: 80px;
+    height: 35px;
+    background: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
+
+#header .util .joinBtn {
+    width: 110px;
+    height: 35px;
+    border: 2px solid #ffdd57;
+    color: #fff;
+    background: #ff00e1;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
+
+#header .util .joinBtn:hover {
+    background: #ad0099;
+}
+
+@media (max-width : 768px) {
+    #header .util {
+        display: none;
+    }
+}
 
 
 /* 메인영역 */
 
 /* 배경페이지 */
-#main #sectionB { position: relative; }
-#main #sectionB .video { width: 100%;}
+#main #sectionB {
+    position: relative;
+}
+
+#main #sectionB .video {
+    width: 100%;
+}
 
 /* 배경 위 메인 페이지 */
-#main #sectionF { 
-    position: absolute; 
-    top: 120px; 
-    width: 100%; 
-    height: 800px; 
-    display: flex; 
-    justify-content: center; 
+#main #sectionF {
+    position: absolute;
+    top: 120px;
+    width: 1153px;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    margin: 0 20%;
 }
-#main #sectionF #dealmeterL { 
-    padding: 10px 0 0 50px; 
-    width:calc(100%/3.3); 
-    background: rgba(255, 255, 255, .8); 
+
+@media (max-width : 768px) {
+    #main #sectionB {
+        display: none;
+    }
+
+    #main #sectionF {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 0.4rem;
+    }
+}
+
+#main #sectionF #dealmeterL {
+    padding: 0.625rem 0 0 3.125rem;
+    width: calc(100%/2);
+    background: rgba(255, 255, 255, .8);
     border-right: 1px solid;
 }
 
+@media (max-width : 768px) {
 
-.ul_main_L { 
-    padding: 0 30px 0 0; 
+    #main #sectionF #dealmeterL {
+        width: 575px;
+        padding: 0;
+        background: none;
+        margin: 700px 0 0 0;
+        border-right: none;
+    }
+}
+
+.ul_top {
+    margin-bottom :0;
+}
+
+.ul_main_L {
+    padding: 0 30px 0 0;
 }
 
 
@@ -84,7 +300,7 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
     /*background-color: lightgray;*/
     position: relative;
     /* background-color: black; */
-    width: 90%;
+    width: 473px;
     height: 2em;
     margin-top: 1em;
     border: 0px solid rgb(0, 255, 162);
@@ -97,10 +313,16 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
     position: relative;
 }
 
+.health-bar-white {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+}
+
 .resource-box {
     position: relative;
-    background-color: rgb(0, 101, 252);
-    width: 80%;
+    /*background-color: rgb(0, 101, 252);*/
+    width: 423px;
     height: 1em;
     margin-top: 0.25em;
     margin-bottom: 1em;
@@ -109,182 +331,315 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
 
 .resource-bar {
     background-color: rgb(23, 121, 234);
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     position: relative;
 }
 
-.resourceless {
-    background-color: rgb(0, 101, 252);
+.resource-box-R {
+    position: relative;
+    /*background-color: rgb(0, 101, 252);*/
+    width: 423px;
+    height: 1em;
+    margin-top: 0.25em;
+    margin-bottom: 1em;
+    margin-right: 0;
+    border: 0px solid rgb(1, 173, 253);
 }
+
+.resource-bar-R {
+    background-color: rgb(23, 121, 234);
+    /* width: 100%; */
+    height: 100%;
+    position: relative;
+    margin-right: 0;
+}
+
+/*.resourceless {*/
+/*    background-color: rgb(0, 101, 252);*/
+/*}*/
+
 /* 게이지 창 E */
 
 /* 공유 및 플레이어 */
-.share_ul { 
+.share_ul {
     padding: 0 0 5px 0;
 }
 
 /* 공유버튼 */
-.share_Btn { 
-    width: 50px; 
-    height: 50px; 
-    background: #bbff00; 
-    color: #000000; 
+.share_Btn {
+    width: 50px;
+    height: 50px;
+    padding-top: 5px;
+    background: #ff00bf;
+    color: #ffd4f6;
     font-size: small;
+}
+.share_Btn:hover {
+    background: #ffd4f6;
+    color: #ff00bf;
 }
 
 /* 플레이어표시 */
-.txt_player { 
-    margin-left: 2px; 
-    border: 1px; 
-    width: 160px; 
-    height: 50px; 
-    background: #3967ff; 
-    color: #fff; 
+.txt_player {
+    border: 1px;
+    width: 160px;
+    height: 50px;
+    background: #3967ff;
+    color: #fff;
     text-align: center;
 }
-.txt_player p { 
-    padding: 12px 0 0 0 ;
+
+.txt_player p {
+    padding: 12px 0 0 0;
 }
 
 /* 아이템 저장버튼 */
-.item_save { 
-    padding: 0 0 5px 0; 
+.item_save {
+    padding: 0 0 5px 0;
 }
 
 /* 공격버튼 */
-.LV_BA { 
-    padding: 0 0 5px 0; 
+.LV_BA {
+    padding: 0 0 5px 0;
 }
 
-.saveItemBtn { 
-    margin-top: 4px ; 
-    width: 50px; 
-    height: 50px; 
-    background: #598EFF; 
-    text-align: center; 
+.saveItemBtn {
+    margin-top: 4px;
+    width: 50px;
+    height: 50px;
+    background: #598EFF;
+    text-align: center;
 }
 
-#main #sectionF #dealmeterL .saveItemBtn:hover { 
-    background: #0d34b4; 
+#main #sectionF #dealmeterL .saveItemBtn:hover {
+    background: #0d34b4;
     color: #fff;
 }
 
-.dealmeterLL { width: 50%; }
-.ds_flex { display: flex; gap: 5px;}
+.dealmeterLL {
+    width: 50%;
+}
 
-.LV_Show { width : 50px; height: 50px; background: turquoise; }
-.LV_Button { width : 30px; height: 50px; background: turquoise; }
-.BA_button { width: 126px; height: 50px; background: #598EFF; color: #fff;}
+.ds_flex {
+    display: flex;
+    gap: 5px;
+}
+
+.LV_Show {
+    width: 50px;
+    height: 50px;
+    background: turquoise;
+}
+
+.LV_Button {
+    width: 30px;
+    height: 50px;
+    background: turquoise;
+}
+
+.BA_button {
+    width: 126px;
+    height: 50px;
+    background: #598EFF;
+    color: #fff;
+}
 
 /* 크리티컬 체크박스 */
-.cri_check { width: 30px; height: 50px; background-color: #3967ff; text-align: center; color: #FFF;}
+.cri_check {
+    width: 30px;
+    height: 50px;
+    background-color: #3967ff;
+    text-align: center;
+    color: #FFF;
+}
+.cri_check span{
+    font-size: 12px;
+}
 
 /* 스킬창 */
-.skill_pan { 
-    padding: 0 0 10px 0; 
+.skill_pan {
+    padding: 0 0 10px 0;
 }
+
 /* 스킬버튼 */
-.skill_Btn { 
-    width: 50px; 
-    height: 50px; 
+.skill_Btn {
+    position: relative;
+    width: 50px;
+    height: 50px;
     background: #598EFF;
 }
+
 /* 스킬 레벨 업다운 버튼 */
-.skill_Lv_Btn { 
-    margin-top: 5px; 
-    width: 10px; 
-    height: 20px; 
-    background: #598EFF; 
+.skill_Lv_Btn {
+    margin-top: 5px;
+    width: 10px;
+    height: 20px;
+    background: #598EFF;
     color: #fff;
-    font-size: 10px; 
+    font-size: 10px;
     font-size: 15px;
 }
+
 /* 스킬 레벨 표시창 */
-.LV_Num { 
-    margin-top: 5px; 
-    border: 1px solid #000; 
-    width: 20px; 
-    height: 20px; 
+.LV_Num {
+    margin-top: 5px;
+    border: 1px solid #000;
+    width: 20px;
+    height: 20px;
+}
+
+/*스킬 설명창*/
+#tooltip {
+    position: absolute;
+    z-index: 0;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
 }
 
 
 /* 스탯창 */
-.stat { 
-    width: 215px; 
-    height: 255px; 
-    background-color: rgb(255, 255, 255); 
+.stat {
+    width: 215px;
+    height: 255px;
+    background-color: rgb(255, 255, 255);
 }
-.stat td { 
+
+.stat td {
     height: 30px;
 }
-.stat_name { 
-    width: 54px; 
-    background: #00ddff; 
+
+.stat_name {
+    width: 54px;
+    background: #00ddff;
 }
-.stat_value { 
-    width: 54px; 
-    background: #78edff;  
+
+.stat_value {
+    width: 54px;
+    background: #78edff;
 }
 
 /* 아이템 & 로그 패널 */
-.left_panel_ul_main_R { 
-    width: 220px; 
+.left_panel_ul_main_R {
+    width: 220px;
 }
 
 /* 돈 이미지 */
-.cost { 
+.cost {
     padding: 0 0 5px;
-    align-items : center; 
+    align-items: center;
     text-align: center;
     align-content: center;
 }
 
 /* 아이템창 */
-.item_pan { display: flex; flex-wrap: wrap; justify-content: space-between; }
-.item_box { width: 70px; height: 70px; background: #ffffff; margin-bottom: 10px ;  }
+.item_pan {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.item_box {
+    width: 70px;
+    height: 70px;
+    background: #c7c7c7;
+    margin-bottom: 10px;
+}
 
 /* 로그창 */
-.log_pan { 
-    width: 100%; 
-    height: 460px; 
-    padding: 20px; 
-    background: #2c2e3e; 
-    color: #ffffff; 
+.log_pan {
+    width: 100%;
+    height: 460px;
+    padding: 20px;
+    background: #2c2e3e;
+    color: #ffffff;
 }
 
 
 /* 오른쪽 딜미터기 */
 
-#main #sectionF #dealmeterR { 
-    padding: 10px 0 0 50px; 
-    width:calc(100%/3.3); 
-    background: rgba(255, 255, 255, .8); 
+#main #sectionF #dealmeterR {
+    padding: 0.625rem 3.125rem 0 0;
+    width: calc(100%/2);
+    background: rgba(255, 255, 255, .8);
     border-right: 1px solid;
 }
 
-.ds_flex_R { display: flex; justify-content: right; gap: 5px;}
-
-.right_panel_ul_main_L { 
-    width: 220px;     
+@media (max-width : 768px) {
+    #main #sectionF #dealmeterR {
+        background: none;
+        padding: 50px 0 0 0;
+    }
 }
 
-.ul_main_R { 
-    padding: 0 0 0 30px; 
+.ds_flex_R {
+    flex-direction: row-reverse;
+    margin-right: 0;
 }
 
-.txt_cpu { 
-    margin-left: 2px; 
-    border: 1px; 
-    width: 160px; 
-    height: 50px; 
-    background: rgb(255, 56, 56); 
-    color: #fff; 
+.right_panel_ul_main_L {
+    width: 220px;
+}
+
+.ul_main_R {
+    padding: 0 0 0 30px;
+}
+
+.txt_cpu {
+    border: 1px;
+    width: 160px;
+    height: 50px;
+    background: rgb(255, 56, 56);
+    color: #fff;
     text-align: center;
 }
 
-.txt_cpu p { 
-    padding: 12px 0 0 0 ;
+.txt_cpu p {
+    padding: 12px 0 0 0;
+}
+#left-hp-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 체력 숫자 */
+#left-hp-num {
+    position: absolute;
+    top: 4px;
+    font-weight: 700;
+
 }
 
+#left-rsc-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 마나 or  숫자 */
+#left-rsc-num {
+    position: absolute;
+    top: 1px;
+    font-size: 10px;
+    font-weight: 700;
+}
 
+#right-hp-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 체력 숫자 */
+#right-hp-num {
+    position: absolute;
+    top: 4px;
+    font-weight: 700;
+
+}
+
+#right-rsc-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 마나 or  숫자 */
+#right-rsc-num {
+    position: absolute;
+    top: 1px;
+    font-size: 10px;
+    font-weight: 700;
+}

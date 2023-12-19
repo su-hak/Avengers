@@ -17,11 +17,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src='js/decimal.js'></script>
+
+
+
+
 
 
     <title>Calc.lol</title> <!-- 타이틀 -->
 </head>
+<script>
+    $.ajax({
+        type: "get",
+        url: "https://universe-meeps.leagueoflegends.com/v1/en_us/champion-browse/index.json",
+        success: function (data) {
+            var champions = Object.values(data.data); // 챔피언 데이터 배열 추출
+            champ = champions;
 
+            console.log(champ);
+        }
+    });
+</script>
 <body>
     <div id="wrap">
         <!-- 헤더영역 -->
@@ -117,7 +133,6 @@
                             <ul class="LV_BA ds_flex">
                                 <li class="LV_Show">  <!-- 챔피언 레벨표시 -->                                     
                                     <select name="LV" id="champ_lv" style="width: 100%; height: 100%;">
-                                        <option value="LV">LV</option>
                                         <option value="1">01</option>
                                         <option value="2">02</option>
                                         <option value="3">03</option>
@@ -195,10 +210,34 @@
         
                             <div class="stat">
                                 <!-- 스탯 박스 -->
-                                <table style="text-align: center;">
+                                <table style="text-align: center;" id="stats">
                                     <tr>
-                                        <td class="stat_name">공격</td>
-                                        <td class="stat_value">60</td>
+                                        <td class="stat_name" id="attackdamage">공격력</td>
+                                        <td class="stat_value">0</td>
+                                        <td class="stat_name" id="abilitypower">주문력</td>
+                                        <td class="stat_value">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="stat_name" id="armor">방어력</td>
+                                        <td class="stat_value">0</td>
+                                        <td class="stat_name" id="spellblock">마법방어력</td>
+                                        <td class="stat_value">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="stat_name" id="attackspeed">공격속도</td>
+                                        <td class="stat_value">0</td>
+                                        <td class="stat_name" id="movespeed">이동속도</td>
+                                        <td class="stat_value">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="stat_name" id="mpregen">마나 재생률</td>
+                                        <td class="stat_value">0</td>
+                                        <td class="stat_name" id="hpregen">체력 재생률</td>
+                                        <td class="stat_value">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="stat_name" id="crit">치명타</td>
+                                        <td class="stat_value">0</td>
                                         <td class="stat_name">수비</td>
                                         <td class="stat_value">60</td>
                                     </tr>
@@ -232,31 +271,7 @@
                                         <td class="stat_name">수비</td>
                                         <td class="stat_value">60</td>
                                     </tr>
-                                    <tr>
-                                        <td class="stat_name">공격</td>
-                                        <td class="stat_value">60</td>
-                                        <td class="stat_name">수비</td>
-                                        <td class="stat_value">60</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="stat_name">공격</td>
-                                        <td class="stat_value">60</td>
-                                        <td class="stat_name">수비</td>
-                                        <td class="stat_value">60</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="stat_name">공격</td>
-                                        <td class="stat_value">60</td>
-                                        <td class="stat_name">수비</td>
-                                        <td class="stat_value">60</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="stat_name">공격</td>
-                                        <td class="stat_value">60</td>
-                                        <td class="stat_name">수비</td>
-                                        <td class="stat_value">60</td>
-                                    </tr>
-                                                            
+
                                 </table>
                                 
 
@@ -327,6 +342,9 @@
         </footer>
         <!-- 푸터영역 E -->
     </div>
+    <script>
+
+    </script>
 </body>
 
 </html>
