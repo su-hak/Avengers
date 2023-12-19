@@ -13,6 +13,7 @@ $.ajax({
             $("#iBox" + i).click(function() {
                 var parentContainer = "left-item-filter-options";
                 var container = "itemContainer" ;
+
                 if ($("#" + container).children().length === 0) {
                     $("#" + container).append('<div id="newBox"></div>');
                 } else if (clickItemBox && clickItemBox[0] === this) {
@@ -45,22 +46,22 @@ $.ajax({
         // 아이템 필터링
         var filterItems=items.filter(function(items){
             return !items.requiredChampion // 챔피언전용템제외
-                && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+                // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
                 && items.inStore!==false // 스토어: false인 item 제외
                 && items.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
         });
         // 아이템 필터링 End
 
         // description 값 확인
-        console.log(filterItems)
+        console.log(filterItems) // 필터링된 전체 아이템 목록
 
         function printItems(filterItems){
-            $("#newBox").empty();// newBox의 초기 값
+            $("#newBox").empty(); // newBox의 초기 값
 
             for(var i=0; i<filterItems.length; i++){
                 var item = filterItems[i];
-                var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
-                var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
+                var imgURL= "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
+                var itemButton = $("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
 
 
                 // 아이템 이미지 버튼에 클릭 이벤트를 설정
@@ -71,7 +72,7 @@ $.ajax({
             }
         }
         // 각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
-        var selectedMythicItem=[null,null,null,null,null,null]
+        var selectedMythicItem= [null,null,null,null,null,null]
 
         // 스탯 값을 담을 변수 선언
         var adValue= 0;
@@ -83,11 +84,14 @@ $.ajax({
         var newArPen= 0;
         var adPen= 0;
         var spPen= 0;
+        var spPen2= 0;
         var crit= 0;
         var newOmniVamp= 0;
         var cooltime= 0;
         var hpRegen= 0;
         var mpRegen= 0;
+        var fullHp= 0;
+        var fullMp= 0;
 
 
         // 아이템 이미지 클릭 이벤트
@@ -105,9 +109,10 @@ $.ajax({
                     statValues = stats[1].split('<br>');
                 }
                 //
+                console.log("iBox" + (iBoxIndex + 1) + "에서 선택한 아이템:", item); // 선택한 아이템 확인을 위한 console.log 추가
 
 
-                // // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
+                // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
                 // if(selectedMythicItem.some((selectedMythicItem,index)=>
                 //     selectedMythicItem !== null && index !== iBoxIndex)){
                 //     alert("신화 아이템은 하나만 선택 가능 합니다.");
@@ -115,9 +120,10 @@ $.ajax({
                 // }
                 // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료 End
 
+
                 // 이미지와 X버튼을 생성
                 clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
-                $("#newBox").remove();// 아이템을 선택하면 #newBox제거
+                $("#newBox").remove(); // 아이템을 선택하면 #newBox제거
                 $("#left-item-filter-options").hide();
                 // 이미지와 X버튼을 생성 End
 
@@ -168,9 +174,15 @@ $.ajax({
                             $("#adPenL").next().text(adPen);
                             break;
                         case "마법 관통력":
-                            spPen -= parseInt(statValue);
-                            $("#spPenL").next().text(spPen);
-                            break;
+                            if (statValue.includes('%')){
+                                spPen -= parseInt(statValue);
+                                $("#spPenL").next().text(spPen +'%' +"("+ spPen2+")");
+                                break;
+                            }else {
+                                spPen2 -= parseInt(statValue);
+                                $("#spPenL").next().text(spPen + '%' +"("+ spPen2+")");
+                                break;
+                            }
                         case "치명타 확률":
                             crit -= parseInt(statValue);
                             $("#critL").next().text(crit);
@@ -191,6 +203,12 @@ $.ajax({
                             mpRegen -= parseInt(statValue);
                             $("#mpRegenL").next().text(mpRegen);
                             break;
+                        case "체력":
+                            fullHp -= parseInt(statValue);
+                            break;
+                        case "마나":
+                            fullMp -= parseInt(statValue);
+                            break;
                     }
                     })
                 });
@@ -198,7 +216,7 @@ $.ajax({
 
                 selectedMythicItem[iBoxIndex] = item; // 신화 아이템 선택 상태 업데이트
 
-                var itemPrice=item.gold.total; // 아이템의 total값을 추출
+                var itemPrice= item.gold.total; // 아이템의 total값을 추출
                 $(".cost p").text(": "+ itemPrice + " 원"); //아이템 가격을 HTML에 적용
 
 
@@ -242,9 +260,15 @@ $.ajax({
                                 $("#adPenL").next().text(adPen);
                                 break;
                             case "마법 관통력":
-                                spPen += parseInt(statValue);
-                                $("#spPenL").next().text(spPen);
-                                break;
+                                if (statValue.includes('%')){
+                                    spPen += parseInt(statValue);
+                                    $("#spPenL").next().text(spPen +'%' +"("+ spPen2+")");
+                                    break;
+                                }else {
+                                    spPen2 += parseInt(statValue);
+                                    $("#spPenL").next().text(spPen + '%' +"("+ spPen2+")");
+                                    break;
+                                }
                             case "치명타 확률":
                                 crit += parseInt(statValue);
                                 $("#critL").next().text(crit);
@@ -265,15 +289,21 @@ $.ajax({
                                 mpRegen += parseInt(statValue);
                                 $("#mpRegenL").next().text(mpRegen);
                                 break;
+                            case "체력":
+                                fullHp += parseInt(statValue);
+                                break;
+                            case "마나":
+                                fullMp += parseInt(statValue);
+                                break;
                         }
                     }
                 });
                 // 아이템 스탯 정보 출력 End
             });
 
-            itemButton.mouseover(function(){    //마우스 올리면 이벤트
+            itemButton.mouseover(function(){    // 마우스 올리면 이벤트
                 var imgSrc = $(this).find('img').attr('src');
-                var imgName = imgSrc.split('/').pop();    //이미지 파일 이름 추출
+                var imgName = imgSrc.split('/').pop();    // 이미지 파일 이름 추출
 
                 // 마우스를 올린 이미지와 API에서 가져 온 아이템의 이미지가 일치하는지 확인
                 if(imgName === item.image.full) {
@@ -333,8 +363,292 @@ $.ajax({
             itemButton.mouseout(function(){     // 마우스 내리면 이벤트
                 $(this).find('div').remove(); // description 정보 초기화
             });
+
+        }// 아이템 이미지 클릭 이벤트 End
+
+        var isItemSavedBoxShown = false;
+
+        // saveItemBtn 버튼 클릭 이벤트 설정
+        $(".saveItemBtn").click(function (){
+            if (isItemSavedBoxShown){
+                $("#itemSavedBox1").show();
+                isItemSavedBoxShown = false;
+            } else {
+                $("#itemSavedBox1").hide();
+                isItemSavedBoxShown = true;
+            }
+
+        });
+
+        var itemArray1 = []; // iBox1에서 선택한 아이템을 저장하는 배열
+
+        var itemStats = [adValue, apValue, armor, spellBlock, attackSpeed,
+            moveSpeed, newArPen, adPen, spPen, spPen2, crit, newOmniVamp, cooltime,
+            hpRegen, mpRegen, fullHp, fullMp];
+        console.log(itemStats)
+
+        window.sendItemStats =function(){
+            return itemStats;
         }
-        // 아이템 이미지 클릭 이벤트 End
+
+        $(".saveHere").click(function() {
+            if (itemArray1.length > 0) {
+                // s1,s2,s3에 저장하기
+                itemArray1 = [];
+
+                for (var i = 1; i <= 6; i++) {
+                    var itemHtml = $("#iBox" + i).html();
+                    var itemText = $(itemHtml).filter("button").text();
+                    var item = selectedMythicItem[i - 1];
+
+                    if (itemText !== "" && item !== null) {
+                        itemArray1.push({
+                            item: item,
+                            itemText: itemText
+                        });
+                    }
+
+                    $("#iBox" + i).empty();
+                    selectedMythicItem[i - 1] = null;
+                }
+
+                console.log("저장된 아이템들:", itemArray1);
+
+                var itemSavedBox = $(this).closest("li").find("#itemSavedBox1");
+                itemSavedBox.hide();
+                $("#s1Btn").css("background-color", "pink");
+            } else {
+                itemSavedBox.hide();
+                $("#s1Btn").css("background-color", "skyblue");
+            }
+
+            // 이미지와 X버튼을 생성
+            clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
+            $("#newBox").remove(); // 아이템을 선택하면 #newBox제거
+            $("#left-item-filter-options").hide();
+            // 이미지와 X버튼을 생성 End
+
+            // X버튼 클릭 이벤트
+            clickItemBox.find('.itemRemoveBtn').click(function(){
+                $(this).siblings('img').remove(); // 현재 'X' 버튼과 동일한 iBox의 이미지만 제거
+                $(this).remove(); // 'X' 버튼 제거
+                selectedMythicItem[iBoxIndex] = null;
+                $(".cost p").text(":0원");// 아이템 가격 초기화
+
+                var description = itemArray1.item.description;
+                var stats = description.match(/<stats>(.*?)<\/stats>/);
+                var statValues = [];
+                //
+                //
+                if (stats) {
+                    statValues = stats[1].split('<br>');
+                }
+
+
+                statValues.forEach(function(stat) {
+                    // 스탯 값을 빼는 로직 추가
+                    var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
+                    var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
+
+                    switch (statName) {
+                        case "공격력":
+                            adValue -= parseInt(statValue);
+                            $("#attackDamageL").next().text(adValue);
+                            break;
+                        case "주문력":
+                            apValue -= parseInt(statValue);
+                            $("#abilityPowerL").next().text(apValue);
+                            break;
+                        case "방어력":
+                            armor -= parseInt(statValue);
+                            $("#armorL").next().text(armor);
+                            break;
+                        case "마법 저항력":
+                            spellBlock -= parseInt(statValue);
+                            $("#spellBlockL").next().text(spellBlock);
+                            break;
+                        case "공격 속도":
+                            attackSpeed -= parseInt(statValue);
+                            $("#attackSpeedL").next().text(attackSpeed);
+                            break;
+                        case "이동 속도":
+                            moveSpeed -= parseInt(statValue);
+                            $("#moveSpeedL").next().text(moveSpeed);
+                            break;
+                        case "방어구 관통력":
+                            newArPen -= parseInt(statValue);
+                            $("#arPenL").next().text(newArPen);
+                            break;
+                        case "물리 관통력":
+                            adPen -= parseInt(statValue);
+                            $("#adPenL").next().text(adPen);
+                            break;
+                        case "마법 관통력":
+                            if (statValue.includes('%')){
+                                spPen -= parseInt(statValue);
+                                $("#spPenL").next().text(spPen +'%' +"("+ spPen2+")");
+                                break;
+                            }else {
+                                spPen2 -= parseInt(statValue);
+                                $("#spPenL").next().text(spPen + '%' +"("+ spPen2+")");
+                                break;
+                            }
+                        case "치명타 확률":
+                            crit -= parseInt(statValue);
+                            $("#critL").next().text(crit);
+                            break;
+                        case "모든 피해 흡혈":
+                            newOmniVamp -= parseFloat(statValue);
+                            $("#vampL").next().text(newOmniVamp + "%");
+                            break;
+                        case "스킬 가속":
+                            cooltime -= parseInt(statValue);
+                            $("#coolTimeL").next().text(cooltime);
+                            break;
+                        case "기본 체력 재생":
+                            hpRegen -= parseInt(statValue);
+                            $("#hpRegenL").next().text(hpRegen);
+                            break;
+                        case "기본 마나 재생":
+                            mpRegen -= parseInt(statValue);
+                            $("#mpRegenL").next().text(mpRegen);
+                            break;
+                        case "체력":
+                            fullHp -= parseInt(statValue);
+                            break;
+                        case "마나":
+                            fullMp -= parseInt(statValue);
+                            break;
+                    }
+                })
+            });
+            // X버튼 클릭 이벤트 End
+        });
+
+        $(".loadThere").click(function() { // s1,s2,s3에서 불러오기
+            // 아이템 스탯 정보 출력 End
+
+
+            for (var i = 1; i <= 6; i++) {
+                var item = itemArray1[i - 1];
+                if (item) {
+                    var imgURL = "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + item.item.image.full;
+                    var itemButton = $("<button type='button' class='item_box'><img src='" + imgURL + "' alt='" + item.item.name + "'></button>" + item.item.name);
+
+                    $("#iBox" + i).html(itemButton);
+                    selectedMythicItem[i - 1] = item.item;
+                } else {
+                    $("#iBox" + i).empty();
+                    selectedMythicItem[i - 1] = null;
+                }
+                setItemClickEvent(itemButton, )
+            }
+            var allItemLoad = $(this).closest("li").find("#itemSavedBox1");
+            if (itemArray1.length > 0) {
+                allItemLoad.hide();
+                $("#s1Btn").css("background-color", "skyblue");
+            } else {
+                allItemLoad.hide();
+                $("#s1Btn").css("background-color", "pink");
+            }
+
+            console.log("불러온 아이템들:", itemArray1);
+
+            selectedMythicItem[iBoxIndex] = item; // 신화 아이템 선택 상태 업데이트
+
+            var itemPrice= item.gold.total; // 아이템의 total값을 추출
+            $(".cost p").text(": "+ itemPrice + " 원"); //아이템 가격을 HTML에 적용
+
+            var description = item.description;
+            var stats = description.match(/<stats>(.*?)<\/stats>/);
+            var statValues = [];
+            //
+            //
+            if (stats) {
+                statValues = stats[1].split('<br>');
+            }
+
+
+            // 아이템 스탯 정보 출력
+            statValues.forEach(function (stat) {
+                var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
+                var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
+
+                if (statName && statValue) {
+                    switch (statName) {
+                        case "공격력":
+                            adValue += parseInt(statValue);
+                            $("#attackDamageL").next().text(adValue);
+                            break;
+                        case "주문력":
+                            apValue += parseInt(statValue);
+                            $("#abilityPowerL").next().text(apValue);
+                            break;
+                        case "방어력":
+                            armor += parseInt(statValue);
+                            $("#armorL").next().text(armor);
+                            break;
+                        case "마법 저항력":
+                            spellBlock += parseInt(statValue);
+                            $("#spellBlockL").next().text(spellBlock);
+                            break;
+                        case "공격 속도":
+                            attackSpeed += parseInt(statValue);
+                            $("#attackSpeedL").next().text(attackSpeed);
+                            break;
+                        case "이동 속도":
+                            moveSpeed += parseInt(statValue);
+                            $("#moveSpeedL").next().text(moveSpeed);
+                            break;
+                        case "방어구 관통력":
+                            newArPen += parseInt(statValue);
+                            $("#arPenL").next().text(newArPen);
+                            break;
+                        case "물리 관통력":
+                            adPen += parseInt(statValue);
+                            $("#adPenL").next().text(adPen);
+                            break;
+                        case "마법 관통력":
+                            if (statValue.includes('%')){
+                                spPen += parseInt(statValue);
+                                $("#spPenL").next().text(spPen +'%' +"("+ spPen2+")");
+                                break;
+                            }else {
+                                spPen2 += parseInt(statValue);
+                                $("#spPenL").next().text(spPen + '%' +"("+ spPen2+")");
+                                break;
+                            }
+                        case "치명타 확률":
+                            crit += parseInt(statValue);
+                            $("#critL").next().text(crit);
+                            break;
+                        case "모든 피해 흡혈":
+                            newOmniVamp += parseInt(statValue);
+                            $("#vampL").next().text(newOmniVamp + "%");
+                            break;
+                        case "스킬 가속":
+                            cooltime += parseInt(statValue);
+                            $("#coolTimeL").next().text(cooltime);
+                            break;
+                        case "기본 체력 재생":
+                            hpRegen += parseInt(statValue);
+                            $("#hpRegenL").next().text(hpRegen);
+                            break;
+                        case "기본 마나 재생":
+                            mpRegen += parseInt(statValue);
+                            $("#mpRegenL").next().text(mpRegen);
+                            break;
+                        case "체력":
+                            fullHp += parseInt(statValue);
+                            break;
+                        case "마나":
+                            fullMp += parseInt(statValue);
+                            break;
+                    }
+                }
+            });
+
+        });
 
     }
 });

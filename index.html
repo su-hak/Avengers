@@ -94,9 +94,27 @@
                             <ul class="item_save ds_flex">
                                 <li>
                                     <ul> <!-- 아이템 저장버튼 -->
-                                        <li><button type="button" class="saveItemBtn">S1</button></li>
-                                        <li><button type="button" class="saveItemBtn">S2</button></li>
-                                        <li><button type="button" class="saveItemBtn">S3</button></li>
+                                        <li>
+                                            <button type="button" class="saveItemBtn" id="s1Btn" >S1</button>
+                                            <div id="itemSavedBox1" style="position: absolute; display: none; border: 1px dotted black">
+                                                <button type="button" class="saveHere" >저장하기</button></br>
+                                                <button type="button" class="loadThere" >불러오기</button>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="saveItemBtn">S2</button>
+                                            <div id="itemSavedBox2" style="position: absolute; display: none; border: 1px dotted black">
+                                            <button type="button" class="saveHere" >저장하기</button></br>
+                                            <button type="button" class="loadThere" >불러오기</button>
+                                        </div>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="saveItemBtn">S3</button>
+                                            <div id="itemSavedBox3" style="position: absolute; display: none; border: 1px dotted black">
+                                            <button type="button" class="saveHere" >저장하기</button></br>
+                                            <button type="button" class="loadThere" >불러오기</button>
+                                        </div>
+                                        </li>
                                     </ul> <!-- 아이템 저장버튼 E-->
                                 </li>
         
@@ -224,7 +242,6 @@
                                         <td class="stat_name" id="moveSpeedL">이동 속도</td>
                                         <td class="stat_value">0</td>
                                     </tr>
-
                                     <tr>
                                         <td class="stat_name" id="arPenL">방어구 관통력</td>
                                         <td class="stat_value">0%</td>
@@ -259,10 +276,10 @@
                         <li class="left_panel_ul_main_R">
                             <ul>
                                 <li>
-                                    <ul class="item_pan">
+                                    <ul class="item_pan dropright">
                                         <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
-                                             aria-labelledby="dropdownMenuButton" x-placement="right-start"
-                                             style="display: none; position: absolute; will-change:transform; top: 0px; left: 0px; transform: translate3d(160px, 2px, 0px); ">
+                                             aria-labelledby="dropdownMenuButton"
+                                             style="display: none;">
                                             <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
                                             <div class="row mx-auto" id="itemContainer">
                                                 <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->

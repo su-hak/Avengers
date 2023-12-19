@@ -83,11 +83,14 @@ $.ajax({
         var newArPen= 0;
         var adPen= 0;
         var spPen= 0;
+        var spPen2= 0;
         var crit= 0;
         var newOmniVamp= 0;
         var cooltime= 0;
         var hpRegen= 0;
         var mpRegen= 0;
+        var fullHp= 0;
+        var fullMp= 0;
 
 
         // 아이템 이미지 클릭 이벤트
@@ -191,6 +194,12 @@ $.ajax({
                             mpRegen -= parseInt(statValue);
                             $("#mpRegenL").next().text(mpRegen);
                             break;
+                        case "체력":
+                            fullHp -= parseInt(statValue);
+                            break;
+                            case "마나":
+                            fullMp -= parseInt(statValue);
+                            break;
                     }
                     })
                 });
@@ -242,9 +251,15 @@ $.ajax({
                                 $("#adPenL").next().text(adPen);
                                 break;
                             case "마법 관통력":
-                                spPen += parseInt(statValue);
-                                $("#spPenL").next().text(spPen);
-                                break;
+                                if (statValue.includes('%')){
+                                    spPen += parseInt(statValue);
+                                    $("#spPenL").next().text(spPen + "%");
+                                    break;
+                                }else {
+                                    spPen2 += statValue;
+                                    $("#spPenL").next().text(spPen2 + "%");
+                                    break;
+                                }
                             case "치명타 확률":
                                 crit += parseInt(statValue);
                                 $("#critL").next().text(crit);
@@ -264,6 +279,12 @@ $.ajax({
                             case "기본 마나 재생":
                                 mpRegen += parseInt(statValue);
                                 $("#mpRegenL").next().text(mpRegen);
+                                break;
+                            case "체력":
+                                fullHp += parseInt(statValue);
+                                break;
+                            case "마나":
+                                fullMp += parseInt(statValue);
                                 break;
                         }
                     }
