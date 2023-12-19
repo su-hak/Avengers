@@ -641,6 +641,7 @@ body {
     border: 1px solid #000;
     width: 20px;
     height: 20px;
+    text-align: center;
 }
 
 /*스킬 설명창*/
