@@ -42,7 +42,7 @@ input[type="number"] {
 }
 
 .btn-blue {
-    background-color : rgb(45, 32, 188);
+    background-color : #2d20bc;
     color : white;
     /* border : 1px solid black; */
     width: 160px;
@@ -76,6 +76,7 @@ input[type="number"] {
 
 
 /* 챔피언 목록창 */
+
 .dropdown-multicol{
     min-width: 50em;
 }
@@ -141,11 +142,6 @@ input[type="number"] {
     width: 20em;
 }
 
-.centered-title {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
 
 .right-align-btn {
     position: absolute;

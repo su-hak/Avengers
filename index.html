@@ -27,9 +27,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
     <script src="./js/test.js"></script>
-    <script src="./js/item.js"></script>    
+    <script src="./js/item2.js"></script>    
     <script src="./js/decimal.js"></script>
-    <!-- <script src="./js/web.js"></script> -->
+    <!-- <script src="./js/web.js"></script> 원래 따로 만들었는데 재홍이가 test.js 에 붙여넣음 -->
     
 
     <title>Calc.lol</title>
@@ -107,18 +107,18 @@
                         <div class="health-box rounded">
                             <!-- 왼쪽 HP 박스 -->                             
                             <!-- 왼쪽 HP 게이지 --> 
-                            <div id="left-hp-bar" class="row ml-0 health-bar rounded" style="width: 50% ;"></div>
+                            <div id="left-hp-bar" class="row ml-0 health-bar rounded" style="width: 100% ;"></div>
                             <!-- 왼쪽 HP 숫자--> 
                             <div id="left-hp-num" class="centered-title">
-                                <span id="left-hp-value">0</span> / <span id="left-hp-total">0</span>
+                                <span id="left-hp-value">123130</span> / <span id="left-hp-total">1213123</span>
                             </div> 
                         </div>
                         <div class="resource-box rounded">
                             <!-- 왼쪽 MP/리소스 박스 : MP일때 와 리소스 일때 색깔 변경 하도록-->
-                            <div id="left-rsc-bar" class="resource-bar rounded resourceless" style="width: 10%"></div>
+                            <div id="left-rsc-bar" class="resource-bar rounded resourceless" style="width: 100%"></div>
                             <!-- 왼쪽 HP 숫자--> 
                             <div id="left-rsc-num" class="centered-title">
-                                <span id="left-rsc-value">0</span> / <span id="left-rsc-total">0</span>
+                                <span id="left-rsc-value">0</span> / <span id="left-rsc-total">1245646</span>
                             </div> 
                         </div>
                     </li>
@@ -128,11 +128,11 @@
                 <ul class="ul_main ds_flex">
                     <!-- 왼쪽 챔피언창 라인 -->
                     <li class="ul_main_L">
-                        <ul class="share_ul ds_flex">
-                            <!-- 왼쪽 플레이어 표시 및 공유버튼 -->
+                        <!-- 왼쪽 플레이어 표시 및 공유버튼 -->
+                        <ul class="share_ul ds_flex">                            
                             <li>
-                                <button id="left-share-btn" type="button" class="share_Btn">
-                                    <iconify-icon icon="octicon:share-16" width="25px"></iconify-icon>
+                                <button id="left-share-btn" type="button" class="share_Btn btn_bora">
+                                    <iconify-icon icon="octicon:share-16" width="25px" class="share_icon"></iconify-icon>
                                 </button>
                             </li>
                             <li class="txt_player">
@@ -146,13 +146,13 @@
                                 <ul>
                                     <!-- 왼쪽 아이템 저장버튼 -->
                                     <li>
-                                        <button type="button" class="saveItemBtn">S1</button>
+                                        <button id="left_save_btn1" type="button" class="saveItemBtn btn_green">S1</button>
                                     </li>
                                     <li>
-                                        <button type="button" class="saveItemBtn">S2</button>
+                                        <button id="left_save_btn2" type="button" class="saveItemBtn btn_green">S2</button>
                                     </li>
                                     <li>
-                                        <button type="button" class="saveItemBtn">S3</button>
+                                        <button id="left_save_btn3" type="button" class="saveItemBtn btn_green">S3</button>
                                     </li>
                                     <!-- 왼쪽 아이템 저장버튼 E-->
                                 </ul>
@@ -184,7 +184,7 @@
                         <ul class="LV_BA ds_flex">
                             <li class="LV_Show">
                                 <!-- 왼쪽 챔피언 레벨표시 -->
-                                <select name="LV" id="left_champ_lv" class="chmap_Lv" style="width: 100%; height: 100%">
+                                <select name="LV" id="champ_lv" class="chmap_Lv" style="width: 100%; height: 100%">
                                     <option value="LV">LV</option>
                                     <option value="1">01</option>
                                     <option value="2">02</option>
@@ -208,17 +208,18 @@
                                 <!-- 왼쪽 챔피언 레벨표시 E -->
                             </li>
                             <li>
-                                <button type="button" class="BA_button">BasicAttack</button>
+                                <!-- 왼쪽 공격버튼 -->
+                                <button id="left_BA_button" type="button" class="BA_button btn_green">BasicAttack</button>
                                 <!-- 베이직 어택 -->
                             </li>
                             <!-- 크리티컬 체크박스 -->
-                            <li class="cri_check">
+                            <li class="cri_check btn_green">
                                 <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
-                                <input type="checkbox" id="critical" name="critical" value="critical" />
+                                <input type="checkbox" id="left_critical" name="critical" value="critical"/>
                             </li>
                         </ul>
 
-                        <!-- 스킬 박스 -->
+                        <!-- 왼쪽 스킬 박스 -->
                         <ul class="skill_pan ds_flex">
                             <li class="skill">
                                 <!-- 스킬 이미지1 -->
@@ -367,7 +368,15 @@
                     <li class="left_panel_ul_main_R">
                         <ul>
                             <li>
-                                <ul class="item_pan">
+                                <ul id="item_box" class="item_pan dropright">
+                                    <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
+                                             aria-labelledby="dropdownMenuButton"
+                                             style="display: none;">
+                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
+                                            <div class="row mx-auto" id="itemContainer">
+                                                <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
+                                            </div>
+                                    </div>
                                     <li>
                                         <button type="button" id="iBox1" class="item_box">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
@@ -406,40 +415,26 @@
                                     </li>
                                 </ul>
 
-                                <ul>
+                                <!-- 왼쪽 비용 창 -->
+                                <ul class="cost ds_flex ds_flex_space-between">
                                     <!-- 왼쪽 동전 이미지 -->
-                                    <li class="cost ds_flex">
-                                        <img src="/resource/img/coin.png" width="40px" />
-                                        <p id="cost_L" style="margin: 0">: 1000원</p>
+                                    <li>
+                                        <img src="/resource/img/coin.png" class="cost-img"/>                                        
+                                    </li>
+                                    <li>
+                                        <p id="left-cost-value" class="cost-value-pan">12456</p>
                                     </li>
                                 </ul>
                             </li>
-                            <textarea id="left-log_pan" class="log_pan_css" name="" cols="30" rows="10">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
+                            <textarea id="left-log_pan" class="log_pan_css" name="" cols="30" rows="10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.
                             </textarea>
                         </ul>
                     </li>
@@ -467,8 +462,8 @@
                             <div class="resource-bar-R rounded resourceless" id="right-rsc-bar" style="width: 100%;">
                             </div>
                             <!-- 오른쪽 MP 숫자--> 
-                            <div id="left-rsc-num" class="centered-title">
-                                <span id="left-rsc-value">0</span> / <span id="left-rsc-total">0</span>
+                            <div id="right-rsc-num" class="centered-title">
+                                <span id="right-rsc-value">0</span> / <span id="right-rsc-total">0</span>
                             </div> 
                         </div>
                     </li>
@@ -518,11 +513,15 @@
                                         </button>
                                     </li>
                                 </ul>
-                                <ul>
+
+                                <!-- 오른쪽 비용 창 -->
+                                <ul class="cost ds_flex ds_flex_space-between">
                                     <!-- 오른쪽 동전 이미지 -->
-                                    <li class="cost ds_flex">
-                                        <img src="/resource/img/coin.png" width="40px" />
-                                        <p id="cost_R" style="margin: 0">: 1000원</p>
+                                    <li>
+                                        <img src="/resource/img/coin.png" class="cost-img" />                                        
+                                    </li>
+                                    <li>
+                                        <p id="right-cost-value" class="cost-value-pan"> 1000</p>
                                     </li>
                                 </ul>
                             </li>
@@ -558,14 +557,14 @@
 
                     <!-- 오른쪽 챔피언창 라인 -->
                     <li class="ul_main_R">
-                        <ul class="share_ul ds_flex">
-                            <!-- 오른쪽 챔피언 표시 및 공유버튼 -->
+                        <!-- 오른쪽 챔피언 표시 및 공유버튼 -->
+                        <ul class="share_ul ds_flex">                            
                             <li class="txt_cpu">
                                 <p>CPU</p>
                             </li>
                             <li>
-                                <button id="right-share-btn" type="button" class="share_Btn">
-                                    <iconify-icon icon="octicon:share-16" width="25px"></iconify-icon>
+                                <button id="right-share-btn" type="button" class="share_Btn btn_bora">
+                                    <iconify-icon icon="octicon:share-16" width="25px" class="share_icon"></iconify-icon>
                                 </button>
                             </li>
                         </ul>
@@ -581,11 +580,11 @@
                                                  data-toggle="tooltip" data-placement="bottom" />
                                         </button>
                                         <!-- 오른쪽 챔피언 목록 -->
-                                        <div class="dropdown-menu" id="champion-dropdown">
+                                        <div class="dropdown-menu" id="right-champion-dropdown">
                                             <!-- 오른쪽 챔피언 목록 속 검색창 -->
                                             <input class="form-control mx-auto my-2" type="text" placeholder="챔피언 검색"
-                                                   id="champion-search" />
-                                            <div id="champion-list" class="mx-auto">
+                                                   id="right-champion-search" />
+                                            <div id="right-champion-list" class="mx-auto">
                                                 <!-- 오른쪽 챔피언 목록이 들어갈 자리 -->
                                             </div>
                                         </div>
@@ -597,13 +596,13 @@
                                 <ul>
                                     <!-- 아이템 저장버튼 -->
                                     <li>
-                                        <button type="button" class="saveItemBtn">S1</button>
+                                        <button id="right_save_btn1" type="button" class="saveItemBtn btn_green">S1</button>
                                     </li>
                                     <li>
-                                        <button type="button" class="saveItemBtn">S2</button>
+                                        <button id="right_save_btn2" type="button" class="saveItemBtn btn_green">S2</button>
                                     </li>
                                     <li>
-                                        <button type="button" class="saveItemBtn">S3</button>
+                                        <button id="right_save_btn3" type="button" class="saveItemBtn btn_green">S3</button>
                                     </li>
                                 </ul>
                                 <!-- 아이템 저장버튼 E-->
@@ -636,16 +635,17 @@
                                 </select>
                             </li>
                             <li>
-                                <button type="button" class="BA_button">BasicAttack</button>
+                                <!-- 오른쪽 공격버튼 -->
+                                <button id="right_BA_button" type="button" class="BA_button btn_green">BasicAttack</button>
                                 <!-- 베이직 어택 -->
                             </li>
-                            <li class="cri_check">
+                            <li class="cri_check btn_green">
                                 <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
                                 <input type="checkbox" id="right_critical" name="critical" value="critical" />
                             </li>
                         </ul>
 
-                        <!-- 스킬 박스 -->
+                        <!-- 오른쪽 스킬 박스 -->
                         <ul class="skill_pan ds_flex">
                             <li class="skill">
                                 <button type="button" id="right_skill11" class="skill_Btn"></button>
@@ -714,31 +714,31 @@
                             <!-- 스탯 박스 -->
                             <table style="text-align: center">
                                 <tr>
-                                    <td class="stat_name" id="attackdamage">공격력</td>
+                                    <td class="stat_name" id="right-attackdamage">공격력</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="abilitypower">주문력</td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="armor">방어력</td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="spellblock">마법방어력</td>
+                                    <td class="stat_name" id="right-abilitypower">주문력</td>
                                     <td class="stat_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="attackspeed">공격속도</td>
+                                    <td class="stat_name" id="right-armor">방어력</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="movespeed">이동속도</td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="mpregen">마나 재생률</td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="hpregen">체력 재생률</td>
+                                    <td class="stat_name" id="right-spellblock">마법방어력</td>
                                     <td class="stat_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="crit">치명타</td>
+                                    <td class="stat_name" id="right-attackspeed">공격속도</td>
+                                    <td class="stat_value">0</td>
+                                    <td class="stat_name" id="right-movespeed">이동속도</td>
+                                    <td class="stat_value">0</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat_name" id="right-mpregen">마나 재생률</td>
+                                    <td class="stat_value">0</td>
+                                    <td class="stat_name" id="right-hpregen">체력 재생률</td>
+                                    <td class="stat_value">0</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat_name" id="right-crit">치명타</td>
                                     <td class="stat_value">0</td>
                                     <td class="stat_name">수비</td>
                                     <td class="stat_value">0</td>
@@ -786,7 +786,22 @@
     <!-- 메인영역 E -->
 
     <!-- 푸터영역 -->
-    <footer></footer>
+    <footer id="footer" class="footer-style">
+        <div class="copyright">
+            copyright &copy; 2023 <a href="https://github.com/su-hak/Avengers" style="color: #fffc57;">Avengers</a> All rights reserved.
+        </div>
+        <div>
+            <span>
+                이 사이트는 Riot Games의 보증을 받지 않으며 Riot Games 또는 공식적으로 관련된 사람의 견해나 의견을 반영하지 않습니다.
+            </span>
+            <span>
+                리그 오브 레전드를 제작하거나 관리하는 데 있어 League of Legends 및 Riot Games는 Riot Games의 상표 또는 등록 상표입니다. Inc. 리그 오브 레전드 © Riot Games, Inc.
+            </span>
+            
+        </div>
+        
+
+    </footer>
     <!-- 푸터영역 E -->
 </div>
 </body>

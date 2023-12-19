@@ -1,6 +1,10 @@
 @charset "utf-8";
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* 기본글꼴 */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap'); 
+
+/* 게이지 글꼴 */
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&family=VT323&display=swap');
 
 /* font-family: 'Noto Sans KR', sans-serif;
 font-family: 'DM Serif Text', serif; */
@@ -82,7 +86,7 @@ body {
     font-size: 1.6rem;
     line-height: 1.6;
     color: #000;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 .inner {
@@ -296,10 +300,24 @@ body {
     justify-content: center;
 }
 
+.ds_flex_space-between {
+    display: flex; 
+    justify-content: space-between;
+}
+
 
 /* 배경페이지 */
+#main {
+    height: 880px;
+}
+@media (max-width : 768px) {
+    #main {
+        height: 1600px;
+    }
+} 
+
 #main #sectionB {
-    position: relative;
+    position: relative;    
 }
 
 #main #sectionB .video {
@@ -307,7 +325,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 1080px;
+    height: 880px;
     object-fit: cover;
 }
 
@@ -375,7 +393,7 @@ body {
 }
 
 .health-bar {
-    background-color: rgb(82, 191, 58);
+    background-color: #00e71f;
     width: 100%;
     height: 100%;
     position: relative;
@@ -430,9 +448,9 @@ body {
 /* 왼쪽 챔피언 체력 숫자 */
 #left-hp-num {
     position: absolute;
-    top: 4px;    
+    top: 4px;  
+    font-size: 30px;   
     font-weight: 700;
-    
 }
 
 #left-rsc-bar {
@@ -442,8 +460,8 @@ body {
 #left-rsc-num {
     position: absolute;
     top: 1px;    
-    font-size: 10px;
-    font-weight: 700;    
+    font-size: 16px;
+    /* font-weight: 700;     */
 }
 
 #right-hp-bar {
@@ -453,6 +471,7 @@ body {
 #right-hp-num {
     position: absolute;
     top: 4px;    
+    font-size: 30px;
     font-weight: 700;
     
 }
@@ -464,8 +483,19 @@ body {
 #right-rsc-num {
     position: absolute;
     top: 1px;    
-    font-size: 10px;
-    font-weight: 700;    
+    font-size: 16px;
+    /* font-weight: 700;     */
+}
+
+/* 게이지 숫자 스타일 */
+.centered-title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -25%);   
+    font-family: 'VT323', monospace; 
+    font-size: 30px;   
+    color: #fbff2b;
+    text-shadow: 2px 2px 2px gray;  
 }
 
 
@@ -485,14 +515,8 @@ body {
 .share_Btn {
     width: 50px;
     height: 50px;
-    padding-top: 5px;
-    background: #ff00bf;
-    color: #ffd4f6;
+    padding-top: 5px;    
     font-size: small;
-}
-.share_Btn:hover {
-    background: #ffd4f6;
-    color: #ff00bf;
 }
 
 /* 플레이어표시 */
@@ -500,7 +524,7 @@ body {
     border: 1px;
     width: 160px;
     height: 50px;
-    background: #3967ff;
+    background: #2d20bc;
     color: #fff;
     text-align: center;
 }
@@ -510,6 +534,25 @@ body {
 }
 
 /* 아이템 저장버튼 */
+.btn_bora {
+    background: #f700ff;
+    color: #fff;
+}
+.btn_bora:hover {
+    background: #fa5bff;
+    color: #c800cf;
+}
+
+
+.btn_green {
+    background: #52bf3a;
+    color: #fff;
+}
+.btn_green:hover {
+    background: #2dff49;
+    color: #009e15;
+}
+
 .item_save {
     padding: 0 0 5px 0;
 }
@@ -522,14 +565,8 @@ body {
 .saveItemBtn {
     margin-top: 4px;
     width: 50px;
-    height: 50px;
-    background: #598EFF;
+    height: 50px;    
     text-align: center;
-}
-
-#main #sectionF #dealmeterL .saveItemBtn:hover {
-    background: #0d34b4;
-    color: #fff;
 }
 
 .dealmeterLL {
@@ -558,17 +595,13 @@ body {
 .BA_button {
     width: 126px;
     height: 50px;
-    background: #598EFF;
-    color: #fff;
 }
 
 /* 크리티컬 체크박스 */
 .cri_check {
     width: 30px;
-    height: 50px;
-    background-color: #3967ff;
-    text-align: center;
-    color: #FFF;
+    height: 50px;    
+    text-align: center;    
 }
 .cri_check span{
     font-size: 12px;        
@@ -576,7 +609,7 @@ body {
 
 /* 스킬창 */
 .skill_pan {
-    padding: 0 0 10px 0;
+    margin-bottom: 10px;
 }
 
 /* 스킬버튼 */
@@ -584,23 +617,27 @@ body {
     position: relative;
     width: 50px;
     height: 50px;
-    background: #598EFF;
+    background: #b6b6b6;
+    border: 2px solid #c9b92f;
+}
+.skill_Btn:hover {
+    border: 2px solid #fbff00;
 }
 
 /* 스킬 레벨 업다운 버튼 */
 .skill_Lv_Btn {
-    margin-top: 5px;
+    /* margin-top: 5px; */
     width: 10px;
     height: 20px;
-    background: #598EFF;
+    border: 2px solid #c9b92f;
+    background: #757575;
     color: #fff;
-    font-size: 10px;
-    font-size: 15px;
+    font-size: 10px;        
 }
 
 /* 스킬 레벨 표시창 */
 .LV_Num {
-    margin-top: 5px;
+    /* margin-top: 5px; */
     border: 1px solid #000;
     width: 20px;
     height: 20px;
@@ -608,6 +645,16 @@ body {
 
 /*스킬 설명창*/
 #left-tooltip {
+    position: absolute;
+    z-index: 9999;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+}
+
+#right-tooltip {
     position: absolute;
     z-index: 9999;
     width: 300px;
@@ -632,15 +679,17 @@ body {
 
 .stat_name {
     width: 65.5px;    /* 기본 54px */
-    background: #598EFF;
-    /* color: #000000; */
+    /* background: #7cc0ff; */
+    background: #323749;
+    color: #ffdef7;
 
 }
 
 .stat_value {
     width: 45px; 
-    background: #97d0ff;
-    /* color: #461f44 */
+    /* background: #b1daff; */
+    background: #525975;
+    color: #ffe600;
 }
 
 /* 아이템 & 로그 패널 */
@@ -648,12 +697,22 @@ body {
     width: 220px;
 }
 
-/* 돈 이미지 */
+/* 비용 이미지 및 표시*/
 .cost {
-    padding: 0 0 5px;
+    margin-bottom: 10px;    
+    border: 1px solid #000000;
     align-items: center;
-    text-align: center;
     align-content: center;
+    background-color: #59758f;
+    color: #FFF;
+}
+.cost-img {
+    width: 30px;
+    margin-left: 10px;
+}
+.cost-value-pan {
+    margin: 0 10px 0 0;
+    font-family: 'Silkscreen', sans-serif;
 }
 
 /* 아이템창 */
@@ -668,6 +727,11 @@ body {
     height: 70px;
     background: #c7c7c7;
     margin-bottom: 10px;
+    border: 2px solid #c9b92f;
+}
+
+.item_box:hover {
+    border: 2px solid #eeff00;
 }
 
 /* 로그창 */
@@ -731,4 +795,26 @@ body {
 
 .txt_cpu p {
     padding: 12px 0 0 0;
+}
+
+
+/* 푸터 스타일 */
+.footer-style{
+    width: 100%;
+    height: 100px;
+    background: #2c2e3e;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    align-content: center;
+}
+.copyright {
+    padding: 20px 0 5px 0;
+}
+
+@media (max-width : 768px) {
+    .footer-style{
+        height: 150px;
+        padding: 10px 30px;
+    }
 }
