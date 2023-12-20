@@ -165,9 +165,7 @@ $.ajax({
                 //
                 var description = item.description;
                 var stats = description.match(/<stats>(.*?)<\/stats>/);
-                console.log(50,stats)
                 var statValues = [];
-                console.log(60,statValues)
                 //
                 //
                 if (stats) {
@@ -185,31 +183,25 @@ $.ajax({
                 // }
                 // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료 End
 
-                // $("#emptyBtn").addEventListener("click", function() {
-                //     // 이미지 제거
-                //     $(this).siblings('img').remove();
-                //     $(this).remove(); // emptyBtn 제거
-                //     selectedMythicItem[iBoxIndex] = null;
-                //     $(".cost p").text(":0원"); // 아이템 가격 초기화
-                // });
-
-                // // 이미지와 X버튼을 생성
-                // clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
-                // $("#newBox").remove(); // 아이템을 선택하면 #newBox제거
-                // $("#left-item-filter-options").hide();
-                // // 이미지와 X버튼을 생성 End
 
                 clickItemBox.html("<img src='"+imgSrc+"'>"); // 아이템 출력
                 $("#newBox").remove(); // 아이템을 선택하면 #newBox 제거
                 $("#left-item-filter-options").hide();
+                console.log("클릭박스",clickItemBox)
+                selectedMythicItem[iBoxIndex] = item; // 신화 아이템 선택 상태 업데이트
+                console.log("new1",selectedMythicItem[iBoxIndex])
 
                 // emptyBtn 클릭 이벤트
-                // clickItemBox.find('#emptyBtn').click(function(){
-                //     selectedMythicItem[iBoxIndex] = null;
+                $('#emptyBtn').click(function(){
+                    console.log("new2",selectedMythicItem[iBoxIndex])
+                    selectedMythicItem[iBoxIndex] = null; // 고른 아이템 clickItemBox에서 null 값으로.
+                    console.log("new23",selectedMythicItem[iBoxIndex])
 
-                    //     $(this).siblings('img').remove(); // 현재 emptyBtn 버튼 박스와 동일한 iBox의 이미지만 제거
-                    //     $(this).remove(); // 'X' 버튼 제거
-                //     $(".cost p").text(":0원"); // 아이템 가격 초기화
+                    clickItemBox.empty();
+                    // $(("iBox" + (iBoxIndex + 1))).empty();
+                    // $(this).remove(); // 'X' 버튼 제거
+                    $(".cost p").text(":0원"); // 아이템 가격 초기화
+                    console.log("iBox" + (iBoxIndex + 1) + "에서 지운 아이템:", item);
 
                 // 만들고 나서 default 버튼 만들고 $("#newBox").empty(); 이걸로 디폴트 가능 // newBox의 초기 값
 
@@ -303,10 +295,10 @@ $.ajax({
                                 }
                                 console.log("##########5#############")
                             })
-                    console.log("##########6#############")
-                 // });
+                    console.log("##########6#############", clickItemBox)
+                }); // X버튼 클릭 이벤트 End
                 console.log("##########7#############")
-                // X버튼 클릭 이벤트 End
+
 
                 selectedMythicItem[iBoxIndex] = item; // 신화 아이템 선택 상태 업데이트
 

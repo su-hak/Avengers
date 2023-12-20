@@ -123,6 +123,7 @@ $.ajax({
                 $("#newBox").remove();// 아이템을 선택하면 #newBox제거
                 $("#left-item-filter-options").hide();
                 // 이미지와 X버튼을 생성 End
+                console.log("클릭박스",clickItemBox)
 
                 // X버튼 클릭 이벤트
                 clickItemBox.find('.itemRemoveBtn').click(function(){
@@ -130,6 +131,7 @@ $.ajax({
                     $(this).remove(); // 'X' 버튼 제거
                     selectedMythicItem[iBoxIndex] = null;
                     $(".cost p").text(":0원");// 아이템 가격 초기화
+                    console.log("클릭박스 222",clickItemBox)
 
 
                     statValues.forEach(function(stat) {
