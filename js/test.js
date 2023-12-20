@@ -19,7 +19,7 @@ $.ajax({
             }
             return 0;
         });
-        console.log(champ);
+        // console.log(champ);
     }
 });
 // end
