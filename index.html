@@ -29,7 +29,7 @@
     <script src="./js/test.js"></script>
     <script src="./js/item2.js"></script>    
     <script src="./js/decimal.js"></script>
-    <!-- <script src="./js/web.js"></script> 원래 따로 만들었는데 재홍이가 test.js 에 붙여넣음 -->
+    <script src="./js/web.js"></script> <!-- 원래 따로 만들었는데 재홍이가 test.js 에 붙여넣음 -->
     
 
     <title>Calc.lol</title>
@@ -47,15 +47,16 @@
             </a>
 
             <!-- 메뉴 -->
-            <nav>
+            <nav class="nav">
                 <ul class="gnb">
-                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#" id="openModalButton">공지사항</a></li>
                     <li><a href="#">딜미터기</a></li>
                     <li><a href="#">커뮤니티</a></li>
+                    <!-- <li>
+                        <p id="openModalButton">about us</p>
+                    </li> -->
                 </ul>
-            </nav>
-
-            <!-- 작은 화면용 팝업창-->
+            </nav>          
 
             <!--로그인 회원가입 버튼 -->
             <ul class="util">
@@ -67,6 +68,8 @@
                 </li>
             </ul>
         </div>
+        
+        <!-- 작은 화면용 팝업창-->
         <button id="fullscreen-trigger">
             <iconify-icon icon="fa:navicon" style="color: white" width="30"></iconify-icon>
         </button>      
@@ -87,6 +90,7 @@
               </li>
             </ul>
         </div>
+        <!-- 작은 화면용 팝업창 E-->
     </header>
     <!-- 헤더영역 E -->
 
@@ -782,7 +786,14 @@
         </section>
     </main>
 
-    
+    <!-- about us 모달창 -->
+    <div id="fullscreenModal" class="modal">
+        <div id="modalContent" class="modal-line"></div>
+        <div class="modal-content">
+        </div>
+    </div>
+    <!-- about us 모달창 E -->
+
     <!-- 메인영역 E -->
 
     <!-- 푸터영역 -->
