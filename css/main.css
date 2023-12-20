@@ -1,6 +1,10 @@
 @charset "utf-8";
 
+/* 기본글꼴 */
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* 게이지 글꼴 */
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&family=VT323&display=swap');
 
 /* font-family: 'Noto Sans KR', sans-serif;
 font-family: 'DM Serif Text', serif; */
@@ -97,6 +101,7 @@ body {
 /* 헤더영역 */
 #header {
     width: 100%;
+    height: 80px;
     align-items: center;
     background: #598EFF;
     color: rgb(255, 255, 255);
@@ -157,41 +162,124 @@ body {
 }
 
 
-/* 메뉴열기 아이콘 이미지 평소크기에 안보이게*/
-.navimg {
-    position: relative;
+
+/* 작은 화면일 때 메뉴 설정 */
+
+/* 큰 화면시 메뉴바 버튼 안보이게 */
+#fullscreen-trigger {
     display: none;
 }
-/* 메뉴닫기 아이콘 이미지 평소크기에 안보이게*/
-.navcloseimg {
+
+/* 작은 화면시 전체창 메뉴 큰 화면시 안보이게 */
+#fullscreen-overlay {
+    display: none;
+    background: rgba(0, 0, 0, 0.900);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 30px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+/* 작은 화면 메뉴 닫기 버튼 */
+#fullscreen-closed {
     position: absolute;
-    display: none;
+    top: 30px;
+    right: 30px;
 }
 
+/* 작은 화면 메뉴 목록 */
+#fullscreen-overlay ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 50px;
+}
 
+#fullscreen-overlay ul li {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+/* 작은화면 메뉴창 링크 스타일 */
+#fullscreen-overlay a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+/* 화면 줄일 시 메뉴바 사이즈 조정 */
 @media (max-width : 1000px) {
     #header .gnb { gap : 1rem}
 }
+
+/* 화면 줄일 시 메뉴바 안보이고 메뉴버튼 나오게 */
 @media (max-width : 768px) {
     /* 화면 줄어들면 메뉴 사라짐*/
     #header .gnb {
         display: none;
     }
-    /* 메뉴아이콘 클릭시 메뉴바 보이게 */
-    .gnb_show {
-        display: block flex;
-        justify-content: center;
-    }
-    /* 화면 줄어들면 메뉴아이콘 생성*/
-    .navimg {
+    /* 화면 줄어들면 작은 화면 메뉴 활성화 */
+    #fullscreen-trigger {
+        display: block ;
         position: absolute;
-        top: 3rem;
-        right: 3rem;
-        display: block;
+        top: 30px;
+        right: 30px;
     }
 }
 
+/* 모달창 설정 */
 
+.modal {
+    display: none;
+    position: fixed;
+    top: 5rem;
+    left: 5rem;
+    padding: 200px;
+    width: 1750px;
+    height: 850px;
+    background-color: rgba(0, 0, 0, 0);
+    /* border: 1px solid #fff; */
+}
+
+.modal-line {
+    position: absolute;
+    z-index: 999;
+    top: 25px;
+    left: 25px;
+    width: 1700px;
+    height: 800px;
+    background-color: rgba(red, green, blue, 0);
+    border: 1px solid #ffffff;
+}
+
+.modal-content {
+    position: absolute;
+    /* padding: 20px -20px; */
+    top: 40px;
+    left: 10px;
+    /* transform: translate(-50%, -50%); */
+    background-color: rgb(62, 76, 139);
+    padding: 20px;
+    width: 1730px;
+    height: 770px;
+}
+
+.close {
+    color: #aaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* 모달창 설정 */
 
 /* 로그인 회원가입 */
 #header .util {
@@ -210,6 +298,7 @@ body {
     border-radius: 10px
 }
 
+/* 회원 가입 버튼 */
 #header .util .joinBtn {
     width: 110px;
     height: 35px;
@@ -221,27 +310,74 @@ body {
     text-align: center;
     border-radius: 10px
 }
-
+/* 회원기입버튼 마우스 올렸을때 */
 #header .util .joinBtn:hover {
     background: #ad0099;
 }
-
+/* 화면 줄일 시 유틸창 사라지게 */
 @media (max-width : 768px) {
     #header .util {
         display: none;
     }
 }
+/* 작은 화면 로그인 버튼 */
+.mobileLoginBtn{
+    width: 110px;
+    height: 35px;
+    color: #000;
+    background-color: #FFF;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
+/* 작은 화면  회원가입 버튼 */
+.mobileJoinBtn {
+    width: 110px;
+    height: 35px;
+    color: #fff;
+    background-color: #ff00e1;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
 
 
 /* 메인영역 */
 
+.ds_flex_center {
+    display: flex;
+    justify-content: center;
+}
+
+.ds_flex_space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 /* 배경페이지 */
+#main {
+    height: 880px;
+}
+@media (max-width : 768px) {
+    #main {
+        height: 1600px;
+    }
+}
+
 #main #sectionB {
     position: relative;
 }
 
 #main #sectionB .video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 880px;
+    object-fit: cover;
 }
 
 /* 배경 위 메인 페이지 */
@@ -261,6 +397,7 @@ body {
     }
 
     #main #sectionF {
+        width: 100%;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -278,10 +415,10 @@ body {
 @media (max-width : 768px) {
 
     #main #sectionF #dealmeterL {
-        width: 575px;
+        width: 475px;
         padding: 0;
         background: none;
-        margin: 700px 0 0 0;
+        margin: 680px auto 0 auto;
         border-right: none;
     }
 }
@@ -307,7 +444,7 @@ body {
 }
 
 .health-bar {
-    background-color: rgb(82, 191, 58);
+    background-color: #00e71f;
     width: 100%;
     height: 100%;
     position: relative;
@@ -355,6 +492,65 @@ body {
     margin-right: 0;
 }
 
+
+#left-hp-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 체력 숫자 */
+#left-hp-num {
+    position: absolute;
+    top: 4px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+#left-rsc-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 마나 or  숫자 */
+#left-rsc-num {
+    position: absolute;
+    top: 1px;
+    font-size: 16px;
+    /* font-weight: 700;     */
+}
+
+#right-hp-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 체력 숫자 */
+#right-hp-num {
+    position: absolute;
+    top: 4px;
+    font-size: 30px;
+    font-weight: 700;
+
+}
+
+#right-rsc-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 마나 or  숫자 */
+#right-rsc-num {
+    position: absolute;
+    top: 1px;
+    font-size: 16px;
+    /* font-weight: 700;     */
+}
+
+/* 게이지 숫자 스타일 */
+.centered-title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    font-family: 'VT323', monospace;
+    font-size: 30px;
+    color: #fbff2b;
+    text-shadow: 2px 2px 2px gray;
+}
+
+
+
 /*.resourceless {*/
 /*    background-color: rgb(0, 101, 252);*/
 /*}*/
@@ -371,13 +567,7 @@ body {
     width: 50px;
     height: 50px;
     padding-top: 5px;
-    background: #ff00bf;
-    color: #ffd4f6;
     font-size: small;
-}
-.share_Btn:hover {
-    background: #ffd4f6;
-    color: #ff00bf;
 }
 
 /* 플레이어표시 */
@@ -385,7 +575,7 @@ body {
     border: 1px;
     width: 160px;
     height: 50px;
-    background: #3967ff;
+    background: #2d20bc;
     color: #fff;
     text-align: center;
 }
@@ -395,6 +585,25 @@ body {
 }
 
 /* 아이템 저장버튼 */
+.btn_bora {
+    background: #f700ff;
+    color: #fff;
+}
+.btn_bora:hover {
+    background: #fa5bff;
+    color: #c800cf;
+}
+
+
+.btn_green {
+    background: #52bf3a;
+    color: #fff;
+}
+.btn_green:hover {
+    background: #2dff49;
+    color: #009e15;
+}
+
 .item_save {
     padding: 0 0 5px 0;
 }
@@ -408,13 +617,7 @@ body {
     margin-top: 4px;
     width: 50px;
     height: 50px;
-    background: #598EFF;
     text-align: center;
-}
-
-#main #sectionF #dealmeterL .saveItemBtn:hover {
-    background: #0d34b4;
-    color: #fff;
 }
 
 .dealmeterLL {
@@ -426,32 +629,30 @@ body {
     gap: 5px;
 }
 
+/* 왼쪽 챔피언 레벨 표시창 */
 .LV_Show {
     width: 50px;
     height: 50px;
-    background: turquoise;
+    /* background: turquoise; */
+}
+.chmap_Lv {
+    /* background: #f1f1f1; */
+    border: 1px solid #000;
+    color: #000;
 }
 
-.LV_Button {
-    width: 30px;
-    height: 50px;
-    background: turquoise;
-}
+
 
 .BA_button {
     width: 126px;
     height: 50px;
-    background: #598EFF;
-    color: #fff;
 }
 
 /* 크리티컬 체크박스 */
 .cri_check {
     width: 30px;
     height: 50px;
-    background-color: #3967ff;
     text-align: center;
-    color: #FFF;
 }
 .cri_check span{
     font-size: 12px;
@@ -459,7 +660,7 @@ body {
 
 /* 스킬창 */
 .skill_pan {
-    padding: 0 0 10px 0;
+    margin-bottom: 10px;
 }
 
 /* 스킬버튼 */
@@ -467,32 +668,47 @@ body {
     position: relative;
     width: 50px;
     height: 50px;
-    background: #598EFF;
+    background: #b6b6b6;
+    border: 2px solid #c9b92f;
+}
+.skill_Btn:hover {
+    border: 2px solid #fbff00;
 }
 
 /* 스킬 레벨 업다운 버튼 */
 .skill_Lv_Btn {
-    margin-top: 5px;
+    /* margin-top: 5px; */
     width: 10px;
     height: 20px;
-    background: #598EFF;
+    border: 2px solid #c9b92f;
+    background: #757575;
     color: #fff;
     font-size: 10px;
-    font-size: 15px;
 }
 
 /* 스킬 레벨 표시창 */
 .LV_Num {
-    margin-top: 5px;
+    /* margin-top: 5px; */
     border: 1px solid #000;
     width: 20px;
     height: 20px;
+    text-align: center;
 }
 
 /*스킬 설명창*/
-#tooltip {
+#left-tooltip {
     position: absolute;
-    z-index: 0;
+    z-index: 9999;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+}
+
+#right-tooltip {
+    position: absolute;
+    z-index: 9999;
     width: 300px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -506,6 +722,7 @@ body {
     width: 215px;
     height: 255px;
     background-color: rgb(255, 255, 255);
+    font-size: 10px;
 }
 
 .stat td {
@@ -513,13 +730,18 @@ body {
 }
 
 .stat_name {
-    width: 54px;
-    background: #00ddff;
+    width: 65.5px;    /* 기본 54px */
+    /* background: #7cc0ff; */
+    background: #323749;
+    color: #ffffff;
+
 }
 
 .stat_value {
-    width: 54px;
-    background: #78edff;
+    width: 45px;
+    /* background: #b1daff; */
+    background: #525975;
+    color: #ffe600;
 }
 
 /* 아이템 & 로그 패널 */
@@ -527,12 +749,22 @@ body {
     width: 220px;
 }
 
-/* 돈 이미지 */
+/* 비용 이미지 및 표시*/
 .cost {
-    padding: 0 0 5px;
+    margin-bottom: 10px;
+    border: 1px solid #000000;
     align-items: center;
-    text-align: center;
     align-content: center;
+    background-color: #59758f;
+    color: #FFF;
+}
+.cost-img {
+    width: 30px;
+    margin-left: 10px;
+}
+.cost-value-pan {
+    margin: 0 10px 0 0;
+    font-family: 'Silkscreen', sans-serif;
 }
 
 /* 아이템창 */
@@ -547,15 +779,37 @@ body {
     height: 70px;
     background: #c7c7c7;
     margin-bottom: 10px;
+    border: 2px solid #c9b92f;
+}
+.item_box:hover {
+    border: 2px solid #eeff00;
 }
 
+.item_box_list {
+    text-align: center;
+    width: 70px;
+    height: 90px;
+    /* border: 2px solid #c9b92f; */
+    margin: 0 5px;
+    margin-bottom: 10px;
+}
+
+
 /* 로그창 */
-.log_pan {
+.log_pan_css {
     width: 100%;
-    height: 460px;
-    padding: 20px;
+    height: 460px !important;
+    box-sizing: border-box; /* padding과 border를 요소의 크기에 포함 */
+    padding: 10px;
     background: #2c2e3e;
     color: #ffffff;
+    font-size: 12px;
+    /* overflow: scroll; 무조건 스크롤바를 표시 */
+    scrollbar-width: 6px; /* 스크롤바의 너비를 얇게 설정 (크롬, 파이어폭스 등 최신 브라우저에서 적용) */
+    scrollbar-color: transparent transparent; /* 스크롤바 색상을 투명으로 설정 */
+}
+.log_pan_css::-webkit-scrollbar {
+    width: 6px; /* 스크롤바의 너비 */
 }
 
 
@@ -570,8 +824,11 @@ body {
 
 @media (max-width : 768px) {
     #main #sectionF #dealmeterR {
+        width: 475px;
+        padding: 0;
         background: none;
-        padding: 50px 0 0 0;
+        margin: 10px auto 0 auto;
+        border-right: none;
     }
 }
 
@@ -600,46 +857,25 @@ body {
 .txt_cpu p {
     padding: 12px 0 0 0;
 }
-#left-hp-bar {
-    position: relative;
-}
-/* 왼쪽 챔피언 체력 숫자 */
-#left-hp-num {
-    position: absolute;
-    top: 4px;
-    font-weight: 700;
 
-}
 
-#left-rsc-bar {
-    position: relative;
+/* 푸터 스타일 */
+.footer-style{
+    width: 100%;
+    height: 100px;
+    background: #2c2e3e;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    align-content: center;
 }
-/* 왼쪽 챔피언 마나 or  숫자 */
-#left-rsc-num {
-    position: absolute;
-    top: 1px;
-    font-size: 10px;
-    font-weight: 700;
+.copyright {
+    padding: 20px 0 5px 0;
 }
 
-#right-hp-bar {
-    position: relative;
-}
-/* 오른쪽 챔피언 체력 숫자 */
-#right-hp-num {
-    position: absolute;
-    top: 4px;
-    font-weight: 700;
-
-}
-
-#right-rsc-bar {
-    position: relative;
-}
-/* 오른쪽 챔피언 마나 or  숫자 */
-#right-rsc-num {
-    position: absolute;
-    top: 1px;
-    font-size: 10px;
-    font-weight: 700;
+@media (max-width : 768px) {
+    .footer-style{
+        height: 150px;
+        padding: 10px 30px;
+    }
 }

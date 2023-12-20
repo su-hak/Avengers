@@ -176,13 +176,17 @@ input[type="number"] {
 }
 
 .item-img {
-    width: 80% !important;
-    padding-top: 80% !important;
+    /* width: 80% !important; */
+    /* padding-top: 80% !important; */
     display: block !important;
-    border: 1px solid black;
-    outline: 2px solid black;
+    /* outline: 2px solid black; */
     outline-offset: -2px;
+    border: 2px solid #ac9f31;
 }
+.item-img:hover {
+    border: 3px solid #eeff00;
+}
+
 
 .item-placeholder {
     background-image: none !important;
@@ -242,7 +246,7 @@ input[type="number"] {
 
 #left-item-filter-options {
     position: absolute;
-    max-height: 22.65em;
+    max-height: 40em;
     width: 15em;
     margin-top: 2.5em;
     overflow-x: auto;

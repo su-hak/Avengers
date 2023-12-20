@@ -85,7 +85,7 @@ function searchChampById(imgId) {
 // }
 
 // 선택한 레벨 받아오기
- test.getSelectedLevel = function() {
+test.getSelectedLevel = function() {
     const selectElement = document.getElementById('champ_lv');
     test.selectedValue = selectElement.value;
     return test.selectedValue;
@@ -117,9 +117,9 @@ function setChampStats(id) {
             'coolTimeL' : 0 // 스킬 가속
 
         };
-          test.updateAttackStats = function(selectedLevel)  {
-              var result = test.sendItemStats();
-              var itemAt = result[0];
+        test.updateAttackStats = function(selectedLevel)  {
+            var result = test.sendItemStats();
+            var itemAt = result[0];
             if (selectedLevel > 1) {
                 let coefficient = dtch[0].stats.attackdamageperlevel;
                 let a = [];
@@ -235,7 +235,7 @@ function setChampStats(id) {
                 }
             }
         }
-       test.updateMpregenStats = function(selectedLevel) {
+        test.updateMpregenStats = function(selectedLevel) {
             var result = test.sendItemStats();
             var itemMr = result[13];
             var itemMrNum = itemMr * 0.01;
@@ -281,9 +281,9 @@ function setChampStats(id) {
                 a[0] = dtch[0].stats.attackspeed;
                 let level = 1;
                 // if(asstatValue != null){
-                    for (let i = 1; i < selectedLevel; i++) {
-                        a[i] = ((itemAsNum+(+(coefficient*0.01)*(selectedLevel-1))*(0.7025+(0.0175*(selectedLevel-1))))*a[0]) + a[0];
-                    }
+                for (let i = 1; i < selectedLevel; i++) {
+                    a[i] = ((itemAsNum+(+(coefficient*0.01)*(selectedLevel-1))*(0.7025+(0.0175*(selectedLevel-1))))*a[0]) + a[0];
+                }
                 // }else{
                 //     // itemAs = 0;
                 //     for (let i = 1; i < selectedLevel; i++) {
@@ -342,12 +342,46 @@ function setChampStats(id) {
             var itemHp = result[14];
             console.log(dtch[0].stats.hp);
             const totalHp = document.getElementById("left-hp-total");
+            if (selectedLevel > 1) {
+                console.log("statValues  ::",statValues);
+                let coefficient = dtch[0].stats.hpperlevel;
+                let a = [];
+                let itemHp = 0;
+                a[0] = dtch[0].stats.hp;
+                let level = 1;
+                for (let i = 1; i < selectedLevel; i++) {
+                    a[i] = (a[i - 1] + Math.round((coefficient * (0.65 + (0.035 * (i + 1))))));
+                }
+                const value = new Decimal(a[selectedLevel - 1]);
+                const roundedValue = value.toDecimalPlaces(2);
+                const realRoundedValue = roundedValue.toDecimalPlaces(1);
+                statValues['hp'] = Math.round(realRoundedValue) + itemHp;
+                console.log(a);
+            } else if (selectedLevel < 2) {
+                statValues['hp'] = Math.round(dtch[0].stats.hp) + itemHp;
+            }
+            for (const id in statValues) {
+                const element = 'hp';
+                if(element == id){
+                    let value = statValues[id];
+                    totalHp.textContent = value;
+                }
+            }
+            setRealHp();
+        }
+
+        test.updateMpStats = function(selectedLevel) {
+            const totalMp = document.getElementById("left-rsc-total");
+            if(dtch[0].stats.mp != 0){
+                var result = test.sendItemStats();
+                var itemMp = result[15];
+                console.log(dtch[0].stats.mp);
                 if (selectedLevel > 1) {
                     console.log("statValues  ::",statValues);
-                    let coefficient = dtch[0].stats.hpperlevel;
+                    let coefficient = dtch[0].stats.mpperlevel;
                     let a = [];
-                    let itemHp = 0;
-                    a[0] = dtch[0].stats.hp;
+                    let itemMp = 0;
+                    a[0] = dtch[0].stats.mp;
                     let level = 1;
                     for (let i = 1; i < selectedLevel; i++) {
                         a[i] = (a[i - 1] + Math.round((coefficient * (0.65 + (0.035 * (i + 1))))));
@@ -355,55 +389,21 @@ function setChampStats(id) {
                     const value = new Decimal(a[selectedLevel - 1]);
                     const roundedValue = value.toDecimalPlaces(2);
                     const realRoundedValue = roundedValue.toDecimalPlaces(1);
-                    statValues['hp'] = Math.round(realRoundedValue) + itemHp;
+                    statValues['mp'] = Math.round(realRoundedValue) + itemMp;
                     console.log(a);
                 } else if (selectedLevel < 2) {
-                    statValues['hp'] = Math.round(dtch[0].stats.hp) + itemHp;
+                    statValues['mp'] = Math.round(dtch[0].stats.mp) + itemMp;
                 }
                 for (const id in statValues) {
-                    const element = 'hp';
+                    const element = 'mp';
                     if(element == id){
                         let value = statValues[id];
-                        totalHp.textContent = value;
+                        totalMp.textContent = value;
                     }
                 }
-                setRealHp();
-        }
-
-        test.updateMpStats = function(selectedLevel) {
-            const totalMp = document.getElementById("left-rsc-total");
-            if(dtch[0].stats.mp != 0){
-                  var result = test.sendItemStats();
-                  var itemMp = result[15];
-                  console.log(dtch[0].stats.mp);
-                  if (selectedLevel > 1) {
-                      console.log("statValues  ::",statValues);
-                      let coefficient = dtch[0].stats.mpperlevel;
-                      let a = [];
-                      let itemMp = 0;
-                      a[0] = dtch[0].stats.mp;
-                      let level = 1;
-                      for (let i = 1; i < selectedLevel; i++) {
-                          a[i] = (a[i - 1] + Math.round((coefficient * (0.65 + (0.035 * (i + 1))))));
-                      }
-                      const value = new Decimal(a[selectedLevel - 1]);
-                      const roundedValue = value.toDecimalPlaces(2);
-                      const realRoundedValue = roundedValue.toDecimalPlaces(1);
-                      statValues['mp'] = Math.round(realRoundedValue) + itemMp;
-                      console.log(a);
-                  } else if (selectedLevel < 2) {
-                      statValues['mp'] = Math.round(dtch[0].stats.mp) + itemMp;
-                  }
-                  for (const id in statValues) {
-                      const element = 'mp';
-                      if(element == id){
-                          let value = statValues[id];
-                          totalMp.textContent = value;
-                      }
-                  }
-              }else{
-                  totalMp.textContent = 0;
-              }
+            }else{
+                totalMp.textContent = 0;
+            }
             setRealMp();
 
         }
@@ -423,7 +423,7 @@ function setChampStats(id) {
             });
 
         }
-         test.updateMovespeedStats = function(){
+        test.updateMovespeedStats = function(){
             // let itemMs = 0;
             let a = 0;
             var result = test.sendItemStats();
@@ -438,7 +438,7 @@ function setChampStats(id) {
                 }
             }
         }
-         test.updateAbilitypowerStats = function(){
+        test.updateAbilitypowerStats = function(){
             // let itemAp = 0;
             let a = 0;
             var result = test.sendItemStats();
@@ -481,7 +481,7 @@ function setChampStats(id) {
 
 // 초기 레벨 설정
         const selectedLevel = test.getSelectedLevel();
-        // test();
+        test.test();
         test.updateAttackStats(selectedLevel);
         test.updateArmorStats(selectedLevel);
         test.updateSpellBlockStats(selectedLevel);
@@ -497,7 +497,7 @@ function setChampStats(id) {
 // 레벨 변경 시 업데이트
         document.getElementById('champ_lv').onchange = function() {
             const selectedLevel = test.getSelectedLevel();
-            // test();
+            test.test();
             console.log(selectedLevel); // 선택된 레벨 값 출력
             test.updateAttackStats(selectedLevel);
             test.updateArmorStats(selectedLevel);
@@ -742,6 +742,22 @@ function searchChampion() {
         }
     });
 }
+function searchItem() {
+    var searchText = $("#left-item-search").val().toLowerCase();
+    var itemBoxes = $(".item_box_list");
+
+    itemBoxes.each(function () {
+        var itemBox = $(this);
+        var itemName = itemBox.find("p").text().toLowerCase();
+
+        if (itemName.includes(searchText)) {
+            itemBox.show();
+        } else {
+            itemBox.hide();
+        }
+    });
+}
+
 
 
 // 챔피언 버튼 이미지를 업데이트하는 함수
@@ -758,6 +774,7 @@ function initialize() {
 
     // 검색창에 입력이 있을 때마다 검색 수행
     $("#champion-search").on("input", searchChampion);
+    $("#left-item-search").on("input", searchItem);
 }
 
 // 페이지 로드 시 초기화 함수 호출
@@ -766,10 +783,10 @@ $(document).ready(initialize);
 // 스킬 이벤트
 function setSkillEvents(skillButton, spellInfo) {
     // 마우스 오버 및 아웃 이벤트 추가
-    skillButton.addEventListener('mouseover', function (event) {
-        showTooltip(spellInfo, event.pageX, event.pageY);
-    });
-    skillButton.addEventListener('mouseout', hideTooltip);
+    // skillButton.addEventListener('mouseover', function (event) {
+    //     showTooltip(spellInfo, event.pageX, event.pageY);
+    // });
+    // skillButton.addEventListener('mouseout', hideTooltip);
 }
 // 받은 이미지로 spell 정보 받아오기 // 스킬 이미지 및 설명
 function setChampSpells(id){
@@ -795,21 +812,21 @@ function setChampSpells(id){
     });
 }
 
-// 스킬 설명 툴팁
-function showTooltip(content, x, y) {
-    var tooltip = document.getElementById('tooltip');
-    var tooltipContent = document.getElementById('tooltip-content');
-
-    tooltipContent.innerHTML = content;
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
-    tooltip.style.display = 'block';
-}
-
-function hideTooltip() {
-    var tooltip = document.getElementById('tooltip');
-    tooltip.style.display = 'none';
-}
+// // 스킬 설명 툴팁
+// function showTooltip(content, x, y) {
+//     var tooltip = document.getElementById('tooltip');
+//     var tooltipContent = document.getElementById('tooltip-content');
+//
+//     tooltipContent.innerHTML = content;
+//     tooltip.style.left = x + 'px';
+//     tooltip.style.top = y + 'px';
+//     tooltip.style.display = 'block';
+// }
+//
+// function hideTooltip() {
+//     var tooltip = document.getElementById('tooltip');
+//     tooltip.style.display = 'none';
+// }
 
 
 
@@ -836,7 +853,7 @@ $.ajax({
         for (var i = 1; i <= 6; i++) {
             $("#iBox" + i).click(function() {
                 if(test.choose == false){
-                    alert("챔프 선택부터 혀라");
+                    Swal.fire("챔프 선택부터 혀라");
                 }else {
                     var parentContainer = "left-item-filter-options";
                     var container = "itemContainer" ;
@@ -849,6 +866,15 @@ $.ajax({
                     }
                     clickItemBox = $(this); // 현재 클릭한 아이템 박스를 저장
                     $("#" + parentContainer).show(); // left-item-filter-options 열고 닫기
+                    // 아이템 필터링
+                    var filterItems=items.filter(function(items){
+                        return !items.requiredChampion // 챔피언전용템제외
+                            // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+                            && items.inStore!==false // 스토어: false인 item 제외
+                            && items.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
+                    });
+                    console.log(filterItems);
+                    // 아이템 필터링 End
                     printItems(filterItems); // 아이템 출력을 새로운 박스 안으로 변경
                 }
 
@@ -871,34 +897,52 @@ $.ajax({
         });
         /*===========================정렬end==========================*/
 
-        // 아이템 필터링
-        var filterItems=items.filter(function(items){
-            return !items.requiredChampion // 챔피언전용템제외
-                && items.description.includes('rarityMythic') // 신화급 아이템만 출력
-                && items.inStore!==false // 스토어: false인 item 제외
-                && items.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
-        });
-        // 아이템 필터링 End
+
 
         // description 값 확인
-        console.log(filterItems)
+        // console.log(filterItems);
 
-        function printItems(filterItems){
-            $("#newBox").empty();// newBox의 초기 값
+        // function printItems(filterItems){
+        //     $("#newBox").empty();// newBox의 초기 값
+        //
+        //     for(var i=0; i<filterItems.length; i++){
+        //         var item = filterItems[i];
+        //         var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
+        //         var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name);
+        //
+        //
+        //         // 아이템 이미지 버튼에 클릭 이벤트를 설정
+        //         setItemClickEvent(itemButton,item,clickItemBox.attr('id').replace('iBox','')-1);
+        //
+        //         // 버튼에 이미지와 텍스트 추가
+        //         $("#newBox").append(itemButton);
+        //     }
+        // }
+        function printItems(items) {
+            console.log(test.choose);
+            var itemList = $("#item-list");
+            itemList.empty(); // 기존 목록 초기화
 
-            for(var i=0; i<filterItems.length; i++){
-                var item = filterItems[i];
-                var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
-                var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name)
+            items.forEach(function (item, index) {
+                var itemBox = $("<div>").addClass("item_box_list").click(function () {
+                    // setItemClickEvent(itemButton,item,clickItemBox.attr('id').replace('iBox','')-1);
+                });
 
+                var itemImg = $("<img>", {
+                    src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + item.image.full,
+                    alt: item.name + " 이미지",
+                    class: "item-img"
+                });
+                var itemName = $("<p>").addClass("item-name").text(item.name);
 
-                // 아이템 이미지 버튼에 클릭 이벤트를 설정
-                setItemClickEvent(itemButton,item,clickItemBox.attr('id').replace('iBox','')-1);
-
-                // 버튼에 이미지와 텍스트 추가
-                $("#newBox").append(itemButton);
-            }
+                itemBox.append(itemImg);
+                // itemBox.append($("<br>"));
+                itemBox.append(itemName);
+                itemList.append(itemBox);
+            });
         }
+
+
         // 각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
         var selectedMythicItem=[null,null,null,null,null,null];
 
@@ -923,7 +967,7 @@ $.ajax({
 
         var itemStats = [adValue, apValue, armor, spellBlock, attackSpeed, moveSpeed, newArPen, adPen, spPen, spPen2, crit, newOmniVamp, cooltime, hpRegen, mpRegen, fullHp, fullMp];
 
-         test.sendItemStats =function(){
+        test.sendItemStats =function(){
             return itemStats;
         }
 
