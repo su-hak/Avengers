@@ -816,6 +816,9 @@ body {
     color: #fff;
     font-size: 10px;
 }
+.skill_Lv_Btn:hover {
+    border: 2px solid #fbff00;
+}
 
 /* 스킬 레벨 표시창 */
 .LV_Num {
