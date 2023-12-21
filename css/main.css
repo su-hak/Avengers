@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /* 기본글꼴 */
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* 게이지 글꼴 */
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&family=VT323&display=swap');
@@ -86,7 +86,6 @@ body {
     font-size: 1.6rem;
     line-height: 1.6;
     color: #000;
-    /* overflow-x: hidden; */
 }
 
 .inner {
@@ -168,7 +167,7 @@ body {
 
 /* 큰 화면시 메뉴바 버튼 안보이게 */
 #fullscreen-trigger {
-    display: none;   
+    display: none;
 }
 
 /* 작은 화면시 전체창 메뉴 큰 화면시 안보이게 */
@@ -182,7 +181,7 @@ body {
     padding-top: 30px;
     width: 100%;
     height: 100%;
-    z-index: 9999;    
+    z-index: 9999;
 }
 /* 작은 화면 메뉴 닫기 버튼 */
 #fullscreen-closed {
@@ -219,68 +218,196 @@ body {
     /* 화면 줄어들면 메뉴 사라짐*/
     #header .gnb {
         display: none;
-    }  
+    }
     /* 화면 줄어들면 작은 화면 메뉴 활성화 */
     #fullscreen-trigger {
         display: block ;
         position: absolute;
         top: 30px;
         right: 30px;
-    }    
+    }
 }
 
-/* 모달창 설정 */
 
+
+/* -------------- 공지사항 모달창 설정 --------------*/
+
+/* 공지 모달 전체사이즈 */
 .modal {
     display: none;
     position: fixed;
-    top: 5rem;
-    left: 5rem;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 200px;
-    width: 1750px;
+    width: 80%;
     height: 850px;
     background-color: rgba(0, 0, 0, 0);
-    /* border: 1px solid #fff; */
+    /* border: 0px solid #fff; */
 }
-
+/* 공지 모달 실선 */
 .modal-line {
-    position: absolute;
+    position: fixed;
     z-index: 999;
-    top: 25px;
-    left: 25px;
-    width: 1700px;
-    height: 800px;    
-    background-color: rgba(red, green, blue, 0);
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
+    width: 97%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
     border: 1px solid #ffffff;
 }
 
-.modal-content {
-    position: absolute;
-    /* padding: 20px -20px; */
-    top: 40px;
-    left: 10px;
-    /* transform: translate(-50%, -50%); */
+.modal-line-L { /* 공지 모달 왼쪽 라인 */
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #ffffff;
+    border-right: 0;
+}
+.modal-line-R { /* 공지 모달 오른쪽 라인 */
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 93%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #ffffff;
+    border-left: 0;
+}
+.modal-line-C { /* 공지 모달 가운데 라인 */
+    position: fixed;
+    /* z-index: 999; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+
+/* 공지모달 내용창 */
+.modal_contents {
+    position: fixed;
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
     background-color: rgb(62, 76, 139);
-    padding: 20px;    
-    width: 1730px;
-    height: 770px;  
+    padding: 20px;
+    width: 99%;
+    height: 770px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    
 }
 
-.close {
-    color: #aaa;
-    float: left;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+/* 공지모달 세부내용 */
+.modal_content {
+    margin-top: 10px;
+    width: 400px;
+    height: 600px !important;
+    background: rgba(0, 0, 0, 0);    
+    padding: 30px;    
+    color: #FFF;
+    overflow: auto;
+    /* scrollbar-color: transparent transparent;     */
+}
+.modal_content::-webkit-scrollbar { /* 브라우저 종류에 따른 스크롤바 출력 */
+    width: 6px; /* 스크롤바의 너비 */
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.borderwhite {    
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
 }
-/* 모달창 설정 */
+
+/* 공지모달 제목들 */
+.notice-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.text_close {  
+    position: fixed;  
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
+    margin-top: 350px;
+    color: #04f023;    
+    text-align: center; 
+    z-index: 999; 
+}
+
+/* 공지 모달 반응형 */
+/* @media (max-width:1600px) {
+    .modal { max-width: calc(100% - 160px); }
+}
+
+@media (max-width:1400px) {
+    .inner { max-width: calc(100% - 140px); }
+}
+
+@media (max-width:1200px) {
+    .inner { max-width: calc(100% - 120px); }
+} */
+
+@media (max-width:1024px) {
+    .modal {
+        display: none;
+        position: fixed;
+        top: 54%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 200px;
+        width: 80%;
+        height: 850px;
+        background-color: rgba(0, 0, 0, 0);
+        /* border: 0px solid #fff; */
+    }
+    .modal_contents { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    .modal_content {
+        margin-top: 10px;
+        width: 400px;
+        height: 50%;
+        background: rgba(0, 0, 0, 0);    
+        padding: 30px;    
+        color: #FFF;
+        border: 0;
+    }
+    .text_close {  
+        position: fixed;  
+        top: 1%;
+        /* left: 50.4%;
+        transform: translate(-50%, -50%); */
+        margin-top: 50px;
+        color: #04f023;    
+        text-align: center; 
+        z-index: 999; 
+    }
+}
+
+/* @media (max-width:768px) {
+    .inner { max-width: calc(100% - 40px); }
+} */
+
+
+/* ------------ 공지 모달창 설정 ------------*/
 
 /* 로그인 회원가입 */
 #header .util {
@@ -314,7 +441,6 @@ body {
 /* 회원기입버튼 마우스 올렸을때 */
 #header .util .joinBtn:hover {
     background: #ad0099;
-
 }
 /* 화면 줄일 시 유틸창 사라지게 */
 @media (max-width : 768px) {
@@ -342,19 +468,19 @@ body {
     font-size: 15px;
     font-weight: 700;
     text-align: center;
-    border-radius: 10px    
+    border-radius: 10px
 }
 
 
 /* 메인영역 */
 
 .ds_flex_center {
-    display: flex; 
+    display: flex;
     justify-content: center;
 }
 
 .ds_flex_space-between {
-    display: flex; 
+    display: flex;
     justify-content: space-between;
 }
 
@@ -367,10 +493,10 @@ body {
     #main {
         height: 1600px;
     }
-} 
+}
 
 #main #sectionB {
-    position: relative;    
+    position: relative;
 }
 
 #main #sectionB .video {
@@ -394,6 +520,9 @@ body {
 }
 
 @media (max-width : 768px) {
+    #main {
+        background-color: #d5ecaf;
+    }
     #main #sectionB {
         display: none;
     }
@@ -403,7 +532,7 @@ body {
         display: flex;
         justify-content: center;
         flex-direction: column;
-        margin: 0 0.4rem;
+        margin: 0 0.4rem;        
     }
 }
 
@@ -501,8 +630,8 @@ body {
 /* 왼쪽 챔피언 체력 숫자 */
 #left-hp-num {
     position: absolute;
-    top: 4px;  
-    font-size: 30px;   
+    top: 4px;
+    font-size: 30px;
     font-weight: 700;
 }
 
@@ -512,7 +641,7 @@ body {
 /* 왼쪽 챔피언 마나 or  숫자 */
 #left-rsc-num {
     position: absolute;
-    top: 1px;    
+    top: 1px;
     font-size: 16px;
     /* font-weight: 700;     */
 }
@@ -523,10 +652,10 @@ body {
 /* 오른쪽 챔피언 체력 숫자 */
 #right-hp-num {
     position: absolute;
-    top: 4px;    
+    top: 4px;
     font-size: 30px;
     font-weight: 700;
-    
+
 }
 
 #right-rsc-bar {
@@ -535,7 +664,7 @@ body {
 /* 오른쪽 챔피언 마나 or  숫자 */
 #right-rsc-num {
     position: absolute;
-    top: 1px;    
+    top: 1px;
     font-size: 16px;
     /* font-weight: 700;     */
 }
@@ -544,11 +673,11 @@ body {
 .centered-title {
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -25%);   
-    font-family: 'VT323', monospace; 
-    font-size: 30px;   
+    transform: translate(-50%, -25%);
+    font-family: 'VT323', monospace;
+    font-size: 30px;
     color: #fbff2b;
-    text-shadow: 2px 2px 2px gray;  
+    text-shadow: 2px 2px 2px gray;
 }
 
 
@@ -568,7 +697,7 @@ body {
 .share_Btn {
     width: 50px;
     height: 50px;
-    padding-top: 5px;    
+    padding-top: 5px;
     font-size: small;
 }
 
@@ -618,7 +747,7 @@ body {
 .saveItemBtn {
     margin-top: 4px;
     width: 50px;
-    height: 50px;    
+    height: 50px;
     text-align: center;
 }
 
@@ -653,11 +782,11 @@ body {
 /* 크리티컬 체크박스 */
 .cri_check {
     width: 30px;
-    height: 50px;    
-    text-align: center;    
+    height: 50px;
+    text-align: center;
 }
 .cri_check span{
-    font-size: 12px;        
+    font-size: 12px;
 }
 
 /* 스킬창 */
@@ -685,7 +814,7 @@ body {
     border: 2px solid #c9b92f;
     background: #757575;
     color: #fff;
-    font-size: 10px;        
+    font-size: 10px;
 }
 
 /* 스킬 레벨 표시창 */
@@ -724,7 +853,7 @@ body {
     width: 215px;
     height: 255px;
     background-color: rgb(255, 255, 255);
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .stat td {
@@ -735,12 +864,12 @@ body {
     width: 65.5px;    /* 기본 54px */
     /* background: #7cc0ff; */
     background: #323749;
-    color: #ffdef7;
+    color: #ffffff;
 
 }
 
 .stat_value {
-    width: 45px; 
+    width: 45px;
     /* background: #b1daff; */
     background: #525975;
     color: #ffe600;
@@ -753,7 +882,7 @@ body {
 
 /* 비용 이미지 및 표시*/
 .cost {
-    margin-bottom: 10px;    
+    margin-bottom: 10px;
     border: 1px solid #000000;
     align-items: center;
     align-content: center;
@@ -783,10 +912,19 @@ body {
     margin-bottom: 10px;
     border: 2px solid #c9b92f;
 }
-
 .item_box:hover {
     border: 2px solid #eeff00;
 }
+
+.item_box_list {
+    text-align: center;
+    width: 70px;
+    height: 90px;
+    /* border: 2px solid #c9b92f; */
+    margin: 0 5px;
+    margin-bottom: 10px;
+}
+
 
 /* 로그창 */
 .log_pan_css {
@@ -801,7 +939,7 @@ body {
     scrollbar-width: 6px; /* 스크롤바의 너비를 얇게 설정 (크롬, 파이어폭스 등 최신 브라우저에서 적용) */
     scrollbar-color: transparent transparent; /* 스크롤바 색상을 투명으로 설정 */
 }
-.log_pan_css::-webkit-scrollbar {
+.log_pan_css::-webkit-scrollbar { /* 브라우저 종류에 따른 스크롤바 출력 */
     width: 6px; /* 스크롤바의 너비 */
 }
 
@@ -809,7 +947,7 @@ body {
 /* 오른쪽 딜미터기 */
 
 #main #sectionF #dealmeterR {
-    padding: 0.625rem 3.125rem 0 0;    
+    padding: 0.625rem 3.125rem 0 0;
     width: calc(100%/2);
     background: rgba(255, 255, 255, .8);
     border-right: 1px solid;

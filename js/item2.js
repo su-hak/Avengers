@@ -130,68 +130,70 @@ $.ajax({
 
 
                     statValues.forEach(function(stat) {
-                    // 스탯 값을 빼는 로직 추가
-                    var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
-                    var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
+                        // 스탯 값을 빼는 로직 추가
+                        var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
+                        var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
 
-                    switch (statName) {
-                        case "공격력":
-                            adValue -= parseInt(statValue);
-                            $("#attackDamageL").next().text(adValue);
-                            break;
-                        case "주문력":
-                            apValue -= parseInt(statValue);
-                            $("#abilityPowerL").next().text(apValue);
-                            break;
-                        case "방어력":
-                            armor -= parseInt(statValue);
-                            $("#armorL").next().text(armor);
-                            break;
-                        case "마법 저항력":
-                            spellBlock -= parseInt(statValue);
-                            $("#spellBlockL").next().text(spellBlock);
-                            break;
-                        case "공격 속도":
-                            attackSpeed -= parseInt(statValue);
-                            $("#attackSpeedL").next().text(attackSpeed);
-                            break;
-                        case "이동 속도":
-                            moveSpeed -= parseInt(statValue);
-                            $("#moveSpeedL").next().text(moveSpeed);
-                            break;
-                        case "방어구 관통력":
-                            newArPen -= parseInt(statValue);
-                            $("#arPenL").next().text(newArPen);
-                            break;
-                        case "물리 관통력":
-                            adPen -= parseInt(statValue);
-                            $("#adPenL").next().text(adPen);
-                            break;
-                        case "마법 관통력":
-                            spPen -= parseInt(statValue);
-                            $("#spPenL").next().text(spPen);
-                            break;
-                        case "치명타 확률":
-                            crit -= parseInt(statValue);
-                            $("#critL").next().text(crit);
-                            break;
-                        case "모든 피해 흡혈":
-                            newOmniVamp -= parseFloat(statValue);
-                            $("#vampL").next().text(newOmniVamp + "%");
-                            break;
-                        case "스킬 가속":
-                            cooltime -= parseInt(statValue);
-                            $("#coolTimeL").next().text(cooltime);
-                            break;
-                        case "기본 체력 재생":
-                            hpRegen -= parseInt(statValue);
-                            $("#hpRegenL").next().text(hpRegen);
-                            break;
-                        case "기본 마나 재생":
-                            mpRegen -= parseInt(statValue);
-                            $("#mpRegenL").next().text(mpRegen);
-                            break;
-                    }
+                        switch (statName) {
+                            case "공격력":
+                                adValue -= parseInt(statValue);
+                                $("#attackDamageL").next().text(adValue);
+                                break;
+                            case "주문력":
+                                apValue -= parseInt(statValue);
+                                $("#abilityPowerL").next().text(apValue);
+                                break;
+                            case "방어력":
+                                armor -= parseInt(statValue);
+                                $("#armorL").next().text(armor);
+                                break;
+                            case "마법 저항력":
+                                spellBlock -= parseInt(statValue);
+                                $("#spellBlockL").next().text(spellBlock);
+                                break;
+                            case "공격 속도":
+                                attackSpeed -= parseInt(statValue);
+                                console.log(statValue);
+                                $("#attackSpeedL").next().text(attackSpeed);
+                                break;
+                            case "이동 속도":
+                                moveSpeed -= parseInt(statValue);
+                                $("#moveSpeedL").next().text(moveSpeed);
+                                break;
+                            case "방어구 관통력":
+                                newArPen -= parseInt(statValue);
+                                $("#arPenL").next().text(newArPen);
+                                break;
+                            case "물리 관통력":
+                                adPen -= parseInt(statValue);
+                                $("#adPenL").next().text(adPen);
+                                break;
+                            case "마법 관통력":
+                                spPen -= parseInt(statValue);
+                                console.log(statValue);
+                                $("#spPenL").next().text(spPen);
+                                break;
+                            case "치명타 확률":
+                                crit -= parseInt(statValue);
+                                $("#critL").next().text(crit);
+                                break;
+                            case "모든 피해 흡혈":
+                                newOmniVamp -= parseFloat(statValue);
+                                $("#vampL").next().text(newOmniVamp + "%");
+                                break;
+                            case "스킬 가속":
+                                cooltime -= parseInt(statValue);
+                                $("#coolTimeL").next().text(cooltime);
+                                break;
+                            case "기본 체력 재생":
+                                hpRegen -= parseInt(statValue);
+                                $("#hpRegenL").next().text(hpRegen);
+                                break;
+                            case "기본 마나 재생":
+                                mpRegen -= parseInt(statValue);
+                                $("#mpRegenL").next().text(mpRegen);
+                                break;
+                        }
                     })
                 });
                 // X버튼 클릭 이벤트 End
@@ -227,6 +229,7 @@ $.ajax({
                                 break;
                             case "공격 속도":
                                 attackSpeed += parseInt(statValue);
+                                console.log(statValue);
                                 $("#attackSpeedL").next().text(attackSpeed);
                                 break;
                             case "이동 속도":
@@ -243,6 +246,7 @@ $.ajax({
                                 break;
                             case "마법 관통력":
                                 spPen += parseInt(statValue);
+                                console.log(statValue);
                                 $("#spPenL").next().text(spPen);
                                 break;
                             case "치명타 확률":

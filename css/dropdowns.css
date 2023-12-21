@@ -22,11 +22,11 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-   -webkit-appearance: none;
-   margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 input[type="number"] {
-   -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 /* Popover */
@@ -35,14 +35,14 @@ input[type="number"] {
     background-color: rgba(255, 255, 255, 0.9);
     max-width: 25em;
 }
- 
+
 /* Background */
 .background {
     background-color: rgb(255, 255, 255)
 }
 
 .btn-blue {
-    background-color : #2d20bc;
+    background-color : rgb(45, 32, 188);
     color : white;
     /* border : 1px solid black; */
     width: 160px;
@@ -53,7 +53,7 @@ input[type="number"] {
 .btn-blue:hover, .btn-blue:focus, .btn-blue:active {
     color : white;
     background-color : rgb(26, 21, 62);
-    
+
 }
 
 .btn-red {
@@ -76,7 +76,6 @@ input[type="number"] {
 
 
 /* 챔피언 목록창 */
-
 .dropdown-multicol{
     min-width: 50em;
 }
@@ -91,17 +90,17 @@ input[type="number"] {
     margin-top: 2.5em;
 }
 
-.dropdown-menu {         
+.dropdown-menu {
     max-height: 50em;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 /* 임시 */
-/* .champion-box {
+.champion-box {
     max-height: 50em;
     overflow-y: hidden;
     overflow-x: hidden;
-} */
+}
 
 .champion-img {
     width:100%;
@@ -116,8 +115,8 @@ input[type="number"] {
 #champion-list {
     width: 500px;
     display: flex;
-    flex-wrap: wrap; 
-    justify-self: flex-start;  
+    flex-wrap: wrap;
+    justify-self: flex-start;
     align-items: baseline;
     gap: 4px;
     font-size: 16px;
@@ -142,6 +141,11 @@ input[type="number"] {
     width: 20em;
 }
 
+.centered-title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
 
 .right-align-btn {
     position: absolute;
@@ -172,13 +176,17 @@ input[type="number"] {
 }
 
 .item-img {
-    width: 80% !important;
-    padding-top: 80% !important;
+    /* width: 80% !important; */
+    /* padding-top: 80% !important; */
     display: block !important;
-    border: 1px solid black;
-    outline: 2px solid black;
+    /* outline: 2px solid black; */
     outline-offset: -2px;
+    border: 2px solid #ac9f31;
 }
+.item-img:hover {
+    border: 3px solid #eeff00;
+}
+
 
 .item-placeholder {
     background-image: none !important;
@@ -238,7 +246,7 @@ input[type="number"] {
 
 #left-item-filter-options {
     position: absolute;
-    max-height: 22.65em;
+    max-height: 40em;
     width: 15em;
     margin-top: 2.5em;
     overflow-x: auto;
@@ -268,11 +276,11 @@ input[type="number"] {
 .health-text {
     position: absolute;
     bottom: 1.65em;
-    top: calc(100%/2);    
+    top: calc(100%/2);
     left: calc((100%/2));
     font-size: 1em;
     width: 100%;
-    height: 100%;    
+    height: 100%;
 }
 
 
@@ -362,7 +370,7 @@ td.stat-col {
 }
 
 .selected-rune {
-    box-shadow: 0px 0px 0px 1px rgb(176, 176, 176) inset;   
+    box-shadow: 0px 0px 0px 1px rgb(176, 176, 176) inset;
     border-radius: 10px;
 }
 
@@ -378,11 +386,11 @@ td.stat-col {
 }
 
 @-webkit-keyframes fade {
-    from {opacity: .4} 
+    from {opacity: .4}
     to {opacity: 1}
 }
 
 @keyframes fade {
-    from {opacity: .4} 
+    from {opacity: .4}
     to {opacity: 1}
 }
