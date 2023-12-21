@@ -984,7 +984,7 @@ $.ajax({
         // 아이템 필터링 End
 
         filterItems.forEach((data, index) =>{
-            var itemBox = $("<div>").addClass("item-box");
+            var itemBox = $("<div>").addClass("item_box");
             var itemImg = $("<img>", {
                 src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
                 alt: data.name + " 이미지",
@@ -996,7 +996,6 @@ $.ajax({
             // var itemButton = $("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+data.name+"'></button>"+data.name)
             // $("#itemContainer").append(itemButton);
             itemBox.append(itemImg);
-            itemBox.append($("<br>"));
             itemBox.append(itemName);
             $("#item-list").append(itemBox); //#item-list의 자식요소에 <div class="item-box">
         });
@@ -1010,14 +1009,6 @@ $.ajax({
 var itemPriceL= 0; // 아이템 값을 담아줄 변수
 // 아이템 리스트 출력
 
-function checkSavedItemsNull() {
-    for (var i = 0; i < savedItems.length; i++) {
-        if (savedItems[i] != null) {
-            return false; // null이 아닌 값이 하나라도 존재하면 false 반환
-        }
-    }
-    return true; // 모든 값이 null이면 true 반환
-}
 $("#item-list").click(function (e) {
     var totalGold = 0;
     if (e.target.id == 'emptyBtn') {
@@ -1027,15 +1018,9 @@ $("#item-list").click(function (e) {
         // $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
         itemGold[callIdx] = 0;
         console.log(itemGold);
-        // savedItems.splice(callIdx, 1);
-        delete savedItems[callIdx];
-        console.log("savedItems :: ",savedItems);
-        var isSavedItemsNull = checkSavedItemsNull();
-        console.log(isSavedItemsNull);
-        // savedItems[callIdx] = 0;
+        savedItems.splice(callIdx, 1);
         // itemPriceL -= temp;
-        if(isSavedItemsNull == true){
-            console.log("노템임ㅋ");
+        if(savedItems.length == 0){
             items.adValue= 0;
             items.apValue= 0;
             items.armor= 0;
@@ -1056,14 +1041,14 @@ $("#item-list").click(function (e) {
             deleteItem();
         }
         itemStatCalc();
-
-        $("#iBox" + callIdx).empty();
+        console.log("아이템 잔여 확인 :: ",savedItems);
+        // $("#iBox" + callIdx).empty();
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
         console.log("저장된 스탯::: ", items);
         for(var i=0; i<itemGold.length; i++){
             totalGold += itemGold[i];
             $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
-            // console.log("for문 gold :: ", itemGold[i]);
+            console.log("for문 gold :: ", itemGold[i]);
         }
     } else if (e.target.classList.contains('item-img')) {
 
@@ -1084,7 +1069,7 @@ $("#item-list").click(function (e) {
         for(var i=0; i<itemGold.length; i++){
             totalGold += itemGold[i];
             $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
-            // console.log("for문 gold :: ", itemGold[i]);
+            console.log("for문 gold :: ", itemGold[i]);
         }
     }
     console.log("총 골드: " + totalGold);
@@ -1275,8 +1260,8 @@ $("#item-list").mouseover(function(e) {
         description = description.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
         description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
 
-        var itemBox = $(e.target).closest('.item-box');
-        itemBox.append($("<div>").addClass("desBox").html(itemName + "<br>" + description));
+        var itemBox = $(e.target).closest('.item_box');
+        itemBox.append($("<div>").addClass("desBox").html(description));
 
 
         console.log(itemName, description);
@@ -1286,6 +1271,6 @@ $("#item-list").mouseover(function(e) {
 
 // 마우스 아웃 시 아이템 정보 제거
 $("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
-    var itemBox = $(e.target).closest('.item-box');
+    var itemBox = $(e.target).closest('.item_box');
     itemBox.find(".desBox").remove(); // itemName과 description을 삭제합니다.
 });

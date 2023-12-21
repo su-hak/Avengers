@@ -12,9 +12,6 @@
 
     <link rel="stylesheet" type="text/css" href="css/dropdowns.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/item.css">
-
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -360,43 +357,42 @@
                     <li class="left_panel_ul_main_R">
                         <ul>
                             <li>
-                                <ul id="item_box" class="item_pan dropright">
-                                    <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
-                                             aria-labelledby="dropdownMenuButton"
-                                             style="display: none;">
-                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
-                                            <div class="row mx-auto" id="item-list">
-                                                <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                            </div>
+                                <ul class="item_pan dropright" id="plusItem">
+                                    <div class="dropdown-menu dropdown-multicol" id="left-item-filter-options"
+                                         aria-labelledby="dropdownMenuButton"
+                                         style="display: none;">
+                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
+                                        <div class="row mx-auto" id="item-list" class="item-list-css">
+                                            <button type="button" class="itemRemoveBtn" id="emptyBtn" onclick="deleteItem()">delete</button>
+                                        </div>
                                     </div>
                                     <li>
-                                        <button type="button" id="iBox1" class="item_box">
+                                        <button type="button" id="iBox0" class="item_box" data-idx ="0">
+                                            <iconify-icon  icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" id="iBox1" class="item_box" data-idx ="1">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox2" class="item_box">
-                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
-                                        </button>
-
-                                    </li>
-                                    <li>
-                                        <button type="button" id="iBox3" class="item_box">
+                                        <button type="button" id="iBox2" class="item_box" data-idx ="2">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox4" class="item_box">
+                                        <button type="button" id="iBox3" class="item_box" data-idx ="3">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox5" class="item_box">
+                                        <button type="button" id="iBox4" class="item_box" data-idx ="4">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox6" class="item_box">
+                                        <button type="button" id="iBox5" class="item_box" data-idx ="5">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
@@ -413,9 +409,15 @@
                                     </li>
                                 </ul>
                             </li>
-                            <!-- 공격시 로그 내용 출력 -->
-                            <textarea id="damage-log" class="DamageRecord" name="" cols="30" rows="10">
-                                
+                            <textarea id="left-log_pan" class="log_pan_css" name="" cols="30" rows="10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.
                             </textarea>
                         </ul>
 
@@ -619,7 +621,7 @@
                             </li>
                             <li>
                                 <!-- 오른쪽 공격버튼 -->
-                                <button id="right_BA_button" type="button" class="BA_button btn_green" onclick="recordDamage()">BasicAttack</button>
+                                <button id="right_BA_button" type="button" class="BA_button btn_green">BasicAttack</button>
                                 <!-- 베이직 어택 -->
                             </li>
                             <li class="cri_check btn_green">
@@ -770,7 +772,7 @@
         <div id="modal-line-left" class="modal-line-L"></div>
         <div id="modal-line-center" class="modal-line-C"></div>
         <div id="modal-line-right" class="modal-line-R"></div>
-        <div>                        
+        <div>
             <div id="modal_contents" class="modal_contents">
                 <div class="modal_content">
                     <h3 class="notice-title">calclol은?</h3><br/>
@@ -784,7 +786,7 @@
                     <h3 class="notice-title">기능설명서</h3><br/>
                     <p>&nbsp;&nbsp;
                         모든 계산은 낙관적입니다. 간단히 말해서, 모든 능력은 모든 효과를 최대 값으로 적중하고 발동시키는 것으로 가정하고 공격 및 아이템 능력 범위는 무시되며 능력은 시간을 가장 효율적으로 사용한다는 의미입니다.<br/>
-    
+
                         아이템은 이름, 희귀도, 특정 태그로 검색할 수 있습니다.<br/>
                         모든 항목에는 통계가 구현되어 있어야 합니다.<br/>
                         건강 재생은 적절하게 설명되어야 합니다.<br/>
@@ -804,20 +806,17 @@
                         챔피언 능력을 사용하려면 챔피언 능력 아이콘을 클릭하세요(대부분의 능력은 구현되지 않음).<br/>
                         동작(기본 공격 또는 능력 사용)을 제거하려면 동작 대기열에서 원하는 동작을 클릭하여 제거하세요. 또는 "작업 대기열 재설정" 버튼을 사용하여 깨끗한 상태를 제공할 수 있습니다.<br/>
                     </p>
-                </div>            
-            </div>    
-            <p class="text_close">현재 창 클릭 시 창 닫힘</p>                         
+                </div>
+            </div>
+            <p class="text_close">현재 창 클릭 시 창 닫힘</p>
         </div>
-              
     </div>
     <!-- about us 모달창 E -->
 
     <script src="./js/test.js"></script>
     <script src="./js/decimal.js"></script>
     <script src="./js/web.js"></script> <!-- 원래 따로 만들었는데 재홍이가 test.js 에 붙여넣음 -->
-    <script src="./js/testtest.js"></script>
-    <script src="./js/skill.js"></script>
-<!--    <script> let test ={}; </script>-->
+    <!--    <script> let test ={}; </script>-->
     <!-- 메인영역 E -->
 
     <!-- 푸터영역 -->
