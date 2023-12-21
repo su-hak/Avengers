@@ -56,7 +56,6 @@ $.ajax({
         });
 
 
-        console.log(filterItems);
         // 아이템 필터링 End
 
 
@@ -85,39 +84,53 @@ $.ajax({
 });
 
 
-// 아이템 리스트 출력
+// 아이템 선택
 $("#item-list").click(function (e) {
+    console.log(e.target);
     if (e.target.id == 'emptyBtn') {
-        console.log("삭제 버튼 클릭하였습니다.");
+        // console.log("삭제 버튼 클릭하였습니다.");
         savedItems.splice(callIdx, 1);
-        console.log("아이템 잔여 확인 :: ",savedItems);
+        // console.log("아이템 잔여 확인 :: ",savedItems);
         // $("#iBox" + callIdx).empty();
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+        // itemFilterControl();
     } else if (e.target.classList.contains('item-img')) {
-        console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
+        // console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
         var itemData = filterItems[e.target.getAttribute("value")];
         var imgSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filterItems[e.target.getAttribute("value")].image.full;
 
+        $('#iBox' + callIdx).html("<img src='"+imgSrc+"' alt='"+ e.target.alt+"' class='"+ e.target.classList[0]+"'>"); // 아이템 출력
 
-        $('#iBox' + callIdx).html("<img src='"+imgSrc+"'>"); // 아이템 출력
         savedItems[callIdx] = itemData;
         itemStatCalc(); // 아이템 스텟 값 함수 호출
-        console.log("savedItems", savedItems);
-
-
+        // console.log("savedItems", savedItems);
     }
+
 });
 
 // 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
 $("#plusItem").click(function (e){
+    console.log("plusItem 클릭 !", e.type);
     if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
         callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControl();
 
-    }else if(e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+    }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
         callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControl();
+
+    }else if($(this).find('li img').length > 0 ) {
+        itemFilterControl();
+        // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
+    }else if(e.target.id === 'left-item-search') {
+        // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
+        return;
     }
-    itemFilterControl()
+    console.log(e.target.tagName , e.target.classList[0]);
+
 });
+
+console.log(items)
 
 // 아이템 목록 창 출력
 function itemFilterControl() {
@@ -128,16 +141,6 @@ function itemFilterControl() {
     }
 
 }
-
-// 아이템 목록 외 body 클릭 시 닫기
-// $(document).mouseup(function(e) {
-//     var leftItemFilterOptions = $("#left-item-filter-options");
-//     if (!$(e.target).is(leftItemFilterOptions)
-//         && !$(e.target).closest(leftItemFilterOptions).length
-//         || leftItemFilterOptions.css("display") == "block") {
-//         leftItemFilterOptions.css("display", "none");
-//     }
-// });
 
 
 // 스탯 계산 함수
@@ -226,14 +229,18 @@ $("#item-list").mouseover(function(e) {
         var itemName = itemData.name;
         var description = itemData.description;
 
-        description = description.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
+        description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
         description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+        console.log("description",description)
+
+        // 문장 뒤에 <br> 추가
+        description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
 
         var itemBox = $(e.target).closest('.item-box');
         itemBox.append($("<div>").addClass("desBox").html(itemName + "<br>" + description));
 
 
-        console.log(itemName, description);
+        // console.log(itemName, description);
         // 또는 원하는 동작을 수행하세요.
     }
 });
