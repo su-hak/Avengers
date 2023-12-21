@@ -1,6 +1,10 @@
 @charset "utf-8";
 
+/* 기본글꼴 */
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* 게이지 글꼴 */
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&family=VT323&display=swap');
 
 /* font-family: 'Noto Sans KR', sans-serif;
 font-family: 'DM Serif Text', serif; */
@@ -9,73 +13,553 @@ font-family: 'DM Serif Text', serif; */
 
 /* 초기화 */
 
-html { font-size: 62.5%; }
+html {
+    font-size: 62.5%;
+}
 
-* { margin: 0; padding: 0; box-sizing: border-box }
-table { border-collapse: collapse; width: 100%; }
-h1,h2,h3,h4,h5,h6 { font-size: 100%; }
-img { vertical-align: top;}
-ul,ol { list-style: none;}
-a { text-decoration: none; color: #000;}
-em, address { font-style : normal ; }
+* {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box */
+}
 
-button { border: 0 ; margin: 0; padding: 0; background: transparent;} /* 버튼 보더 배경 지우기 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+
+img {
+    vertical-align: top;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+em,
+address {
+    font-style: normal;
+}
+
+button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+/* 버튼 보더 배경 지우기 */
 
 /* form 테두리 영역 없애기 */
-fieldset,input,textarea,select { vertical-align: middle; border: 0;}
-legend,caption { display: none;}
+fieldset,
+input,
+textarea,
+select {
+    vertical-align: middle;
+    border: 0;
+}
+
+legend,
+caption {
+    display: none;
+}
 
 
-body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size: 1.6rem; line-height: 1.6; color: #000;}
+body {
+    word-break: keep-all;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: #000;
+}
 
-.inner { max-width: calc(100% - 200px); margin: 0 auto; }
+.inner {
+    max-width: calc(100% - 200px);
+    margin: 0 auto;
+}
+
+
 
 
 /* 초기화  E */
 
 /* 헤더영역 */
-#header { align-items: center;  background: #598EFF; color: rgb(255, 255, 255);}
-#header .inner { padding: 20px; display: flex; align-items: center; }
-#header .inner a {text-decoration: none; }
-#header .inner h1 { padding: 0px 50px 0px 0px; font-size: 30px; font-weight: bold; color: #fff; }
+#header {
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    background: #598EFF;
+    color: rgb(255, 255, 255);
+}
+
+#header .inner {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+@media (max-width : 768px) {
+    #header .inner {
+        display: block;
+        padding: 20px 0;
+    }
+}
+
+#header .inner a {
+    text-decoration: none;
+}
+
+#header .inner h1 {
+    padding: 0px 50px 0px 0px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+}
+
+@media (max-width : 1000px) {
+    #header .inner h1 { padding: 0 25px 0 0; }
+}
+@media (max-width : 768px) {
+    #header .inner h1 {
+        text-align: center;
+        align-items: center;
+        align-content: center;
+        padding: 0;
+
+        /*display: none; !*테스트용*!*/
+    }
+}
 
 /* 헤더 네비 */
-#header .gnb { margin: 0; display: flex; gap: 30px; align-items: center; }
-#header .gnb a { color: rgb(255, 255, 255); text-decoration: none; }
-#header .gnb a:hover { color:rgb(255, 38, 0)}
+#header .gnb {
+    margin: 0;
+    display: flex;
+    gap: 1.875rem;
+    align-items: center;
+}
+/* 메뉴 기본 스타일 */
+#header .gnb a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+/*매뉴에 마우스 올리면 스타일 변경*/
+#header .gnb a:hover {
+    color: rgb(255, 38, 0)
+}
+
+
+
+/* 작은 화면일 때 메뉴 설정 */
+
+/* 큰 화면시 메뉴바 버튼 안보이게 */
+#fullscreen-trigger {
+    display: none;
+}
+
+/* 작은 화면시 전체창 메뉴 큰 화면시 안보이게 */
+#fullscreen-overlay {
+    display: none;
+    background: rgba(0, 0, 0, 0.900);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 30px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+/* 작은 화면 메뉴 닫기 버튼 */
+#fullscreen-closed {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+/* 작은 화면 메뉴 목록 */
+#fullscreen-overlay ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#fullscreen-overlay ul li {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+/* 작은화면 메뉴창 링크 스타일 */
+#fullscreen-overlay a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+/* 화면 줄일 시 메뉴바 사이즈 조정 */
+@media (max-width : 1000px) {
+    #header .gnb { gap : 1rem}
+}
+
+/* 화면 줄일 시 메뉴바 안보이고 메뉴버튼 나오게 */
+@media (max-width : 768px) {
+    /* 화면 줄어들면 메뉴 사라짐*/
+    #header .gnb {
+        display: none;
+    }
+    /* 화면 줄어들면 작은 화면 메뉴 활성화 */
+    #fullscreen-trigger {
+        display: block ;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+    }
+}
+
+
+
+/* -------------- 공지사항 모달창 설정 --------------*/
+
+/* 공지 모달 전체사이즈 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 200px;
+    width: 80%;
+    height: 850px;
+    background-color: rgba(0, 0, 0, 0);
+    /* border: 0px solid #fff; */
+}
+/* 공지 모달 실선 */
+.modal-line {
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
+    width: 97%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #ffffff;
+}
+
+.modal-line-L { /* 공지 모달 왼쪽 라인 */
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #ffffff;
+    border-right: 0;
+}
+.modal-line-R { /* 공지 모달 오른쪽 라인 */
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 93%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #ffffff;
+    border-left: 0;
+}
+.modal-line-C { /* 공지 모달 가운데 라인 */
+    position: fixed;
+    /* z-index: 999; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+
+/* 공지모달 내용창 */
+.modal_contents {
+    position: fixed;
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(62, 76, 139);
+    padding: 20px;
+    width: 99%;
+    height: 770px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    
+}
+
+/* 공지모달 세부내용 */
+.modal_content {
+    margin-top: 10px;
+    width: 400px;
+    height: 600px !important;
+    background: rgba(0, 0, 0, 0);    
+    padding: 30px;    
+    color: #FFF;
+    overflow: auto;
+    /* scrollbar-color: transparent transparent;     */
+}
+.modal_content::-webkit-scrollbar { /* 브라우저 종류에 따른 스크롤바 출력 */
+    width: 6px; /* 스크롤바의 너비 */
+}
+
+.borderwhite {    
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+/* 공지모달 제목들 */
+.notice-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.text_close {  
+    position: fixed;  
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
+    margin-top: 350px;
+    color: #04f023;    
+    text-align: center; 
+    z-index: 999; 
+}
+
+/* 공지 모달 반응형 */
+/* @media (max-width:1600px) {
+    .modal { max-width: calc(100% - 160px); }
+}
+
+@media (max-width:1400px) {
+    .inner { max-width: calc(100% - 140px); }
+}
+
+@media (max-width:1200px) {
+    .inner { max-width: calc(100% - 120px); }
+} */
+
+@media (max-width:1024px) {
+    .modal {
+        display: none;
+        position: fixed;
+        top: 54%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 200px;
+        width: 80%;
+        height: 850px;
+        background-color: rgba(0, 0, 0, 0);
+        /* border: 0px solid #fff; */
+    }
+    .modal_contents { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    .modal_content {
+        margin-top: 10px;
+        width: 400px;
+        height: 50%;
+        background: rgba(0, 0, 0, 0);    
+        padding: 30px;    
+        color: #FFF;
+        border: 0;
+    }
+    .text_close {  
+        position: fixed;  
+        top: 1%;
+        /* left: 50.4%;
+        transform: translate(-50%, -50%); */
+        margin-top: 50px;
+        color: #04f023;    
+        text-align: center; 
+        z-index: 999; 
+    }
+}
+
+/* @media (max-width:768px) {
+    .inner { max-width: calc(100% - 40px); }
+} */
+
+
+/* ------------ 공지 모달창 설정 ------------*/
 
 /* 로그인 회원가입 */
-#header .util { display: flex; margin: 0 0 0 auto; gap: 20px;}
-#header .util button { width: 80px ; height: 35px ; background: #ffffff; font-size: 15px; font-weight: 700; text-align: center; border-radius: 10px}
-#header .util .joinBtn { width: 110px ; height: 35px ; border: 2px solid #ffdd57; color: #fff; background: #ff00e1; font-size: 15px; font-weight: 700; text-align: center; border-radius: 10px}
-#header .util .joinBtn:hover { background: #ad0099; } 
+#header .util {
+    display: flex;
+    margin: 0 0 0 auto;
+    gap: 20px;
+}
+
+#header .util button {
+    width: 80px;
+    height: 35px;
+    background: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
+
+/* 회원 가입 버튼 */
+#header .util .joinBtn {
+    width: 110px;
+    height: 35px;
+    border: 2px solid #ffdd57;
+    color: #fff;
+    background: #ff00e1;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
+/* 회원기입버튼 마우스 올렸을때 */
+#header .util .joinBtn:hover {
+    background: #ad0099;
+}
+/* 화면 줄일 시 유틸창 사라지게 */
+@media (max-width : 768px) {
+    #header .util {
+        display: none;
+    }
+}
+/* 작은 화면 로그인 버튼 */
+.mobileLoginBtn{
+    width: 110px;
+    height: 35px;
+    color: #000;
+    background-color: #FFF;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
+/* 작은 화면  회원가입 버튼 */
+.mobileJoinBtn {
+    width: 110px;
+    height: 35px;
+    color: #fff;
+    background-color: #ff00e1;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px
+}
 
 
 /* 메인영역 */
 
+.ds_flex_center {
+    display: flex;
+    justify-content: center;
+}
+
+.ds_flex_space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 /* 배경페이지 */
-#main #sectionB { position: relative; }
-#main #sectionB .video { width: 100%;}
+#main {
+    height: 880px;
+}
+@media (max-width : 768px) {
+    #main {
+        height: 1600px;
+    }
+}
+
+#main #sectionB {
+    position: relative;
+}
+
+#main #sectionB .video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 880px;
+    object-fit: cover;
+}
 
 /* 배경 위 메인 페이지 */
-#main #sectionF { 
-    position: absolute; 
-    top: 120px; 
-    width: 100%; 
-    height: 800px; 
-    display: flex; 
-    justify-content: center; 
+#main #sectionF {
+    position: absolute;
+    top: 120px;
+    width: 1153px;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    margin: 0 20%;
 }
-#main #sectionF #dealmeterL { 
-    padding: 10px 0 0 50px; 
-    width:calc(100%/3.3); 
-    background: rgba(255, 255, 255, .8); 
+
+@media (max-width : 768px) {
+    #main {
+        background-color: #d5ecaf;
+    }
+    #main #sectionB {
+        display: none;
+    }
+
+    #main #sectionF {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 0.4rem;        
+    }
+}
+
+#main #sectionF #dealmeterL {
+    padding: 0.625rem 0 0 3.125rem;
+    width: calc(100%/2);
+    background: rgba(255, 255, 255, .8);
     border-right: 1px solid;
 }
 
+@media (max-width : 768px) {
 
-.ul_main_L { 
-    padding: 0 30px 0 0; 
+    #main #sectionF #dealmeterL {
+        width: 475px;
+        padding: 0;
+        background: none;
+        margin: 680px auto 0 auto;
+        border-right: none;
+    }
+}
+
+.ul_top {
+    margin-bottom :0;
+}
+
+.ul_main_L {
+    padding: 0 30px 0 0;
 }
 
 
@@ -84,23 +568,29 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
     /*background-color: lightgray;*/
     position: relative;
     /* background-color: black; */
-    width: 90%;
+    width: 473px;
     height: 2em;
     margin-top: 1em;
     border: 0px solid rgb(0, 255, 162);
 }
 
 .health-bar {
-    background-color: rgb(82, 191, 58);
+    background-color: #00e71f;
     width: 100%;
     height: 100%;
     position: relative;
 }
 
+.health-bar-white {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+}
+
 .resource-box {
     position: relative;
-    background-color: rgb(0, 101, 252);
-    width: 80%;
+    /*background-color: rgb(0, 101, 252);*/
+    width: 423px;
     height: 1em;
     margin-top: 0.25em;
     margin-bottom: 1em;
@@ -109,182 +599,417 @@ body { word-break:keep-all ; font-family: 'Noto Sans KR', sans-serif; font-size:
 
 .resource-bar {
     background-color: rgb(23, 121, 234);
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     position: relative;
 }
 
-.resourceless {
-    background-color: rgb(0, 101, 252);
+.resource-box-R {
+    position: relative;
+    /*background-color: rgb(0, 101, 252);*/
+    width: 423px;
+    height: 1em;
+    margin-top: 0.25em;
+    margin-bottom: 1em;
+    margin-right: 0;
+    border: 0px solid rgb(1, 173, 253);
 }
+
+.resource-bar-R {
+    background-color: rgb(23, 121, 234);
+    /* width: 100%; */
+    height: 100%;
+    position: relative;
+    margin-right: 0;
+}
+
+
+#left-hp-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 체력 숫자 */
+#left-hp-num {
+    position: absolute;
+    top: 4px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+#left-rsc-bar {
+    position: relative;
+}
+/* 왼쪽 챔피언 마나 or  숫자 */
+#left-rsc-num {
+    position: absolute;
+    top: 1px;
+    font-size: 16px;
+    /* font-weight: 700;     */
+}
+
+#right-hp-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 체력 숫자 */
+#right-hp-num {
+    position: absolute;
+    top: 4px;
+    font-size: 30px;
+    font-weight: 700;
+
+}
+
+#right-rsc-bar {
+    position: relative;
+}
+/* 오른쪽 챔피언 마나 or  숫자 */
+#right-rsc-num {
+    position: absolute;
+    top: 1px;
+    font-size: 16px;
+    /* font-weight: 700;     */
+}
+
+/* 게이지 숫자 스타일 */
+.centered-title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    font-family: 'VT323', monospace;
+    font-size: 30px;
+    color: #fbff2b;
+    text-shadow: 2px 2px 2px gray;
+}
+
+
+
+/*.resourceless {*/
+/*    background-color: rgb(0, 101, 252);*/
+/*}*/
+
 /* 게이지 창 E */
 
 /* 공유 및 플레이어 */
-.share_ul { 
+.share_ul {
     padding: 0 0 5px 0;
 }
 
 /* 공유버튼 */
-.share_Btn { 
-    width: 50px; 
-    height: 50px; 
-    background: #bbff00; 
-    color: #000000; 
+.share_Btn {
+    width: 50px;
+    height: 50px;
+    padding-top: 5px;
     font-size: small;
 }
 
 /* 플레이어표시 */
-.txt_player { 
-    margin-left: 2px; 
-    border: 1px; 
-    width: 160px; 
-    height: 50px; 
-    background: #3967ff; 
-    color: #fff; 
+.txt_player {
+    border: 1px;
+    width: 160px;
+    height: 50px;
+    background: #2d20bc;
+    color: #fff;
     text-align: center;
 }
-.txt_player p { 
-    padding: 12px 0 0 0 ;
+
+.txt_player p {
+    padding: 12px 0 0 0;
 }
 
 /* 아이템 저장버튼 */
-.item_save { 
-    padding: 0 0 5px 0; 
+.btn_bora {
+    background: #f700ff;
+    color: #fff;
+}
+.btn_bora:hover {
+    background: #fa5bff;
+    color: #c800cf;
+}
+
+
+.btn_green {
+    background: #52bf3a;
+    color: #fff;
+}
+.btn_green:hover {
+    background: #2dff49;
+    color: #009e15;
+}
+
+.item_save {
+    padding: 0 0 5px 0;
 }
 
 /* 공격버튼 */
-.LV_BA { 
-    padding: 0 0 5px 0; 
+.LV_BA {
+    padding: 0 0 5px 0;
 }
 
-.saveItemBtn { 
-    margin-top: 4px ; 
-    width: 50px; 
-    height: 50px; 
-    background: #598EFF; 
-    text-align: center; 
+.saveItemBtn {
+    margin-top: 4px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
 }
 
-#main #sectionF #dealmeterL .saveItemBtn:hover { 
-    background: #0d34b4; 
-    color: #fff;
+.dealmeterLL {
+    width: 50%;
 }
 
-.dealmeterLL { width: 50%; }
-.ds_flex { display: flex; gap: 5px;}
+.ds_flex {
+    display: flex;
+    gap: 5px;
+}
 
-.LV_Show { width : 50px; height: 50px; background: turquoise; }
-.LV_Button { width : 30px; height: 50px; background: turquoise; }
-.BA_button { width: 126px; height: 50px; background: #598EFF; color: #fff;}
+/* 왼쪽 챔피언 레벨 표시창 */
+.LV_Show {
+    width: 50px;
+    height: 50px;
+    /* background: turquoise; */
+}
+.chmap_Lv {
+    /* background: #f1f1f1; */
+    border: 1px solid #000;
+    color: #000;
+}
+
+
+
+.BA_button {
+    width: 126px;
+    height: 50px;
+}
 
 /* 크리티컬 체크박스 */
-.cri_check { width: 30px; height: 50px; background-color: #3967ff; text-align: center; color: #FFF;}
+.cri_check {
+    width: 30px;
+    height: 50px;
+    text-align: center;
+}
+.cri_check span{
+    font-size: 12px;
+}
 
 /* 스킬창 */
-.skill_pan { 
-    padding: 0 0 10px 0; 
+.skill_pan {
+    margin-bottom: 10px;
 }
+
 /* 스킬버튼 */
-.skill_Btn { 
-    width: 50px; 
-    height: 50px; 
-    background: #598EFF;
+.skill_Btn {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: #b6b6b6;
+    border: 2px solid #c9b92f;
 }
+.skill_Btn:hover {
+    border: 2px solid #fbff00;
+}
+
 /* 스킬 레벨 업다운 버튼 */
-.skill_Lv_Btn { 
-    margin-top: 5px; 
-    width: 10px; 
-    height: 20px; 
-    background: #598EFF; 
+.skill_Lv_Btn {
+    /* margin-top: 5px; */
+    width: 10px;
+    height: 20px;
+    border: 2px solid #c9b92f;
+    background: #757575;
     color: #fff;
-    font-size: 10px; 
-    font-size: 15px;
+    font-size: 10px;
 }
+.skill_Lv_Btn:hover {
+    border: 2px solid #fbff00;
+}
+
 /* 스킬 레벨 표시창 */
-.LV_Num { 
-    margin-top: 5px; 
-    border: 1px solid #000; 
-    width: 20px; 
-    height: 20px; 
+.LV_Num {
+    /* margin-top: 5px; */
+    border: 1px solid #000;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+/*스킬 설명창*/
+#left-tooltip {
+    position: absolute;
+    z-index: 9999;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+}
+
+#right-tooltip {
+    position: absolute;
+    z-index: 9999;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
 }
 
 
 /* 스탯창 */
-.stat { 
-    width: 215px; 
-    height: 255px; 
-    background-color: rgb(255, 255, 255); 
+.stat {
+    width: 215px;
+    height: 255px;
+    background-color: rgb(255, 255, 255);
+    font-size: 10px;
 }
-.stat td { 
+
+.stat td {
     height: 30px;
 }
-.stat_name { 
-    width: 54px; 
-    background: #00ddff; 
+
+.stat_name {
+    width: 65.5px;    /* 기본 54px */
+    /* background: #7cc0ff; */
+    background: #323749;
+    color: #ffffff;
+
 }
-.stat_value { 
-    width: 54px; 
-    background: #78edff;  
+
+.stat_value {
+    width: 45px;
+    /* background: #b1daff; */
+    background: #525975;
+    color: #ffe600;
 }
 
 /* 아이템 & 로그 패널 */
-.left_panel_ul_main_R { 
-    width: 220px; 
+.left_panel_ul_main_R {
+    width: 220px;
 }
 
-/* 돈 이미지 */
-.cost { 
-    padding: 0 0 5px;
-    align-items : center; 
-    text-align: center;
+/* 비용 이미지 및 표시*/
+.cost {
+    margin-bottom: 10px;
+    border: 1px solid #000000;
+    align-items: center;
     align-content: center;
+    background-color: #59758f;
+    color: #FFF;
+}
+.cost-img {
+    width: 30px;
+    margin-left: 10px;
+}
+.cost-value-pan {
+    margin: 0 10px 0 0;
+    font-family: 'Silkscreen', sans-serif;
 }
 
 /* 아이템창 */
-.item_pan { display: flex; flex-wrap: wrap; justify-content: space-between; }
-.item_box { width: 70px; height: 70px; background: #ffffff; margin-bottom: 10px ;  }
+.item_pan {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.item_box {
+    width: 70px;
+    height: 70px;
+    background: #c7c7c7;
+    margin-bottom: 10px;
+    border: 2px solid #c9b92f;
+}
+.item_box:hover {
+    border: 2px solid #eeff00;
+}
+
+.item_box_list {
+    text-align: center;
+    width: 70px;
+    height: 90px;
+    /* border: 2px solid #c9b92f; */
+    margin: 0 5px;
+    margin-bottom: 10px;
+}
+
 
 /* 로그창 */
-.log_pan { 
-    width: 100%; 
-    height: 460px; 
-    padding: 20px; 
-    background: #2c2e3e; 
-    color: #ffffff; 
+.log_pan_css {
+    width: 100%;
+    height: 460px !important;
+    box-sizing: border-box; /* padding과 border를 요소의 크기에 포함 */
+    padding: 10px;
+    background: #2c2e3e;
+    color: #ffffff;
+    font-size: 12px;
+    /* overflow: scroll; 무조건 스크롤바를 표시 */
+    scrollbar-width: 6px; /* 스크롤바의 너비를 얇게 설정 (크롬, 파이어폭스 등 최신 브라우저에서 적용) */
+    scrollbar-color: transparent transparent; /* 스크롤바 색상을 투명으로 설정 */
+}
+.log_pan_css::-webkit-scrollbar { /* 브라우저 종류에 따른 스크롤바 출력 */
+    width: 6px; /* 스크롤바의 너비 */
 }
 
 
 /* 오른쪽 딜미터기 */
 
-#main #sectionF #dealmeterR { 
-    padding: 10px 0 0 50px; 
-    width:calc(100%/3.3); 
-    background: rgba(255, 255, 255, .8); 
+#main #sectionF #dealmeterR {
+    padding: 0.625rem 3.125rem 0 0;
+    width: calc(100%/2);
+    background: rgba(255, 255, 255, .8);
     border-right: 1px solid;
 }
 
-.ds_flex_R { display: flex; justify-content: right; gap: 5px;}
-
-.right_panel_ul_main_L { 
-    width: 220px;     
+@media (max-width : 768px) {
+    #main #sectionF #dealmeterR {
+        width: 475px;
+        padding: 0;
+        background: none;
+        margin: 10px auto 0 auto;
+        border-right: none;
+    }
 }
 
-.ul_main_R { 
-    padding: 0 0 0 30px; 
+.ds_flex_R {
+    flex-direction: row-reverse;
+    margin-right: 0;
 }
 
-.txt_cpu { 
-    margin-left: 2px; 
-    border: 1px; 
-    width: 160px; 
-    height: 50px; 
-    background: rgb(255, 56, 56); 
-    color: #fff; 
+.right_panel_ul_main_L {
+    width: 220px;
+}
+
+.ul_main_R {
+    padding: 0 0 0 30px;
+}
+
+.txt_cpu {
+    border: 1px;
+    width: 160px;
+    height: 50px;
+    background: rgb(255, 56, 56);
+    color: #fff;
     text-align: center;
 }
 
-.txt_cpu p { 
-    padding: 12px 0 0 0 ;
+.txt_cpu p {
+    padding: 12px 0 0 0;
 }
 
 
+/* 푸터 스타일 */
+.footer-style{
+    width: 100%;
+    height: 100px;
+    background: #2c2e3e;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    align-content: center;
+}
+.copyright {
+    padding: 20px 0 5px 0;
+}
+
+@media (max-width : 768px) {
+    .footer-style{
+        height: 150px;
+        padding: 10px 30px;
+    }
+}

@@ -92,7 +92,9 @@ $("#item-list").click(function (e) {
         savedItems.splice(callIdx, 1);
         // console.log("아이템 잔여 확인 :: ",savedItems);
         // $("#iBox" + callIdx).empty();
+        console.log(callIdx)
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+        console.log(callIdx)
         // itemFilterControl();
     } else if (e.target.classList.contains('item-img')) {
         // console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
@@ -103,7 +105,7 @@ $("#item-list").click(function (e) {
 
         savedItems[callIdx] = itemData;
         itemStatCalc(); // 아이템 스텟 값 함수 호출
-        // console.log("savedItems", savedItems);
+        console.log("savedItems", savedItems);
     }
 
 });
@@ -127,8 +129,40 @@ $("#plusItem").click(function (e){
         return;
     }
     console.log(e.target.tagName , e.target.classList[0]);
+    console.log(callIdx,"callIdx")
 
 });
+
+// 인벤토리 초기화
+// function defalutInven() {
+//      if (e.target.id == 'defaultInven'){
+//          $("#plusItem").reset();
+//      }
+// }
+$('#defaultInven').click(function (){
+    console.log(savedItems)
+    $(".item_box").html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+    savedItems.fill(0);
+    items.adValue= 0;
+    items.apValue= 0;
+    items.armor= 0;
+    items.spellBlock= 0;
+    items.attackSpeed= 0;
+    items.moveSpeed= 0;
+    items.newArPen= 0;
+    items.adPen= 0;
+    items.spPen= 0;
+    items.spPen2= 0;
+    items.crit= 0;
+    items.newOmniVamp= 0;
+    items.cooltime= 0;
+    items.hpRegen= 0;
+    items.mpRegen= 0;
+    items.fullHp= 0;
+    items.fullMp= 0;
+    itemStatCalc(); // 아이템 스텟 값 함수 호출
+    console.log(savedItems)
+})
 
 console.log(items)
 
