@@ -138,7 +138,11 @@
                                 <ul>
                                     <!-- 왼쪽 아이템 저장버튼 -->
                                     <li>
-                                        <button id="left_save_btn1" type="button" class="saveItemBtn btn_green">S1</button>
+                                        <button type="button" class="saveItemBtn" id="s1Btn" >S1</button>
+                                        <div id="itemSavedBox1" style="position: absolute; display: none; border: 1px dotted black">
+                                            <button type="button" class="saveHere" >저장하기</button></br>
+                                            <button type="button" class="loadThere" >불러오기</button>
+                                        </div>
                                     </li>
                                     <li>
                                         <button id="left_save_btn2" type="button" class="saveItemBtn btn_green">S2</button>
@@ -364,39 +368,38 @@
                                     <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
                                              aria-labelledby="dropdownMenuButton"
                                              style="display: none;">
-                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
+                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="off">
                                             <div class="row mx-auto" id="item-list">
                                                 <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
                                             </div>
                                     </div>
                                     <li>
-                                        <button type="button" id="iBox1" class="item_box">
+                                        <button type="button" id="iBox0" class="item_box" data-idx ="0">
+                                            <iconify-icon  icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" id="iBox1" class="item_box" data-idx ="1">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox2" class="item_box">
-                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
-                                        </button>
-
-                                    </li>
-                                    <li>
-                                        <button type="button" id="iBox3" class="item_box">
+                                        <button type="button" id="iBox2" class="item_box" data-idx ="2">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox4" class="item_box">
+                                        <button type="button" id="iBox3" class="item_box" data-idx ="3">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox5" class="item_box">
+                                        <button type="button" id="iBox4" class="item_box" data-idx ="4">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox6" class="item_box">
+                                        <button type="button" id="iBox5" class="item_box" data-idx ="5">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
@@ -410,6 +413,9 @@
                                     </li>
                                     <li>
                                         <p id="left-cost-value" class="cost-value-pan">0</p>
+                                    </li>
+                                    <li>
+                                        <button type="reset" id="defaultInven">인벤토리 초기화</button>
                                     </li>
                                 </ul>
                             </li>
