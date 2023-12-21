@@ -85,7 +85,7 @@ function searchChampById(imgId) {
 // }
 
 // 선택한 레벨 받아오기
- test.getSelectedLevel = function() {
+test.getSelectedLevel = function() {
     const selectElement = document.getElementById('champ_lv');
     test.selectedValue = selectElement.value;
     return test.selectedValue;
@@ -111,15 +111,16 @@ function setChampStats(id) {
             'hp' : dtch[0].stats.hp, // 체력
             'mp' : dtch[0].stats.mp, // 마나
             'arPenL' : 0, // 방어구 관통력
-            'spPenL' : 0, // 마법 관통력
+            'spPenL' : 0, // 마법 관통력 (%)
+            'spPen2L' : 0, // 마법 관통력 (정수)
             'adPenL' : 0, // 물리 관통력
             'vampL' : 0, // 모든 피해 흡혈
             'coolTimeL' : 0 // 스킬 가속
 
         };
-          test.updateAttackStats = function(selectedLevel)  {
-              var result = test.sendItemStats();
-              var itemAt = result[0];
+        test.updateAttackStats = function(selectedLevel)  {
+            console.log("updateAs 호출");
+            var itemAt = items.adValue;
             if (selectedLevel > 1) {
                 let coefficient = dtch[0].stats.attackdamageperlevel;
                 let a = [];
@@ -148,8 +149,7 @@ function setChampStats(id) {
             }
         }
         test.updateArmorStats = function (selectedLevel) {
-            var result = test.sendItemStats();
-            var itemAr = result[2];
+            var itemAr = items.armor;
             if (selectedLevel > 1) {
                 let coefficient = dtch[0].stats.armorperlevel;
                 let a = [];
@@ -177,8 +177,7 @@ function setChampStats(id) {
             }
         }
         test.updateSpellBlockStats = function(selectedLevel) {
-            var result = test.sendItemStats();
-            var itemSb = result[3];
+            var itemSb = items.spellBlock;
             if (selectedLevel > 1) {
                 let coefficient = dtch[0].stats.spellblockperlevel;
                 let a = [];
@@ -206,8 +205,7 @@ function setChampStats(id) {
             }
         }
         test.updateHpregenStats = function(selectedLevel) {
-            var result = test.sendItemStats();
-            var itemHr = result[12];
+            var itemHr = items.hpRegen;
             var itemHrNum = itemHr * 0.01;
             if (selectedLevel > 1) {
                 let coefficient = dtch[0].stats.hpregenperlevel;
@@ -235,9 +233,8 @@ function setChampStats(id) {
                 }
             }
         }
-       test.updateMpregenStats = function(selectedLevel) {
-            var result = test.sendItemStats();
-            var itemMr = result[13];
+        test.updateMpregenStats = function(selectedLevel) {
+            var itemMr = items.mpRegen;
             var itemMrNum = itemMr * 0.01;
             if (selectedLevel > 1) {
                 let coefficient = dtch[0].stats.mpregenperlevel;
@@ -266,8 +263,7 @@ function setChampStats(id) {
         }
 
         test.updateAttackspeedStats = function(selectedLevel) {
-            var result = test.sendItemStats();
-            var itemAs = result[4];
+            var itemAs = items.attackSpeed;
             let a = [];
             var itemAsNum = 0;
             if(itemAs == 0){
@@ -281,9 +277,9 @@ function setChampStats(id) {
                 a[0] = dtch[0].stats.attackspeed;
                 let level = 1;
                 // if(asstatValue != null){
-                    for (let i = 1; i < selectedLevel; i++) {
-                        a[i] = ((itemAsNum+(+(coefficient*0.01)*(selectedLevel-1))*(0.7025+(0.0175*(selectedLevel-1))))*a[0]) + a[0];
-                    }
+                for (let i = 1; i < selectedLevel; i++) {
+                    a[i] = ((itemAsNum+(+(coefficient*0.01)*(selectedLevel-1))*(0.7025+(0.0175*(selectedLevel-1))))*a[0]) + a[0];
+                }
                 // }else{
                 //     // itemAs = 0;
                 //     for (let i = 1; i < selectedLevel; i++) {
@@ -338,16 +334,48 @@ function setChampStats(id) {
         //     }
         // }
         test.updateHpStats = function(selectedLevel) {
-            var result = test.sendItemStats();
-            var itemHp = result[14];
+            var itemHp = items.fullHp;
             console.log(dtch[0].stats.hp);
             const totalHp = document.getElementById("left-hp-total");
+            if (selectedLevel > 1) {
+                console.log("statValues  ::",statValues);
+                let coefficient = dtch[0].stats.hpperlevel;
+                let a = [];
+                let itemHp = 0;
+                a[0] = dtch[0].stats.hp;
+                let level = 1;
+                for (let i = 1; i < selectedLevel; i++) {
+                    a[i] = (a[i - 1] + Math.round((coefficient * (0.65 + (0.035 * (i + 1))))));
+                }
+                const value = new Decimal(a[selectedLevel - 1]);
+                const roundedValue = value.toDecimalPlaces(2);
+                const realRoundedValue = roundedValue.toDecimalPlaces(1);
+                statValues['hp'] = Math.round(realRoundedValue) + itemHp;
+                console.log(a);
+            } else if (selectedLevel < 2) {
+                statValues['hp'] = Math.round(dtch[0].stats.hp) + itemHp;
+            }
+            for (const id in statValues) {
+                const element = 'hp';
+                if(element == id){
+                    let value = statValues[id];
+                    totalHp.textContent = value;
+                }
+            }
+            setRealHp();
+        }
+
+        test.updateMpStats = function(selectedLevel) {
+            const totalMp = document.getElementById("left-rsc-total");
+            if(dtch[0].stats.mp != 0){
+                var itemMp = items.fullMp;
+                console.log(dtch[0].stats.mp);
                 if (selectedLevel > 1) {
                     console.log("statValues  ::",statValues);
-                    let coefficient = dtch[0].stats.hpperlevel;
+                    let coefficient = dtch[0].stats.mpperlevel;
                     let a = [];
-                    let itemHp = 0;
-                    a[0] = dtch[0].stats.hp;
+                    let itemMp = 0;
+                    a[0] = dtch[0].stats.mp;
                     let level = 1;
                     for (let i = 1; i < selectedLevel; i++) {
                         a[i] = (a[i - 1] + Math.round((coefficient * (0.65 + (0.035 * (i + 1))))));
@@ -355,55 +383,21 @@ function setChampStats(id) {
                     const value = new Decimal(a[selectedLevel - 1]);
                     const roundedValue = value.toDecimalPlaces(2);
                     const realRoundedValue = roundedValue.toDecimalPlaces(1);
-                    statValues['hp'] = Math.round(realRoundedValue) + itemHp;
+                    statValues['mp'] = Math.round(realRoundedValue) + itemMp;
                     console.log(a);
                 } else if (selectedLevel < 2) {
-                    statValues['hp'] = Math.round(dtch[0].stats.hp) + itemHp;
+                    statValues['mp'] = Math.round(dtch[0].stats.mp) + itemMp;
                 }
                 for (const id in statValues) {
-                    const element = 'hp';
+                    const element = 'mp';
                     if(element == id){
                         let value = statValues[id];
-                        totalHp.textContent = value;
+                        totalMp.textContent = value;
                     }
                 }
-                setRealHp();
-        }
-
-        test.updateMpStats = function(selectedLevel) {
-            const totalMp = document.getElementById("left-rsc-total");
-            if(dtch[0].stats.mp != 0){
-                  var result = test.sendItemStats();
-                  var itemMp = result[15];
-                  console.log(dtch[0].stats.mp);
-                  if (selectedLevel > 1) {
-                      console.log("statValues  ::",statValues);
-                      let coefficient = dtch[0].stats.mpperlevel;
-                      let a = [];
-                      let itemMp = 0;
-                      a[0] = dtch[0].stats.mp;
-                      let level = 1;
-                      for (let i = 1; i < selectedLevel; i++) {
-                          a[i] = (a[i - 1] + Math.round((coefficient * (0.65 + (0.035 * (i + 1))))));
-                      }
-                      const value = new Decimal(a[selectedLevel - 1]);
-                      const roundedValue = value.toDecimalPlaces(2);
-                      const realRoundedValue = roundedValue.toDecimalPlaces(1);
-                      statValues['mp'] = Math.round(realRoundedValue) + itemMp;
-                      console.log(a);
-                  } else if (selectedLevel < 2) {
-                      statValues['mp'] = Math.round(dtch[0].stats.mp) + itemMp;
-                  }
-                  for (const id in statValues) {
-                      const element = 'mp';
-                      if(element == id){
-                          let value = statValues[id];
-                          totalMp.textContent = value;
-                      }
-                  }
-              }else{
-                  totalMp.textContent = 0;
-              }
+            }else{
+                totalMp.textContent = 0;
+            }
             setRealMp();
 
         }
@@ -423,11 +417,10 @@ function setChampStats(id) {
             });
 
         }
-         test.updateMovespeedStats = function(){
+        test.updateMovespeedStats = function(){
             // let itemMs = 0;
             let a = 0;
-            var result = test.sendItemStats();
-            var itemMs = result[5];
+            var itemMs = items.moveSpeed;
             a = dtch[0].stats.movespeed + itemMs;
             statValues['moveSpeedL'] = a;
             for (const id in statValues) {
@@ -438,11 +431,10 @@ function setChampStats(id) {
                 }
             }
         }
-         test.updateAbilitypowerStats = function(){
+        test.updateAbilitypowerStats = function(){
             // let itemAp = 0;
             let a = 0;
-            var result = test.sendItemStats();
-            var itemAp = result[1];
+            var itemAp = items.apValue;
             a = a+itemAp;
             statValues['abilityPowerL'] = a;
             for (const id in statValues) {
@@ -453,8 +445,82 @@ function setChampStats(id) {
                 }
             }
         }
+        test.updateArPenStats = function(){ // 방관
+            // let itemAp = 0;
+            let a = 0;
+            var itemArpen = items.newArPen;
+            a = a+itemArpen;
+            statValues['arPenL'] = a;
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+        test.updateAdPenStats = function(){ // 물관
+            // let itemAp = 0;
+            let a = 0;
+            var itemAdpen = items.adPen;
+            a = a+itemAdpen;
+            statValues['adPenL'] = a;
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+        test.updateNewOmniVampStats = function(){ // 피흡
+            // let itemAp = 0;
+            let a = 0;
+            // var result = test.sendItemStats();
+            var itemNewOmniVamp = items.newOmniVamp;
+            a = a+itemNewOmniVamp;
+            statValues['vampL'] = a;
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+        test.updateCooltimeStats = function(){ // 쿨탐
+            // let itemAp = 0;
+            let a = 0;
+            // var result = test.sendItemStats();
+            var itemcooltime = items.cooltime;
+            a = a+itemcooltime;
+            statValues['coolTimeL'] = a;
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+        // test.updateSpPenStats = function(){ // 물관
+        //     // let itemAp = 0;
+        //     let a = 0;
+        //     // var result = test.sendItemStats();
+        //     var itemSppen = items.spPen;
+        //     a = a+itemAdpen;
+        //     statValues['adPenL'] = a;
+        //     for (const id in statValues) {
+        //         const element = document.getElementById(id);
+        //         let value = statValues[id];
+        //         if (element) {
+        //             element.nextElementSibling.textContent = value;
+        //         }
+        //     }
+        // }
+
         function setRealHp(){
-            console.log("hp :::",statValues['hp']);
+            // console.log("hp :::",statValues['hp']);
             var realHp = statValues['hp'];
             var damage = 0;
             const targetHp = document.getElementById("left-hp-value");
@@ -467,7 +533,7 @@ function setChampStats(id) {
         }
 
         function setRealMp(){
-            console.log("mp :::",statValues['mp']);
+            // console.log("mp :::",statValues['mp']);
             var realMp = statValues['mp'];
             var cost = 0;
             const targetMp = document.getElementById("left-rsc-value");
@@ -481,7 +547,7 @@ function setChampStats(id) {
 
 // 초기 레벨 설정
         const selectedLevel = test.getSelectedLevel();
-        test.test();
+        // test.test();
         test.updateAttackStats(selectedLevel);
         test.updateArmorStats(selectedLevel);
         test.updateSpellBlockStats(selectedLevel);
@@ -493,11 +559,15 @@ function setChampStats(id) {
         updateCritStats();
         test.updateMovespeedStats();
         test.updateAbilitypowerStats();
+        test.updateArPenStats();
+        test.updateAdPenStats();
+        test.updateNewOmniVampStats();
+        test.updateCooltimeStats();
 
 // 레벨 변경 시 업데이트
         document.getElementById('champ_lv').onchange = function() {
             const selectedLevel = test.getSelectedLevel();
-            test.test();
+            // test.test();
             console.log(selectedLevel); // 선택된 레벨 값 출력
             test.updateAttackStats(selectedLevel);
             test.updateArmorStats(selectedLevel);
@@ -510,9 +580,14 @@ function setChampStats(id) {
             updateCritStats();
             test.updateMovespeedStats();
             test.updateAbilitypowerStats();
+            test.updateArPenStats();
+            test.updateAdPenStats();
+            test.updateNewOmniVampStats();
+            test.updateCooltimeStats();
         };
     });
 }
+
 
 var checkbox = document.getElementById('right_critical');
 
@@ -715,14 +790,20 @@ function displayChampionList(champions) {
 function selectChampion(champion) {
     test.choose = true;
     console.log(test.choose);
+    // detailedChamp();
     // 선택한 챔피언에 대한 동작을 추가하세요.
     console.log("선택한 챔피언 ID:", champion.id);
     // 이미지 업데이트
     updateChampionButtonImage(champion.id);
     // 스킬 정보 업데이트
+
+    itemStatCalc();
     setChampSpells(champion.id);
     setChampStats(champion.id);
+    console.log(savedItems);
+
     test.getSelectedLevel();
+    // deleteItem();
 }
 
 
@@ -742,30 +823,21 @@ function searchChampion() {
         }
     });
 }
-// function searchItems() {
-//     var searchText = $("#left-item-search").val().toLowerCase();
-//     var itemBoxes = $(".item_box");
-//     // HTML에서 img 태그를 선택합니다.
-//     const imgTag = document.querySelector('img');
-//
-// // img 태그의 alt 속성 값을 가져옵니다.
-// //     const altValue = imgTag.alt;
-//     const altValue = $('img').attr('alt');
-//
-// // alt 속성 값을 출력합니다.
-//     console.log(altValue);
-//
-//     itemBoxes.each(function () {
-//         var itemBox = $("#new-box");
-//         var itemName = altValue;
-//
-//         if (itemName.includes(searchText)) {
-//             itemBox.show();
-//         } else {
-//             itemBox.hide();
-//         }
-//     });
-// }
+function searchItem() {
+    var searchText = $("#left-item-search").val().toLowerCase();
+    var itemBoxes = $(".item_box_list");
+
+    itemBoxes.each(function () {
+        var itemBox = $(this);
+        var itemName = itemBox.find("p").text().toLowerCase();
+
+        if (itemName.includes(searchText)) {
+            itemBox.show();
+        } else {
+            itemBox.hide();
+        }
+    });
+}
 
 
 
@@ -783,7 +855,7 @@ function initialize() {
 
     // 검색창에 입력이 있을 때마다 검색 수행
     $("#champion-search").on("input", searchChampion);
-    // $("#left-item-search").on("input", searchItems);
+    $("#left-item-search").on("input", searchItem);
 }
 
 // 페이지 로드 시 초기화 함수 호출
@@ -847,52 +919,45 @@ function setChampSpells(id){
 
 
 // 수학 햄 js
-let items;
+let items = {};
+// let savedItems = []; // 아이템 저장 배열
+var savedItems = new Array(6);
+var itemGold = new Array(6);
+itemGold.fill(0);
+let allItems = {};
+let filterItems = {};
+let callIdx = 0; //선택한 아이템 칸 idx
 
-var clickItemBox;// 아이템 출력 기능 구현
+
+// 스탯 값을 담을 변수 선언
+items.adValue= 0;
+items.apValue= 0;
+items.armor= 0;
+items.spellBlock= 0;
+items.attackSpeed= 0;
+items.moveSpeed= 0;
+items.newArPen= 0;
+items.adPen= 0;
+items.spPen= 0;
+items.spPen2= 0;
+items.crit= 0;
+items.newOmniVamp= 0;
+items.cooltime= 0;
+items.hpRegen= 0;
+items.mpRegen= 0;
+items.fullHp= 0;
+items.fullMp= 0;
+
+
 // API 가져오기
 $.ajax({
-    type:"get",
-    url:"http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
-    success:function(data){
-        var allItems=Object.values(data.data);//챔피언 데이터 배열 추출
-        items = allItems;
+    type: "get",
+    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+    success: function (data) {
+        allItems = Object.values(data.data); //아이템 데이터 배열 추출
 
-        //6개의 각각의 박스에서 원하는 버튼에 클릭할 경우 기능
-        for (var i = 1; i <= 6; i++) {
-            $("#iBox" + i).click(function() {
-                if(test.choose == false){
-                    Swal.fire("챔프 선택부터 혀라");
-                }else {
-                    var parentContainer = "left-item-filter-options";
-                    var container = "itemContainer" ;
-                    if ($("#" + container).children().length === 0) {
-                        $("#" + container).append('<div id="newBox"></div>');
-                    } else if (clickItemBox && clickItemBox[0] === this) {
-                        $("#newBox").remove();
-                        $("#" + parentContainer).hide(); // left-item-filter-options 숨기기
-                        return;
-                    }
-                    clickItemBox = $(this); // 현재 클릭한 아이템 박스를 저장
-                    $("#" + parentContainer).show(); // left-item-filter-options 열고 닫기
-                    // 아이템 필터링
-                    var filterItems=items.filter(function(items){
-                        return !items.requiredChampion // 챔피언전용템제외
-                            // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
-                            && items.inStore!==false // 스토어: false인 item 제외
-                            && items.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
-                    });
-                    console.log(filterItems);
-                    // 아이템 필터링 End
-                    printItems(filterItems); // 아이템 출력을 새로운 박스 안으로 변경
-                }
-
-
-            });
-        }
-
-        //=======================아이템 가나다 순 정렬
-        items.sort(function(a,b){
+        /* ===========아이템 가나다 순 정렬 start ==========*/
+        allItems.sort(function(a,b){
             var nameA=a.name.toUpperCase();
             var nameB=b.name.toUpperCase();
 
@@ -904,432 +969,323 @@ $.ajax({
             }
             return 0;
         });
-        /*===========================정렬end==========================*/
+        /* ===========아이템 가나다 순 정렬 start ==========*/
+
+        // 아이템 필터링 start
+        filterItems = allItems.filter(function(allItems){
+            return !allItems.requiredChampion // 챔피언전용템제외
+                // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+                && allItems.inStore!==false // 스토어: false인 item 제외
+                && allItems.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
+        });
 
 
+        console.log(filterItems);
+        // 아이템 필터링 End
 
-        // description 값 확인
-        // console.log(filterItems);
-
-        // function printItems(filterItems){
-        //     $("#newBox").empty();// newBox의 초기 값
-        //
-        //     for(var i=0; i<filterItems.length; i++){
-        //         var item = filterItems[i];
-        //         var imgURL="http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+item.image.full;
-        //         var itemButton=$("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+item.name+"'></button>"+item.name);
-        //
-        //
-        //         // 아이템 이미지 버튼에 클릭 이벤트를 설정
-        //         setItemClickEvent(itemButton,item,clickItemBox.attr('id').replace('iBox','')-1);
-        //
-        //         // 버튼에 이미지와 텍스트 추가
-        //         $("#newBox").append(itemButton);
-        //     }
-        // }
-        function printItems(items) {
-            console.log(test.choose);
-            var itemList = $("#item-list");
-            itemList.empty(); // 기존 목록 초기화
-
-            items.forEach(function (item, index) {
-                var itemBox = $("<div>").addClass("item_box_list").click(function () {
-                    selectItem(item);
-                });
-
-                var itemImg = $("<img>", {
-                    src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + item.image.full,
-                    alt: item.name + " 이미지",
-                    class: "item-img"
-                });
-                var itemName = $("<p>").addClass("item-name").text(item.name);
-
-                itemBox.append(itemImg);
-                // itemBox.append($("<br>"));
-                itemBox.append(itemName);
-                itemList.append(itemBox);
+        filterItems.forEach((data, index) =>{
+            var itemBox = $("<div>").addClass("item-box");
+            var itemImg = $("<img>", {
+                src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
+                alt: data.name + " 이미지",
+                class: "item-img",
+                value : index
             });
-        }
+            var itemName = $("<p>").addClass("item-name").text(data.name);
+            // var imgURL= "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+data.image.full;
+            // var itemButton = $("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+data.name+"'></button>"+data.name)
+            // $("#itemContainer").append(itemButton);
+            itemBox.append(itemImg);
+            itemBox.append($("<br>"));
+            itemBox.append(itemName);
+            $("#item-list").append(itemBox); //#item-list의 자식요소에 <div class="item-box">
+        });
 
-
-        // 각 아이템 박스마다 선택된 신화 아이템을 저장하는 배열
-        var selectedMythicItem=[null,null,null,null,null,null];
-
-        // 스탯 값을 담을 변수 선언
-        var adValue= 0; // 공격력
-        var apValue= 0; // 주문력
-        var armor= 0; // 방어력
-        var spellBlock= 0; // 마법 저항력
-        var attackSpeed= 0; // 공격 속도
-        var moveSpeed= 0; // 이동 속도
-        var newArPen= 0; // 방어구 관통력
-        var adPen= 0; // 물리 관통력
-        var spPen= 0; // 마법 관통력 ( % 붙은 마관)
-        var spPen2 = 0; // 마법 관통력 ( 정수 마관)
-        var crit= 0; // 치명타 확률
-        var newOmniVamp= 0; // 모든 피해 흡혈
-        var cooltime= 0; // 스킬 가속
-        var hpRegen= 0; // 기본 체력 재생
-        var mpRegen= 0; // 기본 마나 재생
-        var fullHp= 0; // 체력
-        var fullMp= 0; // 마나
-
-        var itemStats = [adValue, apValue, armor, spellBlock, attackSpeed, moveSpeed, newArPen, adPen, spPen, spPen2, crit, newOmniVamp, cooltime, hpRegen, mpRegen, fullHp, fullMp];
-
-         test.sendItemStats =function(){
-            return itemStats;
-        }
-
-        var itemPriceL= 0; // 아이템 값을 담아줄 변수
-        // 아이템 이미지 클릭 이벤트
-        // 아이템 이미지 버튼을 클릭하면,선택한 아이템 박스에 이미지를 설정하고,다시 클릭하면 초기화
-        function setItemClickEvent(itemButton,item,iBoxIndex){
-            itemButton.click(function(){ // 마우스 클릭 시 이벤트
-                var imgSrc= $(this).find('img').attr('src');
-                //
-                var description = item.description;
-                var stats = description.match(/<stats>(.*?)<\/stats>/);
-                var statValues = [];
-                //
-                //
-
-                itemPriceL += item.gold.total; // 아이템의 total값을 누산
-                $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
-                if (stats) {
-                    statValues = stats[1].split('<br>');
-                }
-                // console.log("아이템 가격 ::", item.gold.total);
-                //
-
-
-                // // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료
-                // if(selectedMythicItem.some((selectedMythicItem,index)=>
-                //     selectedMythicItem !== null && index !== iBoxIndex)){
-                //     alert("신화 아이템은 하나만 선택 가능 합니다.");
-                //     return;
-                // }
-                // 이미 신화 아이템이 선택된 상태라면 팝업을 띄우고 함수 종료 End
-
-                // 이미지와 X버튼을 생성
-                clickItemBox.html("<img src='"+imgSrc+"'><button class='itemRemoveBtn'>X</button>");
-                $("#newBox").remove();// 아이템을 선택하면 #newBox제거
-                $("#left-item-filter-options").hide();
-                // 이미지와 X버튼을 생성 End
-
-                // X버튼 클릭 이벤트
-                clickItemBox.find('.itemRemoveBtn').click(function(){
-                    $(this).siblings('img').remove(); // 현재 'X' 버튼과 동일한 iBox의 이미지만 제거
-                    $(this).remove(); // 'X' 버튼 제거
-                    selectedMythicItem[iBoxIndex] = null;
-                    itemPriceL -= item.gold.total; // 아이템제거시 변수에서도 같은 값을 빼줌
-                    console.log("아이템 제거!! :: ", itemPriceL);
-                    $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
-                    // $("#left-cost-value").text(":0원");// 아이템 가격 초기화
-
-
-                    statValues.forEach(function(stat) {
-                        // 스탯 값을 빼는 로직 추가
-                        var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
-                        var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
-
-                        switch (statName) {
-                            case "공격력":
-                                adValue -= parseInt(statValue);
-                                itemStats[0] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateAttackStats(level);
-                                break;
-                            case "주문력":
-                                apValue -= parseInt(statValue);
-                                // $("#abilityPowerL").next().text(apValue);
-                                itemStats[1] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateAbilitypowerStats(level);
-                                break;
-                            case "방어력":
-                                armor -= parseInt(statValue);
-                                // $("#armorL").next().text(armor);
-                                itemStats[2] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateArmorStats(level);
-                                break;
-                            case "마법 저항력":
-                                spellBlock -= parseInt(statValue);
-                                // $("#spellBlockL").next().text(spellBlock);
-                                itemStats[3] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateSpellBlockStats(level);
-                                break;
-                            case "공격 속도":
-                                attackSpeed -= parseInt(statValue);
-                                // $("#attackSpeedL").next().text(attackSpeed);
-                                itemStats[4] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateAttackspeedStats(level);
-                                break;
-                            case "이동 속도":
-                                moveSpeed -= parseInt(statValue);
-                                itemStats[5] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateMovespeedStats(level);
-                                break;
-                            case "방어구 관통력":
-                                newArPen -= parseInt(statValue);
-                                $("#arPenL").next().text(newArPen);
-                                break;
-                            case "물리 관통력":
-                                adPen -= parseInt(statValue);
-                                $("#adPenL").next().text(adPen);
-                                break;
-                            case "마법 관통력":
-                                if (statValue.includes('%')){
-                                    spPen -= parseInt(statValue);
-                                    $("#spPenL").next().text( spPen +'%' +"("+ spPen2+")");
-                                    break;
-                                }else {
-                                    spPen2 -= parseInt(statValue);
-                                    $("#spPenL").next().text(spPen + '%' +"("+ spPen2+")");
-                                    break;
-                                }
-
-                            case "치명타 확률":
-                                crit -= parseInt(statValue);
-                                // $("#critL").next().text(crit);
-                                break;
-                            case "모든 피해 흡혈":
-                                newOmniVamp -= parseInt(statValue);
-                                $("#vampL").next().text(newOmniVamp + "%");
-                                break;
-                            case "스킬 가속":
-                                cooltime -= parseInt(statValue);
-                                // log();
-                                $("#coolTimeL").next().text(cooltime);
-                                break;
-                            case "기본 체력 재생":
-                                hpRegen -= parseInt(statValue);
-                                // $("#hpRegenL").next().text(hpRegen);
-                                itemStats[12] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateHpregenStats(level);
-                                break;
-                            case "기본 마나 재생":
-                                mpRegen -= parseInt(statValue);
-                                // $("#mpRegenL").next().text(mpRegen);
-                                itemStats[13] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateMpregenStats(level);
-                                break;
-                            case "체력":
-                                fullHp -= parseInt(statValue);
-                                itemStats[14] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateHpStats(level);
-                                break;
-                            case "마나":
-                                fullMp -= parseInt(statValue);
-                                itemStats[15] -= parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateMpStats(level);
-                                break;
-                        }
-                    })
-                });
-                // X버튼 클릭 이벤트 End
-
-                selectedMythicItem[iBoxIndex] = item; // 신화 아이템 선택 상태 업데이트
-
-
-
-                // 아이템 스탯 정보 출력
-                statValues.forEach(function (stat) {
-                    var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
-                    var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
-
-                    if (statName && statValue) {
-                        switch (statName) {
-                            case "공격력":
-                                adValue += parseInt(statValue);
-                                itemStats[0] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateAttackStats(level);
-                                break;
-                            case "주문력":
-                                apValue += parseInt(statValue);
-                                // $("#abilityPowerL").next().text(apValue);
-                                itemStats[1] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateAbilitypowerStats(level);
-                                break;
-                            case "방어력":
-                                armor += parseInt(statValue);
-                                // $("#armorL").next().text(armor);
-                                itemStats[2] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateArmorStats(level);
-                                break;
-                            case "마법 저항력":
-                                spellBlock += parseInt(statValue);
-                                // $("#spellBlockL").next().text(spellBlock);
-                                itemStats[3] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateSpellBlockStats(level);
-                                break;
-                            case "공격 속도":
-                                attackSpeed += parseInt(statValue);
-                                // $("#attackSpeedL").next().text(attackSpeed);
-                                itemStats[4] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateAttackspeedStats(level);
-                                break;
-                            case "이동 속도":
-                                moveSpeed += parseInt(statValue);
-                                itemStats[5] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateMovespeedStats(level);
-                                break;
-                            case "방어구 관통력":
-                                newArPen += parseInt(statValue);
-                                $("#arPenL").next().text(newArPen);
-                                break;
-                            case "물리 관통력":
-                                adPen += parseInt(statValue);
-                                $("#adPenL").next().text(adPen);
-                                break;
-                            case "마법 관통력":
-                                if (statValue.includes('%')){
-                                    spPen += parseInt(statValue);
-                                    $("#spPenL").next().text( spPen +'%' +"("+ spPen2+")");
-                                    break;
-                                }else {
-                                    spPen2 += parseInt(statValue);
-                                    $("#spPenL").next().text(spPen + '%' +"("+ spPen2+")");
-                                    break;
-                                }
-
-                            case "치명타 확률":
-                                crit += parseInt(statValue);
-                                // $("#critL").next().text(crit);
-                                break;
-                            case "모든 피해 흡혈":
-                                newOmniVamp += parseInt(statValue);
-                                $("#vampL").next().text(newOmniVamp + "%");
-                                break;
-                            case "스킬 가속":
-                                cooltime += parseInt(statValue);
-                                // log();
-                                $("#coolTimeL").next().text(cooltime);
-                                break;
-                            case "기본 체력 재생":
-                                hpRegen += parseInt(statValue);
-                                // $("#hpRegenL").next().text(hpRegen);
-                                itemStats[12] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateHpregenStats(level);
-                                break;
-                            case "기본 마나 재생":
-                                mpRegen += parseInt(statValue);
-                                // $("#mpRegenL").next().text(mpRegen);
-                                itemStats[13] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateMpregenStats(level);
-                                break;
-                            case "체력":
-                                fullHp += parseInt(statValue);
-                                itemStats[14] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateHpStats(level);
-                                break;
-                            case "마나":
-                                fullMp += parseInt(statValue);
-                                itemStats[15] += parseInt(statValue);
-                                var level = test.getSelectedLevel();
-                                test.updateMpStats(level);
-                                break;
-                        }
-                    }
-                });
-                // 아이템 스탯 정보 출력 End
-            });
-
-            itemButton.mouseover(function(){    //마우스 올리면 이벤트
-                var imgSrc = $(this).find('img').attr('src');
-                var imgName = imgSrc.split('/').pop();    //이미지 파일 이름 추출
-
-                // 마우스를 올린 이미지와 API에서 가져 온 아이템의 이미지가 일치하는지 확인
-                if(imgName === item.image.full) {
-                    var description = item.description;
-
-                    description = description.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
-                    description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
-
-
-                    var newDiv = $("<div></div>"); // 새로운 div 박스 생성 및 description 해당 위치에 출력
-
-
-                    var buttonOffset = $(this).offset();
-                    var mouseX = event.pageX - buttonOffset.left; // x 좌표에 이미지 버튼의 폭을 더해 우측에 보이도록 함
-                    var mouseY = event.pageY - buttonOffset.bottom; // y 좌표에 이미지 버튼의 높이를 더해 하단에 보이도록 함
-
-                    newDiv.css({
-                        'position': 'absolute',
-                        'top': mouseY,
-                        'left': mouseX,
-                        'background-color': 'white',
-                        'border': '1px solid black',
-                        'padding': '5px',
-                        'z-index': '9999'
-                    });
-
-
-                    newDiv.html('<p>' + description + '</p>'); // description 정보 업데이트
-
-
-                    $(this).find('div').remove(); // #newBox -> div 초기화
-                    $(this).append(newDiv); // #newBox에 div 박스 추가
-
-
-                    // #newBox의 width와 height 값과 비교하여 newDiv 위치 조정
-                    var newBoxOffset = $("#newBox").offset();
-                    var newBoxWidth = $("#newBox").outerWidth();
-                    var newBoxHeight = $("#newBox").outerHeight();
-                    var newDivWidth = newDiv.outerWidth();
-                    var newDivHeight = newDiv.outerHeight();
-
-                    // newDiv가 #newBox의 width를 넘어가려고 할 경우
-                    if (mouseX + newDivWidth > newBoxOffset.left + newBoxWidth) {
-                        mouseX = -newDivWidth; // 이벤트 핸들러의 좌측 하단을 기준으로 한 x 좌표
-                        newDiv.css('left', mouseX); // newDiv 위치를 이벤트 핸들러의 우측 하단으로 조정
-                    }
-
-                    // newDiv가 #newBox의 height를 넘어가려고 할 경우
-                    if (mouseY + newDivHeight > newBoxOffset.top + newBoxHeight) {
-                        mouseY = event.pageY - buttonOffset.top - newDivHeight; // 이벤트 핸들러의 우측 하단을 기준으로 한 y 좌표
-                        newDiv.css('top', mouseY); // newDiv 위치를 이벤트 핸들러의 우측 상단으로 조정
-                    }
-
-
-                }
-            });
-            itemButton.mouseout(function(){     // 마우스 내리면 이벤트
-                $(this).find('div').remove(); // description 정보 초기화
-            });
-        }
-        // 아이템 이미지 클릭 이벤트 End
-
+    },
+    error : function (){
+        console.log("API 데이터 가져오는 중 오류 발생");
     }
 });
 
+var itemPriceL= 0; // 아이템 값을 담아줄 변수
+// 아이템 리스트 출력
 
-
-$(document).mouseup(function(e){
-    var container = $("#newBox");
-    var filterOptions = $("#left-item-filter-options");
-
-    //newBox와 item_pan를 제외한 부분을 클릭 했을 경우 newBox닫기
-    if(!container.is(e.target) && container.has(e.target).length===0
-        && !$(".item_pan").is(e.target)
-        && $(".item_pan").has(e.target).length===0){
-        container.remove();
-        filterOptions.hide(); // left-item-filter-options 숨기기
+function checkSavedItemsNull() {
+    for (var i = 0; i < savedItems.length; i++) {
+        if (savedItems[i] != null) {
+            return false; // null이 아닌 값이 하나라도 존재하면 false 반환
+        }
     }
+    return true; // 모든 값이 null이면 true 반환
+}
+$("#item-list").click(function (e) {
+    var totalGold = 0;
+    if (e.target.id == 'emptyBtn') {
+        console.log("삭제 버튼 클릭하였습니다.");
+        // temp = itemData.gold.total; // 아이템제거시 변수에서도 같은 값을 빼줌
+        console.log("아이템 제거!! :: ", itemPriceL);
+        // $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
+        itemGold[callIdx] = 0;
+        console.log(itemGold);
+        // savedItems.splice(callIdx, 1);
+        delete savedItems[callIdx];
+        console.log("savedItems :: ",savedItems);
+        var isSavedItemsNull = checkSavedItemsNull();
+        console.log(isSavedItemsNull);
+        // savedItems[callIdx] = 0;
+        // itemPriceL -= temp;
+        if(isSavedItemsNull == true){
+            console.log("노템임ㅋ");
+            items.adValue= 0;
+            items.apValue= 0;
+            items.armor= 0;
+            items.spellBlock= 0;
+            items.attackSpeed= 0;
+            items.moveSpeed= 0;
+            items.newArPen= 0;
+            items.adPen= 0;
+            items.spPen= 0;
+            items.spPen2= 0;
+            items.crit= 0;
+            items.newOmniVamp= 0;
+            items.cooltime= 0;
+            items.hpRegen= 0;
+            items.mpRegen= 0;
+            items.fullHp= 0;
+            items.fullMp= 0;
+            deleteItem();
+        }
+        itemStatCalc();
+
+        $("#iBox" + callIdx).empty();
+        $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+        console.log("저장된 스탯::: ", items);
+        for(var i=0; i<itemGold.length; i++){
+            totalGold += itemGold[i];
+            $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
+            // console.log("for문 gold :: ", itemGold[i]);
+        }
+    } else if (e.target.classList.contains('item-img')) {
+
+        console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
+        var itemData = filterItems[e.target.getAttribute("value")];
+        var imgSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filterItems[e.target.getAttribute("value")].image.full;
+
+
+        $('#iBox' + callIdx).html("<img src='"+imgSrc+"'>"); // 아이템 출력
+        // temp = itemData.gold.total; // 아이템의 total값을 누산
+        savedItems[callIdx] = itemData;
+        itemGold[callIdx] = savedItems[callIdx].gold.total;
+        // itemPriceL += temp
+        itemStatCalc(); // 아이템 스텟 값 함수 호출
+        console.log("savedItems", savedItems);
+        console.log("저장된 스탯::: ", items);
+        // $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
+        for(var i=0; i<itemGold.length; i++){
+            totalGold += itemGold[i];
+            $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
+            // console.log("for문 gold :: ", itemGold[i]);
+        }
+    }
+    console.log("총 골드: " + totalGold);
+});
+
+// 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
+$("#plusItem").click(function (e){
+    if (!test.choose) {
+        Swal.fire("챔프 선택부터 혀라");
+        return; // test.choose가 false인 경우 함수 실행 중단
+    }
+    if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
+        callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
+
+    }else if(e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+        callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
+    }
+    itemFilterControl()
+});
+
+// 아이템 목록 창 출력
+function itemFilterControl() {
+    if($("#left-item-filter-options").css("display") == "block"){
+        $("#left-item-filter-options").css("display", "none");
+    }else {
+        $("#left-item-filter-options").css("display", "block");
+    }
+
+}
+function deleteItem(){
+    var level = test.getSelectedLevel();
+    test.updateAttackStats(level);
+    test.updateArmorStats(level);
+    test.updateSpellBlockStats(level);
+    test.updateAttackspeedStats(level);
+    test.updateHpregenStats(level);
+    test.updateMpregenStats(level);
+    test.updateHpStats(level);
+    test.updateMpStats(level);
+    // updateCritStats();
+    test.updateMovespeedStats();
+    test.updateAbilitypowerStats();
+    test.updateArPenStats();
+    test.updateAdPenStats();
+    test.updateNewOmniVampStats();
+    test.updateCooltimeStats();
+}
+// 아이템 목록 외 body 클릭 시 닫기
+// $(document).mouseup(function(e) {
+//     var leftItemFilterOptions = $("#left-item-filter-options");
+//     if (!$(e.target).is(leftItemFilterOptions)
+//         && !$(e.target).closest(leftItemFilterOptions).length
+//         || leftItemFilterOptions.css("display") == "block") {
+//         leftItemFilterOptions.css("display", "none");
+//     }
+// });
+
+
+// 스탯 계산 함수
+function itemStatCalc() {
+    items.adValue= 0;
+    items.apValue= 0;
+    items.armor= 0;
+    items.spellBlock= 0;
+    items.attackSpeed= 0;
+    items.moveSpeed= 0;
+    items.newArPen= 0;
+    items.adPen= 0;
+    items.spPen= 0;
+    items.spPen2= 0;
+    items.crit= 0;
+    items.newOmniVamp= 0;
+    items.cooltime= 0;
+    items.hpRegen= 0;
+    items.mpRegen= 0;
+    items.fullHp= 0;
+    items.fullMp= 0;
+    savedItems.forEach(function (data){
+
+        var description = data.description;
+        var stats = description.match(/<stats>(.*?)<\/stats>/);
+
+        var statValues = [];
+        if (stats) {
+            statValues = stats[1].split('<br>');
+        }
+
+        statValues.forEach(function (stat) {
+            //TODO : 스탯값 있는지 확인 로직 추가
+
+            var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
+            var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
+
+            if (statName && statValue) {
+                var level = test.getSelectedLevel();
+                switch (statName) {
+                    case "공격력":
+                        items.adValue += parseInt(statValue);
+                        test.updateAttackStats(level);
+                        break;
+                    case "주문력":
+                        items.apValue += parseInt(statValue);
+                        test.updateAbilitypowerStats(level);
+                        break;
+                    case "방어력":
+                        items.armor += parseInt(statValue);
+                        test.updateArmorStats(level);
+                        break;
+                    case "마법 저항력":
+                        items.spellBlock += parseInt(statValue);
+                        test.updateSpellBlockStats(level);
+                        break;
+                    case "공격 속도":
+                        items.attackSpeed += parseInt(statValue);
+                        test.updateAttackspeedStats(level);
+                        break;
+                    case "이동 속도":
+                        items.moveSpeed += parseInt(statValue);
+                        test.updateMovespeedStats();
+                        break;
+                    case "방어구 관통력":
+                        items.newArPen += parseInt(statValue);
+                        test.updateArPenStats();
+                        break;
+                    case "물리 관통력":
+                        items.adPen += parseInt(statValue);
+                        test.updateAdPenStats();
+                        break;
+                    case "마법 관통력":
+                        // if (statValue.includes('%')){
+                        //     items.spPen += parseInt(statValue);
+                        //     break;
+                        // }else {
+                        //     items.spPen2 += parseInt(statValue);
+                        //     break;
+                        // }
+                        if (statValue.includes('%')){
+                            items.spPen += parseInt(statValue);
+                            $("#spPenL").next().text( items.spPen +'%' +"("+ items.spPen2+")");
+                            break;
+                        }else {
+                            items.spPen2 += parseInt(statValue);
+                            $("#spPenL").next().text(items.spPen + '%' +"("+ items.spPen2+")");
+                            break;
+                        }
+                    case "치명타 확률":
+                        items.crit += parseInt(statValue);
+                        break;
+                    case "모든 피해 흡혈":
+                        items.newOmniVamp += parseInt(statValue);
+                        test.updateNewOmniVampStats();
+                        // $("#vampL").next().text(items.newOmniVamp + "%");
+                        break;
+                    case "스킬 가속":
+                        items.cooltime += parseInt(statValue);
+                        test.updateCooltimeStats();
+                        break;
+                    case "기본 체력 재생":
+                        items.hpRegen += parseInt(statValue);
+                        test.updateHpregenStats(level);
+                        break;
+                    case "기본 마나 재생":
+                        items.mpRegen += parseInt(statValue);
+                        test.updateMpregenStats(level);
+                        break;
+                    case "체력":
+                        items.fullHp += parseInt(statValue);
+                        test.updateHpStats(level);
+                        break;
+                    case "마나":
+                        items.fullMp += parseInt(statValue);
+                        test.updateMpStats(level);
+                        break;
+                }
+            }
+        });
+    })
+
+}
+
+// 마우스 오버 시 아이템 정보 출력
+$("#item-list").mouseover(function(e) {
+    if (e.target.classList.contains('item-img')) {
+        var itemData = filterItems[e.target.getAttribute("value")];
+        var itemName = itemData.name;
+        var description = itemData.description;
+
+        description = description.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
+        description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+
+        var itemBox = $(e.target).closest('.item-box');
+        itemBox.append($("<div>").addClass("desBox").html(itemName + "<br>" + description));
+
+
+        console.log(itemName, description);
+        // 또는 원하는 동작을 수행하세요.
+    }
+});
+
+// 마우스 아웃 시 아이템 정보 제거
+$("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
+    var itemBox = $(e.target).closest('.item-box');
+    itemBox.find(".desBox").remove(); // itemName과 description을 삭제합니다.
 });
