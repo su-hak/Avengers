@@ -1095,15 +1095,28 @@ $("#plusItem").click(function (e){
     if (!test.choose) {
         Swal.fire("챔프 선택부터 혀라");
         return; // test.choose가 false인 경우 함수 실행 중단
-    }
-    if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
-        callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
+         }
+        console.log("plusItem 클릭 !", e.type);
+        if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
+            callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
+            itemFilterControl();
 
-    }else if(e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
-        callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
-    }
-    itemFilterControl()
-});
+        }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+            callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
+            itemFilterControl();
+
+        }else if($(this).find('li img').length > 0 ) {
+            itemFilterControl();
+            // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
+        }else if(e.target.id === 'left-item-search') {
+            // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
+            return;
+        }
+        console.log(e.target.tagName , e.target.classList[0]);
+        console.log(callIdx,"callIdx")
+
+    });
+
 
 // 아이템 목록 창 출력
 function itemFilterControl() {
@@ -1132,15 +1145,7 @@ function deleteItem(){
     test.updateNewOmniVampStats();
     test.updateCooltimeStats();
 }
-// 아이템 목록 외 body 클릭 시 닫기
-// $(document).mouseup(function(e) {
-//     var leftItemFilterOptions = $("#left-item-filter-options");
-//     if (!$(e.target).is(leftItemFilterOptions)
-//         && !$(e.target).closest(leftItemFilterOptions).length
-//         || leftItemFilterOptions.css("display") == "block") {
-//         leftItemFilterOptions.css("display", "none");
-//     }
-// });
+
 
 
 // 스탯 계산 함수
@@ -1272,17 +1277,22 @@ $("#item-list").mouseover(function(e) {
         var itemName = itemData.name;
         var description = itemData.description;
 
-        description = description.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
+        description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
         description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+        console.log("description",description)
+
+        // 문장 뒤에 <br> 추가
+        description = description.replace(/.(?!\s<br>)/g, ".<br>");
 
         var itemBox = $(e.target).closest('.item-box');
         itemBox.append($("<div>").addClass("desBox").html(itemName + "<br>" + description));
 
 
-        console.log(itemName, description);
+        // console.log(itemName, description);
         // 또는 원하는 동작을 수행하세요.
     }
 });
+
 
 // 마우스 아웃 시 아이템 정보 제거
 $("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
