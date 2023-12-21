@@ -56,8 +56,8 @@ $.ajax({
         });
 
 
+        console.log(filterItems)
         // 아이템 필터링 End
-
 
         filterItems.forEach((data, index) =>{
             var itemBox = $("<div>").addClass("item-box");

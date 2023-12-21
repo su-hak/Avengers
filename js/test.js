@@ -921,8 +921,8 @@ function setChampSpells(id){
 // 수학 햄 js
 let items = {};
 // let savedItems = []; // 아이템 저장 배열
-var savedItems = new Array(6);
-var itemGold = new Array(6);
+let savedItems = new Array(6);
+let itemGold = new Array(6);
 itemGold.fill(0);
 let allItems = {};
 let filterItems = {};
@@ -1006,73 +1006,31 @@ $.ajax({
     }
 });
 
-var itemPriceL= 0; // 아이템 값을 담아줄 변수
-// 아이템 리스트 출력
 
+// 아이템 선택
 $("#item-list").click(function (e) {
-    var totalGold = 0;
+    console.log(e.target);
     if (e.target.id == 'emptyBtn') {
-        console.log("삭제 버튼 클릭하였습니다.");
-        // temp = itemData.gold.total; // 아이템제거시 변수에서도 같은 값을 빼줌
-        console.log("아이템 제거!! :: ", itemPriceL);
-        // $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
-        itemGold[callIdx] = 0;
-        console.log(itemGold);
+        // console.log("삭제 버튼 클릭하였습니다.");
         savedItems.splice(callIdx, 1);
-        // itemPriceL -= temp;
-        if(savedItems.length == 0){
-            items.adValue= 0;
-            items.apValue= 0;
-            items.armor= 0;
-            items.spellBlock= 0;
-            items.attackSpeed= 0;
-            items.moveSpeed= 0;
-            items.newArPen= 0;
-            items.adPen= 0;
-            items.spPen= 0;
-            items.spPen2= 0;
-            items.crit= 0;
-            items.newOmniVamp= 0;
-            items.cooltime= 0;
-            items.hpRegen= 0;
-            items.mpRegen= 0;
-            items.fullHp= 0;
-            items.fullMp= 0;
-            deleteItem();
-        }
-        itemStatCalc();
-        console.log("아이템 잔여 확인 :: ",savedItems);
+        // console.log("아이템 잔여 확인 :: ",savedItems);
         // $("#iBox" + callIdx).empty();
+        console.log(callIdx)
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
-        console.log("저장된 스탯::: ", items);
-        for(var i=0; i<itemGold.length; i++){
-            totalGold += itemGold[i];
-            $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
-            console.log("for문 gold :: ", itemGold[i]);
-        }
+        console.log(callIdx)
+        // itemFilterControl();
     } else if (e.target.classList.contains('item-img')) {
-
-        console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
+        // console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
         var itemData = filterItems[e.target.getAttribute("value")];
         var imgSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filterItems[e.target.getAttribute("value")].image.full;
 
+        $('#iBox' + callIdx).html("<img src='"+imgSrc+"' alt='"+ e.target.alt+"' class='"+ e.target.classList[0]+"'>"); // 아이템 출력
 
-        $('#iBox' + callIdx).html("<img src='"+imgSrc+"'>"); // 아이템 출력
-        // temp = itemData.gold.total; // 아이템의 total값을 누산
         savedItems[callIdx] = itemData;
-        itemGold[callIdx] = savedItems[callIdx].gold.total;
-        // itemPriceL += temp
         itemStatCalc(); // 아이템 스텟 값 함수 호출
         console.log("savedItems", savedItems);
-        console.log("저장된 스탯::: ", items);
-        // $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
-        for(var i=0; i<itemGold.length; i++){
-            totalGold += itemGold[i];
-            $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
-            console.log("for문 gold :: ", itemGold[i]);
-        }
     }
-    console.log("총 골드: " + totalGold);
+
 });
 
 // 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
@@ -1267,7 +1225,7 @@ $("#item-list").mouseover(function(e) {
         console.log("description",description)
 
         // 문장 뒤에 <br> 추가
-        description = description.replace(/.(?!\s<br>)/g, ".<br>");
+        description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
 
         var itemBox = $(e.target).closest('.item_box');
         itemBox.append($("<div>").addClass("desBox").html(description));
