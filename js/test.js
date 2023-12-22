@@ -270,6 +270,7 @@ function setChampStats(id) {
             }else{
                 itemAsNum = itemAs * 0.01;
             }
+            console.log("item 공속 ::::",itemAsNum);
             if (selectedLevel > 1) {
                 let coefficient = dtch[0].stats.attackspeedperlevel;
 
@@ -419,9 +420,11 @@ function setChampStats(id) {
         test.updateMovespeedStats = function(){
             // let itemMs = 0;
             let a = 0;
-            var itemMs = items.moveSpeed;
-            a = dtch[0].stats.movespeed + itemMs;
-            statValues['moveSpeedL'] = a;
+            // var itemMs = items.moveSpeed;
+            console.log(dtch[0].stats.movespeed + items.moveSpeedInt);
+            console.log((dtch[0].stats.movespeed + items.moveSpeedInt) * (items.moveSpeedPer * 0.01));
+            a = (dtch[0].stats.movespeed + items.moveSpeedInt) + ((dtch[0].stats.movespeed + items.moveSpeedInt) * (items.moveSpeedPer * 0.01));
+            statValues['moveSpeedL'] = Math.round(a);
             for (const id in statValues) {
                 const element = document.getElementById(id);
                 let value = statValues[id];
@@ -1031,7 +1034,8 @@ function isSavedItemsDefault() {
         items.armor= 0;
         items.spellBlock= 0;
         items.attackSpeed= 0;
-        items.moveSpeed= 0;
+        items.moveSpeedInt= 0;
+        items.moveSpeedPer = 0;
         items.newArPen= 0;
         items.adPen= 0;
         items.spPen= 0;
@@ -1175,7 +1179,8 @@ function itemStatCalc() {
     items.armor= 0;
     items.spellBlock= 0;
     items.attackSpeed= 0;
-    items.moveSpeed= 0;
+    items.moveSpeedInt= 0;
+    items.moveSpeedPer = 0;
     items.newArPen= 0;
     items.adPen= 0;
     items.spPen= 0;
@@ -1230,9 +1235,18 @@ function itemStatCalc() {
                         test.updateAttackspeedStats(level);
                         break;
                     case "이동 속도":
-                        items.moveSpeed += parseInt(statValue);
-                        test.updateMovespeedStats();
-                        break;
+                        // items.moveSpeed += parseInt(statValue);
+                        // test.updateMovespeedStats();
+                        // break;
+                        if (statValue.includes('%')){
+                            items.moveSpeedPer += parseInt(statValue);
+                            test.updateMovespeedStats();
+                            break;
+                        }else {
+                            items.moveSpeedInt += parseInt(statValue);
+                            test.updateMovespeedStats();
+                            break;
+                        }
                     case "방어구 관통력":
                         items.newArPen += parseInt(statValue);
                         test.updateArPenStats();
