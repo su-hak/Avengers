@@ -398,7 +398,7 @@ function setChampStats(id) {
             }else{
                 totalMp.textContent = 0;
             }
-            setRealMp();
+            test.setRealMp(0);
 
         }
 
@@ -534,10 +534,10 @@ function setChampStats(id) {
             hpBar.style.width = currentWidth + "%"; // width 값 업데이트
         }
 
-        function setRealMp(){
+         test.setRealMp = function(getCost){
             // console.log("mp :::",statValues['mp']);
             var realMp = statValues['mp'];
-            var cost = 0;
+            var cost = getCost;
             const targetMp = document.getElementById("left-rsc-value");
             var costMp = statValues['mp'] - cost;// 데미지 입은만큼 빼기
             targetMp.textContent = costMp;
@@ -722,6 +722,34 @@ function roundToThreeDecimalPlaces(number) {
 // }
 // end
 
+
+
+// 더미 스탯, 아이템
+let rArea = {}; // 오른쪽 관련 함수
+let itemsR = {}; // 오른쪽 아이템
+itemsR.fullHpR = 0; // 오른쪽 아이템으로 증가할 hp수치
+rArea.updateHpStatsR = function() {
+    var itemHpR = itemsR.fullHpR;
+    // console.log(dtch[0].stats.hp);
+    const totalHp = document.getElementById("right-hp-total");
+    let defaultHp = parseInt(document.getElementById("right-hp-total").innerText);
+    let a = itemHpR + defaultHp;
+    totalHp.textContent = a;
+    rArea.r_SetRealHp(0);
+}
+
+rArea.r_SetRealHp = function(getDamage){
+    // console.log("hp :::",statValues['hp']);
+    var realHp = parseInt(document.getElementById('right-hp-total').innerText);
+    let damage = getDamage;
+    const targetHp = document.getElementById("right-hp-value");
+    var damageHp = realHp - damage;// 데미지 입은만큼 빼기
+    targetHp.textContent = damageHp;
+    var maxWidth = 100; // 최대 width 값 (100%)
+    var currentWidth = (damageHp / realHp) * maxWidth; // 현재 width 값 계산
+    var hpBar = document.getElementById("right-hp-bar"); // hp 바 엘리먼트 가져오기
+    hpBar.style.width = currentWidth + "%"; // width 값 업데이트
+}
 test.choose = false;
 
 // 광규햄 js
@@ -856,6 +884,7 @@ function updateChampionButtonImage(championId) {
 // 초기화 함수
 function initialize() {
     getChampionList();
+    rArea.updateHpStatsR();
 
     // 검색창에 입력이 있을 때마다 검색 수행
     $("#champion-search").on("input", searchChampion);
