@@ -154,7 +154,7 @@
                             <li>
                                 <div class="">
                                     <!-- 왼쪽 챔피언 박스 -->
-                                    <div class="dropright">
+                                    <div id="left-champion-box" class="dropright">
                                         <button class="btn btn-blue mt-1" type="button" id="champion-btn" data-toggle="dropdown">
                                             <img class="portrait img-fluid mx-auto champion-img" src="" name="" id="left-champ-portrait"
                                                  data-toggle="tooltip" data-placement="bottom" />
@@ -468,39 +468,47 @@
                     <li class="right_panel_ul_main_L">
                         <ul>
                             <li>
-                                <ul class="item_pan">
+                                <ul class="item_pan dropleft" id="plusItemR">
+                                    <div class="dropdown-menu dropdown-multicol" id="right-item-filter-options"
+                                         aria-labelledby="dropdownMenuButton"
+                                         style="display: none;">
+                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="right-item-search" autocomplete="off">
+                                        <div class="row mx-auto" id="item-listR" class="item-list-css">
+                                            <button type="button" class="itemRemoveBtn" id="emptyBtnR" onclick="deleteItemR()">delete</button>
+                                        </div>
+                                    </div>
                                     <li>
-                                        <button type="button" id="iBox1_R" class="item_box">
+                                        <button type="button" id="iBox6" class="item_box" data-idx ="6">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox2_R" class="item_box">
+                                        <button type="button" id="iBox7" class="item_box" data-idx ="7">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox3_R" class="item_box">
+                                        <button type="button" id="iBox8" class="item_box" data-idx ="8">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox4_R" class="item_box">
+                                        <button type="button" id="iBox9" class="item_box" data-idx ="9">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox5_R" class="item_box">
+                                        <button type="button" id="iBox10" class="item_box" data-idx ="10">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox6_R" class="item_box">
+                                        <button type="button" id="iBox11" class="item_box" data-idx ="11">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
@@ -778,7 +786,6 @@
     </main>
 
     <!-- about us 모달창 -->
-    <!-- about us 모달창 -->
     <div id="fullscreenModal" class="modal">
         <div id="modal-line-left" class="modal-line-L"></div>
         <div id="modal-line-center" class="modal-line-C"></div>
@@ -822,7 +829,6 @@
             <p class="text_close">현재 창 클릭 시 창 닫힘</p>
         </div>
     </div>
-    <!-- about us 모달창 E -->
     <!-- about us 모달창 E -->
 
     <script src="./js/test.js"></script>
