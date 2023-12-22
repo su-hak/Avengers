@@ -1362,7 +1362,30 @@ function getValues() {
 
 // left_BA_button 클릭 이벤트 처리
 const leftBAButton = document.getElementById('left_BA_button');
+const skillButtons = [
+    document.getElementById('skill1'),
+    document.getElementById('skill2'),
+    document.getElementById('skill3'),
+    document.getElementById('skill4')
+];
+
+for (let i = 0; i < skillButtons.length; i++) {
+    const button = skillButtons[i];
+
+    button.addEventListener('click', function() {
+        const values = getValues();
+        var imgElement = document.querySelector('.portrait');
+        var src = imgElement.getAttribute('src');
+        var championName = src.split('/').pop().split('.')[0];
+
+        console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
+    });
+}
 leftBAButton.addEventListener('click', function() {
     const values = getValues();
-    console.log(values); // 배열 출력 또는 원하는 작업 수행
+    var imgElement = document.querySelector('.portrait');
+    var src = imgElement.getAttribute('src');
+    var championName = src.split('/').pop().split('.')[0];
+
+    console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
 });
