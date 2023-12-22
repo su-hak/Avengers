@@ -361,15 +361,20 @@
                     <li class="left_panel_ul_main_R">
                         <ul>
                             <li>
+                                 <!-- 아이템 선택 전체창 -->
                                 <ul class="item_pan dropright" id="plusItem">
+                                     <!-- 아이템 목록 전체창 -->
                                     <div class="dropdown-menu dropdown-multicol" id="left-item-filter-options"
                                          aria-labelledby="dropdownMenuButton"
                                          style="display: none;">
+                                          <!-- 아이템 검색창 -->
                                         <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
-                                        <div class="row mx-auto" id="item-list" class="item-list-css">
+                                         <!-- 아이템 목록창 -->
+                                        <div class="row mx-auto" id="item-list">
                                             <button type="button" class="itemRemoveBtn" id="emptyBtn" onclick="deleteItem()">delete</button>
                                         </div>
                                     </div>
+                                    <!-- 아이템 선택 개별창 -->
                                     <li>
                                         <button type="button" id="iBox0" class="item_box" data-idx ="0">
                                             <iconify-icon  icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
@@ -566,7 +571,7 @@
                                     <!-- 오른쪽 챔피언 박스 -->
                                     <div class="">
                                         <div class="btn btn-red mt-1" type="button" id="right-champion-btn" data-toggle="">
-                                            <img class="portrait img-fluid mx-auto right-champion-img" src="img/dummy.png" name="" id="right-champ-portrait"
+                                            <img class="portrait img-fluid mx-auto right-champion-img" src="./resource/img/dummy.png" name="" id="right-champ-portrait"
                                                  data-toggle="tooltip" data-placement="bottom" />
                                         </div>
                                         <!-- 오른쪽 챔피언 목록 -->

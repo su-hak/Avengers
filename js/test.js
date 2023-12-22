@@ -1022,22 +1022,32 @@ $.ajax({
 
         console.log(filterItems);
         // 아이템 필터링 End
+
+        // 아이템 설명창 띄우기
         function showDescription(data, index) {
             // 팝오버 내용 설정
-            var popoverContent = '<strong>' + data.name + '</strong><br>' + '<p>' + data.description + '</p>';
+            var itemName = data.name;
+            var description = data.description;
+        
+            description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
+            description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+            // console.log("description",description)
+        
+            // 문장 뒤에 <br> 추가
+            description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
         
             // 팝오버 생성 및 표시
             $('#item-img-' + index).popover({
-                content: popoverContent,
+                title: itemName,
+                content: description,
                 trigger: 'manual', // 수동으로 트리거
                 html: true,
                 placement: 'bottom',
-                container: 'body',
-                
+                container: 'body'
             }).popover('show');
-
-            console.log(data.description);
         }
+        // 아이템 설명창 띄우기 E
+
         
         filterItems.forEach((data, index) => {
             var itemBox = $("<div>").addClass("item_box_list");
@@ -1050,12 +1060,12 @@ $.ajax({
             });
             var itemName = $("<p>").addClass("item-name").text(data.name);
         
-            // 마우스 오버 이벤트에 팝오버 표시 함수 연결
+            // 마우스 오버 이벤트에 아이템 설명창 팝오버 표시 함수 연결
             itemImg.mouseover(function () {
                 showDescription(data, index);
             });
         
-            // 마우스 나가기 이벤트에 팝오버 숨기기
+            // 마우스 나가기 이벤트에  아이템 설명창 팝오버 숨기기
             itemImg.mouseout(function () {
                 $('#item-img-' + index).popover('hide');
             });
@@ -1064,7 +1074,7 @@ $.ajax({
             itemBox.append($("<br>"));
             itemBox.append(itemName);
             $("#item-list").append(itemBox);
-        });
+        });        
         
 
     },
