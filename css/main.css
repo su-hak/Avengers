@@ -727,12 +727,12 @@ body {
 
 
 .btn_green {
-    background: #52bf3a;
+    background: #3E4C8BFF;
     color: #fff;
 }
 .btn_green:hover {
-    background: #2dff49;
-    color: #009e15;
+    background: #7d86af;
+    color: #253ca2;
 }
 
 .item_save {
@@ -854,13 +854,13 @@ body {
 /* 스탯창 */
 .stat {
     width: 215px;
-    height: 255px;
+    height: 300px;
     background-color: rgb(255, 255, 255);
     font-size: 10px;
 }
 
 .stat td {
-    height: 30px;
+    height: 43px;
 }
 
 .stat_name {
@@ -868,10 +868,9 @@ body {
     /* background: #7cc0ff; */
     background: #323749;
     color: #ffffff;
-
 }
 
-.stat_value {
+.stat_value, .stat_value_R {
     width: 45px;
     /* background: #b1daff; */
     background: #525975;
@@ -913,22 +912,24 @@ body {
     width: 70px !important;
     height: 70px;
     background: #c7c7c7;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 2px solid #c9b92f;
-    text-wrap: balance;        
+    text-wrap: balance;
 }
 .item_box:hover {
     border: 2px solid #eeff00;
 }
 
 .item_box_list {
-    text-align: center;
-    width: 70px;
-    height: 90px;
-    /* border: 2px solid #c9b92f; */
-    margin: 0 5px;
+    width: 70px !important;
+    height: 70px;
+    background: #c7c7c7;
     margin-bottom: 10px;
-    text-align: center;
+    border: 2px solid #c9b92f;
+    text-wrap: balance;
+}
+.item_box_list:hover {
+    border: 2px solid #eeff00;
 }
 
 /* 아이템 삭제 버튼 */
@@ -937,9 +938,9 @@ body {
     height: 70px;
     font-size: 14px;
     border: 1px solid black;
-    text-align: center; 
-    color: hotpink; 
-    padding: 15px 10px; 
+    text-align: center;
+    color: hotpink;
+    padding: 15px 10px;
 }
 
 

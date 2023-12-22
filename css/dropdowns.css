@@ -57,6 +57,7 @@ input[type="number"] {
 }
 
 .btn-red {
+    padding-top: 7px;
     background-color : rgb(255, 56, 56);
     color : white;
     /* border : 0px solid black; */
@@ -106,6 +107,16 @@ input[type="number"] {
     width:100%;
     /* height: 30px;
     margin-right: 10px; */
+}
+
+/* 오른쪽 챔피언 이미지 */
+.right-champion-img {
+    width: 143px;
+    height: 143px;
+    object-fit: cover;
+    /* position: absolute; */
+    top: 10;
+    left: 0;
 }
 
 #champion-search {
@@ -181,7 +192,11 @@ input[type="number"] {
 } */
 #item-list {
     display: flex;
-    gap: .625rem;
+    gap: 1rem;
+}
+
+#item-list p {
+    line-height : 1.5;
 }
 
 .item-img {
@@ -192,7 +207,7 @@ input[type="number"] {
 .item-name {
     width: 68px;
     text-align: center;
-    text-wrap: balance;    
+    text-wrap: balance;
 }
 /* 아이템 마우스 오버 시 나오는 아이템 설명창 */
 .desBox {
@@ -262,8 +277,8 @@ input[type="number"] {
 }
 
 #left-item-filter-options {
-    position: absolute;    
-    max-height: 40em;
+    position: absolute;
+    max-height: 60em;
     width: 15em;
     margin: 2.5em 0 0 0;
     overflow-x: auto;
