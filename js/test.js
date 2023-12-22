@@ -1059,6 +1059,8 @@ function itemGoldUpdate() {
 $("#item-list").click(function (e) {
 
     console.log(itemGold);
+
+    // 선택된 템 제거버튼 클릭
     if (e.target.id === 'emptyBtn') {
         console.log("삭제 버튼 클릭하였습니다.");
 
@@ -1074,7 +1076,7 @@ $("#item-list").click(function (e) {
         itemGoldUpdate();
 
 
-
+    // 템 선택
     } else if (e.target.classList.contains('item-img')) {
         console.log(333,)
         console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
@@ -1133,20 +1135,21 @@ $("#plusItem").click(function (e){
     console.log("plusItem 클릭 !", e.type);
     if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
         callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
-        itemFilterControl();
+        // itemFilterControl();
 
-    }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+    }else if(/*e.target.tagName == 'ICONIFY-ICON' &&*/ e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
         callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
-        itemFilterControl();
 
-    }else if($(this).find('li img').length > 0 ) {
+
+    }/*else if($(this).find('li img').length > 0 ) {
         // callIdx = $(e.target).closest('.iBox').index();
         itemFilterControl();
         // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
     }else if(e.target.id === 'left-item-filter-options') {
         // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
         return;
-    }
+    }*/
+    itemFilterControl();
     console.log(e.target.tagName , e.target.classList[0]);
     console.log(callIdx,"callIdx")
 
