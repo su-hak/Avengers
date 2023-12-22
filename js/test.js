@@ -112,7 +112,6 @@ function setChampStats(id) {
             'mp' : dtch[0].stats.mp, // 마나
             'arPenL' : 0, // 방어구 관통력
             'spPenL' : 0, // 마법 관통력 (%)
-            'spPen2L' : 0, // 마법 관통력 (정수)
             'adPenL' : 0, // 물리 관통력
             'vampL' : 0, // 모든 피해 흡혈
             'coolTimeL' : 0 // 스킬 가속
@@ -503,21 +502,21 @@ function setChampStats(id) {
                 }
             }
         }
-        // test.updateSpPenStats = function(){ // 물관
-        //     // let itemAp = 0;
-        //     let a = 0;
-        //     // var result = test.sendItemStats();
-        //     var itemSppen = items.spPen;
-        //     a = a+itemAdpen;
-        //     statValues['adPenL'] = a;
-        //     for (const id in statValues) {
-        //         const element = document.getElementById(id);
-        //         let value = statValues[id];
-        //         if (element) {
-        //             element.nextElementSibling.textContent = value;
-        //         }
-        //     }
-        // }
+        test.updateSpPenStats = function() {
+            let a = 0;
+            var itemSpPen = items.spPen;
+            var itemSpPen2 = items.spPen2;
+            a = a + itemSpPen;
+            statValues['spPenL'] = a + '% (' + items.spPen2 + ')';
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+
 
         function setRealHp(){
             // console.log("hp :::",statValues['hp']);
@@ -563,6 +562,7 @@ function setChampStats(id) {
         test.updateAdPenStats();
         test.updateNewOmniVampStats();
         test.updateCooltimeStats();
+        test.updateSpPenStats();
 
 // 레벨 변경 시 업데이트
         document.getElementById('champ_lv').onchange = function() {
@@ -584,6 +584,7 @@ function setChampStats(id) {
             test.updateAdPenStats();
             test.updateNewOmniVampStats();
             test.updateCooltimeStats();
+            test.updateSpPenStats();
         };
     });
 }
@@ -1122,6 +1123,7 @@ function deleteItem(){
     test.updateAdPenStats();
     test.updateNewOmniVampStats();
     test.updateCooltimeStats();
+    test.updateSpPenStats();
 }
 
 
@@ -1249,11 +1251,13 @@ function itemStatCalc() {
                         // }
                         if (statValue.includes('%')){
                             items.spPen += parseInt(statValue);
-                            $("#spPenL").next().text( items.spPen +'%' +"("+ items.spPen2+")");
+                            // $("#spPenL").next().text( items.spPen +'%' +"("+ items.spPen2+")");
+                            test.updateSpPenStats();
                             break;
                         }else {
                             items.spPen2 += parseInt(statValue);
-                            $("#spPenL").next().text(items.spPen + '%' +"("+ items.spPen2+")");
+                            // $("#spPenL").next().text(items.spPen + '%' +"("+ items.spPen2+")");
+                            test.updateSpPenStats();
                             break;
                         }
                     case "치명타 확률":
