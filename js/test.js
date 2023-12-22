@@ -1392,6 +1392,22 @@ function getValues() {
 
     return values;
 }
+function getDummyValues(){
+    const dummyValues = [];
+    const statValueElements = document.getElementsByClassName('stat_value_R');
+    const rightRscValue = document.getElementById('right-rsc-value').innerHTML;
+    const rightHpValue = document.getElementById('right-hp-value').innerHTML;
+
+    for (let i = 0; i < statValueElements.length; i++) {
+        const value = statValueElements[i].innerHTML;
+        dummyValues.push(value);
+    }
+
+    dummyValues.push(rightRscValue);
+    dummyValues.push(rightHpValue);
+
+    return dummyValues;
+}
 
 // left_BA_button 클릭 이벤트 처리
 const leftBAButton = document.getElementById('left_BA_button');
@@ -1407,18 +1423,20 @@ for (let i = 0; i < skillButtons.length; i++) {
 
     button.addEventListener('click', function() {
         const values = getValues();
+        const dummyValues = getDummyValues();
         var imgElement = document.querySelector('.portrait');
         var src = imgElement.getAttribute('src');
         var championName = src.split('/').pop().split('.')[0];
 
-        console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
+        console.log(championName, values, dummyValues); // 배열 출력 또는 원하는 작업 수행
     });
 }
 leftBAButton.addEventListener('click', function() {
     const values = getValues();
+    const dummyValues = getDummyValues();
     var imgElement = document.querySelector('.portrait');
     var src = imgElement.getAttribute('src');
     var championName = src.split('/').pop().split('.')[0];
 
-    console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
+    console.log(championName, values, dummyValues); // 배열 출력 또는 원하는 작업 수행
 });
