@@ -1010,7 +1010,7 @@ $.ajax({
         // 아이템 필터링 start
         filterItems = allItems.filter(function(allItems){
             return !allItems.requiredChampion // 챔피언전용템제외
-                // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+                 // && allItems.description.includes('rarityMythic') // 신화급 아이템만 출력
                 && allItems.inStore!==false // 스토어: false인 item 제외
                 && allItems.maps["11"]===true // 소환사의 협곡 맵("11")만 출력
                 && !allItems.tags.includes("Jungle")
