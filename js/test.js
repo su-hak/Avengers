@@ -825,7 +825,7 @@ function searchChampion() {
 }
 function searchItem() {
     var searchText = $("#left-item-search").val().toLowerCase();
-    var itemBoxes = $(".item_box_list");
+    var itemBoxes = $(".item_box");
 
     itemBoxes.each(function () {
         var itemBox = $(this);
@@ -1342,5 +1342,28 @@ leftBAButton.addEventListener('click', function() {
     const values = getValues();
     console.log(values); // 배열 출력 또는 원하는 작업 수행
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 재영씨 데미지 코드 시작
 
 
