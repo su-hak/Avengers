@@ -825,7 +825,7 @@ function searchChampion() {
 }
 function searchItem() {
     var searchText = $("#left-item-search").val().toLowerCase();
-    var itemBoxes = $(".item_box");
+    var itemBoxes = $(".item_box_list");
 
     itemBoxes.each(function () {
         var itemBox = $(this);
@@ -987,7 +987,7 @@ $.ajax({
         // 아이템 필터링 End
 
         filterItems.forEach((data, index) =>{
-            var itemBox = $("<div>").addClass("item_box");
+            var itemBox = $("<div>").addClass("item_box_list");
             var itemImg = $("<img>", {
                 src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
                 alt: data.name + " 이미지",
@@ -1019,55 +1019,61 @@ function checkSavedItemsNull() {
     return true; // 모든 값이 null이면 true 반환
 }
 
+// 템 제거 시 스텟 초기화
+function isSavedItemsDefault() {
+    var isSavedItemsNull = checkSavedItemsNull();
+
+
+    if(isSavedItemsNull == true){
+        items.adValue= 0;
+        items.apValue= 0;
+        items.armor= 0;
+        items.spellBlock= 0;
+        items.attackSpeed= 0;
+        items.moveSpeed= 0;
+        items.newArPen= 0;
+        items.adPen= 0;
+        items.spPen= 0;
+        items.spPen2= 0;
+        items.crit= 0;
+        items.newOmniVamp= 0;
+        items.cooltime= 0;
+        items.hpRegen= 0;
+        items.mpRegen= 0;
+        items.fullHp= 0;
+        items.fullMp= 0;
+        deleteItem();
+    }
+}
+
+function itemGoldUpdate() {
+    var totalGold = 0;
+    for(var i=0; i<itemGold.length; i++){
+        totalGold += itemGold[i];
+        $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
+        console.log("for문 gold :: ", itemGold[i]);
+    }
+}
 
 // 아이템 선택
 $("#item-list").click(function (e) {
-    var totalGold = 0;
-    // var callIdx = parseInt(e.target.getAttribute("data-idx"));
-    // console.log(e.target);
+
     console.log(itemGold);
     if (e.target.id === 'emptyBtn') {
         console.log("삭제 버튼 클릭하였습니다.");
-        // callIdx = $(e.target).closest('#iBox').index();
-        // savedItems.splice(callIdx, 1);
-        // delete savedItems[callIdx];
-        // savedItems[callIdx] = "description 0";
+
         delete savedItems[callIdx];
         itemGold[callIdx] = 0;
-        console.log("savedItems :: ",savedItems);
-        var isSavedItemsNull = checkSavedItemsNull();
 
-        // 템 제거 시 스텟 초기화
-        if(isSavedItemsNull == true){
-            items.adValue= 0;
-            items.apValue= 0;
-            items.armor= 0;
-            items.spellBlock= 0;
-            items.attackSpeed= 0;
-            items.moveSpeed= 0;
-            items.newArPen= 0;
-            items.adPen= 0;
-            items.spPen= 0;
-            items.spPen2= 0;
-            items.crit= 0;
-            items.newOmniVamp= 0;
-            items.cooltime= 0;
-            items.hpRegen= 0;
-            items.mpRegen= 0;
-            items.fullHp= 0;
-            items.fullMp= 0;
-            deleteItem();
-        }
+        isSavedItemsDefault();
         itemStatCalc();
         console.log("아이템 잔여 확인 :: ",savedItems);
         $("#iBox" + callIdx).css("background-image", "none");
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
         console.log("저장된 스탯::: ", items);
-        for(var i=0; i<itemGold.length; i++){
-            totalGold += itemGold[i];
-            $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
-            console.log("for문 gold :: ", itemGold[i]);
-        }
+        itemGoldUpdate();
+
+
 
     } else if (e.target.classList.contains('item-img')) {
         console.log(333,)
@@ -1084,16 +1090,16 @@ $("#item-list").click(function (e) {
             'background-position': 'center',
             'background-size': 'contain'
         });
-
         savedItems[callIdx] = itemData;
         itemGold[callIdx] = savedItems[callIdx].gold.total; // 아이템의 total값을 누산
+        console.log("items ::::", items);
+        const searchInput = document.getElementById('left-item-search');
+        searchInput.value = '';
+        searchItem();
         itemStatCalc(); // 아이템 스텟 값 함수 호출
+        deleteItem();
         // console.log("savedItems", savedItems);
-        for(var i=0; i<itemGold.length; i++){
-            totalGold += itemGold[i];
-            $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
-            console.log("for문 gold :: ", itemGold[i]);
-        }
+        itemGoldUpdate();
     }
 
 });
@@ -1294,12 +1300,12 @@ $("#item-list").mouseover(function(e) {
 
         description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
         description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
-        console.log("description",description)
+        // console.log("description",description)
 
         // 문장 뒤에 <br> 추가
         description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
 
-        var itemBox = $(e.target).closest('.item_box');
+        var itemBox = $(e.target).closest('.item_box_list');
         itemBox.append($("<div>").addClass("desBox").html(description));
 
 
@@ -1311,7 +1317,7 @@ $("#item-list").mouseover(function(e) {
 
 // 마우스 아웃 시 아이템 정보 제거
 $("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
-    var itemBox = $(e.target).closest('.item_box');
+    var itemBox = $(e.target).closest('.item_box_list');
     itemBox.find(".desBox").remove(); // itemName과 description을 삭제합니다.
 });
 
@@ -1342,28 +1348,3 @@ leftBAButton.addEventListener('click', function() {
     const values = getValues();
     console.log(values); // 배열 출력 또는 원하는 작업 수행
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 재영씨 데미지 코드 시작
-
-
