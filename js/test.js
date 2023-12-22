@@ -1012,7 +1012,11 @@ $.ajax({
             return !allItems.requiredChampion // 챔피언전용템제외
                 // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
                 && allItems.inStore!==false // 스토어: false인 item 제외
-                && allItems.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
+                && allItems.maps["11"]===true // 소환사의 협곡 맵("11")만 출력
+                && !allItems.tags.includes("Jungle")
+                && !allItems.tags.includes("Consumable")
+                && !allItems.description.includes('퀘스트')
+                && !allItems.description.includes('장신구');
         });
 
 
