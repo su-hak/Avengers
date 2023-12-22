@@ -112,7 +112,6 @@ function setChampStats(id) {
             'mp' : dtch[0].stats.mp, // 마나
             'arPenL' : 0, // 방어구 관통력
             'spPenL' : 0, // 마법 관통력 (%)
-            'spPen2L' : 0, // 마법 관통력 (정수)
             'adPenL' : 0, // 물리 관통력
             'vampL' : 0, // 모든 피해 흡혈
             'coolTimeL' : 0 // 스킬 가속
@@ -503,21 +502,21 @@ function setChampStats(id) {
                 }
             }
         }
-        // test.updateSpPenStats = function(){ // 물관
-        //     // let itemAp = 0;
-        //     let a = 0;
-        //     // var result = test.sendItemStats();
-        //     var itemSppen = items.spPen;
-        //     a = a+itemAdpen;
-        //     statValues['adPenL'] = a;
-        //     for (const id in statValues) {
-        //         const element = document.getElementById(id);
-        //         let value = statValues[id];
-        //         if (element) {
-        //             element.nextElementSibling.textContent = value;
-        //         }
-        //     }
-        // }
+        test.updateSpPenStats = function() {
+            let a = 0;
+            var itemSpPen = items.spPen;
+            var itemSpPen2 = items.spPen2;
+            a = a + itemSpPen;
+            statValues['spPenL'] = a + '% (' + items.spPen2 + ')';
+            for (const id in statValues) {
+                const element = document.getElementById(id);
+                let value = statValues[id];
+                if (element) {
+                    element.nextElementSibling.textContent = value;
+                }
+            }
+        }
+
 
         function setRealHp(){
             // console.log("hp :::",statValues['hp']);
@@ -563,6 +562,7 @@ function setChampStats(id) {
         test.updateAdPenStats();
         test.updateNewOmniVampStats();
         test.updateCooltimeStats();
+        test.updateSpPenStats();
 
 // 레벨 변경 시 업데이트
         document.getElementById('champ_lv').onchange = function() {
@@ -584,6 +584,7 @@ function setChampStats(id) {
             test.updateAdPenStats();
             test.updateNewOmniVampStats();
             test.updateCooltimeStats();
+            test.updateSpPenStats();
         };
     });
 }
@@ -1059,8 +1060,6 @@ function itemGoldUpdate() {
 $("#item-list").click(function (e) {
 
     console.log(itemGold);
-
-    // 선택된 템 제거버튼 클릭
     if (e.target.id === 'emptyBtn') {
         console.log("삭제 버튼 클릭하였습니다.");
 
@@ -1076,7 +1075,7 @@ $("#item-list").click(function (e) {
         itemGoldUpdate();
 
 
-    // 템 선택
+
     } else if (e.target.classList.contains('item-img')) {
         console.log(333,)
         console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
@@ -1092,13 +1091,14 @@ $("#item-list").click(function (e) {
             'background-position': 'center',
             'background-size': 'contain'
         });
-
         savedItems[callIdx] = itemData;
         itemGold[callIdx] = savedItems[callIdx].gold.total; // 아이템의 total값을 누산
+        console.log("items ::::", items);
         const searchInput = document.getElementById('left-item-search');
         searchInput.value = '';
         searchItem();
         itemStatCalc(); // 아이템 스텟 값 함수 호출
+        deleteItem();
         // console.log("savedItems", savedItems);
         itemGoldUpdate();
     }
@@ -1123,6 +1123,7 @@ function deleteItem(){
     test.updateAdPenStats();
     test.updateNewOmniVampStats();
     test.updateCooltimeStats();
+    test.updateSpPenStats();
 }
 
 
@@ -1135,21 +1136,20 @@ $("#plusItem").click(function (e){
     console.log("plusItem 클릭 !", e.type);
     if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
         callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
-        // itemFilterControl();
+        itemFilterControl();
 
-    }else if(/*e.target.tagName == 'ICONIFY-ICON' &&*/ e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+    }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
         callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControl();
 
-
-    }/*else if($(this).find('li img').length > 0 ) {
+    }else if($(this).find('li img').length > 0 ) {
         // callIdx = $(e.target).closest('.iBox').index();
         itemFilterControl();
         // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
     }else if(e.target.id === 'left-item-filter-options') {
         // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
         return;
-    }*/
-    itemFilterControl();
+    }
     console.log(e.target.tagName , e.target.classList[0]);
     console.log(callIdx,"callIdx")
 
@@ -1251,11 +1251,13 @@ function itemStatCalc() {
                         // }
                         if (statValue.includes('%')){
                             items.spPen += parseInt(statValue);
-                            $("#spPenL").next().text( items.spPen +'%' +"("+ items.spPen2+")");
+                            // $("#spPenL").next().text( items.spPen +'%' +"("+ items.spPen2+")");
+                            test.updateSpPenStats();
                             break;
                         }else {
                             items.spPen2 += parseInt(statValue);
-                            $("#spPenL").next().text(items.spPen + '%' +"("+ items.spPen2+")");
+                            // $("#spPenL").next().text(items.spPen + '%' +"("+ items.spPen2+")");
+                            test.updateSpPenStats();
                             break;
                         }
                     case "치명타 확률":
@@ -1302,7 +1304,7 @@ $("#item-list").mouseover(function(e) {
 
         description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
         description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
-        console.log("description",description)
+        // console.log("description",description)
 
         // 문장 뒤에 <br> 추가
         description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
