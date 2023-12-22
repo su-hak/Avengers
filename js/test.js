@@ -1555,7 +1555,7 @@ $("#item-listR").click(function (e) {
         var itemDataR = filteritemsR[e.target.getAttribute("value")];
         var imgSrcR = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filteritemsR[e.target.getAttribute("value")].image.full;
 
-        // $('#iBox' + callIdxR).empty();
+        $('#iBox' + callIdxR).empty();
         $('#iBox' + callIdxR).css({
             'background-image': 'url(' + imgSrcR + ')',
             'background-repeat': 'no-repeat',
