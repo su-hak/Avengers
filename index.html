@@ -335,24 +335,24 @@
                                     <td class="stat_name" id="mpRegenL">기본 마나 재생</td>
                                     <td class="stat_value">0</td>
                                 </tr>
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp1L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp2L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp3L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp4L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp5L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp6L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp1L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp2L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp3L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp4L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp5L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp6L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                     </li>
@@ -361,21 +361,20 @@
                     <li class="left_panel_ul_main_R">
                         <ul>
                             <li>
+                                 <!-- 아이템 선택 전체창 -->
                                 <ul class="item_pan dropright" id="plusItem">
+                                     <!-- 아이템 목록 전체창 -->
                                     <div class="dropdown-menu dropdown-multicol" id="left-item-filter-options"
                                          aria-labelledby="dropdownMenuButton"
                                          style="display: none;">
+                                          <!-- 아이템 검색창 -->
                                         <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
-                                        <div class="row mx-auto" id="item-list" class="item-list-css">
+                                         <!-- 아이템 목록창 -->
+                                        <div class="row mx-auto" id="item-list">
                                             <button type="button" class="itemRemoveBtn" id="emptyBtn" onclick="deleteItem()">delete</button>
-                                            <div id="rarityAll">모든 아이템</div></br>
-                                            <div id="rarityMythic">신화급 아이템</div></br>
-                                            <div id="rarityLegendary">전설급 아이템</div>
-                                            <div id="rarityEpic">서사급 아이템</div>
-                                            <div id="rarityBoots">신발 아이템</div>
-                                            <div id="rarityNormal">기본 아이템</div>
                                         </div>
                                     </div>
+                                    <!-- 아이템 선택 개별창 -->
                                     <li>
                                         <button type="button" id="iBox0" class="item_box" data-idx ="0">
                                             <iconify-icon  icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
@@ -465,53 +464,43 @@
                 <!-- 게이지 박스 E -->
 
                 <ul class="ul_main ds_flex float-right">
-
-
                     <!-- 아이템 & 로그 창 -->
                     <li class="right_panel_ul_main_L">
                         <ul>
                             <li>
-                                <ul class="item_pan dropleft" id="plusItemR">
-                                    <div class="dropdown-menu dropdown-multicol" id="right-item-filter-options"
-                                         aria-labelledby="dropdownMenuButton"
-                                         style="display: none;">
-                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="right-item-search" autocomplete="off">
-                                        <div class="row mx-auto" id="item-listR" class="item-list-css">
-                                            <button type="button" class="itemRemoveBtn" id="emptyBtnR" onclick="deleteItemR()">delete</button>
-                                        </div>
-                                    </div>
+                                <ul class="item_pan">
                                     <li>
-                                        <button type="button" id="iBox6" class="item_box" data-idx ="6">
+                                        <button type="button" id="iBox1_R" class="item_box">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox7" class="item_box" data-idx ="7">
+                                        <button type="button" id="iBox2_R" class="item_box">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox8" class="item_box" data-idx ="8">
+                                        <button type="button" id="iBox3_R" class="item_box">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox9" class="item_box" data-idx ="9">
+                                        <button type="button" id="iBox4_R" class="item_box">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox10" class="item_box" data-idx ="10">
+                                        <button type="button" id="iBox5_R" class="item_box">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox11" class="item_box" data-idx ="11">
+                                        <button type="button" id="iBox6_R" class="item_box">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1" width="50"
                                                           height="50"></iconify-icon>
                                         </button>
@@ -582,7 +571,7 @@
                                     <!-- 오른쪽 챔피언 박스 -->
                                     <div class="">
                                         <div class="btn btn-red mt-1" type="button" id="right-champion-btn" data-toggle="">
-                                            <img class="portrait img-fluid mx-auto right-champion-img" src="img/dummy.png" name="" id="right-champ-portrait"
+                                            <img class="portrait img-fluid mx-auto right-champion-img" src="./resource/img/dummy.png" name="" id="right-champ-portrait"
                                                  data-toggle="tooltip" data-placement="bottom" />
                                         </div>
                                         <!-- 오른쪽 챔피언 목록 -->
@@ -620,24 +609,24 @@
                                 <!-- 챔피언 레벨표시 -->
                                 <select name="LV" id="right_champ_lv" class="chmap_Lv" style="width: 100%; height: 100%">
                                     <option value="1">default</option>
-                                    <!--                                    <option value="1">01</option>-->
-                                    <!--                                    <option value="2">02</option>-->
-                                    <!--                                    <option value="3">03</option>-->
-                                    <!--                                    <option value="4">04</option>-->
-                                    <!--                                    <option value="5">05</option>-->
-                                    <!--                                    <option value="6">06</option>-->
-                                    <!--                                    <option value="7">07</option>-->
-                                    <!--                                    <option value="8">08</option>-->
-                                    <!--                                    <option value="9">09</option>-->
-                                    <!--                                    <option value="10">10</option>-->
-                                    <!--                                    <option value="11">11</option>-->
-                                    <!--                                    <option value="12">12</option>-->
-                                    <!--                                    <option value="13">13</option>-->
-                                    <!--                                    <option value="14">14</option>-->
-                                    <!--                                    <option value="15">15</option>-->
-                                    <!--                                    <option value="16">16</option>-->
-                                    <!--                                    <option value="17">17</option>-->
-                                    <!--                                    <option value="18">18</option>-->
+<!--                                    <option value="1">01</option>-->
+<!--                                    <option value="2">02</option>-->
+<!--                                    <option value="3">03</option>-->
+<!--                                    <option value="4">04</option>-->
+<!--                                    <option value="5">05</option>-->
+<!--                                    <option value="6">06</option>-->
+<!--                                    <option value="7">07</option>-->
+<!--                                    <option value="8">08</option>-->
+<!--                                    <option value="9">09</option>-->
+<!--                                    <option value="10">10</option>-->
+<!--                                    <option value="11">11</option>-->
+<!--                                    <option value="12">12</option>-->
+<!--                                    <option value="13">13</option>-->
+<!--                                    <option value="14">14</option>-->
+<!--                                    <option value="15">15</option>-->
+<!--                                    <option value="16">16</option>-->
+<!--                                    <option value="17">17</option>-->
+<!--                                    <option value="18">18</option>-->
                                 </select>
                             </li>
                             <li>
@@ -761,24 +750,24 @@
                                     <td class="stat_name" id="mpRegenR">기본 마나 재생</td>
                                     <td class="stat_value_R">0</td>
                                 </tr>
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp1R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp2R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp3R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp4R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp5R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp6R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp1R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp2R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp3R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp4R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp5R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp6R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                     </li>
@@ -788,6 +777,7 @@
         </section>
     </main>
 
+    <!-- about us 모달창 -->
     <!-- about us 모달창 -->
     <div id="fullscreenModal" class="modal">
         <div id="modal-line-left" class="modal-line-L"></div>
@@ -832,6 +822,7 @@
             <p class="text_close">현재 창 클릭 시 창 닫힘</p>
         </div>
     </div>
+    <!-- about us 모달창 E -->
     <!-- about us 모달창 E -->
 
     <script src="./js/test.js"></script>
