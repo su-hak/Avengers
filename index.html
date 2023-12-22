@@ -12,9 +12,6 @@
 
     <link rel="stylesheet" type="text/css" href="css/dropdowns.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/item.css">
-
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -68,15 +65,15 @@
                 <iconify-icon icon="vaadin:close" style="color: white" width="30"></iconify-icon>
             </button>
             <ul>
-              <li><a href="#">공지사항</a></li>
-              <li><a href="#">딜미터기</a></li>
-              <li><a href="#">커뮤니티</a></li>
-              <li>
-                <button id="loginBtn" class="btn mobileLoginBtn" type="button" value="로그인">로그인</button>
-              </li>
-              <li>
-                <button id="joinBtn" class="btn mobileJoinBtn" type="button" value="회원가입">회원가입</button>
-              </li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">딜미터기</a></li>
+                <li><a href="#">커뮤니티</a></li>
+                <li>
+                    <button id="loginBtn" class="btn mobileLoginBtn" type="button" value="로그인">로그인</button>
+                </li>
+                <li>
+                    <button id="joinBtn" class="btn mobileJoinBtn" type="button" value="회원가입">회원가입</button>
+                </li>
             </ul>
         </div>
         <!-- 작은 화면용 팝업창 E-->
@@ -139,6 +136,10 @@
                                     <!-- 왼쪽 아이템 저장버튼 -->
                                     <li>
                                         <button id="left_save_btn1" type="button" class="saveItemBtn btn_green">S1</button>
+                                        <div id="left_save_box1" style="position: absolute; display: none; border: 1px dotted black">
+                                            <button type="button" class="saveHere" >저장하기</button></br>
+                                            <button type="button" class="loadThere" >불러오기</button>
+                                        </div>
                                     </li>
                                     <li>
                                         <button id="left_save_btn2" type="button" class="saveItemBtn btn_green">S2</button>
@@ -334,24 +335,24 @@
                                     <td class="stat_name" id="mpRegenL">기본 마나 재생</td>
                                     <td class="stat_value">0</td>
                                 </tr>
-                                <tr>
-                                    <td class="stat_name" id="temp1L"></td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="temp2L"></td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="temp3L"></td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="temp4L"></td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="temp5L"></td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="temp6L"></td>
-                                    <td class="stat_value">0</td>
-                                </tr>
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp1L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp2L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp3L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp4L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp5L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp6L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                     </li>
@@ -360,43 +361,42 @@
                     <li class="left_panel_ul_main_R">
                         <ul>
                             <li>
-                                <ul id="item_box" class="item_pan dropright">
-                                    <div class="dropdown-menu dropdown-multicol show" id="left-item-filter-options"
-                                             aria-labelledby="dropdownMenuButton"
-                                             style="display: none;">
-                                            <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
-                                            <div class="row mx-auto" id="item-list">
-                                                <!-- JavaScript로 후처리될 요소를 동적으로 생성 -->
-                                            </div>
+                                <ul class="item_pan dropright" id="plusItem">
+                                    <div class="dropdown-menu dropdown-multicol" id="left-item-filter-options"
+                                         aria-labelledby="dropdownMenuButton"
+                                         style="display: none;">
+                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
+                                        <div class="row mx-auto" id="item-list" class="item-list-css">
+                                            <button type="button" class="itemRemoveBtn" id="emptyBtn" onclick="deleteItem()">delete</button>
+                                        </div>
                                     </div>
                                     <li>
-                                        <button type="button" id="iBox1" class="item_box">
+                                        <button type="button" id="iBox0" class="item_box" data-idx ="0">
+                                            <iconify-icon  icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" id="iBox1" class="item_box" data-idx ="1">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox2" class="item_box">
-                                            <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
-                                        </button>
-
-                                    </li>
-                                    <li>
-                                        <button type="button" id="iBox3" class="item_box">
+                                        <button type="button" id="iBox2" class="item_box" data-idx ="2">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox4" class="item_box">
+                                        <button type="button" id="iBox3" class="item_box" data-idx ="3">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox5" class="item_box">
+                                        <button type="button" id="iBox4" class="item_box" data-idx ="4">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" id="iBox6" class="item_box">
+                                        <button type="button" id="iBox5" class="item_box" data-idx ="5">
                                             <iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
                                         </button>
                                     </li>
@@ -442,7 +442,7 @@
                             </div>
                             <!-- 오른쪽 HP 숫자-->
                             <div id="right-hp-num" class="centered-title">
-                                <span id="right-hp-value">0</span> / <span id="right-hp-total">0</span>
+                                <span id="right-hp-value">0</span> / <span id="right-hp-total">1000</span>
                             </div>
                         </div>
                         <div class="resource-box-R rounded ds_flex ds_flex_R float-right">
@@ -564,11 +564,11 @@
                             <li>
                                 <div class="">
                                     <!-- 오른쪽 챔피언 박스 -->
-                                    <div class="dropright">
-                                        <button class="btn btn-red mt-1" type="button" id="right-champion-btn" data-toggle="dropdown">
-                                            <img class="portrait img-fluid mx-auto champion-img" src="" name="" id="right-champ-portrait"
+                                    <div class="">
+                                        <div class="btn btn-red mt-1" type="button" id="right-champion-btn" data-toggle="">
+                                            <img class="portrait img-fluid mx-auto right-champion-img" src="img/dummy.png" name="" id="right-champ-portrait"
                                                  data-toggle="tooltip" data-placement="bottom" />
-                                        </button>
+                                        </div>
                                         <!-- 오른쪽 챔피언 목록 -->
                                         <div class="dropdown-menu" id="right-champion-dropdown">
                                             <!-- 오른쪽 챔피언 목록 속 검색창 -->
@@ -603,24 +603,25 @@
                             <li class="LV_Show">
                                 <!-- 챔피언 레벨표시 -->
                                 <select name="LV" id="right_champ_lv" class="chmap_Lv" style="width: 100%; height: 100%">
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
+                                    <option value="1">default</option>
+<!--                                    <option value="1">01</option>-->
+<!--                                    <option value="2">02</option>-->
+<!--                                    <option value="3">03</option>-->
+<!--                                    <option value="4">04</option>-->
+<!--                                    <option value="5">05</option>-->
+<!--                                    <option value="6">06</option>-->
+<!--                                    <option value="7">07</option>-->
+<!--                                    <option value="8">08</option>-->
+<!--                                    <option value="9">09</option>-->
+<!--                                    <option value="10">10</option>-->
+<!--                                    <option value="11">11</option>-->
+<!--                                    <option value="12">12</option>-->
+<!--                                    <option value="13">13</option>-->
+<!--                                    <option value="14">14</option>-->
+<!--                                    <option value="15">15</option>-->
+<!--                                    <option value="16">16</option>-->
+<!--                                    <option value="17">17</option>-->
+<!--                                    <option value="18">18</option>-->
                                 </select>
                             </li>
                             <li>
@@ -704,64 +705,64 @@
                             <table style="text-align: center;">
                                 <tr>
                                     <td class="stat_name" id="attackDamageR">공격력</td>
-                                    <td class="stat_value" >0</td>
+                                    <td class="stat_value_R" >0</td>
                                     <td class="stat_name" id="abilityPowerR">주문력</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name" id="armorR">방어력</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">30</td>
                                     <td class="stat_name" id="spellBlockR">마법 저항력</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">30</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name" id="attackSpeedR">공격 속도</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                     <td class="stat_name" id="moveSpeedR">이동 속도</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name" id="arPenR">방어구 관통력</td>
-                                    <td class="stat_value">0%</td>
+                                    <td class="stat_value_R">0%</td>
                                     <td class="stat_name" id="spPenR">마법 관통력</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name" id="adPenR">물리 관통력</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                     <td class="stat_name" id="vampR">모든 피해 흡혈</td>
-                                    <td class="stat_value">0%</td>
+                                    <td class="stat_value_R">0%</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name" id="coolTimeR">스킬 가속</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                     <td class="stat_name" id="critR">치명타 확률</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name" id="hpRegenR">기본 체력 재생</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                     <td class="stat_name" id="mpRegenR">기본 마나 재생</td>
-                                    <td class="stat_value">0</td>
+                                    <td class="stat_value_R">0</td>
                                 </tr>
-                                <tr>
-                                    <td class="stat_name" id="temp1R"></td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="temp2R"></td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="temp3R"></td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="temp4R"></td>
-                                    <td class="stat_value">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat_name" id="temp5R"></td>
-                                    <td class="stat_value">0</td>
-                                    <td class="stat_name" id="temp6R"></td>
-                                    <td class="stat_value">0</td>
-                                </tr>
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp1R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp2R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp3R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp4R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp5R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp6R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                     </li>
@@ -772,11 +773,12 @@
     </main>
 
     <!-- about us 모달창 -->
+    <!-- about us 모달창 -->
     <div id="fullscreenModal" class="modal">
         <div id="modal-line-left" class="modal-line-L"></div>
         <div id="modal-line-center" class="modal-line-C"></div>
         <div id="modal-line-right" class="modal-line-R"></div>
-        <div>                        
+        <div>
             <div id="modal_contents" class="modal_contents">
                 <div class="modal_content">
                     <h3 class="notice-title">calclol은?</h3><br/>
@@ -790,7 +792,7 @@
                     <h3 class="notice-title">기능설명서</h3><br/>
                     <p>&nbsp;&nbsp;
                         모든 계산은 낙관적입니다. 간단히 말해서, 모든 능력은 모든 효과를 최대 값으로 적중하고 발동시키는 것으로 가정하고 공격 및 아이템 능력 범위는 무시되며 능력은 시간을 가장 효율적으로 사용한다는 의미입니다.<br/>
-    
+
                         아이템은 이름, 희귀도, 특정 태그로 검색할 수 있습니다.<br/>
                         모든 항목에는 통계가 구현되어 있어야 합니다.<br/>
                         건강 재생은 적절하게 설명되어야 합니다.<br/>
@@ -810,19 +812,18 @@
                         챔피언 능력을 사용하려면 챔피언 능력 아이콘을 클릭하세요(대부분의 능력은 구현되지 않음).<br/>
                         동작(기본 공격 또는 능력 사용)을 제거하려면 동작 대기열에서 원하는 동작을 클릭하여 제거하세요. 또는 "작업 대기열 재설정" 버튼을 사용하여 깨끗한 상태를 제공할 수 있습니다.<br/>
                     </p>
-                </div>            
-            </div>    
-            <p class="text_close">현재 창 클릭 시 창 닫힘</p>                         
+                </div>
+            </div>
+            <p class="text_close">현재 창 클릭 시 창 닫힘</p>
         </div>
-              
     </div>
+    <!-- about us 모달창 E -->
     <!-- about us 모달창 E -->
 
     <script src="./js/test.js"></script>
     <script src="./js/decimal.js"></script>
     <script src="./js/web.js"></script> <!-- 원래 따로 만들었는데 재홍이가 test.js 에 붙여넣음 -->
-    <script src="./js/testtest.js"></script>
-<!--    <script> let test ={}; </script>-->
+    <!--    <script> let test ={}; </script>-->
     <!-- 메인영역 E -->
 
     <!-- 푸터영역 -->

@@ -57,6 +57,7 @@ input[type="number"] {
 }
 
 .btn-red {
+    padding-top: 7px;
     background-color : rgb(255, 56, 56);
     color : white;
     /* border : 0px solid black; */
@@ -91,7 +92,7 @@ input[type="number"] {
 }
 
 .dropdown-menu {
-    max-height: 50em;
+    max-height: 60em;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -106,6 +107,16 @@ input[type="number"] {
     width:100%;
     /* height: 30px;
     margin-right: 10px; */
+}
+
+/* 오른쪽 챔피언 이미지 */
+.right-champion-img {
+    width: 143px;
+    height: 143px;
+    object-fit: cover;
+    /* position: absolute; */
+    top: 10;
+    left: 0;
 }
 
 #champion-search {
@@ -175,18 +186,39 @@ input[type="number"] {
     width: 100%;
 }
 
-.item-img {
-    /* width: 80% !important; */
-    /* padding-top: 80% !important; */
-    display: block !important;
-    /* outline: 2px solid black; */
-    outline-offset: -2px;
-    border: 2px solid #ac9f31;
-}
-.item-img:hover {
-    border: 3px solid #eeff00;
+/* .item-list-css {
+    display: flex;
+    gap: .3125rem;
+} */
+#item-list {
+    display: flex;
+    gap: 1rem;
 }
 
+#item-list p {
+    line-height : 1.5;
+}
+
+.item-img {
+    width: 100%;
+}
+
+
+.item-name {
+    width: 68px;
+    text-align: center;
+    text-wrap: balance;
+}
+/* 아이템 마우스 오버 시 나오는 아이템 설명창 */
+.desBox {
+    position: absolute;
+    width: 150px !important;
+    z-index: 999999;
+    background-color: #ffffff;
+    padding: 0 10px 10px ;
+    border: 1px solid #000000;
+    align-items: auto;
+}
 
 .item-placeholder {
     background-image: none !important;
@@ -246,9 +278,9 @@ input[type="number"] {
 
 #left-item-filter-options {
     position: absolute;
-    max-height: 40em;
+    max-height: 60em;
     width: 15em;
-    margin-top: 2.5em;
+    margin: 2.5em 0 0 0;
     overflow-x: auto;
 }
 
