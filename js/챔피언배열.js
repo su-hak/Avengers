@@ -81,14 +81,8 @@ saveFileToArray(filePath, function (error, jsonData) {
 
         //Amumu 아무무
         console.log(championsArray[5].name);
-        console.log(championsArray[5].abilities.Q[0].effects[0].leveling[0].attribute); //Q
-        console.log(championsArray[5].abilities.W[0].effects[0].leveling[0].attribute); //W 데미지 공식 필요
-        console.log(championsArray[5].abilities.E[0].effects[1].leveling[0].attribute); //E
-        console.log(championsArray[5].abilities.R[0].effects[0].leveling[0].attribute); //R
 
-        //Anivia 애니비아
         console.log(championsArray[6].name);
-        console.log(championsArray[6].abilities.Q[0]); //Q
 
         console.log(championsArray[7].name);
 
