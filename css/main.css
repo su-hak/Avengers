@@ -854,13 +854,13 @@ body {
 /* 스탯창 */
 .stat {
     width: 215px;
-    height: 255px;
+    height: 300px;
     background-color: rgb(255, 255, 255);
     font-size: 10px;
 }
 
 .stat td {
-    height: 30px;
+    height: 43px;
 }
 
 .stat_name {
@@ -868,10 +868,9 @@ body {
     /* background: #7cc0ff; */
     background: #323749;
     color: #ffffff;
-
 }
 
-.stat_value {
+.stat_value, .stat_value_R {
     width: 45px;
     /* background: #b1daff; */
     background: #525975;

@@ -103,9 +103,19 @@ input[type="number"] {
 }
 
 .champion-img {
-    width:100%;
+    width:100%;    
     /* height: 30px;
     margin-right: 10px; */
+}
+
+/* 오른쪽 챔피언 이미지 */
+.right-champion-img {
+    width: 143px;
+    height: 143px;
+    object-fit: cover;
+    /* position: absolute; */
+    top: 0;
+    left: 0;
 }
 
 #champion-search {
