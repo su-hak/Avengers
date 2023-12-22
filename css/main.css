@@ -228,58 +228,186 @@ body {
     }
 }
 
-/* 모달창 설정 */
 
+
+/* -------------- 공지사항 모달창 설정 --------------*/
+
+/* 공지 모달 전체사이즈 */
 .modal {
     display: none;
     position: fixed;
-    top: 5rem;
-    left: 5rem;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 200px;
-    width: 1750px;
+    width: 80%;
     height: 850px;
     background-color: rgba(0, 0, 0, 0);
-    /* border: 1px solid #fff; */
+    /* border: 0px solid #fff; */
 }
-
+/* 공지 모달 실선 */
 .modal-line {
-    position: absolute;
+    position: fixed;
     z-index: 999;
-    top: 25px;
-    left: 25px;
-    width: 1700px;
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
+    width: 97%;
     height: 800px;
-    background-color: rgba(red, green, blue, 0);
+    background-color: rgba(0, 0, 0, 0);
     border: 1px solid #ffffff;
 }
 
-.modal-content {
-    position: absolute;
-    /* padding: 20px -20px; */
-    top: 40px;
-    left: 10px;
-    /* transform: translate(-50%, -50%); */
+.modal-line-L { /* 공지 모달 왼쪽 라인 */
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #ffffff;
+    border-right: 0;
+}
+.modal-line-R { /* 공지 모달 오른쪽 라인 */
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 93%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #ffffff;
+    border-left: 0;
+}
+.modal-line-C { /* 공지 모달 가운데 라인 */
+    position: fixed;
+    /* z-index: 999; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0);
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+
+/* 공지모달 내용창 */
+.modal_contents {
+    position: fixed;
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
     background-color: rgb(62, 76, 139);
     padding: 20px;
-    width: 1730px;
+    width: 99%;
     height: 770px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
 }
 
-.close {
-    color: #aaa;
-    float: left;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+/* 공지모달 세부내용 */
+.modal_content {
+    margin-top: 10px;
+    width: 400px;
+    height: 600px !important;
+    background: rgba(0, 0, 0, 0);
+    padding: 30px;
+    color: #FFF;
+    overflow: auto;
+    /* scrollbar-color: transparent transparent;     */
+}
+.modal_content::-webkit-scrollbar { /* 브라우저 종류에 따른 스크롤바 출력 */
+    width: 6px; /* 스크롤바의 너비 */
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.borderwhite {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
 }
-/* 모달창 설정 */
+
+/* 공지모달 제목들 */
+.notice-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.text_close {
+    position: fixed;
+    top: 50%;
+    left: 50.4%;
+    transform: translate(-50%, -50%);
+    margin-top: 350px;
+    color: #04f023;
+    text-align: center;
+    z-index: 999;
+}
+
+/* 공지 모달 반응형 */
+/* @media (max-width:1600px) {
+    .modal { max-width: calc(100% - 160px); }
+}
+
+@media (max-width:1400px) {
+    .inner { max-width: calc(100% - 140px); }
+}
+
+@media (max-width:1200px) {
+    .inner { max-width: calc(100% - 120px); }
+} */
+
+@media (max-width:1024px) {
+    .modal {
+        display: none;
+        position: fixed;
+        top: 54%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 200px;
+        width: 80%;
+        height: 850px;
+        background-color: rgba(0, 0, 0, 0);
+        /* border: 0px solid #fff; */
+    }
+    .modal_contents {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+    .modal_content {
+        margin-top: 10px;
+        width: 400px;
+        height: 50%;
+        background: rgba(0, 0, 0, 0);
+        padding: 30px;
+        color: #FFF;
+        border: 0;
+    }
+    .text_close {
+        position: fixed;
+        top: 1%;
+        /* left: 50.4%;
+        transform: translate(-50%, -50%); */
+        margin-top: 50px;
+        color: #04f023;
+        text-align: center;
+        z-index: 999;
+    }
+}
+
+/* @media (max-width:768px) {
+    .inner { max-width: calc(100% - 40px); }
+} */
+
+
+/* ------------ 공지 모달창 설정 ------------*/
 
 /* 로그인 회원가입 */
 #header .util {
@@ -392,6 +520,9 @@ body {
 }
 
 @media (max-width : 768px) {
+    #main {
+        background-color: #d5ecaf;
+    }
     #main #sectionB {
         display: none;
     }
@@ -596,12 +727,12 @@ body {
 
 
 .btn_green {
-    background: #52bf3a;
+    background: #3E4C8BFF;
     color: #fff;
 }
 .btn_green:hover {
-    background: #2dff49;
-    color: #009e15;
+    background: #7d86af;
+    color: #253ca2;
 }
 
 .item_save {
@@ -684,6 +815,9 @@ body {
     background: #757575;
     color: #fff;
     font-size: 10px;
+}
+.skill_Lv_Btn:hover {
+    border: 2px solid #fbff00;
 }
 
 /* 스킬 레벨 표시창 */
@@ -775,23 +909,39 @@ body {
 }
 
 .item_box {
-    width: 70px;
+    position: relative;
+    width: 70px !important;
     height: 70px;
     background: #c7c7c7;
     margin-bottom: 10px;
     border: 2px solid #c9b92f;
+    text-wrap: balance;
 }
 .item_box:hover {
     border: 2px solid #eeff00;
 }
 
 .item_box_list {
-    text-align: center;
-    width: 70px;
-    height: 90px;
-    /* border: 2px solid #c9b92f; */
-    margin: 0 5px;
+    width: 70px !important;
+    height: 70px;
+    background: #c7c7c7;
     margin-bottom: 10px;
+    border: 2px solid #c9b92f;
+    text-wrap: balance;
+}
+.item_box_list:hover {
+    border: 2px solid #eeff00;
+}
+
+/* 아이템 삭제 버튼 */
+.itemRemoveBtn {
+    width: 70px;
+    height: 70px;
+    font-size: 14px;
+    border: 1px solid black;
+    text-align: center;
+    color: hotpink;
+    padding: 15px 10px;
 }
 
 
@@ -808,7 +958,7 @@ body {
     scrollbar-width: 6px; /* 스크롤바의 너비를 얇게 설정 (크롬, 파이어폭스 등 최신 브라우저에서 적용) */
     scrollbar-color: transparent transparent; /* 스크롤바 색상을 투명으로 설정 */
 }
-.log_pan_css::-webkit-scrollbar {
+.log_pan_css::-webkit-scrollbar { /* 브라우저 종류에 따른 스크롤바 출력 */
     width: 6px; /* 스크롤바의 너비 */
 }
 

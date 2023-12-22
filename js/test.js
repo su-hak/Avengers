@@ -927,6 +927,9 @@ itemGold.fill(0);
 let allItems = {};
 let filterItems = {};
 let callIdx = 0; //선택한 아이템 칸 idx
+let itemPriceL= 0; // 아이템 값을 담아줄 변수
+
+console.log("savedItems",savedItems)
 
 
 // 스탯 값을 담을 변수 선언
@@ -984,7 +987,7 @@ $.ajax({
         // 아이템 필터링 End
 
         filterItems.forEach((data, index) =>{
-            var itemBox = $("<div>").addClass("item-box");
+            var itemBox = $("<div>").addClass("item_box");
             var itemImg = $("<img>", {
                 src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
                 alt: data.name + " 이미지",
@@ -1007,9 +1010,6 @@ $.ajax({
     }
 });
 
-var itemPriceL= 0; // 아이템 값을 담아줄 변수
-// 아이템 리스트 출력
-
 function checkSavedItemsNull() {
     for (var i = 0; i < savedItems.length; i++) {
         if (savedItems[i] != null) {
@@ -1018,24 +1018,27 @@ function checkSavedItemsNull() {
     }
     return true; // 모든 값이 null이면 true 반환
 }
+
+
+// 아이템 선택
 $("#item-list").click(function (e) {
     var totalGold = 0;
-    if (e.target.id == 'emptyBtn') {
+    // var callIdx = parseInt(e.target.getAttribute("data-idx"));
+    // console.log(e.target);
+    console.log(itemGold);
+    if (e.target.id === 'emptyBtn') {
         console.log("삭제 버튼 클릭하였습니다.");
-        // temp = itemData.gold.total; // 아이템제거시 변수에서도 같은 값을 빼줌
-        console.log("아이템 제거!! :: ", itemPriceL);
-        // $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
-        itemGold[callIdx] = 0;
-        console.log(itemGold);
+        // callIdx = $(e.target).closest('#iBox').index();
         // savedItems.splice(callIdx, 1);
+        // delete savedItems[callIdx];
+        // savedItems[callIdx] = "description 0";
         delete savedItems[callIdx];
+        itemGold[callIdx] = 0;
         console.log("savedItems :: ",savedItems);
         var isSavedItemsNull = checkSavedItemsNull();
-        console.log(isSavedItemsNull);
-        // savedItems[callIdx] = 0;
-        // itemPriceL -= temp;
+
+        // 템 제거 시 스텟 초기화
         if(isSavedItemsNull == true){
-            console.log("노템임ㅋ");
             items.adValue= 0;
             items.apValue= 0;
             items.armor= 0;
@@ -1056,64 +1059,46 @@ $("#item-list").click(function (e) {
             deleteItem();
         }
         itemStatCalc();
-
-        $("#iBox" + callIdx).empty();
+        console.log("아이템 잔여 확인 :: ",savedItems);
+        $("#iBox" + callIdx).css("background-image", "none");
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
         console.log("저장된 스탯::: ", items);
         for(var i=0; i<itemGold.length; i++){
             totalGold += itemGold[i];
             $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
-            // console.log("for문 gold :: ", itemGold[i]);
+            console.log("for문 gold :: ", itemGold[i]);
         }
-    } else if (e.target.classList.contains('item-img')) {
 
+    } else if (e.target.classList.contains('item-img')) {
+        console.log(333,)
         console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
+        // callIdx = $(e.target).closest('.iBox').index();
+        console.log("savedItems :: ",savedItems);
         var itemData = filterItems[e.target.getAttribute("value")];
         var imgSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filterItems[e.target.getAttribute("value")].image.full;
 
+        $('#iBox' + callIdx).empty();
+        $('#iBox' + callIdx).css({
+            'background-image': 'url(' + imgSrc + ')',
+            'background-repeat': 'no-repeat',
+            'background-position': 'center',
+            'background-size': 'contain'
+        });
 
-        $('#iBox' + callIdx).html("<img src='"+imgSrc+"'>"); // 아이템 출력
-        // temp = itemData.gold.total; // 아이템의 total값을 누산
         savedItems[callIdx] = itemData;
-        itemGold[callIdx] = savedItems[callIdx].gold.total;
-        // itemPriceL += temp
+        itemGold[callIdx] = savedItems[callIdx].gold.total; // 아이템의 total값을 누산
         itemStatCalc(); // 아이템 스텟 값 함수 호출
-        console.log("savedItems", savedItems);
-        console.log("저장된 스탯::: ", items);
-        // $("#left-cost-value").text(": "+ itemPriceL + " 원"); //아이템 가격을 HTML에 적용
+        // console.log("savedItems", savedItems);
         for(var i=0; i<itemGold.length; i++){
             totalGold += itemGold[i];
             $("#left-cost-value").text(": "+ totalGold + " 원"); //아이템 가격을 HTML에 적용
-            // console.log("for문 gold :: ", itemGold[i]);
+            console.log("for문 gold :: ", itemGold[i]);
         }
     }
-    console.log("총 골드: " + totalGold);
+
 });
 
-// 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
-$("#plusItem").click(function (e){
-    if (!test.choose) {
-        Swal.fire("챔프 선택부터 혀라");
-        return; // test.choose가 false인 경우 함수 실행 중단
-    }
-    if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
-        callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
-
-    }else if(e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
-        callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
-    }
-    itemFilterControl()
-});
-
-// 아이템 목록 창 출력
-function itemFilterControl() {
-    if($("#left-item-filter-options").css("display") == "block"){
-        $("#left-item-filter-options").css("display", "none");
-    }else {
-        $("#left-item-filter-options").css("display", "block");
-    }
-
-}
+// 아이템 스탯 업데이트
 function deleteItem(){
     var level = test.getSelectedLevel();
     test.updateAttackStats(level);
@@ -1132,15 +1117,47 @@ function deleteItem(){
     test.updateNewOmniVampStats();
     test.updateCooltimeStats();
 }
-// 아이템 목록 외 body 클릭 시 닫기
-// $(document).mouseup(function(e) {
-//     var leftItemFilterOptions = $("#left-item-filter-options");
-//     if (!$(e.target).is(leftItemFilterOptions)
-//         && !$(e.target).closest(leftItemFilterOptions).length
-//         || leftItemFilterOptions.css("display") == "block") {
-//         leftItemFilterOptions.css("display", "none");
-//     }
-// });
+
+
+// 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
+$("#plusItem").click(function (e){
+    if (!test.choose) {
+        Swal.fire("챔프 선택부터 혀라");
+        return; // test.choose가 false인 경우 함수 실행 중단
+    }
+    console.log("plusItem 클릭 !", e.type);
+    if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
+        callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControl();
+
+    }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+        callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControl();
+
+    }else if($(this).find('li img').length > 0 ) {
+        // callIdx = $(e.target).closest('.iBox').index();
+        itemFilterControl();
+        // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
+    }else if(e.target.id === 'left-item-filter-options') {
+        // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
+        return;
+    }
+    console.log(e.target.tagName , e.target.classList[0]);
+    console.log(callIdx,"callIdx")
+
+});
+
+
+// 아이템 목록 창 출력
+function itemFilterControl() {
+    if($("#left-item-filter-options").css("display") == "block"){
+        $("#left-item-filter-options").css("display", "none");
+    }else {
+        $("#left-item-filter-options").css("display", "block");
+    }
+
+}
+
 
 
 // 스탯 계산 함수
@@ -1162,10 +1179,12 @@ function itemStatCalc() {
     items.mpRegen= 0;
     items.fullHp= 0;
     items.fullMp= 0;
+
     savedItems.forEach(function (data){
 
         var description = data.description;
         var stats = description.match(/<stats>(.*?)<\/stats>/);
+        console.log("stats",stats)
 
         var statValues = [];
         if (stats) {
@@ -1177,6 +1196,7 @@ function itemStatCalc() {
 
             var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
             var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
+
 
             if (statName && statValue) {
                 var level = test.getSelectedLevel();
@@ -1272,20 +1292,55 @@ $("#item-list").mouseover(function(e) {
         var itemName = itemData.name;
         var description = itemData.description;
 
-        description = description.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
+        description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
         description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+        console.log("description",description)
 
-        var itemBox = $(e.target).closest('.item-box');
-        itemBox.append($("<div>").addClass("desBox").html(itemName + "<br>" + description));
+        // 문장 뒤에 <br> 추가
+        description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
+
+        var itemBox = $(e.target).closest('.item_box');
+        itemBox.append($("<div>").addClass("desBox").html(description));
 
 
-        console.log(itemName, description);
+        // console.log(itemName, description);
         // 또는 원하는 동작을 수행하세요.
     }
 });
 
+
 // 마우스 아웃 시 아이템 정보 제거
 $("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
-    var itemBox = $(e.target).closest('.item-box');
+    var itemBox = $(e.target).closest('.item_box');
     itemBox.find(".desBox").remove(); // itemName과 description을 삭제합니다.
 });
+
+
+// HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
+// HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
+// HTML 테이블에서 stat_value, left-rsc-value, left-hp-value의 값을 가져와 배열에 넣는 함수
+function getValues() {
+    const values = [];
+    const statValueElements = document.getElementsByClassName('stat_value');
+    const leftRscValue = document.getElementById('left-rsc-value').innerHTML;
+    const leftHpValue = document.getElementById('left-hp-value').innerHTML;
+
+    for (let i = 0; i < statValueElements.length; i++) {
+        const value = statValueElements[i].innerHTML;
+        values.push(value);
+    }
+
+    values.push(leftRscValue);
+    values.push(leftHpValue);
+
+    return values;
+}
+
+// left_BA_button 클릭 이벤트 처리
+const leftBAButton = document.getElementById('left_BA_button');
+leftBAButton.addEventListener('click', function() {
+    const values = getValues();
+    console.log(values); // 배열 출력 또는 원하는 작업 수행
+});
+
+
