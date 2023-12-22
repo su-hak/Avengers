@@ -5,101 +5,96 @@ let selectedChampionImg; // 선택한 챔피언 이미지 요소를 저장하는
 
 // Ajax를 사용하여 파일을 받아오는 함수
 function getFile(url, callback) {
-const xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-            callback(null, xhr.responseText);
-        } else {
-            callback(new Error('파일을 받아오는 중 오류 발생'), null);
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                callback(null, xhr.responseText);
+            } else {
+                callback(new Error('파일을 받아오는 중 오류 발생'), null);
+            }
         }
-    }
-};
+    };
 
-xhr.open('GET', url, true);
-xhr.send();
+    xhr.open('GET', url, true);
+    xhr.send();
 }
 
 // 파일을 받아와서 배열에 저장하는 함수
 function saveFileToArray(filePath, callback) {
-getFile(filePath, function (error, fileContent) {
-    if (error) {
-        callback(error, null);
-    } else {
-        try {
-            const jsonData = JSON.parse(fileContent);
-            callback(null, jsonData);
-        } catch (jsonError) {
-            callback(jsonError, null);
+    getFile(filePath, function (error, fileContent) {
+        if (error) {
+            callback(error, null);
+        } else {
+            try {
+                const jsonData = JSON.parse(fileContent);
+                callback(null, jsonData);
+            } catch (jsonError) {
+                callback(jsonError, null);
+            }
         }
-    }
-});
+    });
 }
 
 // 파일을 받아와서 배열에 저장하는 예제 호출
 saveFileToArray(filePath, function (error, jsonData) {
-if (error) {
-    console.error('파일 받아오기 중 오류:', error);
-} else {
-    championsArray = Object.values(jsonData); // jsonData의 값들을 배열로 변환하여 저장
-    console.log(championsArray);
-    console.log(championsArray[49].abilities.Q[0].effects[1].leveling[0].modifiers[0].values[0]);
-    console.log(championsArray[49].abilities.W[0].effects[0].leveling[0].modifiers[0].values[0]);
-    console.log(championsArray[49].abilities.E[0].effects[1].leveling[0].modifiers[0].values[0]);
-    console.log(championsArray[49].abilities.R[0].effects[1].leveling[0].modifiers[0].values[0]);
-}
+    if (error) {
+        console.error('파일 받아오기 중 오류:', error);
+    } else {
+        championsArray = Object.values(jsonData); // jsonData의 값들을 배열로 변환하여 저장
+        console.log(championsArray);
+        console.log(championsArray[49].abilities.Q[0].effects[1].leveling[0].modifiers[0].values[0]);
+        console.log(championsArray[49].abilities.W[0].effects[0].leveling[0].modifiers[0].values[0]);
+        console.log(championsArray[49].abilities.E[0].effects[1].leveling[0].modifiers[0].values[0]);
+        console.log(championsArray[49].abilities.R[0].effects[1].leveling[0].modifiers[0].values[0]);
+    }
 });
 
 // createBoxes() 함수 내에 다음 코드를 추가해주세요.
 function createBoxes() {
-const championContainer = document.querySelector('.champion-container');
-const damageLogElement = document.getElementById('damage-log');
-damageLogElement.innerHTML = '';
+    const championContainer = document.querySelector('.champion-container');
+    const damageLogElement = document.getElementById('damage-log');
+    damageLogElement.innerHTML = '';
 
-totalDamage = 0;
-championContainer.innerHTML = ''; // 기존 챔피언 이미지를 초기화
+    totalDamage = 0;
+    championContainer.innerHTML = ''; // 기존 챔피언 이미지를 초기화
 
-if (championsArray) {
-    for (let i = 0; i < championsArray.length; i++) {
-        const champion = championsArray[i];
-        const championBox = document.createElement('div');
-        championBox.classList.add('champion-box');
+    if (championsArray) {
+        for (let i = 0; i < championsArray.length; i++) {
+            const champion = championsArray[i];
+            const championBox = document.createElement('div');
+            championBox.classList.add('champion-box');
 
-        const championImg = document.createElement('img');
-        championImg.src = champion.icon;
-        championImg.alt = champion.name;
-        championImg.classList.add('champion-img');
+            const championImg = document.createElement('img');
+            championImg.src = champion.icon;
+            championImg.alt = champion.name;
+            championImg.classList.add('champion-img');
 
-        championBox.appendChild(championImg);
-        championContainer.appendChild(championBox);
+            championBox.appendChild(championImg);
+            championContainer.appendChild(championBox);
 
-        championImg.addEventListener('click', function () {
-            showSelectedChampion(championImg, i);
-        });
+            championImg.addEventListener('click', function () {
+                showSelectedChampion(championImg, i);
+            });
+        }
     }
 }
-}
 
-// 이미지 선택 후 .champion-container 보여주는 함수
-function showChampionContainer() {
-const championContainer = document.querySelector('.champion-container');
-championContainer.style.display = 'grid';
-}
 
-// 이미지 선택 버튼 이벤트 리스너 등록
+// 이미지 선택 버튼 이벤트 리스너 등록 다시 클릭가능하게
 const championButton = document.getElementById('right-champ-dropdown');
 championButton.addEventListener('click', function() {
-const championContainer = document.querySelector('.champion-container');
-const allImages = document.querySelectorAll('.champion-container img');
+    const championContainer = document.querySelector('.champion-container');
+    const allImages = document.querySelectorAll('.champion-container img');
 
-if (championContainer.style.display === 'none') {
-    championContainer.style.display = 'grid';
-    allImages.forEach(function(image) {
-        image.style.display = 'block';
-    });
-} else {
-    championContainer.style.display = 'none';
-}
+    if (championContainer.style.display === 'none') {
+        championContainer.style.display = 'grid';
+        allImages.forEach(function(image) {
+            image.style.display = 'block';
+        });
+    } else {
+        championContainer.style.display = 'none';
+    }
 });
 
 // 전역 변수로 index 선언
@@ -338,20 +333,6 @@ function calculateBasicAttack(armor) {
     return calculatedDamage.toFixed(2); // 소수점 2자리까지 표시
 }
 
-
-
-
-
-
-
-/!*초기화*!/
-function resetDamageRecord() {
-const damageLogElement = document.getElementById('damage-log');
-damageLogElement.innerHTML = '';
-
-totalDamage = 0;
-}
-
 // 각 스킬 버튼 요소를 가져오기
 const qSkillButton = document.getElementById('skill1');
 const wSkillButton = document.getElementById('skill2');
@@ -360,68 +341,59 @@ const rSkillButton = document.getElementById('skill4');
 
 // 각 스킬 버튼 클릭 이벤트에 함수 등록
 qSkillButton.addEventListener('click', function () {
-recordSkillDamage('Q');
+    recordSkillDamage('Q');
 });
 
 wSkillButton.addEventListener('click', function () {
-recordSkillDamage('W');
+    recordSkillDamage('W');
 });
 
 eSkillButton.addEventListener('click', function () {
-recordSkillDamage('E');
+    recordSkillDamage('E');
 });
 
 rSkillButton.addEventListener('click', function () {
-recordSkillDamage('R');
+    recordSkillDamage('R');
 });
-
-
-
-
-
 
 // 스킬 데미지 기록 함수
 function recordSkillDamage(skillName) {
 // 해당 스킬의 데미지 값을 가져오기
-const skillDamageElement = document.getElementById(`${skillName.toLowerCase()}-skill-damage`);
+    const skillDamageElement = document.getElementById(`${skillName.toLowerCase()}-skill-damage`);
 
-if (skillDamageElement) {
+    if (skillDamageElement) {
 // 스킬 데미지의 span 태그 가져오기
-    const skillDamageSpan = skillDamageElement.querySelector('span');
+        const skillDamageSpan = skillDamageElement.querySelector('span');
 
-    if (skillDamageSpan) {
+        if (skillDamageSpan) {
 // span 태그의 color 속성 값 가져오기
-        const color = skillDamageSpan.style.color;
-        const damageLogElement = document.getElementById('damage-log');
+            const color = skillDamageSpan.style.color;
+            const damageLogElement = document.getElementById('damage-log');
 
 // 데미지 로그 업데이트
-        if (color === 'rebeccapurple') {
-            const skillDamageValue = parseFloat(skillDamageSpan.textContent);
-            damageLogElement.innerHTML += `(${skillName})${skillDamageValue}의 데미지를 입혔습니다. `;
-            updateTotalDamage(skillDamageValue);
+            if (color === 'rebeccapurple') {
+                const skillDamageValue = parseFloat(skillDamageSpan.textContent);
+                damageLogElement.innerHTML += `(${skillName})${skillDamageValue}의 데미지를 입혔습니다. `;
+                updateTotalDamage(skillDamageValue);
+            } else {
+                damageLogElement.innerHTML += `(${skillName})0의 데미지를 입혔습니다.<br>`;
+            }
         } else {
-            damageLogElement.innerHTML += `(${skillName})0의 데미지를 입혔습니다.<br>`;
+            console.error(`스킬 ${skillName}의 데미지 표시 span 요소를 찾을 수 없습니다.`);
         }
     } else {
-        console.error(`스킬 ${skillName}의 데미지 표시 span 요소를 찾을 수 없습니다.`);
+        console.error(`스킬 ${skillName}의 데미지 표시 요소를 찾을 수 없습니다.`);
     }
-} else {
-    console.error(`스킬 ${skillName}의 데미지 표시 요소를 찾을 수 없습니다.`);
-}
 }
 
 // 전체 데미지 합계 업데이트 함수
 function updateTotalDamage(damage) {
-totalDamage += damage;
+    totalDamage += damage;
 
 // 합계 업데이트
-const damageLogElement = document.getElementById('damage-log');
-damageLogElement.innerHTML += ` 합계: ${totalDamage.toFixed(2)}<br>`;
+    const damageLogElement = document.getElementById('damage-log');
+    damageLogElement.innerHTML += ` 합계: ${totalDamage.toFixed(2)}<br>`;
 }
-
-
-
-
 
 // 초기화 버튼 클릭 시 결과 초기화
 function resetDamageRecord() {
@@ -431,6 +403,7 @@ function resetDamageRecord() {
     attackDamageElement.textContent = '0';
     damageLogElement.innerHTML = '';
 }
+
 //허수아비
 function checkMaxValue(inputId, maxValue) {
     const inputElement = document.getElementById(inputId);
@@ -448,7 +421,3 @@ document.getElementById('Physical-Penetration').innerText = '0';
 document.getElementById('Armor-Penetration').innerText = '0';
 document.getElementById('Magic-Penetration').innerText = '0';
 document.getElementById('Magic-PenetrationPercent').innerText = '0';
-
-
-
-
