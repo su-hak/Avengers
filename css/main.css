@@ -727,12 +727,12 @@ body {
 
 
 .btn_green {
-    background: #52bf3a;
+    background: #3E4C8BFF;
     color: #fff;
 }
 .btn_green:hover {
-    background: #2dff49;
-    color: #009e15;
+    background: #7d86af;
+    color: #253ca2;
 }
 
 .item_save {
@@ -913,22 +913,24 @@ body {
     width: 70px !important;
     height: 70px;
     background: #c7c7c7;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 2px solid #c9b92f;
-    text-wrap: balance;        
+    text-wrap: balance;
 }
 .item_box:hover {
     border: 2px solid #eeff00;
 }
 
 .item_box_list {
-    text-align: center;
-    width: 70px;
-    height: 90px;
-    /* border: 2px solid #c9b92f; */
-    margin: 0 5px;
+    width: 70px !important;
+    height: 70px;
+    background: #c7c7c7;
     margin-bottom: 10px;
-    text-align: center;
+    border: 2px solid #c9b92f;
+    text-wrap: balance;
+}
+.item_box_list:hover {
+    border: 2px solid #eeff00;
 }
 
 /* 아이템 삭제 버튼 */

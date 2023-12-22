@@ -181,7 +181,11 @@ input[type="number"] {
 } */
 #item-list {
     display: flex;
-    gap: .625rem;
+    gap: 1rem;
+}
+
+#item-list p {
+    line-height : 1.5;
 }
 
 .item-img {
@@ -263,7 +267,7 @@ input[type="number"] {
 
 #left-item-filter-options {
     position: absolute;    
-    max-height: 40em;
+    max-height: 60em;
     width: 15em;
     margin: 2.5em 0 0 0;
     overflow-x: auto;
