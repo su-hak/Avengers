@@ -308,14 +308,41 @@ function showSelectedChampion(championImg, selectedIndex) {
 /!*데미지 로그 뜨는거*!/
 let totalDamage = 0;
 
-function recordDamage() {
-const attackDamageElement = document.getElementById('attack-damage');
-const damageLogElement = document.getElementById('damage-log');
-const damage = parseInt(attackDamageElement.textContent);
-totalDamage += damage;
+// Basic Attack 버튼 클릭 이벤트에 함수 등록
+const basicAttackButton = document.querySelector('.BasicAttack button');
+basicAttackButton.addEventListener('click', function () {
+    calculateBasicAttackDamage();
+});
 
-damageLogElement.innerHTML += `(평타)${damage}의 데미지를 입혔습니다. 합계: ${totalDamage}<br>`;
+// Basic Attack 데미지 계산 함수
+function calculateBasicAttackDamage() {
+    // 방어력 값 가져오기
+    const armorValue = parseInt(document.getElementById('armor').value);
+
+    // Basic Attack 데미지 계산
+    const basicAttackDamage = calculateBasicAttack(armorValue);
+
+    // 데미지 로그 업데이트
+    const damageLogElement = document.getElementById('damage-log');
+    damageLogElement.innerHTML += `(Basic Attack)${basicAttackDamage}의 데미지를 입혔습니다.`;
+
+    // 합계 업데이트
+    updateTotalDamage(parseFloat(basicAttackDamage));
 }
+
+// Basic Attack 데미지를 계산하는 함수
+function calculateBasicAttack(armor) {
+    const attackDamage = parseFloat(championsArray[index].stats.attackDamage.flat);
+    const armorReduction = 100 / (100 + armor);
+    const calculatedDamage = attackDamage * armorReduction;
+    return calculatedDamage.toFixed(2); // 소수점 2자리까지 표시
+}
+
+
+
+
+
+
 
 /!*초기화*!/
 function resetDamageRecord() {
@@ -347,6 +374,11 @@ recordSkillDamage('E');
 rSkillButton.addEventListener('click', function () {
 recordSkillDamage('R');
 });
+
+
+
+
+
 
 // 스킬 데미지 기록 함수
 function recordSkillDamage(skillName) {
@@ -384,8 +416,11 @@ totalDamage += damage;
 
 // 합계 업데이트
 const damageLogElement = document.getElementById('damage-log');
-damageLogElement.innerHTML += ` 합계: ${totalDamage}<br>`;
+damageLogElement.innerHTML += ` 합계: ${totalDamage.toFixed(2)}<br>`;
 }
+
+
+
 
 
 // 초기화 버튼 클릭 시 결과 초기화
@@ -397,9 +432,13 @@ function resetDamageRecord() {
     damageLogElement.innerHTML = '';
 }
 //허수아비
-function limitInput(input) {
-    if (parseInt(input.value) > 1000) {
-        input.value = 1000;
+function checkMaxValue(inputId, maxValue) {
+    const inputElement = document.getElementById(inputId);
+    const inputValue = parseInt(inputElement.value);
+
+    if (inputValue > maxValue) {
+        // 최대값을 초과하는 경우 현재 입력값을 최대값으로 설정
+        inputElement.value = maxValue;
     }
 }
 
@@ -409,3 +448,7 @@ document.getElementById('Physical-Penetration').innerText = '0';
 document.getElementById('Armor-Penetration').innerText = '0';
 document.getElementById('Magic-Penetration').innerText = '0';
 document.getElementById('Magic-PenetrationPercent').innerText = '0';
+
+
+
+
