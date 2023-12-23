@@ -1042,32 +1042,7 @@ $.ajax({
         console.log(filterItems);
         // 아이템 필터링 End
 
-        // 아이템 설명창 띄우기
-        function showDescription(data, index) {
-            // 팝오버 내용 설정
-            var itemName = data.name;
-            var description = data.description;
-        
-            description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
-            description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
-            // console.log("description",description)
-        
-            // 문장 뒤에 <br> 추가
-            description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
-        
-            // 팝오버 생성 및 표시
-            $('#item-img-' + index).popover({
-                title: itemName,
-                content: description,
-                trigger: 'manual', // 수동으로 트리거
-                html: true,
-                placement: 'bottom',
-                container: 'body'
-            }).popover('show');
-        }
-        // 아이템 설명창 띄우기 E
-
-        
+                
         filterItems.forEach((data, index) => {
             var itemBox = $("<div>").addClass("item_box_list");
             var itemImg = $("<img>", {
@@ -1465,23 +1440,35 @@ $.ajax({
         console.log(filteritemsR);
         // 아이템 필터링 End
 
-        filteritemsR.forEach((data, index) =>{
+
+        // filteritemsR에 대한 코드 추가
+        filteritemsR.forEach((data, index) => {
             var itemBox = $("<div>").addClass("item_box_list");
             var itemImg = $("<img>", {
+                id: 'item-imgR-' + index,
                 src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
                 alt: data.name + " 이미지",
                 class: "item-img",
-                value : index
+                value: index
             });
             var itemName = $("<p>").addClass("item-name").text(data.name);
-            // var imgURL= "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+data.image.full;
-            // var itemButton = $("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+data.name+"'></button>"+data.name)
-            // $("#itemContainer").append(itemButton);
+
+            // 마우스 오버 이벤트에 팝오버 표시 함수 연결
+            itemImg.mouseover(function () {
+                showDescription(data, index, '#item-listR');
+            });
+
+            // 마우스 나가기 이벤트에 팝오버 숨기기
+            itemImg.mouseout(function () {
+                $('#item-imgR-' + index).popover('hide');
+            });
+
             itemBox.append(itemImg);
             itemBox.append($("<br>"));
             itemBox.append(itemName);
-            $("#item-listR").append(itemBox); //#item-list의 자식요소에 <div class="item-box">
+            $("#item-listR").append(itemBox);
         });
+
 
     },
     error : function (){
@@ -1538,7 +1525,7 @@ function itemGoldUpdateR() {
 $("#item-listR").click(function (e) {
 
 
-    if (e.target.id === 'emptyBtn') {
+    if (e.target.id === 'emptyBtnR') {
         console.log("삭제 버튼 클릭하였습니다.");
 
         delete saveditemsR[callIdxR];
@@ -1591,10 +1578,11 @@ function deleteItemR(){
 
 // 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
 $("#plusItemR").click(function (e){
-    if (!test.choose) {
-        Swal.fire("챔프 선택부터 혀라");
-        return; // test.choose가 false인 경우 함수 실행 중단
-    }
+    // 오른쪽 챔피언 구현되면 주석 풀기
+    // if (!test.choose) {
+    //     Swal.fire("챔프 선택부터 혀라");
+    //     return; // test.choose가 false인 경우 함수 실행 중단
+    // }
     console.log("plusItemR 클릭 !", e.type);
     if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
         callIdxR = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
@@ -1768,36 +1756,41 @@ function itemstatCalcR() {
 
 }
 
-// 마우스 오버 시 아이템 정보 출력
-$("#item-listR").mouseover(function(e) {
-    if (e.target.classList.contains('item-img')) {
-        var itemData = filteritemsR[e.target.getAttribute("value")];
-        var itemName = itemData.name;
-        var description = itemData.description;
-
-        description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
-        description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
-        // console.log("description",description)
-
-        // 문장 뒤에 <br> 추가
-        description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
-
-        var itemBox = $(e.target).closest('.item_box_list');
-        itemBox.append($("<div>").addClass("desBox").html(description));
 
 
-        // console.log(itemName, description);
-        // 또는 원하는 동작을 수행하세요.
-    }
-});
+// 아이템 설명창 띄우기
+function showDescription(data, index) {
+    // 팝오버 내용 설정
+    var itemName = data.name;
+    var description = data.description;
 
+    description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
+    description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+    // console.log("description",description)
 
-// 마우스 아웃 시 아이템 정보 제거
-$("#item-listR").mouseout(function(e){     // 마우스 내리면 이벤트
-    var itemBox = $(e.target).closest('.item_box_list');
-    itemBox.find(".desBox").remove(); // itemName과 description을 삭제합니다.
-});
-test.choose = false;
+    // 문장 뒤에 <br> 추가
+    description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
+
+    // 팝오버 생성 및 표시
+    $('#item-img-' + index).popover({
+        title: itemName,
+        content: description,
+        trigger: 'manual', // 수동으로 트리거
+        html: true,
+        placement: 'bottom',
+        // container: 'body'
+    }).popover('show');
+
+    $('#item-imgR-' + index).popover({
+        title: itemName,
+        content: description,
+        trigger: 'manual', // 수동으로 트리거
+        html: true,
+        placement: 'bottom',
+        // container: 'body'
+    }).popover('show');
+}
+// 아이템 설명창 띄우기 E
 
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
