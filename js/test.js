@@ -1,61 +1,14 @@
-// import { asstatValue } from "./item.js";
-// console.log(asstatValue);
-// 챔피언의 스킬정보와 디테일한 스텟정보를 받아오는 함수
-// function detailedChamp(id, callback){
-//     let detail;
-//     $.ajax({
-//         type: "get",
-//         url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion/"+id+".json",
-//         success: function (data) {
-//             var dtch = Object.values(data.data); // 챔피언 데이터 배열 추출
-//             console.log(dtch);
-//             callback(dtch); // 결과를 콜백 함수로 전달합니다.
-//         }
-//     });
-//
-//
-// }
-// stats = {};
 let test = {};
 let testR = {};
 //
 function selectObject(colElement) {
-//         console.log("selectObject 함수 호출 성공");
-//         // 해당 div 요소를 가져옵니다.
-//         // var colDiv = document.querySelector('.col-3.bg-hover');
-//         var colDiv = document.querySelector('.col-3.bg-hover');
-// // 이미지 요소를 가져옵니다.
-//         var imgElement = colDiv.querySelector('img');
-//         var name = imgElement.id;
-//         // var info = champ.id.equals(imgElement);
-//         console.log(name);
-//         // var info = champ.find(name);
-//         var info = champ.find(function(champion) {
-//             return champion.key === name;
-//         });
-//         console.log(info);
-//         // console.log(champ);
 
     var clickedDiv = currentTarget;
     var imgElement = clickedDiv.querySelector("img");
     var imgId = imgElement.id;
     console.log("클릭한 div의 img id:", imgId);
     // 필요한 작업을 수행합니다.
-
-
 }
-// 선택한 챔피언의 div img id값으로 선택
-// function selectObject(event) {
-//     var clickedDiv = event.currentTarget;
-//     var imgElement = clickedDiv.querySelector("img");
-//     var imgId = imgElement.id;
-//     console.log("클릭한 div의 img id:", imgId);
-//     var newSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/"+imgId+".png"; // 새로운 이미지 소스 URL
-//     searchChampById(imgId);
-//     changeLeftChampPortraitSrc(newSrc);
-//     // 필요한 작업을 수행합니다.
-//
-// }
 
 // 이미지를 검색하는 함수
 function searchChampById(imgId) {
@@ -72,18 +25,6 @@ function searchChampById(imgId) {
     }
 }
 
-// 받은 이미지로 spell정보 받아오기
-// function setChampSpells(id){
-//     console.log("setChampSpells 진입성공");
-//     detailedChamp(id, function(dtch) {
-//         for(var i=0; i<4; i++){
-//             console.log(dtch[0].spells[i]);
-//         }
-//         // console.log(dtch[0].spells);
-//
-//
-//     });
-// }
 
 // 선택한 레벨 받아오기
 test.getSelectedLevel = function() {
@@ -281,12 +222,6 @@ function setChampStats(id) {
                 for (let i = 1; i < selectedLevel; i++) {
                     a[i] = ((itemAsNum+(+(coefficient*0.01)*(selectedLevel-1))*(0.7025+(0.0175*(selectedLevel-1))))*a[0]) + a[0];
                 }
-                // }else{
-                //     // itemAs = 0;
-                //     for (let i = 1; i < selectedLevel; i++) {
-                //         a[i] = ((itemAsNum+(+(coefficient*0.01)*(selectedLevel-1))*(0.7025+(0.0175*(selectedLevel-1))))*a[0]) + a[0];
-                //     }
-                // }
 
                 const value = new Decimal(a[selectedLevel - 1]);
                 const roundedValue = roundToThreeDecimalPlaces(value);
@@ -305,35 +240,7 @@ function setChampStats(id) {
                 }
             }
         }
-        // function updateHpStats(selectedLevel){
-        //     const totalHp = document.getElementById("left-hp-total");
-        //     // console.log(dtch[0].stats.hp);
-        //     // console.log(dtch[0].stats.hpperlevel);
-        //     if (selectedLevel > 1) {
-        //         let coefficient = dtch[0].stats.hpperlevel;
-        //         let a = [];
-        //         let itemHp = 0;
-        //         a[0] = dtch[0].stats.hp;
-        //         let level = 1;
-        //         for (let i = 1; i < selectedLevel; i++) {
-        //             a[i] = Math.round((a[i-1]+(coefficient* (0.65+(0.035*(i+1)))))+itemHp);
-        //         }
-        //         const value = new Decimal(a[selectedLevel - 1]);
-        //         const roundedValue = value.toDecimalPlaces(2);
-        //         const realRoundedValue = roundedValue.toDecimalPlaces(1);
-        //         statValues['hp'] = Math.round(realRoundedValue);
-        //         console.log(a);
-        //     } else if (selectedLevel < 2) {
-        //         statValues['hp'] = Math.round(dtch[0].stats.hp);
-        //     }
-        //     for (const id in statValues) {
-        //         const element = document.getElementById(id);
-        //         let value = statValues[id];
-        //         if (element) {
-        //             totalHp.textContent = value;
-        //         }
-        //     }
-        // }
+        
         test.updateHpStats = function(selectedLevel) {
             var itemHp = items.fullHp;
             console.log(dtch[0].stats.hp);
@@ -605,126 +512,6 @@ function roundToThreeDecimalPlaces(number) {
 
 }
 
-
-//
-//
-//
-//
-// // 챔피언 선택시 초상화 해당 챔피언으로 변경하는 함수
-// function changeLeftChampPortraitSrc(newSrc) {
-//     console.log(newSrc);
-//     var imgElement = document.getElementById("left-champ-portrait");
-//     if (imgElement) {
-//         imgElement.src = newSrc;
-//         console.log("left-champ-portrait 이미지의 src가 변경되었습니다.");
-//     } else {
-//         console.log("left-champ-portrait 이미지를 찾을 수 없습니다.");
-//     }
-// }
-//
-//
-// // 사용 예시
-// // api속 챔피언 갯수만큼 박스 생성
-// function createBoxes() {
-//
-//     var boxes = champ; // 예시로 사용되는 배열
-//     var searchInput = document.getElementById("left-champ-search");
-//     var searchText = searchInput.value.toLowerCase();
-//
-//     var boxContainer = document.getElementById("boxContainer");
-//     boxContainer.innerHTML = ""; // 기존 요소 초기화
-//     for(var i=0; boxes.length; i++){
-//
-//             let championName = boxes[i].name;
-//             // console.log(boxes[i].name);
-//
-//          // 예시로 사용되는 챔피언 이름
-//         // console.log(championName);
-//
-//         // 검색어가 존재하고 현재 챔피언 이름에 검색어가 포함되지 않으면 요소를 생성하지 않음
-//         if (searchText && !championName.toLowerCase().includes(searchText)) {
-//             return;
-//         }
-//
-//         var colElement = document.createElement("div");
-//         colElement.classList.add("col-3", "bg-hover", "pt-2");
-//         colElement.addEventListener("click", selectObject);
-//         // selectObject(colElement);
-//         // colElement.addEventListener("click", selectObject);
-//         // colElement.setAttribute("onclick", "selectObject()");
-//
-//         // colElement.addEventListener("click", function() {
-//         //     selectObject(boxes[i].name);
-//         // });
-//
-//         var imgElement = document.createElement("img");
-//         imgElement.src = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/"+champ[i].id+".png";
-//         imgElement.classList.add("portrait", "sprite");
-//          // imgElement.style.width = "90%"; // 이미지 크기 지정
-//          // imgElement.style.height = "90%"; // 이미지 크기 지정
-//         imgElement.id = champ[i].id; // 이미지에 id 할당
-//         colElement.appendChild(imgElement);
-//
-//
-//         var rowElement = document.createElement("div");
-//         rowElement.classList.add("row");
-//
-//         var pElement = document.createElement("p");
-//         pElement.classList.add("text-center", "champ-name", "mx-auto");
-//         pElement.textContent = champ[i].name;
-//         rowElement.appendChild(pElement);
-//
-//         colElement.appendChild(rowElement);
-//
-//         boxContainer.appendChild(colElement);
-//     }
-//
-// }
-//
-// // 챔피언 초상화 클릭후 search에서 이름으로 검색하는 함수들
-// $(document).ready(function () {
-//
-//
-// });
-// import { asstatValue } from "./item2.js";
-
-// console.log(asstatValue);  // statValue 값을 사용하는 원하는 로직을 작성합니다.
-//
-// function enableSearch(parent) {
-//     var searchBar = $(parent)
-//     searchBar.on("keyup", function() {
-//         var input = $(this).val();
-//         searchItems(input, parent);
-//     });
-// }
-//
-// function searchItems(input, parent) {
-//     var filter = input.toUpperCase();
-//     // Select all .col-3.bg-hover where the parent is a row preceded by #id
-//     var candidates = $(parent).find(".col-3.bg-hover");
-//     while ($(candidates).length == 0) {
-//         parent = $(parent).parent();
-//         candidates = parent.find(".col-3.bg-hover");
-//     }
-//     for (var i = 0; i < candidates.length; ++i) {
-//         if ($(candidates[i]).attr("filtered") == "true") {
-//             continue;
-//         }
-//         var img = $(candidates[i]).find("img");
-//         var name = $(candidates[i]).find("p");
-//         var text = name.text();
-//         if (text.toUpperCase().indexOf(filter) > -1) {
-//             $(candidates[i]).show();
-//         }
-//         else {
-//             $(candidates[i]).hide();
-//         }
-//     }
-// }
-// end
-
-
-
 // 더미 스탯, 아이템
 let rArea = {}; // 오른쪽 관련 함수
 let itemsR = {}; // 오른쪽 아이템
@@ -945,30 +732,6 @@ function setChampSpells(id){
     });
 }
 
-// // 스킬 설명 툴팁
-// function showTooltip(content, x, y) {
-//     var tooltip = document.getElementById('tooltip');
-//     var tooltipContent = document.getElementById('tooltip-content');
-//
-//     tooltipContent.innerHTML = content;
-//     tooltip.style.left = x + 'px';
-//     tooltip.style.top = y + 'px';
-//     tooltip.style.display = 'block';
-// }
-//
-// function hideTooltip() {
-//     var tooltip = document.getElementById('tooltip');
-//     tooltip.style.display = 'none';
-// }
-
-
-
-
-
-
-
-
-
 
 // 수학 햄 js
 let items = {};
@@ -1041,6 +804,31 @@ $.ajax({
 
         console.log(filterItems);
         // 아이템 필터링 End
+
+        // 아이템 설명창 띄우기
+        function showDescription(data, index) {
+            // 팝오버 내용 설정
+            var itemName = data.name;
+            var description = data.description;
+
+            description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
+            description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+            // console.log("description",description)
+
+            // 문장 뒤에 <br> 추가
+            description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
+
+            // 팝오버 생성 및 표시
+            $('#item-img-' + index).popover({
+                title: itemName,
+                content: description,
+                trigger: 'manual', // 수동으로 트리거
+                html: true,
+                placement: 'bottom',
+                // container: 'body'
+            }).popover('show');
+        }
+        // 아이템 설명창 띄우기 E
 
                 
         filterItems.forEach((data, index) => {
@@ -1441,6 +1229,32 @@ $.ajax({
         // 아이템 필터링 End
 
 
+        // 아이템 설명창 띄우기
+        function showDescriptionR(data, index) {
+            // 팝오버 내용 설정
+            var itemName = data.name;
+            var description = data.description;
+
+            description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
+            description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+            // console.log("description",description)
+
+            // 문장 뒤에 <br> 추가
+            description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
+
+            // 팝오버 생성 및 표시
+            $('#item-imgR-' + index).popover({
+                title: itemName,
+                content: description,
+                trigger: 'manual', // 수동으로 트리거
+                html: true,
+                placement: 'bottom',
+                // container: 'body'
+            }).popover('show');
+        }
+        // 아이템 설명창 띄우기 E
+
+
         // filteritemsR에 대한 코드 추가
         filteritemsR.forEach((data, index) => {
             var itemBox = $("<div>").addClass("item_box_list");
@@ -1455,7 +1269,7 @@ $.ajax({
 
             // 마우스 오버 이벤트에 팝오버 표시 함수 연결
             itemImg.mouseover(function () {
-                showDescription(data, index, '#item-listR');
+                showDescriptionR(data, index, '#item-listR');
             });
 
             // 마우스 나가기 이벤트에 팝오버 숨기기
@@ -1755,42 +1569,6 @@ function itemstatCalcR() {
     })
 
 }
-
-
-
-// 아이템 설명창 띄우기
-function showDescription(data, index) {
-    // 팝오버 내용 설정
-    var itemName = data.name;
-    var description = data.description;
-
-    description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
-    description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
-    // console.log("description",description)
-
-    // 문장 뒤에 <br> 추가
-    description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
-
-    // 팝오버 생성 및 표시
-    $('#item-img-' + index).popover({
-        title: itemName,
-        content: description,
-        trigger: 'manual', // 수동으로 트리거
-        html: true,
-        placement: 'bottom',
-        // container: 'body'
-    }).popover('show');
-
-    $('#item-imgR-' + index).popover({
-        title: itemName,
-        content: description,
-        trigger: 'manual', // 수동으로 트리거
-        html: true,
-        placement: 'bottom',
-        // container: 'body'
-    }).popover('show');
-}
-// 아이템 설명창 띄우기 E
 
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
