@@ -162,7 +162,7 @@
                                         <!-- 왼쪽 챔피언 목록 -->
                                         <div class="dropdown-menu" id="champion-dropdown">
                                             <!-- 왼쪽 챔피언 목록 속 검색창 -->
-                                            <input class="form-control mx-auto my-2" type="text" placeholder="챔피언 검색"
+                                            <input class="form-control mx-auto my-2 sticky" type="text" placeholder="챔피언 검색"
                                                    id="champion-search" />
                                             <div id="champion-list" class="mx-auto">
                                                 <!-- 왼쪽 챔피언 목록이 들어갈 자리 -->
@@ -205,9 +205,9 @@
                                 <button id="left_BA_button" type="button" class="BA_button btn_green">BasicAttack</button>
                                 <!-- 베이직 어택 -->
                             </li>
-                            <!-- 크리티컬 체크박스 -->
+                            <!-- 왼쪽 크리티컬 체크박스 -->
                             <li class="cri_check btn_green">
-                                <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
+                                <span title="체크시 치명타 확률이 100가 됩니다.">Cri</span>
                                 <input type="checkbox" id="critical" name="critical" value="critical">
                             </li>
                         </ul>
@@ -223,7 +223,7 @@
                                         <button type="button" id="left-skill1-numDown" class="skill_Q skill_Lv_Btn">
                                             -
                                         </button>
-                                        <input id="left-skill1-num" class="skill_Q LV_Num" type="number" min="0" max="5" />
+                                        <input id="left-skill1-num" class="skill_Q LV_Num" type="number" value=""  min="0" max="5" />
                                         <!-- 스킬1 레벨 업 -->
                                         <button id="left-skill1-numUp"  type="button" class="skill_Q skill_Lv_Btn">
                                             +
@@ -302,37 +302,37 @@
                                 <tr>
                                     <td class="stat_name" id="armorL">방어력</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="spellBlockL">마법방어력</td>
+                                    <td class="stat_name" id="spellBlockL" title="마법방어력">마 / 방</td>
                                     <td class="stat_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="attackSpeedL">공격속도</td>
+                                    <td class="stat_name" id="attackSpeedL" title="공격속도">공 / 속</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="moveSpeedL">이동속도</td>
+                                    <td class="stat_name" id="moveSpeedL" title="이동속도">이 / 속</td>
                                     <td class="stat_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="arPenL">방어구 관통력</td>
+                                    <td class="stat_name" id="arPenL" title="방어구 관통력">방 / 관</td>
                                     <td class="stat_value">0%</td>
-                                    <td class="stat_name" id="spPenL">마법 관통력</td>
+                                    <td class="stat_name" id="spPenL" title="마법 관통력">마 / 관</td>
                                     <td class="stat_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="adPenL">물리 관통력</td>
+                                    <td class="stat_name" id="adPenL" title="물리 관통력">물 / 관</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="vampL">모든 피해 흡혈</td>
+                                    <td class="stat_name" id="vampL" title="모든 피해 흡혈">모피흡</td>
                                     <td class="stat_value">0%</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="coolTimeL">스킬 가속</td>
+                                    <td class="stat_name" id="coolTimeL" title="스킬 가속">스 / 가</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="critL">치명타 확률</td>
+                                    <td class="stat_name" id="critL" title="치명타 확률">치명타</td>
                                     <td class="stat_value" id="critL_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="hpRegenL">기본 체력 재생</td>
+                                    <td class="stat_name" id="hpRegenL" title="기본 체력 재생">체 / 재</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="mpRegenL">기본 마나 재생</td>
+                                    <td class="stat_name" id="mpRegenL" title="기본 마나 재생">마 / 재</td>
                                     <td class="stat_value">0</td>
                                 </tr>
 <!--                                <tr>-->
@@ -368,7 +368,7 @@
                                          aria-labelledby="dropdownMenuButton"
                                          style="display: none;">
                                           <!-- 아이템 검색창 -->
-                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
+                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="아이템 검색..." id="left-item-search" autocomplete="on">
                                          <!-- 아이템 목록창 -->
                                         <div class="row mx-auto" id="item-list">
                                             <button type="button" class="itemRemoveBtn" id="emptyBtn" onclick="deleteItem()">delete</button>
@@ -472,7 +472,7 @@
                                     <div class="dropdown-menu dropdown-multicol" id="right-item-filter-options"
                                          aria-labelledby="dropdownMenuButton"
                                          style="display: none;">
-                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="right-item-search" autocomplete="off">
+                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="아이템 검색..." id="right-item-search" autocomplete="off">
                                         <div class="row mx-auto" id="item-listR" class="item-list-css">
                                             <button type="button" class="itemRemoveBtn" id="emptyBtnR" onclick="deleteItemR()">delete</button>
                                         </div>
@@ -642,8 +642,9 @@
                                 <button id="right_BA_button" type="button" class="BA_button btn_green">BasicAttack</button>
                                 <!-- 베이직 어택 -->
                             </li>
+                            <!-- 오른쪽 크리티컬 체크 박스 -->
                             <li class="cri_check btn_green">
-                                <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
+                                <span title="체크시 치명타 확률이 100가 됩니다.">Cri</span>
                                 <input type="checkbox" id="right_critical" name="critical" value="critical" />
                             </li>
                         </ul>
@@ -833,8 +834,8 @@
 
     <script src="./js/test.js"></script>
     <script src="./js/decimal.js"></script>
-    <script src="./js/web.js"></script> <!-- 원래 따로 만들었는데 재홍이가 test.js 에 붙여넣음 -->
-    <!--    <script> let test ={}; </script>-->
+    <script src="./js/web.js"></script>
+
     <!-- 메인영역 E -->
 
     <!-- 푸터영역 -->
