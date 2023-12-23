@@ -593,12 +593,12 @@ function setChampStats(id) {
 }
 
 
-var checkbox = document.getElementById('right_critical');
+// var checkbox = document.getElementById('right_critical');
 
-checkbox.addEventListener('change', function() {
-    var critValue = checkCritbox(); // checkCritbox() 함수 호출하여 반환된 값을 가져옵니다.
-    updateCritStats(critValue); // updateCritStats() 함수 호출하여 critValue를 전달합니다.
-});
+// checkbox.addEventListener('change', function() {
+//     var critValue = checkCritbox(); // checkCritbox() 함수 호출하여 반환된 값을 가져옵니다.
+//     updateCritStats(critValue); // updateCritStats() 함수 호출하여 critValue를 전달합니다.
+// });
 function roundToThreeDecimalPlaces(number) {
     return Math.round(number * 1000) / 1000;
 
@@ -862,8 +862,8 @@ function initialize() {
     $("#left-item-search").on("input", searchItem);
 }
 
-// 페이지 로드 시 초기화 함수 호출
-$(document).ready(initialize);
+// // 페이지 로드 시 초기화 함수 호출
+// $(document).ready(initialize);
 
 // 스킬 이벤트
 function setSkillEvents(skillButton, spellInfo) {
@@ -957,62 +957,62 @@ items.fullMp= 0;
 
 
 // API 가져오기
-$.ajax({
-    type: "get",
-    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
-    success: function (data) {
-        allItems = Object.values(data.data); //아이템 데이터 배열 추출
+// $.ajax({
+//     type: "get",
+//     url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+//     success: function (data) {
+//         allItems = Object.values(data.data); //아이템 데이터 배열 추출
 
-        /* ===========아이템 가나다 순 정렬 start ==========*/
-        allItems.sort(function(a,b){
-            var nameA=a.name.toUpperCase();
-            var nameB=b.name.toUpperCase();
+//         /* ===========아이템 가나다 순 정렬 start ==========*/
+//         allItems.sort(function(a,b){
+//             var nameA=a.name.toUpperCase();
+//             var nameB=b.name.toUpperCase();
 
-            if(nameA<nameB){
-                return -1;
-            }
-            if(nameA>nameB){
-                return 1;
-            }
-            return 0;
-        });
-        /* ===========아이템 가나다 순 정렬 start ==========*/
+//             if(nameA<nameB){
+//                 return -1;
+//             }
+//             if(nameA>nameB){
+//                 return 1;
+//             }
+//             return 0;
+//         });
+//         /* ===========아이템 가나다 순 정렬 start ==========*/
 
-        // 아이템 필터링 start
-        filterItems = allItems.filter(function(allItems){
-            return !allItems.requiredChampion // 챔피언전용템제외
-                // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
-                && allItems.inStore!==false // 스토어: false인 item 제외
-                && allItems.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
-        });
+//         // 아이템 필터링 start
+//         filterItems = allItems.filter(function(allItems){
+//             return !allItems.requiredChampion // 챔피언전용템제외
+//                 // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+//                 && allItems.inStore!==false // 스토어: false인 item 제외
+//                 && allItems.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
+//         });
 
 
-        console.log(filterItems);
-        // 아이템 필터링 End
+//         console.log(filterItems);
+//         // 아이템 필터링 End
 
-        filterItems.forEach((data, index) =>{
-            var itemBox = $("<div>").addClass("item_box_list");
-            var itemImg = $("<img>", {
-                src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
-                alt: data.name + " 이미지",
-                class: "item-img",
-                value : index
-            });
-            var itemName = $("<p>").addClass("item-name").text(data.name);
-            // var imgURL= "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+data.image.full;
-            // var itemButton = $("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+data.name+"'></button>"+data.name)
-            // $("#itemContainer").append(itemButton);
-            itemBox.append(itemImg);
-            itemBox.append($("<br>"));
-            itemBox.append(itemName);
-            $("#item-list").append(itemBox); //#item-list의 자식요소에 <div class="item-box">
-        });
+//         filterItems.forEach((data, index) =>{
+//             var itemBox = $("<div>").addClass("item_box_list");
+//             var itemImg = $("<img>", {
+//                 src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
+//                 alt: data.name + " 이미지",
+//                 class: "item-img",
+//                 value : index
+//             });
+//             var itemName = $("<p>").addClass("item-name").text(data.name);
+//             // var imgURL= "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+data.image.full;
+//             // var itemButton = $("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+data.name+"'></button>"+data.name)
+//             // $("#itemContainer").append(itemButton);
+//             itemBox.append(itemImg);
+//             itemBox.append($("<br>"));
+//             itemBox.append(itemName);
+//             $("#item-list").append(itemBox); //#item-list의 자식요소에 <div class="item-box">
+//         });
 
-    },
-    error : function (){
-        console.log("API 데이터 가져오는 중 오류 발생");
-    }
-});
+//     },
+//     error : function (){
+//         console.log("API 데이터 가져오는 중 오류 발생");
+//     }
+// });
 
 function checkSavedItemsNull() {
     for (var i = 0; i < savedItems.length; i++) {
@@ -1061,53 +1061,53 @@ function itemGoldUpdate() {
 }
 
 // 아이템 선택
-$("#item-list").click(function (e) {
+// $("#item-list").click(function (e) {
 
-    console.log(itemGold);
-    if (e.target.id === 'emptyBtn') {
-        console.log("삭제 버튼 클릭하였습니다.");
+//     console.log(itemGold);
+//     if (e.target.id === 'emptyBtn') {
+//         console.log("삭제 버튼 클릭하였습니다.");
 
-        delete savedItems[callIdx];
-        itemGold[callIdx] = 0;
+//         delete savedItems[callIdx];
+//         itemGold[callIdx] = 0;
 
-        isSavedItemsDefault();
-        itemStatCalc();
-        console.log("아이템 잔여 확인 :: ",savedItems);
-        $("#iBox" + callIdx).css("background-image", "none");
-        $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
-        console.log("저장된 스탯::: ", items);
-        itemGoldUpdate();
+//         isSavedItemsDefault();
+//         itemStatCalc();
+//         console.log("아이템 잔여 확인 :: ",savedItems);
+//         $("#iBox" + callIdx).css("background-image", "none");
+//         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+//         console.log("저장된 스탯::: ", items);
+//         itemGoldUpdate();
 
 
 
-    } else if (e.target.classList.contains('item-img')) {
-        console.log(333,)
-        console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
-        // callIdx = $(e.target).closest('.iBox').index();
-        console.log("savedItems :: ",savedItems);
-        var itemData = filterItems[e.target.getAttribute("value")];
-        var imgSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filterItems[e.target.getAttribute("value")].image.full;
+//     } else if (e.target.classList.contains('item-img')) {
+//         console.log(333,)
+//         console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
+//         // callIdx = $(e.target).closest('.iBox').index();
+//         console.log("savedItems :: ",savedItems);
+//         var itemData = filterItems[e.target.getAttribute("value")];
+//         var imgSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filterItems[e.target.getAttribute("value")].image.full;
 
-        $('#iBox' + callIdx).empty();
-        $('#iBox' + callIdx).css({
-            'background-image': 'url(' + imgSrc + ')',
-            'background-repeat': 'no-repeat',
-            'background-position': 'center',
-            'background-size': 'contain'
-        });
-        savedItems[callIdx] = itemData;
-        itemGold[callIdx] = savedItems[callIdx].gold.total; // 아이템의 total값을 누산
-        console.log("items ::::", items);
-        const searchInput = document.getElementById('left-item-search');
-        searchInput.value = '';
-        searchItem();
-        itemStatCalc(); // 아이템 스텟 값 함수 호출
-        deleteItem();
-        // console.log("savedItems", savedItems);
-        itemGoldUpdate();
-    }
+//         $('#iBox' + callIdx).empty();
+//         $('#iBox' + callIdx).css({
+//             'background-image': 'url(' + imgSrc + ')',
+//             'background-repeat': 'no-repeat',
+//             'background-position': 'center',
+//             'background-size': 'contain'
+//         });
+//         savedItems[callIdx] = itemData;
+//         itemGold[callIdx] = savedItems[callIdx].gold.total; // 아이템의 total값을 누산
+//         console.log("items ::::", items);
+//         const searchInput = document.getElementById('left-item-search');
+//         searchInput.value = '';
+//         searchItem();
+//         itemStatCalc(); // 아이템 스텟 값 함수 호출
+//         deleteItem();
+//         // console.log("savedItems", savedItems);
+//         itemGoldUpdate();
+//     }
 
-});
+// });
 
 // 아이템 스탯 업데이트
 function deleteItem(){
@@ -1132,43 +1132,43 @@ function deleteItem(){
 
 
 // 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
-$("#plusItem").click(function (e){
-    if (!test.choose) {
-        Swal.fire("챔프 선택부터 혀라");
-        return; // test.choose가 false인 경우 함수 실행 중단
-    }
-    console.log("plusItem 클릭 !", e.type);
-    if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
-        callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
-        itemFilterControl();
+// $("#plusItem").click(function (e){
+//     if (!test.choose) {
+//         Swal.fire("챔프 선택부터 혀라");
+//         return; // test.choose가 false인 경우 함수 실행 중단
+//     }
+//     console.log("plusItem 클릭 !", e.type);
+//     if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
+//         callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
+//         itemFilterControl();
 
-    }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
-        callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
-        itemFilterControl();
+//     }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+//         callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
+//         itemFilterControl();
 
-    }else if($(this).find('li img').length > 0 ) {
-        // callIdx = $(e.target).closest('.iBox').index();
-        itemFilterControl();
-        // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
-    }else if(e.target.id === 'left-item-filter-options') {
-        // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
-        return;
-    }
-    console.log(e.target.tagName , e.target.classList[0]);
-    console.log(callIdx,"callIdx")
+//     }else if($(this).find('li img').length > 0 ) {
+//         // callIdx = $(e.target).closest('.iBox').index();
+//         itemFilterControl();
+//         // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
+//     }else if(e.target.id === 'left-item-filter-options') {
+//         // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
+//         return;
+//     }
+//     console.log(e.target.tagName , e.target.classList[0]);
+//     console.log(callIdx,"callIdx")
 
-});
+// });
 
 
 // 아이템 목록 창 출력
-function itemFilterControl() {
-    if($("#left-item-filter-options").css("display") == "block"){
-        $("#left-item-filter-options").css("display", "none");
-    }else {
-        $("#left-item-filter-options").css("display", "block");
-    }
+// function itemFilterControl() {
+//     if($("#left-item-filter-options").css("display") == "block"){
+//         $("#left-item-filter-options").css("display", "none");
+//     }else {
+//         $("#left-item-filter-options").css("display", "block");
+//     }
 
-}
+// }
 
 
 
@@ -1310,34 +1310,34 @@ function itemStatCalc() {
 }
 
 // 마우스 오버 시 아이템 정보 출력
-$("#item-list").mouseover(function(e) {
-    if (e.target.classList.contains('item-img')) {
-        var itemData = filterItems[e.target.getAttribute("value")];
-        var itemName = itemData.name;
-        var description = itemData.description;
+// $("#item-list").mouseover(function(e) {
+//     if (e.target.classList.contains('item-img')) {
+//         var itemData = filterItems[e.target.getAttribute("value")];
+//         var itemName = itemData.name;
+//         var description = itemData.description;
 
-        description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
-        description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
-        // console.log("description",description)
+//         description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
+//         description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+//         // console.log("description",description)
 
-        // 문장 뒤에 <br> 추가
-        description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
+//         // 문장 뒤에 <br> 추가
+//         description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
 
-        var itemBox = $(e.target).closest('.item_box_list');
-        itemBox.append($("<div>").addClass("desBox").html(description));
-
-
-        // console.log(itemName, description);
-        // 또는 원하는 동작을 수행하세요.
-    }
-});
+//         var itemBox = $(e.target).closest('.item_box_list');
+//         itemBox.append($("<div>").addClass("desBox").html(description));
 
 
-// 마우스 아웃 시 아이템 정보 제거
-$("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
-    var itemBox = $(e.target).closest('.item_box_list');
-    itemBox.find(".desBox").remove(); // itemName과 description을 삭제합니다.
-});
+//         // console.log(itemName, description);
+//         // 또는 원하는 동작을 수행하세요.
+//     }
+// });
+
+
+// // 마우스 아웃 시 아이템 정보 제거
+// $("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
+//     var itemBox = $(e.target).closest('.item_box_list');
+//     itemBox.find(".desBox").remove(); // itemName과 description을 삭제합니다.
+// });
 
 
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
