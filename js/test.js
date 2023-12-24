@@ -956,6 +956,8 @@ function isSavedItemsDefault() {
         items.fullHp= 0;
         items.fullMp= 0;
         deleteItem();
+    }else {
+        deleteItem();
     }
 }
 
@@ -978,8 +980,8 @@ $("#item-list").click(function (e) {
         delete savedItems[callIdx];
         itemGold[callIdx] = 0;
 
-        isSavedItemsDefault();
         itemStatCalc();
+        isSavedItemsDefault();
         console.log("아이템 잔여 확인 :: ",savedItems);
         $("#iBox" + callIdx).css("background-image", "none");
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
@@ -1379,6 +1381,8 @@ function isSaveditemsDefaultR() {
         itemsR.fullHp= 0;
         itemsR.fullMp= 0;
         deleteItemR();
+    }else{
+        deleteItemR();
     }
 }
 
@@ -1401,8 +1405,8 @@ $("#item-listR").click(function (e) {
         delete saveditemsR[callIdxR];
         itemGoldR[callIdxR] = 0;
 
-        isSaveditemsDefaultR();
         itemstatCalcR();
+        isSaveditemsDefaultR();
         console.log("아이템 잔여 확인 :: ",saveditemsR);
         $("#iBox" + callIdxR).css("background-image", "none");
         $("#iBox" + callIdxR).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
