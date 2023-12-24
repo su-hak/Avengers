@@ -243,7 +243,7 @@ function setChampStats(id) {
         
         test.updateHpStats = function(selectedLevel) {
             var itemHp = items.fullHp;
-            console.log(dtch[0].stats.hp);
+            console.log(selectedLevel, dtch[0].stats.hp);
             const totalHp = document.getElementById("left-hp-total");
             if (selectedLevel > 1) {
                 console.log("statValues  ::",statValues);
@@ -709,12 +709,15 @@ function setChampSpells(id) {
     console.log("setChampSpells 진입성공");
     detailedChamp(id, function (dtch) {
         for (var i = 0; i < 4; i++) {
-            var skillButtonId = "skill" + (i + 1);
-            var skillInputId = "left-skill" + (i + 1) + "-num";
+            var skillButtonId = "skill" + (i + 1); // 스킬버튼 id
+            var skillInputId = "left-skill" + (i + 1) + "-num"; // 스킬 레벨 표시 id 변수선언
             var skillLevelInput = document.getElementById(skillInputId);
-            var skillImageSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/" + dtch[0].spells[i].id + ".png";
+            var skillImageSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/" + dtch[0].spells[i].id + ".png";   // 각 스킬 이미지
+            var skillDescription = dtch[0].spells[i].description; // 스킬 설명 정보 추가
 
-            // 스킬 이미지 설정
+            console.log ("챔피언 스킬정보 불러오기 성공 : " + skillButtonId + skillInputId + skillLevelInput + skillImageSrc + skillDescription);
+
+            // 스킬 이미지 및 설명 설정
             if (skillImageSrc) {
                 document.getElementById(skillButtonId).style.backgroundImage = "url('" + skillImageSrc + "')";
             } else {
@@ -722,13 +725,21 @@ function setChampSpells(id) {
                 skillLevelInput.value = 0;
             }
 
-            // 스킬 레벨을 1로 설정
+            // 스킬 정보 불러올 때 스킬 레벨을 1로 설정
             skillLevelInput.value = 1;
 
+            // 각 스킬 버튼에 대한 Popover 제거
+            $("#" + skillButtonId).popover('dispose');
+
+            // 각 스킬 버튼에 대한 Popover 설정
+            $("#" + skillButtonId).popover({
+                placement: "bottom",
+                trigger: "hover",
+                content: skillDescription
+            });
         }
     });
 }
-
 
 // 스킬 레벨 업 다운 버튼  --------------------
 document.addEventListener("DOMContentLoaded", function () {
@@ -755,7 +766,7 @@ function setupSkillControls(skillIndex) {
         }
     });
 }
-
+// 스킬 레벨 업 다운 버튼 E --------------------
 // 스킬 정보 업데이트 E ------------------------------
 
 
@@ -1184,7 +1195,6 @@ function itemStatCalc() {
             }
         });
     })
-
 }
 
 // 오른쪽 아이템 추가
