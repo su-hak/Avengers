@@ -728,12 +728,31 @@ function roundToThreeDecimalPlaces(number) {
 // 더미 스탯, 아이템
 let rArea = {}; // 오른쪽 관련 함수
 let itemsR = {}; // 오른쪽 아이템
-itemsR.fullHpR = 0; // 오른쪽 아이템으로 증가할 hp수치
+// itemsR.fullHpR = 0; // 오른쪽 아이템으로 증가할 hp수치
+rArea.updateArmorStatsR = function () {
+    var itemAr = itemsR.armor;
+    var armorR = document.getElementById("armorR");
+    var nextTd = armorR.nextElementSibling;
+
+    var currentValue = parseInt(nextTd.innerHTML);
+    var newValue = 30 + itemAr;
+    nextTd.innerHTML = newValue;
+}
+rArea.updateSpellBlockStatsR = function (){
+    var itemSp = itemsR.spellBlock;
+    var spellBlockR = document.getElementById("spellBlockR");
+    var nextTd = spellBlockR.nextElementSibling;
+
+    var currentValue = parseInt(nextTd.innerHTML);
+    var newValue = 30 + itemSp;
+    nextTd.innerHTML = newValue;
+}
 rArea.updateHpStatsR = function() {
-    var itemHpR = itemsR.fullHpR;
+    var itemHpR = itemsR.fullHp;
     // console.log(dtch[0].stats.hp);
     const totalHp = document.getElementById("right-hp-total");
-    let defaultHp = parseInt(document.getElementById("right-hp-total").innerText);
+    // let defaultHp = parseInt(document.getElementById("right-hp-total").innerText);
+    let defaultHp = 1000;
     let a = itemHpR + defaultHp;
     totalHp.textContent = a;
     rArea.r_SetRealHp(0);
@@ -1532,7 +1551,7 @@ function itemGoldUpdateR() {
 $("#item-listR").click(function (e) {
 
 
-    if (e.target.id === 'emptyBtn') {
+    if (e.target.id === 'emptyBtnR') {
         console.log("삭제 버튼 클릭하였습니다.");
 
         delete saveditemsR[callIdxR];
@@ -1579,16 +1598,18 @@ $("#item-listR").click(function (e) {
 
 // 아이템 스탯 업데이트
 function deleteItemR(){
-
+    rArea.updateArmorStatsR();
+    rArea.updateHpStatsR();
+    rArea.updateSpellBlockStatsR();
 }
 
 
 // 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
 $("#plusItemR").click(function (e){
-    if (!test.choose) {
-        Swal.fire("챔프 선택부터 혀라");
-        return; // test.choose가 false인 경우 함수 실행 중단
-    }
+    // if (!test.choose) {
+    //     Swal.fire("챔프 선택부터 혀라");
+    //     return; // test.choose가 false인 경우 함수 실행 중단
+    // }
     console.log("plusItemR 클릭 !", e.type);
     if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
         callIdxR = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
@@ -1677,10 +1698,12 @@ function itemstatCalcR() {
                         break;
                     case "방어력":
                         itemsR.armor += parseInt(statValue);
+                        rArea.updateArmorStatsR();
                         // testR.updateArmorStats(level);
                         break;
                     case "마법 저항력":
                         itemsR.spellBlock += parseInt(statValue);
+                        rArea.updateSpellBlockStatsR();
                         // testR.updateSpellBlockStats(level);
                         break;
                     case "공격 속도":
@@ -1749,6 +1772,7 @@ function itemstatCalcR() {
                         break;
                     case "체력":
                         itemsR.fullHp += parseInt(statValue);
+                        rArea.updateHpStatsR();
                         // testR.updateHpStats(level);
                         break;
                     case "마나":
@@ -1812,6 +1836,22 @@ function getValues() {
 
     return values;
 }
+function getValuesR() {
+    const valuesR = [];
+    const statValueElements = document.getElementsByClassName('stat_value_R');
+    const rightRscValue = document.getElementById('right-rsc-value').innerHTML;
+    const rightHpValue = document.getElementById('right-hp-value').innerHTML;
+
+    for (let i = 0; i < statValueElements.length; i++) {
+        const valueR = statValueElements[i].innerHTML;
+        valuesR.push(valueR);
+    }
+
+    valuesR.push(rightRscValue);
+    valuesR.push(rightHpValue);
+
+    return valuesR;
+}
 
 // left_BA_button 클릭 이벤트 처리
 const leftBAButton = document.getElementById('left_BA_button');
@@ -1827,18 +1867,20 @@ for (let i = 0; i < skillButtons.length; i++) {
 
     button.addEventListener('click', function() {
         const values = getValues();
+        const valuesR = getValuesR();
         var imgElement = document.querySelector('.portrait');
         var src = imgElement.getAttribute('src');
         var championName = src.split('/').pop().split('.')[0];
 
-        console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
+        console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
     });
 }
 leftBAButton.addEventListener('click', function() {
     const values = getValues();
+    const valuesR = getValuesR();
     var imgElement = document.querySelector('.portrait');
     var src = imgElement.getAttribute('src');
     var championName = src.split('/').pop().split('.')[0];
 
-    console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
+    console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
 });
