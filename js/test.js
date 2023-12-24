@@ -243,7 +243,7 @@ function setChampStats(id) {
         
         test.updateHpStats = function(selectedLevel) {
             var itemHp = items.fullHp;
-            console.log(dtch[0].stats.hp);
+            console.log(selectedLevel, dtch[0].stats.hp);
             const totalHp = document.getElementById("left-hp-total");
             if (selectedLevel > 1) {
                 console.log("statValues  ::",statValues);
@@ -515,12 +515,31 @@ function roundToThreeDecimalPlaces(number) {
 // 더미 스탯, 아이템
 let rArea = {}; // 오른쪽 관련 함수
 let itemsR = {}; // 오른쪽 아이템
-itemsR.fullHpR = 0; // 오른쪽 아이템으로 증가할 hp수치
+// itemsR.fullHpR = 0; // 오른쪽 아이템으로 증가할 hp수치
+rArea.updateArmorStatsR = function () {
+    var itemAr = itemsR.armor;
+    var armorR = document.getElementById("armorR");
+    var nextTd = armorR.nextElementSibling;
+
+    var currentValue = parseInt(nextTd.innerHTML);
+    var newValue = 30 + itemAr;
+    nextTd.innerHTML = newValue;
+}
+rArea.updateSpellBlockStatsR = function (){
+    var itemSp = itemsR.spellBlock;
+    var spellBlockR = document.getElementById("spellBlockR");
+    var nextTd = spellBlockR.nextElementSibling;
+
+    var currentValue = parseInt(nextTd.innerHTML);
+    var newValue = 30 + itemSp;
+    nextTd.innerHTML = newValue;
+}
 rArea.updateHpStatsR = function() {
-    var itemHpR = itemsR.fullHpR;
+    var itemHpR = itemsR.fullHp;
     // console.log(dtch[0].stats.hp);
     const totalHp = document.getElementById("right-hp-total");
-    let defaultHp = parseInt(document.getElementById("right-hp-total").innerText);
+    // let defaultHp = parseInt(document.getElementById("right-hp-total").innerText);
+    let defaultHp = 1000;
     let a = itemHpR + defaultHp;
     totalHp.textContent = a;
     rArea.r_SetRealHp(0);
@@ -553,7 +572,6 @@ function getChampionList() {
             champions.sort(function(a, b) {
                 return a.name.localeCompare(b.name);
             });
-
             displayChampionList(champions);
         }
     });
@@ -568,8 +586,9 @@ function detailedChamp(id, callback){
         url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion/"+id+".json",
         success: function (data) {
             var dtch = Object.values(data.data); // 챔피언 데이터 배열 추출
-            console.log(dtch);
+            console.log("dtch :" + dtch);
             callback(dtch); // 결과를 콜백 함수로 전달합니다.
+            console.log("callback(dtch) :" + dtch);
         }
     });
 }
@@ -700,37 +719,75 @@ function initialize() {
 // 페이지 로드 시 초기화 함수 호출
 $(document).ready(initialize);
 
-// 스킬 이벤트
-function setSkillEvents(skillButton, spellInfo) {
-    // 마우스 오버 및 아웃 이벤트 추가
-    // skillButton.addEventListener('mouseover', function (event) {
-    //     showTooltip(spellInfo, event.pageX, event.pageY);
-    // });
-    // skillButton.addEventListener('mouseout', hideTooltip);
-}
+
+
+
+// 스킬 정보 업데이트 --------------------
 // 받은 이미지로 spell 정보 받아오기 // 스킬 이미지 및 설명
-function setChampSpells(id){
+function setChampSpells(id) {
     console.log("setChampSpells 진입성공");
-    detailedChamp(id, function(dtch) {
-        for(var i=0; i<4; i++){
-            var skillButtonId = "skill" + (i + 1);
-            var skillImageSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/" + dtch[0].spells[i].id + ".png";
+    detailedChamp(id, function (dtch) {
+        for (var i = 0; i < 4; i++) {
+            var skillButtonId = "skill" + (i + 1); // 스킬버튼 id
+            var skillInputId = "left-skill" + (i + 1) + "-num"; // 스킬 레벨 표시 id 변수선언
+            var skillLevelInput = document.getElementById(skillInputId);
+            var skillImageSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/" + dtch[0].spells[i].id + ".png";   // 각 스킬 이미지
+            var skillDescription = dtch[0].spells[i].description; // 스킬 설명 정보 추가
 
-            // 각 스킬 버튼의 id에 해당하는 요소에 이미지를 설정합니다.
-            document.getElementById(skillButtonId).style.backgroundImage = "url('" + skillImageSrc + "')";
-            // 이미지 및 툴팁 이벤트 추가
-            var skillButton = document.getElementById(skillButtonId);
-            skillButton.style.backgroundImage = "url('" + skillImageSrc + "')";
+            console.log ("챔피언 스킬정보 불러오기 성공 : " + skillButtonId + skillInputId + skillLevelInput + skillImageSrc + skillDescription);
 
-            // 툴팁에 표시할 스킬 정보 저장
-            var spellInfo = dtch[0].spells[i].description;
+            // 스킬 이미지 및 설명 설정
+            if (skillImageSrc) {
+                document.getElementById(skillButtonId).style.backgroundImage = "url('" + skillImageSrc + "')";
+            } else {
+                // 챔피언 이미지가 없는 경우 해당 input의 값을 0으로 설정
+                skillLevelInput.value = 0;
+            }
 
+            // 스킬 정보 불러올 때 스킬 레벨을 1로 설정
+            skillLevelInput.value = 1;
 
-            // 각 스킬에 대한 이벤트 설정
-            setSkillEvents(skillButton, spellInfo);
+            // 각 스킬 버튼에 대한 Popover 제거
+            $("#" + skillButtonId).popover('dispose');
+
+            // 각 스킬 버튼에 대한 Popover 설정
+            $("#" + skillButtonId).popover({
+                placement: "bottom",
+                trigger: "hover",
+                content: skillDescription
+            });
         }
     });
 }
+
+// 스킬 레벨 업 다운 버튼  --------------------
+document.addEventListener("DOMContentLoaded", function () {
+    for (var i = 1; i <= 4; i++) {
+        setupSkillControls(i);
+    }
+});
+
+function setupSkillControls(skillIndex) {
+    var skillInputId = "left-skill" + skillIndex + "-num";
+    var skillLevelInput = document.getElementById(skillInputId);
+
+    // 레벨 다운 버튼 이벤트 처리
+    document.getElementById("left-skill" + skillIndex + "-numDown").addEventListener("click", function () {
+        if (skillLevelInput.value > 0) {
+            skillLevelInput.value = parseInt(skillLevelInput.value) - 1;
+        }
+    });
+
+    // 레벨 업 버튼 이벤트 처리
+    document.getElementById("left-skill" + skillIndex + "-numUp").addEventListener("click", function () {
+        if (skillLevelInput.value < parseInt(skillLevelInput.getAttribute("max"))) {
+            skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+        }
+    });
+}
+// 스킬 레벨 업 다운 버튼 E --------------------
+// 스킬 정보 업데이트 E ------------------------------
+
 
 
 // 수학 햄 js
@@ -1157,7 +1214,6 @@ function itemStatCalc() {
             }
         });
     })
-
 }
 
 // 오른쪽 아이템 추가
@@ -1386,7 +1442,9 @@ $("#item-listR").click(function (e) {
 
 // 아이템 스탯 업데이트
 function deleteItemR(){
-
+    rArea.updateArmorStatsR();
+    rArea.updateHpStatsR();
+    rArea.updateSpellBlockStatsR();
 }
 
 
@@ -1485,10 +1543,12 @@ function itemstatCalcR() {
                         break;
                     case "방어력":
                         itemsR.armor += parseInt(statValue);
+                        rArea.updateArmorStatsR();
                         // testR.updateArmorStats(level);
                         break;
                     case "마법 저항력":
                         itemsR.spellBlock += parseInt(statValue);
+                        rArea.updateSpellBlockStatsR();
                         // testR.updateSpellBlockStats(level);
                         break;
                     case "공격 속도":
@@ -1557,6 +1617,7 @@ function itemstatCalcR() {
                         break;
                     case "체력":
                         itemsR.fullHp += parseInt(statValue);
+                        rArea.updateHpStatsR();
                         // testR.updateHpStats(level);
                         break;
                     case "마나":
@@ -1589,6 +1650,22 @@ function getValues() {
 
     return values;
 }
+function getValuesR() {
+    const valuesR = [];
+    const statValueElements = document.getElementsByClassName('stat_value_R');
+    const rightRscValue = document.getElementById('right-rsc-value').innerHTML;
+    const rightHpValue = document.getElementById('right-hp-value').innerHTML;
+
+    for (let i = 0; i < statValueElements.length; i++) {
+        const valueR = statValueElements[i].innerHTML;
+        valuesR.push(valueR);
+    }
+
+    valuesR.push(rightRscValue);
+    valuesR.push(rightHpValue);
+
+    return valuesR;
+}
 
 // left_BA_button 클릭 이벤트 처리
 const leftBAButton = document.getElementById('left_BA_button');
@@ -1604,18 +1681,20 @@ for (let i = 0; i < skillButtons.length; i++) {
 
     button.addEventListener('click', function() {
         const values = getValues();
+        const valuesR = getValuesR();
         var imgElement = document.querySelector('.portrait');
         var src = imgElement.getAttribute('src');
         var championName = src.split('/').pop().split('.')[0];
 
-        console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
+        console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
     });
 }
 leftBAButton.addEventListener('click', function() {
     const values = getValues();
+    const valuesR = getValuesR();
     var imgElement = document.querySelector('.portrait');
     var src = imgElement.getAttribute('src');
     var championName = src.split('/').pop().split('.')[0];
 
-    console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
+    console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
 });

@@ -790,11 +790,25 @@ body {
 }
 
 /* 스킬창 */
+.skill-description {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
+
 .skill_pan {
     margin-bottom: 10px;
 }
 
 /* 스킬버튼 */
+.skill {
+    position: relative;
+    display: inline-block;
+}
+
 .skill_Btn {
     position: relative;
     width: 50px;
@@ -875,6 +889,10 @@ body {
     /* background: #b1daff; */
     background: #525975;
     color: #ffe600;
+}
+
+.red-text {
+    color: #ff0000;
 }
 
 /* 아이템 & 로그 패널 */
