@@ -1,60 +1,14 @@
-// import { asstatValue } from "./item.js";
-// console.log(asstatValue);
-// 챔피언의 스킬정보와 디테일한 스텟정보를 받아오는 함수
-// function detailedChamp(id, callback){
-//     let detail;
-//     $.ajax({
-//         type: "get",
-//         url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion/"+id+".json",
-//         success: function (data) {
-//             var dtch = Object.values(data.data); // 챔피언 데이터 배열 추출
-//             console.log(dtch);
-//             callback(dtch); // 결과를 콜백 함수로 전달합니다.
-//         }
-//     });
-//
-//
-// }
-// stats = {};
 let test = {};
+let testR = {};
 //
 function selectObject(colElement) {
-//         console.log("selectObject 함수 호출 성공");
-//         // 해당 div 요소를 가져옵니다.
-//         // var colDiv = document.querySelector('.col-3.bg-hover');
-//         var colDiv = document.querySelector('.col-3.bg-hover');
-// // 이미지 요소를 가져옵니다.
-//         var imgElement = colDiv.querySelector('img');
-//         var name = imgElement.id;
-//         // var info = champ.id.equals(imgElement);
-//         console.log(name);
-//         // var info = champ.find(name);
-//         var info = champ.find(function(champion) {
-//             return champion.key === name;
-//         });
-//         console.log(info);
-//         // console.log(champ);
 
     var clickedDiv = currentTarget;
     var imgElement = clickedDiv.querySelector("img");
     var imgId = imgElement.id;
     console.log("클릭한 div의 img id:", imgId);
     // 필요한 작업을 수행합니다.
-
-
 }
-// 선택한 챔피언의 div img id값으로 선택
-// function selectObject(event) {
-//     var clickedDiv = event.currentTarget;
-//     var imgElement = clickedDiv.querySelector("img");
-//     var imgId = imgElement.id;
-//     console.log("클릭한 div의 img id:", imgId);
-//     var newSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/"+imgId+".png"; // 새로운 이미지 소스 URL
-//     searchChampById(imgId);
-//     changeLeftChampPortraitSrc(newSrc);
-//     // 필요한 작업을 수행합니다.
-//
-// }
 
 // 이미지를 검색하는 함수
 function searchChampById(imgId) {
@@ -71,18 +25,6 @@ function searchChampById(imgId) {
     }
 }
 
-// 받은 이미지로 spell정보 받아오기
-// function setChampSpells(id){
-//     console.log("setChampSpells 진입성공");
-//     detailedChamp(id, function(dtch) {
-//         for(var i=0; i<4; i++){
-//             console.log(dtch[0].spells[i]);
-//         }
-//         // console.log(dtch[0].spells);
-//
-//
-//     });
-// }
 
 // 선택한 레벨 받아오기
 test.getSelectedLevel = function() {
@@ -280,12 +222,6 @@ function setChampStats(id) {
                 for (let i = 1; i < selectedLevel; i++) {
                     a[i] = ((itemAsNum+(+(coefficient*0.01)*(selectedLevel-1))*(0.7025+(0.0175*(selectedLevel-1))))*a[0]) + a[0];
                 }
-                // }else{
-                //     // itemAs = 0;
-                //     for (let i = 1; i < selectedLevel; i++) {
-                //         a[i] = ((itemAsNum+(+(coefficient*0.01)*(selectedLevel-1))*(0.7025+(0.0175*(selectedLevel-1))))*a[0]) + a[0];
-                //     }
-                // }
 
                 const value = new Decimal(a[selectedLevel - 1]);
                 const roundedValue = roundToThreeDecimalPlaces(value);
@@ -304,38 +240,10 @@ function setChampStats(id) {
                 }
             }
         }
-        // function updateHpStats(selectedLevel){
-        //     const totalHp = document.getElementById("left-hp-total");
-        //     // console.log(dtch[0].stats.hp);
-        //     // console.log(dtch[0].stats.hpperlevel);
-        //     if (selectedLevel > 1) {
-        //         let coefficient = dtch[0].stats.hpperlevel;
-        //         let a = [];
-        //         let itemHp = 0;
-        //         a[0] = dtch[0].stats.hp;
-        //         let level = 1;
-        //         for (let i = 1; i < selectedLevel; i++) {
-        //             a[i] = Math.round((a[i-1]+(coefficient* (0.65+(0.035*(i+1)))))+itemHp);
-        //         }
-        //         const value = new Decimal(a[selectedLevel - 1]);
-        //         const roundedValue = value.toDecimalPlaces(2);
-        //         const realRoundedValue = roundedValue.toDecimalPlaces(1);
-        //         statValues['hp'] = Math.round(realRoundedValue);
-        //         console.log(a);
-        //     } else if (selectedLevel < 2) {
-        //         statValues['hp'] = Math.round(dtch[0].stats.hp);
-        //     }
-        //     for (const id in statValues) {
-        //         const element = document.getElementById(id);
-        //         let value = statValues[id];
-        //         if (element) {
-        //             totalHp.textContent = value;
-        //         }
-        //     }
-        // }
+
         test.updateHpStats = function(selectedLevel) {
             var itemHp = items.fullHp;
-            console.log(dtch[0].stats.hp);
+            console.log(selectedLevel, dtch[0].stats.hp);
             const totalHp = document.getElementById("left-hp-total");
             if (selectedLevel > 1) {
                 console.log("statValues  ::",statValues);
@@ -398,7 +306,7 @@ function setChampStats(id) {
             }else{
                 totalMp.textContent = 0;
             }
-            setRealMp();
+            test.setRealMp(0);
 
         }
 
@@ -534,10 +442,10 @@ function setChampStats(id) {
             hpBar.style.width = currentWidth + "%"; // width 값 업데이트
         }
 
-        function setRealMp(){
+        test.setRealMp = function(getCost){
             // console.log("mp :::",statValues['mp']);
             var realMp = statValues['mp'];
-            var cost = 0;
+            var cost = getCost;
             const targetMp = document.getElementById("left-rsc-value");
             var costMp = statValues['mp'] - cost;// 데미지 입은만큼 빼기
             targetMp.textContent = costMp;
@@ -593,136 +501,64 @@ function setChampStats(id) {
 }
 
 
-// var checkbox = document.getElementById('right_critical');
+var checkbox = document.getElementById('right_critical');
 
-// checkbox.addEventListener('change', function() {
-//     var critValue = checkCritbox(); // checkCritbox() 함수 호출하여 반환된 값을 가져옵니다.
-//     updateCritStats(critValue); // updateCritStats() 함수 호출하여 critValue를 전달합니다.
-// });
+checkbox.addEventListener('change', function() {
+    var critValue = checkCritbox(); // checkCritbox() 함수 호출하여 반환된 값을 가져옵니다.
+    updateCritStats(critValue); // updateCritStats() 함수 호출하여 critValue를 전달합니다.
+});
 function roundToThreeDecimalPlaces(number) {
     return Math.round(number * 1000) / 1000;
 
 }
 
+// 더미 스탯, 아이템
+let rArea = {}; // 오른쪽 관련 함수
+let itemsR = {}; // 오른쪽 아이템
+// itemsR.fullHpR = 0; // 오른쪽 아이템으로 증가할 hp수치
+rArea.updateArmorStatsR = function () {
+    var itemAr = itemsR.armor;
+    var armorR = document.getElementById("armorR");
+    var nextTd = armorR.nextElementSibling;
 
-//
-//
-//
-//
-// // 챔피언 선택시 초상화 해당 챔피언으로 변경하는 함수
-// function changeLeftChampPortraitSrc(newSrc) {
-//     console.log(newSrc);
-//     var imgElement = document.getElementById("left-champ-portrait");
-//     if (imgElement) {
-//         imgElement.src = newSrc;
-//         console.log("left-champ-portrait 이미지의 src가 변경되었습니다.");
-//     } else {
-//         console.log("left-champ-portrait 이미지를 찾을 수 없습니다.");
-//     }
-// }
-//
-//
-// // 사용 예시
-// // api속 챔피언 갯수만큼 박스 생성
-// function createBoxes() {
-//
-//     var boxes = champ; // 예시로 사용되는 배열
-//     var searchInput = document.getElementById("left-champ-search");
-//     var searchText = searchInput.value.toLowerCase();
-//
-//     var boxContainer = document.getElementById("boxContainer");
-//     boxContainer.innerHTML = ""; // 기존 요소 초기화
-//     for(var i=0; boxes.length; i++){
-//
-//             let championName = boxes[i].name;
-//             // console.log(boxes[i].name);
-//
-//          // 예시로 사용되는 챔피언 이름
-//         // console.log(championName);
-//
-//         // 검색어가 존재하고 현재 챔피언 이름에 검색어가 포함되지 않으면 요소를 생성하지 않음
-//         if (searchText && !championName.toLowerCase().includes(searchText)) {
-//             return;
-//         }
-//
-//         var colElement = document.createElement("div");
-//         colElement.classList.add("col-3", "bg-hover", "pt-2");
-//         colElement.addEventListener("click", selectObject);
-//         // selectObject(colElement);
-//         // colElement.addEventListener("click", selectObject);
-//         // colElement.setAttribute("onclick", "selectObject()");
-//
-//         // colElement.addEventListener("click", function() {
-//         //     selectObject(boxes[i].name);
-//         // });
-//
-//         var imgElement = document.createElement("img");
-//         imgElement.src = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/"+champ[i].id+".png";
-//         imgElement.classList.add("portrait", "sprite");
-//          // imgElement.style.width = "90%"; // 이미지 크기 지정
-//          // imgElement.style.height = "90%"; // 이미지 크기 지정
-//         imgElement.id = champ[i].id; // 이미지에 id 할당
-//         colElement.appendChild(imgElement);
-//
-//
-//         var rowElement = document.createElement("div");
-//         rowElement.classList.add("row");
-//
-//         var pElement = document.createElement("p");
-//         pElement.classList.add("text-center", "champ-name", "mx-auto");
-//         pElement.textContent = champ[i].name;
-//         rowElement.appendChild(pElement);
-//
-//         colElement.appendChild(rowElement);
-//
-//         boxContainer.appendChild(colElement);
-//     }
-//
-// }
-//
-// // 챔피언 초상화 클릭후 search에서 이름으로 검색하는 함수들
-// $(document).ready(function () {
-//
-//
-// });
-// import { asstatValue } from "./item2.js";
+    var currentValue = parseInt(nextTd.innerHTML);
+    var newValue = 30 + itemAr;
+    nextTd.innerHTML = newValue;
+}
+rArea.updateSpellBlockStatsR = function (){
+    var itemSp = itemsR.spellBlock;
+    var spellBlockR = document.getElementById("spellBlockR");
+    var nextTd = spellBlockR.nextElementSibling;
 
-// console.log(asstatValue);  // statValue 값을 사용하는 원하는 로직을 작성합니다.
-//
-// function enableSearch(parent) {
-//     var searchBar = $(parent)
-//     searchBar.on("keyup", function() {
-//         var input = $(this).val();
-//         searchItems(input, parent);
-//     });
-// }
-//
-// function searchItems(input, parent) {
-//     var filter = input.toUpperCase();
-//     // Select all .col-3.bg-hover where the parent is a row preceded by #id
-//     var candidates = $(parent).find(".col-3.bg-hover");
-//     while ($(candidates).length == 0) {
-//         parent = $(parent).parent();
-//         candidates = parent.find(".col-3.bg-hover");
-//     }
-//     for (var i = 0; i < candidates.length; ++i) {
-//         if ($(candidates[i]).attr("filtered") == "true") {
-//             continue;
-//         }
-//         var img = $(candidates[i]).find("img");
-//         var name = $(candidates[i]).find("p");
-//         var text = name.text();
-//         if (text.toUpperCase().indexOf(filter) > -1) {
-//             $(candidates[i]).show();
-//         }
-//         else {
-//             $(candidates[i]).hide();
-//         }
-//     }
-// }
-// end
+    var currentValue = parseInt(nextTd.innerHTML);
+    var newValue = 30 + itemSp;
+    nextTd.innerHTML = newValue;
+}
+rArea.updateHpStatsR = function() {
+    var itemHpR = itemsR.fullHp;
+    // console.log(dtch[0].stats.hp);
+    const totalHp = document.getElementById("right-hp-total");
+    // let defaultHp = parseInt(document.getElementById("right-hp-total").innerText);
+    let defaultHp = 1000;
+    let a = itemHpR + defaultHp;
+    totalHp.textContent = a;
+    rArea.r_SetRealHp(0);
+}
 
-test.choose = false;
+rArea.r_SetRealHp = function(getDamage){
+    // console.log("hp :::",statValues['hp']);
+    var realHp = parseInt(document.getElementById('right-hp-total').innerText);
+    let damage = getDamage;
+    const targetHp = document.getElementById("right-hp-value");
+    var damageHp = realHp - damage;// 데미지 입은만큼 빼기
+    targetHp.textContent = damageHp;
+    var maxWidth = 100; // 최대 width 값 (100%)
+    var currentWidth = (damageHp / realHp) * maxWidth; // 현재 width 값 계산
+    var hpBar = document.getElementById("right-hp-bar"); // hp 바 엘리먼트 가져오기
+    hpBar.style.width = currentWidth + "%"; // width 값 업데이트
+}
+
+
 
 // 광규햄 js
 // 챔피언 정보를 받아오는 함수
@@ -736,7 +572,6 @@ function getChampionList() {
             champions.sort(function(a, b) {
                 return a.name.localeCompare(b.name);
             });
-
             displayChampionList(champions);
         }
     });
@@ -751,8 +586,9 @@ function detailedChamp(id, callback){
         url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion/"+id+".json",
         success: function (data) {
             var dtch = Object.values(data.data); // 챔피언 데이터 배열 추출
-            console.log(dtch);
+            console.log("dtch :" + dtch);
             callback(dtch); // 결과를 콜백 함수로 전달합니다.
+            console.log("callback(dtch) :" + dtch);
         }
     });
 }
@@ -843,6 +679,22 @@ function searchItem() {
     });
 }
 
+function searchItemR() {
+    var searchText = $("#right-item-search").val().toLowerCase();
+    var itemBoxes = $(".item_box_list");
+
+    itemBoxes.each(function () {
+        var itemBox = $(this);
+        var itemName = itemBox.find("p").text().toLowerCase();
+
+        if (itemName.includes(searchText)) {
+            itemBox.show();
+        } else {
+            itemBox.hide();
+        }
+    });
+}
+
 
 
 // 챔피언 버튼 이미지를 업데이트하는 함수
@@ -856,69 +708,85 @@ function updateChampionButtonImage(championId) {
 // 초기화 함수
 function initialize() {
     getChampionList();
+    rArea.updateHpStatsR();
 
     // 검색창에 입력이 있을 때마다 검색 수행
     $("#champion-search").on("input", searchChampion);
     $("#left-item-search").on("input", searchItem);
+    $("#right-item-search").on("input", searchItemR);
 }
 
-// // 페이지 로드 시 초기화 함수 호출
-// $(document).ready(initialize);
+// 페이지 로드 시 초기화 함수 호출
+$(document).ready(initialize);
 
-// 스킬 이벤트
-function setSkillEvents(skillButton, spellInfo) {
-    // 마우스 오버 및 아웃 이벤트 추가
-    // skillButton.addEventListener('mouseover', function (event) {
-    //     showTooltip(spellInfo, event.pageX, event.pageY);
-    // });
-    // skillButton.addEventListener('mouseout', hideTooltip);
-}
+
+
+
+// 스킬 정보 업데이트 --------------------
 // 받은 이미지로 spell 정보 받아오기 // 스킬 이미지 및 설명
-function setChampSpells(id){
+function setChampSpells(id) {
     console.log("setChampSpells 진입성공");
-    detailedChamp(id, function(dtch) {
-        for(var i=0; i<4; i++){
-            var skillButtonId = "skill" + (i + 1);
-            var skillImageSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/" + dtch[0].spells[i].id + ".png";
+    detailedChamp(id, function (dtch) {
+        for (var i = 0; i < 4; i++) {
+            var skillButtonId = "skill" + (i + 1); // 스킬버튼 id
+            var skillInputId = "left-skill" + (i + 1) + "-num"; // 스킬 레벨 표시 id 변수선언
+            var skillLevelInput = document.getElementById(skillInputId);
+            var skillImageSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/" + dtch[0].spells[i].id + ".png";   // 각 스킬 이미지
+            var skillDescription = dtch[0].spells[i].description; // 스킬 설명 정보 추가
 
-            // 각 스킬 버튼의 id에 해당하는 요소에 이미지를 설정합니다.
-            document.getElementById(skillButtonId).style.backgroundImage = "url('" + skillImageSrc + "')";
-            // 이미지 및 툴팁 이벤트 추가
-            var skillButton = document.getElementById(skillButtonId);
-            skillButton.style.backgroundImage = "url('" + skillImageSrc + "')";
+            console.log ("챔피언 스킬정보 불러오기 성공 : " + skillButtonId + skillInputId + skillLevelInput + skillImageSrc + skillDescription);
 
-            // 툴팁에 표시할 스킬 정보 저장
-            var spellInfo = dtch[0].spells[i].description;
+            // 스킬 이미지 및 설명 설정
+            if (skillImageSrc) {
+                document.getElementById(skillButtonId).style.backgroundImage = "url('" + skillImageSrc + "')";
+            } else {
+                // 챔피언 이미지가 없는 경우 해당 input의 값을 0으로 설정
+                skillLevelInput.value = 0;
+            }
 
+            // 스킬 정보 불러올 때 스킬 레벨을 1로 설정
+            skillLevelInput.value = 1;
 
-            // 각 스킬에 대한 이벤트 설정
-            setSkillEvents(skillButton, spellInfo);
+            // 각 스킬 버튼에 대한 Popover 제거
+            $("#" + skillButtonId).popover('dispose');
+
+            // 각 스킬 버튼에 대한 Popover 설정
+            $("#" + skillButtonId).popover({
+                placement: "bottom",
+                trigger: "hover",
+                content: skillDescription
+            });
         }
     });
 }
 
-// // 스킬 설명 툴팁
-// function showTooltip(content, x, y) {
-//     var tooltip = document.getElementById('tooltip');
-//     var tooltipContent = document.getElementById('tooltip-content');
-//
-//     tooltipContent.innerHTML = content;
-//     tooltip.style.left = x + 'px';
-//     tooltip.style.top = y + 'px';
-//     tooltip.style.display = 'block';
-// }
-//
-// function hideTooltip() {
-//     var tooltip = document.getElementById('tooltip');
-//     tooltip.style.display = 'none';
-// }
+// 스킬 레벨 업 다운 버튼  --------------------
+document.addEventListener("DOMContentLoaded", function () {
+    for (var i = 1; i <= 4; i++) {
+        setupSkillControls(i);
+    }
+});
 
+function setupSkillControls(skillIndex) {
+    var skillInputId = "left-skill" + skillIndex + "-num";
+    var skillLevelInput = document.getElementById(skillInputId);
 
+    // 레벨 다운 버튼 이벤트 처리
+    document.getElementById("left-skill" + skillIndex + "-numDown").addEventListener("click", function () {
+        if (skillLevelInput.value > 0) {
+            skillLevelInput.value = parseInt(skillLevelInput.value) - 1;
+        }
+    });
 
-
-
-
-
+    // 레벨 업 버튼 이벤트 처리
+    document.getElementById("left-skill" + skillIndex + "-numUp").addEventListener("click", function () {
+        if (skillLevelInput.value < parseInt(skillLevelInput.getAttribute("max"))) {
+            skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+        }
+    });
+}
+// 스킬 레벨 업 다운 버튼 E --------------------
+// 스킬 정보 업데이트 E ------------------------------
 
 
 
@@ -957,62 +825,102 @@ items.fullMp= 0;
 
 
 // API 가져오기
-// $.ajax({
-//     type: "get",
-//     url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
-//     success: function (data) {
-//         allItems = Object.values(data.data); //아이템 데이터 배열 추출
+$.ajax({
+    type: "get",
+    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+    success: function (data) {
+        allItems = Object.values(data.data); //아이템 데이터 배열 추출
 
-//         /* ===========아이템 가나다 순 정렬 start ==========*/
-//         allItems.sort(function(a,b){
-//             var nameA=a.name.toUpperCase();
-//             var nameB=b.name.toUpperCase();
+        /* ===========아이템 가나다 순 정렬 start ==========*/
+        allItems.sort(function(a,b){
+            var nameA=a.name.toUpperCase();
+            var nameB=b.name.toUpperCase();
 
-//             if(nameA<nameB){
-//                 return -1;
-//             }
-//             if(nameA>nameB){
-//                 return 1;
-//             }
-//             return 0;
-//         });
-//         /* ===========아이템 가나다 순 정렬 start ==========*/
+            if(nameA<nameB){
+                return -1;
+            }
+            if(nameA>nameB){
+                return 1;
+            }
+            return 0;
+        });
+        /* ===========아이템 가나다 순 정렬 start ==========*/
 
-//         // 아이템 필터링 start
-//         filterItems = allItems.filter(function(allItems){
-//             return !allItems.requiredChampion // 챔피언전용템제외
-//                 // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
-//                 && allItems.inStore!==false // 스토어: false인 item 제외
-//                 && allItems.maps["11"]===true; // 소환사의 협곡 맵("11")만 출력
-//         });
+        // 아이템 필터링 start
+        filterItems = allItems.filter(function(allItems){
+            return !allItems.requiredChampion // 챔피언전용템제외
+                // && items.description.includes('rarityMythic') // 신화급 아이템만 출력
+                && allItems.inStore!==false // 스토어: false인 item 제외
+                && allItems.maps["11"]===true // 소환사의 협곡 맵("11")만 출력
+                && !allItems.tags.includes("Jungle")
+                && !allItems.tags.includes("Consumable")
+                && !allItems.description.includes('퀘스트')
+                && !allItems.description.includes('장신구');
+        });
 
 
-//         console.log(filterItems);
-//         // 아이템 필터링 End
+        console.log(filterItems);
+        // 아이템 필터링 End
 
-//         filterItems.forEach((data, index) =>{
-//             var itemBox = $("<div>").addClass("item_box_list");
-//             var itemImg = $("<img>", {
-//                 src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
-//                 alt: data.name + " 이미지",
-//                 class: "item-img",
-//                 value : index
-//             });
-//             var itemName = $("<p>").addClass("item-name").text(data.name);
-//             // var imgURL= "http://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/"+data.image.full;
-//             // var itemButton = $("<button type='button' class='item_box'><img src='"+imgURL+"'alt='"+data.name+"'></button>"+data.name)
-//             // $("#itemContainer").append(itemButton);
-//             itemBox.append(itemImg);
-//             itemBox.append($("<br>"));
-//             itemBox.append(itemName);
-//             $("#item-list").append(itemBox); //#item-list의 자식요소에 <div class="item-box">
-//         });
+        // 아이템 설명창 띄우기
+        function showDescription(data, index) {
+            // 팝오버 내용 설정
+            var itemName = data.name;
+            var description = data.description;
 
-//     },
-//     error : function (){
-//         console.log("API 데이터 가져오는 중 오류 발생");
-//     }
-// });
+            description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
+            description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+            // console.log("description",description)
+
+            // 문장 뒤에 <br> 추가
+            description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
+
+            // 팝오버 생성 및 표시
+            $('#item-img-' + index).popover({
+                title: itemName,
+                content: description,
+                trigger: 'manual', // 수동으로 트리거
+                html: true,
+                placement: 'bottom',
+                // container: 'body'
+            }).popover('show');
+        }
+        // 아이템 설명창 띄우기 E
+
+
+        filterItems.forEach((data, index) => {
+            var itemBox = $("<div>").addClass("item_box_list");
+            var itemImg = $("<img>", {
+                id: 'item-img-' + index,
+                src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
+                alt: data.name + " 이미지",
+                class: "item-img",
+                value: index
+            });
+            var itemName = $("<p>").addClass("item-name").text(data.name);
+
+            // 마우스 오버 이벤트에 아이템 설명창 팝오버 표시 함수 연결
+            itemImg.mouseover(function () {
+                showDescription(data, index);
+            });
+
+            // 마우스 나가기 이벤트에  아이템 설명창 팝오버 숨기기
+            itemImg.mouseout(function () {
+                $('#item-img-' + index).popover('hide');
+            });
+
+            itemBox.append(itemImg);
+            itemBox.append($("<br>"));
+            itemBox.append(itemName);
+            $("#item-list").append(itemBox);
+        });
+
+
+    },
+    error : function (){
+        console.log("API 데이터 가져오는 중 오류 발생");
+    }
+});
 
 function checkSavedItemsNull() {
     for (var i = 0; i < savedItems.length; i++) {
@@ -1048,6 +956,8 @@ function isSavedItemsDefault() {
         items.fullHp= 0;
         items.fullMp= 0;
         deleteItem();
+    }else {
+        deleteItem();
     }
 }
 
@@ -1061,53 +971,53 @@ function itemGoldUpdate() {
 }
 
 // 아이템 선택
-// $("#item-list").click(function (e) {
+$("#item-list").click(function (e) {
 
-//     console.log(itemGold);
-//     if (e.target.id === 'emptyBtn') {
-//         console.log("삭제 버튼 클릭하였습니다.");
+    console.log(itemGold);
+    if (e.target.id === 'emptyBtn') {
+        console.log("삭제 버튼 클릭하였습니다.");
 
-//         delete savedItems[callIdx];
-//         itemGold[callIdx] = 0;
+        delete savedItems[callIdx];
+        itemGold[callIdx] = 0;
 
-//         isSavedItemsDefault();
-//         itemStatCalc();
-//         console.log("아이템 잔여 확인 :: ",savedItems);
-//         $("#iBox" + callIdx).css("background-image", "none");
-//         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
-//         console.log("저장된 스탯::: ", items);
-//         itemGoldUpdate();
+        itemStatCalc();
+        isSavedItemsDefault();
+        console.log("아이템 잔여 확인 :: ",savedItems);
+        $("#iBox" + callIdx).css("background-image", "none");
+        $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+        console.log("저장된 스탯::: ", items);
+        itemGoldUpdate();
 
 
 
-//     } else if (e.target.classList.contains('item-img')) {
-//         console.log(333,)
-//         console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
-//         // callIdx = $(e.target).closest('.iBox').index();
-//         console.log("savedItems :: ",savedItems);
-//         var itemData = filterItems[e.target.getAttribute("value")];
-//         var imgSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filterItems[e.target.getAttribute("value")].image.full;
+    } else if (e.target.classList.contains('item-img')) {
+        console.log(333,)
+        console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
+        // callIdx = $(e.target).closest('.iBox').index();
+        console.log("savedItems :: ",savedItems);
+        var itemData = filterItems[e.target.getAttribute("value")];
+        var imgSrc = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filterItems[e.target.getAttribute("value")].image.full;
 
-//         $('#iBox' + callIdx).empty();
-//         $('#iBox' + callIdx).css({
-//             'background-image': 'url(' + imgSrc + ')',
-//             'background-repeat': 'no-repeat',
-//             'background-position': 'center',
-//             'background-size': 'contain'
-//         });
-//         savedItems[callIdx] = itemData;
-//         itemGold[callIdx] = savedItems[callIdx].gold.total; // 아이템의 total값을 누산
-//         console.log("items ::::", items);
-//         const searchInput = document.getElementById('left-item-search');
-//         searchInput.value = '';
-//         searchItem();
-//         itemStatCalc(); // 아이템 스텟 값 함수 호출
-//         deleteItem();
-//         // console.log("savedItems", savedItems);
-//         itemGoldUpdate();
-//     }
+        $('#iBox' + callIdx).empty();
+        $('#iBox' + callIdx).css({
+            'background-image': 'url(' + imgSrc + ')',
+            'background-repeat': 'no-repeat',
+            'background-position': 'center',
+            'background-size': 'contain'
+        });
+        savedItems[callIdx] = itemData;
+        itemGold[callIdx] = savedItems[callIdx].gold.total; // 아이템의 total값을 누산
+        console.log("items ::::", items);
+        const searchInput = document.getElementById('left-item-search');
+        searchInput.value = '';
+        searchItem();
+        itemStatCalc(); // 아이템 스텟 값 함수 호출
+        deleteItem();
+        // console.log("savedItems", savedItems);
+        itemGoldUpdate();
+    }
 
-// });
+});
 
 // 아이템 스탯 업데이트
 function deleteItem(){
@@ -1132,43 +1042,43 @@ function deleteItem(){
 
 
 // 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
-// $("#plusItem").click(function (e){
-//     if (!test.choose) {
-//         Swal.fire("챔프 선택부터 혀라");
-//         return; // test.choose가 false인 경우 함수 실행 중단
-//     }
-//     console.log("plusItem 클릭 !", e.type);
-//     if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
-//         callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
-//         itemFilterControl();
+$("#plusItem").click(function (e){
+    if (!test.choose) {
+        Swal.fire("챔프 선택부터 혀라");
+        return; // test.choose가 false인 경우 함수 실행 중단
+    }
+    console.log("plusItem 클릭 !", e.type);
+    if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
+        callIdx = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControl();
 
-//     }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
-//         callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
-//         itemFilterControl();
+    }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+        callIdx = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControl();
 
-//     }else if($(this).find('li img').length > 0 ) {
-//         // callIdx = $(e.target).closest('.iBox').index();
-//         itemFilterControl();
-//         // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
-//     }else if(e.target.id === 'left-item-filter-options') {
-//         // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
-//         return;
-//     }
-//     console.log(e.target.tagName , e.target.classList[0]);
-//     console.log(callIdx,"callIdx")
+    }else if($(this).find('li img').length > 0 ) {
+        // callIdx = $(e.target).closest('.iBox').index();
+        itemFilterControl();
+        // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
+    }else if(e.target.id === 'left-item-filter-options') {
+        // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
+        return;
+    }
+    console.log(e.target.tagName , e.target.classList[0]);
+    console.log(callIdx,"callIdx")
 
-// });
+});
 
 
 // 아이템 목록 창 출력
-// function itemFilterControl() {
-//     if($("#left-item-filter-options").css("display") == "block"){
-//         $("#left-item-filter-options").css("display", "none");
-//     }else {
-//         $("#left-item-filter-options").css("display", "block");
-//     }
+function itemFilterControl() {
+    if($("#left-item-filter-options").css("display") == "block"){
+        $("#left-item-filter-options").css("display", "none");
+    }else {
+        $("#left-item-filter-options").css("display", "block");
+    }
 
-// }
+}
 
 
 
@@ -1306,42 +1216,454 @@ function itemStatCalc() {
             }
         });
     })
+}
+
+// 오른쪽 아이템 추가
+// let saveditemsR = []; // 아이템 저장 배열
+var saveditemsR = new Array(6);
+var itemGoldR = new Array(6);
+itemGoldR.fill(0);
+let allitemsR = {};
+let filteritemsR = {};
+let callIdxR = 0; //선택한 아이템 칸 idx
+let itemPriceR= 0; // 아이템 값을 담아줄 변수
+
+// 스탯 값을 담을 변수 선언
+itemsR.adValue= 0;
+itemsR.apValue= 0;
+itemsR.armor= 0;
+itemsR.spellBlock= 0;
+itemsR.attackSpeed= 0;
+itemsR.moveSpeed= 0;
+itemsR.newArPen= 0;
+itemsR.adPen= 0;
+itemsR.spPen= 0;
+itemsR.spPen2= 0;
+itemsR.crit= 0;
+itemsR.newOmniVamp= 0;
+itemsR.cooltime= 0;
+itemsR.hpRegen= 0;
+itemsR.mpRegen= 0;
+itemsR.fullHp= 0;
+itemsR.fullMp= 0;
+
+
+// API 가져오기
+$.ajax({
+    type: "get",
+    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+    success: function (data) {
+        allitemsR = Object.values(data.data); //아이템 데이터 배열 추출
+
+        /* ===========아이템 가나다 순 정렬 start ==========*/
+        allitemsR.sort(function(a,b){
+            var nameA=a.name.toUpperCase();
+            var nameB=b.name.toUpperCase();
+
+            if(nameA<nameB){
+                return -1;
+            }
+            if(nameA>nameB){
+                return 1;
+            }
+            return 0;
+        });
+        /* ===========아이템 가나다 순 정렬 start ==========*/
+
+        // 아이템 필터링 start
+        filteritemsR = allitemsR.filter(function(allitemsR){
+            return !allitemsR.requiredChampion // 챔피언전용템제외
+                // && itemsR.description.includes('rarityMythic') // 신화급 아이템만 출력
+                && allitemsR.inStore!==false // 스토어: false인 item 제외
+                && allitemsR.maps["11"]===true // 소환사의 협곡 맵("11")만 출력
+                && !allitemsR.tags.includes("Jungle")
+                && !allitemsR.tags.includes("Consumable")
+                && !allitemsR.description.includes('퀘스트')
+                && !allitemsR.description.includes('장신구');
+        });
+
+
+        console.log(filteritemsR);
+        // 아이템 필터링 End
+
+
+        // 아이템 설명창 띄우기
+        function showDescriptionR(data, index) {
+            // 팝오버 내용 설정
+            var itemName = data.name;
+            var description = data.description;
+
+            description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
+            description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
+            // console.log("description",description)
+
+            // 문장 뒤에 <br> 추가
+            description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
+
+            // 팝오버 생성 및 표시
+            $('#item-imgR-' + index).popover({
+                title: itemName,
+                content: description,
+                trigger: 'manual', // 수동으로 트리거
+                html: true,
+                placement: 'bottom',
+                // container: 'body'
+            }).popover('show');
+        }
+        // 아이템 설명창 띄우기 E
+
+
+        // filteritemsR에 대한 코드 추가
+        filteritemsR.forEach((data, index) => {
+            var itemBox = $("<div>").addClass("item_box_list");
+            var itemImg = $("<img>", {
+                id: 'item-imgR-' + index,
+                src: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + data.image.full,
+                alt: data.name + " 이미지",
+                class: "item-img",
+                value: index
+            });
+            var itemName = $("<p>").addClass("item-name").text(data.name);
+
+            // 마우스 오버 이벤트에 팝오버 표시 함수 연결
+            itemImg.mouseover(function () {
+                showDescriptionR(data, index, '#item-listR');
+            });
+
+            // 마우스 나가기 이벤트에 팝오버 숨기기
+            itemImg.mouseout(function () {
+                $('#item-imgR-' + index).popover('hide');
+            });
+
+            itemBox.append(itemImg);
+            itemBox.append($("<br>"));
+            itemBox.append(itemName);
+            $("#item-listR").append(itemBox);
+        });
+
+
+    },
+    error : function (){
+        console.log("API 데이터 가져오는 중 오류 발생");
+    }
+});
+function checkSaveditemsNullR() {
+    for (var i = 0; i < saveditemsR.length; i++) {
+        if (saveditemsR[i] != null) {
+            return false; // null이 아닌 값이 하나라도 존재하면 false 반환
+        }
+    }
+    return true; // 모든 값이 null이면 true 반환
+}
+
+// 템 제거 시 스텟 초기화
+function isSaveditemsDefaultR() {
+    var isSaveditemsNullR = checkSaveditemsNullR();
+
+
+    if(isSaveditemsNullR == true){
+        itemsR.adValue= 0;
+        itemsR.apValue= 0;
+        itemsR.armor= 0;
+        itemsR.spellBlock= 0;
+        itemsR.attackSpeed= 0;
+        itemsR.moveSpeedInt= 0;
+        itemsR.moveSpeedPer = 0;
+        itemsR.newArPen= 0;
+        itemsR.adPen= 0;
+        itemsR.spPen= 0;
+        itemsR.spPen2= 0;
+        itemsR.crit= 0;
+        itemsR.newOmniVamp= 0;
+        itemsR.cooltime= 0;
+        itemsR.hpRegen= 0;
+        itemsR.mpRegen= 0;
+        itemsR.fullHp= 0;
+        itemsR.fullMp= 0;
+        deleteItemR();
+    }else{
+        deleteItemR();
+    }
+}
+
+function itemGoldUpdateR() {
+    var totalGoldR = 0;
+    for(var i=0; i<itemGoldR.length; i++){
+        totalGoldR += itemGoldR[i];
+        $("#right-cost-value").text(": "+ totalGoldR + " 원"); //아이템 가격을 HTML에 적용
+        console.log("for문 goldR :: ", itemGoldR[i]);
+    }
+}
+
+// 아이템 선택
+$("#item-listR").click(function (e) {
+
+
+    if (e.target.id === 'emptyBtnR') {
+        console.log("삭제 버튼 클릭하였습니다.");
+
+        delete saveditemsR[callIdxR];
+        itemGoldR[callIdxR] = 0;
+
+        itemstatCalcR();
+        isSaveditemsDefaultR();
+        console.log("아이템 잔여 확인 :: ",saveditemsR);
+        $("#iBox" + callIdxR).css("background-image", "none");
+        $("#iBox" + callIdxR).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+        console.log("저장된 스탯::: ", itemsR);
+        itemGoldUpdateR();
+
+
+
+    } else if (e.target.classList.contains('item-img')) {
+        console.log("아이템 클릭하였습니다.", e.target.getAttribute("value"));
+        // callIdx = $(e.target).closest('.iBox').index();
+        console.log("saveditemsR :: ",saveditemsR);
+        var itemDataR = filteritemsR[e.target.getAttribute("value")];
+        var imgSrcR = "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" + filteritemsR[e.target.getAttribute("value")].image.full;
+
+        $('#iBox' + callIdxR).empty();
+        $('#iBox' + callIdxR).css({
+            'background-image': 'url(' + imgSrcR + ')',
+            'background-repeat': 'no-repeat',
+            'background-position': 'center',
+            'background-size': 'contain'
+        });
+        saveditemsR[callIdxR] = itemDataR;
+        console.log(saveditemsR[callIdxR].gold.total);
+        itemGoldR[callIdxR] = saveditemsR[callIdxR].gold.total; // 아이템의 total값을 누산
+        const searchInputR = document.getElementById('right-item-search');
+        searchInputR.value = '';
+        searchItemR();
+        itemstatCalcR(); // 아이템 스텟 값 함수 호출
+        deleteItemR();
+        // console.log("saveditemsR", saveditemsR);
+        itemGoldUpdateR();
+        console.log("itemsR ::::", itemsR);
+    }
+
+});
+
+// 아이템 스탯 업데이트
+function deleteItemR(){
+    rArea.updateArmorStatsR();
+    rArea.updateHpStatsR();
+    rArea.updateSpellBlockStatsR();
+}
+
+
+// 십자 이미지와 그 밖의 버튼 모두 하나의 버튼에 동작 하게 설정
+$("#plusItemR").click(function (e){
+    // 오른쪽 챔피언 구현되면 주석 풀기
+    // if (!test.choose) {
+    //     Swal.fire("챔프 선택부터 혀라");
+    //     return; // test.choose가 false인 경우 함수 실행 중단
+    // }
+    console.log("plusItemR 클릭 !", e.type);
+    if(e.target.dataset.idx != undefined){ // callIdx 안 십자 바깥 영역 클릭 시
+        callIdxR = e.target.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControlR();
+
+    }else if(e.target.tagName == 'ICONIFY-ICON' && e.target.parentElement.dataset.idx != undefined){ // 십자 이미지 클릭 시
+        callIdxR = e.target.parentElement.dataset.idx; // 해당 idx 값을 callIdx에 저장
+        itemFilterControlR();
+
+    }else if($(this).find('li img').length > 0 ) {
+        // callIdx = $(e.target).closest('.iBox').index();
+        itemFilterControlR();
+        // 아이템을 가지고 있어도 템 목록 창 열릴 수 있게 설정
+    }else if(e.target.id === 'right-item-filter-options') {
+        // left-item-search를 클릭한 경우 아무 동작도 수행하지 않도록 합니다.
+        return;
+    }
+    console.log(e.target.tagName , e.target.classList[0]);
+    console.log(callIdxR,"callIdxR")
+
+});
+
+
+// 아이템 목록 창 출력
+function itemFilterControlR() {
+    if($("#right-item-filter-options").css("display") == "block"){
+        $("#right-item-filter-options").css("display", "none");
+    }else {
+        $("#right-item-filter-options").css("display", "block");
+    }
 
 }
 
-// 마우스 오버 시 아이템 정보 출력
-// $("#item-list").mouseover(function(e) {
-//     if (e.target.classList.contains('item-img')) {
-//         var itemData = filterItems[e.target.getAttribute("value")];
-//         var itemName = itemData.name;
-//         var description = itemData.description;
-
-//         description = description.replace(/(<(?!br\s*\/?)[^>]+)>/ig, ""); // HTML 태그 제거
-//         description = description.replace(/\r?\n|\r/g, ""); // 필요 없는 문자 제거
-//         // console.log("description",description)
-
-//         // 문장 뒤에 <br> 추가
-//         description = description.replace(/\.(?!\s*<br>)/g, ".<br>");
-
-//         var itemBox = $(e.target).closest('.item_box_list');
-//         itemBox.append($("<div>").addClass("desBox").html(description));
 
 
-//         // console.log(itemName, description);
-//         // 또는 원하는 동작을 수행하세요.
-//     }
-// });
+// 스탯 계산 함수
+function itemstatCalcR() {
+    itemsR.adValue= 0;
+    itemsR.apValue= 0;
+    itemsR.armor= 0;
+    itemsR.spellBlock= 0;
+    itemsR.attackSpeed= 0;
+    itemsR.moveSpeedInt= 0;
+    itemsR.moveSpeedPer = 0;
+    itemsR.newArPen= 0;
+    itemsR.adPen= 0;
+    itemsR.spPen= 0;
+    itemsR.spPen2= 0;
+    itemsR.crit= 0;
+    itemsR.newOmniVamp= 0;
+    itemsR.cooltime= 0;
+    itemsR.hpRegen= 0;
+    itemsR.mpRegen= 0;
+    itemsR.fullHp= 0;
+    itemsR.fullMp= 0;
+
+    saveditemsR.forEach(function (data){
+
+        var description = data.description;
+        var stats = description.match(/<stats>(.*?)<\/stats>/);
+        console.log("stats",stats)
+
+        var statValues = [];
+        if (stats) {
+            statValues = stats[1].split('<br>');
+        }
+
+        statValues.forEach(function (stat) {
+            //TODO : 스탯값 있는지 확인 로직 추가
+
+            var statName = stat.match(/^\s*(.*?)\s*<attention>/)[1];
+            var statValue = stat.match(/<attention>(.*?)<\/attention>/)[1];
 
 
-// // 마우스 아웃 시 아이템 정보 제거
-// $("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
-//     var itemBox = $(e.target).closest('.item_box_list');
-//     itemBox.find(".desBox").remove(); // itemName과 description을 삭제합니다.
-// });
+            if (statName && statValue) {
+                // var level = testR.getSelectedLevel();
+                switch (statName) {
+                    case "공격력":
+                        itemsR.adValue += parseInt(statValue);
+                        // testR.updateAttackStats(level);
+                        console.log("itemsR",itemsR)
+                        break;
+                    case "주문력":
+                        itemsR.apValue += parseInt(statValue);
+                        // testR.updateAbilitypowerStats(level);
+                        break;
+                    case "방어력":
+                        itemsR.armor += parseInt(statValue);
+                        rArea.updateArmorStatsR();
+                        // testR.updateArmorStats(level);
+                        break;
+                    case "마법 저항력":
+                        itemsR.spellBlock += parseInt(statValue);
+                        rArea.updateSpellBlockStatsR();
+                        // testR.updateSpellBlockStats(level);
+                        break;
+                    case "공격 속도":
+                        itemsR.attackSpeed += parseInt(statValue);
+                        // testR.updateAttackspeedStats(level);
+                        break;
+                    case "이동 속도":
+                        // itemsR.moveSpeed += parseInt(statValue);
+                        // testR.updateMovespeedStats();
+                        // break;
+                        if (statValue.includes('%')){
+                            itemsR.moveSpeedPer += parseInt(statValue);
+                            // testR.updateMovespeedStats();
+                            break;
+                        }else {
+                            itemsR.moveSpeedInt += parseInt(statValue);
+                            // testR.updateMovespeedStats();
+                            break;
+                        }
+                    case "방어구 관통력":
+                        itemsR.newArPen += parseInt(statValue);
+                        // testR.updateArPenStats();
+                        break;
+                    case "물리 관통력":
+                        itemsR.adPen += parseInt(statValue);
+                        // testR.updateAdPenStats();
+                        break;
+                    case "마법 관통력":
+                        // if (statValue.includes('%')){
+                        //     itemsR.spPen += parseInt(statValue);
+                        //     break;
+                        // }else {
+                        //     itemsR.spPen2 += parseInt(statValue);
+                        //     break;
+                        // }
+                        if (statValue.includes('%')){
+                            itemsR.spPen += parseInt(statValue);
+                            // $("#spPenL").next().text( itemsR.spPen +'%' +"("+ itemsR.spPen2+")");
+                            // testR.updateSpPenStats();
+                            break;
+                        }else {
+                            itemsR.spPen2 += parseInt(statValue);
+                            // $("#spPenL").next().text(itemsR.spPen + '%' +"("+ itemsR.spPen2+")");
+                            // testR.updateSpPenStats();
+                            break;
+                        }
+                    case "치명타 확률":
+                        itemsR.crit += parseInt(statValue);
+                        break;
+                    case "모든 피해 흡혈":
+                        itemsR.newOmniVamp += parseInt(statValue);
+                        // testR.updateNewOmniVampStats();
+                        // $("#vampL").next().text(itemsR.newOmniVamp + "%");
+                        break;
+                    case "스킬 가속":
+                        itemsR.cooltime += parseInt(statValue);
+                        // testR.updateCooltimeStats();
+                        break;
+                    case "기본 체력 재생":
+                        itemsR.hpRegen += parseInt(statValue);
+                        // testR.updateHpregenStats(level);
+                        break;
+                    case "기본 마나 재생":
+                        itemsR.mpRegen += parseInt(statValue);
+                        // testR.updateMpregenStats(level);
+                        break;
+                    case "체력":
+                        itemsR.fullHp += parseInt(statValue);
+                        rArea.updateHpStatsR();
+                        // testR.updateHpStats(level);
+                        break;
+                    case "마나":
+                        itemsR.fullMp += parseInt(statValue);
+                        // testR.updateMpStats(level);
+                        break;
+                }
+            }
+        });
+    })
 
+}
 
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
 // HTML 테이블에서 stat_value, left-rsc-value, left-hp-value의 값을 가져와 배열에 넣는 함수
+
+
+
+
+function calculateDamage(championIndex, skillIndex, level, values, valuesR) {
+    const logPan = document.getElementById('left-log_pan');
+    const Magic_Penetration = values[7].match(/\((.*?)\)/)[1];
+
+    let damageText = "";
+
+    if (skillIndex === 0) {
+        const damage = Math.round((Number(championsArray[championIndex].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0]) * 0.01) * Number(values[1])) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        damageText = `(Q) ${damage}의 데미지를 입혔습니다.<br>`;
+    } else if (skillIndex === 1) {
+        damageText = "(W) 0의 데미지를 입혔습니다.<br>";
+    } else if (skillIndex === 2) {
+        const damage = Math.round((Number(championsArray[championIndex].abilities.E[0].effects[2].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.E[0].effects[2].leveling[0].modifiers[1].values[0]) * 0.01) * Number(values[1])) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        damageText = `(E) ${damage}의 데미지를 입혔습니다.<br>`;
+    } else if (skillIndex === 3) {
+        const damage = Math.round((Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01)) * Number(values[1])) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        damageText = `(R) ${damage}의 데미지를 입혔습니다.<br>`;
+    }
+
+    // 현재 로그에 데미지 텍스트 추가
+    logPan.innerHTML += damageText;
+}
+
 function getValues() {
     const values = [];
     const statValueElements = document.getElementsByClassName('stat_value');
@@ -1359,6 +1681,23 @@ function getValues() {
     return values;
 }
 
+function getValuesR() {
+    const valuesR = [];
+    const statValueElements = document.getElementsByClassName('stat_value_R');
+    const rightRscValue = document.getElementById('right-rsc-value').innerHTML;
+    const rightHpValue = document.getElementById('right-hp-value').innerHTML;
+
+    for (let i = 0; i < statValueElements.length; i++) {
+        const valueR = statValueElements[i].innerHTML;
+        valuesR.push(valueR);
+    }
+
+    valuesR.push(rightRscValue);
+    valuesR.push(rightHpValue);
+
+    return valuesR;
+}
+
 // left_BA_button 클릭 이벤트 처리
 const leftBAButton = document.getElementById('left_BA_button');
 const skillButtons = [
@@ -1371,40 +1710,111 @@ const skillButtons = [
 for (let i = 0; i < skillButtons.length; i++) {
     const button = skillButtons[i];
 
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
         const values = getValues();
-        var imgElement = document.querySelector('.portrait');
-        var src = imgElement.getAttribute('src');
-        var championName = src.split('/').pop().split('.')[0];
-        console.log(championName, values); // 배열 출력 또는 원하는 작업 수행
+        const valuesR = getValuesR();
+        const imgElement = document.querySelector('.portrait');
+        const src = imgElement.getAttribute('src');
+        const championName = src.split('/').pop().split('.')[0];
 
+        const levelInput = document.getElementById(`left-skill${i + 1}-num`);
+        const level = parseInt(levelInput.value);
 
-        // 럭스
-        // 100/100+마법저항력-(마법저항력*마법관통력(%)+마법관통력(+)*스킬데미지
-        const logPan = document.getElementById('left-log_pan');
+        console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
 
-        //마법관통력 + 부분
-        var Magic_Penetration = values[7].match(/\((.*?)\)/)[1];
-        
-        // '0' 아스키 코드로 가져옴 수정 할것
-
-        if (i === 0) { // 반올림하고 정수값만 출력
-            const damage = Math.round((championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[0] + (championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + 20 - (20 * (parseInt(values[7])*0.01) + Magic_Penetration)));
-            logPan.innerHTML += "(Q" + ") " + damage + "의 데미지를 입혔습니다.<br>";
-        } else if (i === 1) {
-            logPan.innerHTML += "(W" + ") " + 0 + "의 데미지를 입혔습니다.<br>";
-        } else if (i === 2) {
-            const damage = Math.round((championsArray[74].abilities.E[0].effects[2].leveling[0].modifiers[0].values[0] + (championsArray[74].abilities.E[0].effects[2].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + 20 - (20 * (parseInt(values[7])*0.01) + Magic_Penetration)));
-            logPan.innerHTML += "(E" + ") " + damage + "의 데미지를 입혔습니다.<br>";
-        } else if (i === 3) {
-            Magic_Penetration = 0;
-
-            const damage = Math.round((championsArray[74].abilities.R[0].effects[0].leveling[0].modifiers[0].values[0] + (championsArray[74].abilities.R[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + 20 - (20 * (parseInt(values[7])*0.01) + Magic_Penetration)));
-            logPan.innerHTML += "(R" + ") " + damage + "의 데미지를 입혔습니다.<br>";
-            console.log(parseInt(values[7])*0.01,Magic_Penetration);
+        if (level >= 1 && level <= 5) {
+            calculateDamage(74, i, level, values, valuesR);
+        } else {
+            console.error('Invalid level input');
         }
     });
 }
+
+// function getValues() {
+//     const values = [];
+//     const statValueElements = document.getElementsByClassName('stat_value');
+//     const leftRscValue = document.getElementById('left-rsc-value').innerHTML;
+//     const leftHpValue = document.getElementById('left-hp-value').innerHTML;
+//
+//     for (let i = 0; i < statValueElements.length; i++) {
+//         const value = statValueElements[i].innerHTML;
+//         values.push(value);
+//     }
+//
+//     values.push(leftRscValue);
+//     values.push(leftHpValue);
+//
+//     return values;
+// }
+// function getValuesR() {
+//     const valuesR = [];
+//     const statValueElements = document.getElementsByClassName('stat_value_R');
+//     const rightRscValue = document.getElementById('right-rsc-value').innerHTML;
+//     const rightHpValue = document.getElementById('right-hp-value').innerHTML;
+//
+//     for (let i = 0; i < statValueElements.length; i++) {
+//         const valueR = statValueElements[i].innerHTML;
+//         valuesR.push(valueR);
+//     }
+//
+//     valuesR.push(rightRscValue);
+//     valuesR.push(rightHpValue);
+//
+//     return valuesR;
+// }
+//
+// // left_BA_button 클릭 이벤트 처리
+// const leftBAButton = document.getElementById('left_BA_button');
+// const skillButtons = [
+//     document.getElementById('skill1'),
+//     document.getElementById('skill2'),
+//     document.getElementById('skill3'),
+//     document.getElementById('skill4')
+// ];
+//
+// for (let i = 0; i < skillButtons.length; i++) {
+//     const button = skillButtons[i];
+//
+//     button.addEventListener('click', function() {
+//         const values = getValues();
+//         const valuesR = getValuesR();
+//         var imgElement = document.querySelector('.portrait');
+//         var src = imgElement.getAttribute('src');
+//         var championName = src.split('/').pop().split('.')[0];
+//
+//         console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
+//
+//         // 럭스
+//         // 100/100+마법저항력-(마법저항력*마법관통력(%)+마법관통력(+)*스킬데미지
+//         const logPan = document.getElementById('left-log_pan');
+//
+//         //마법관통력 + 부분
+//         var Magic_Penetration = values[7].match(/\((.*?)\)/)[1];
+//
+//         if (i === 0) { // 반올림하고 정수값만 출력
+//             const damage = Math.round((championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[0] + (championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (parseInt(values[7])*0.01) + Magic_Penetration)));
+//             logPan.innerHTML += "(Q" + ") " + damage + "의 데미지를 입혔습니다.<br>";
+//             console.log(Math.round((championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[1] + (championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (parseInt(values[7])*0.01) + Magic_Penetration))));
+//             console.log(Math.round((championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[2] + (championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (parseInt(values[7])*0.01) + Magic_Penetration))));
+//             console.log(Math.round((championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[3] + (championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (parseInt(values[7])*0.01) + Magic_Penetration))));
+//             console.log(Math.round((championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[4] + (championsArray[74].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (parseInt(values[7])*0.01) + Magic_Penetration))));
+//         } else if (i === 1) {
+//             logPan.innerHTML += "(W" + ") " + 0 + "의 데미지를 입혔습니다.<br>";
+//         } else if (i === 2) {
+//             const damage = Math.round((championsArray[74].abilities.E[0].effects[2].leveling[0].modifiers[0].values[0] + (championsArray[74].abilities.E[0].effects[2].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (parseInt(values[7])*0.01) + Magic_Penetration)));
+//             logPan.innerHTML += "(E" + ") " + damage + "의 데미지를 입혔습니다.<br>";
+//         } else if (i === 3) {
+//             Magic_Penetration = 0;
+//
+//             const damage = Math.round((championsArray[74].abilities.R[0].effects[0].leveling[0].modifiers[0].values[0] + (championsArray[74].abilities.R[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01) * values[1]) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (parseInt(values[7])*0.01) + Magic_Penetration)));
+//             logPan.innerHTML += "(R" + ") " + damage + "의 데미지를 입혔습니다.<br>";
+//             console.log(parseInt(values[7])*0.01,Magic_Penetration);
+//
+//
+//         }
+//     });
+// }
+
 
 
 
@@ -1412,15 +1822,30 @@ for (let i = 0; i < skillButtons.length; i++) {
 //평타버튼
 leftBAButton.addEventListener('click', function() {
     const values = getValues();
+    const valuesR = getValuesR();
     var imgElement = document.querySelector('.portrait');
     var src = imgElement.getAttribute('src');
     var championName = src.split('/').pop().split('.')[0];
 
-    console.log(championName, values);
+    console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
     //데미지 로그에 값 출력 values[0]에 저장된 데미지 값을 가져와 데미지 로그에 평타출력
     const logPan = document.getElementById('left-log_pan');
-    logPan.innerHTML += "(평타) " + values[0] + "의 데미지를 입혔습니다.<br>";
+    const damage = Math.round(Number(values[0]) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + Number(values[8])))));
+
+    console.log(Number(values[0])); // 164
+    console.log(Number(valuesR[2])); // 30
+    console.log(Number(values[6])); // 30
+    console.log(Number(values[6])*0.01); //0.3
+    console.log(Number(values[8])); // 18
+    console.log(Number(values[6])*0.01) + Number(values[8]); //18.3
+    console.log(Number(values[6]) * 0.01 + Number(values[8])); // 올바른 식
+    console.log((Number(valuesR[2]) * (Number(values[6])*0.01) + Number(values[8]))); //18.3
+    console.log(Number(values[0]) * 100 / (100 + Number(valuesR[2])));
+
+
+    logPan.innerHTML +=  damage + "의 데미지를 입혔습니다.<br>";
 });
+
 
 
 // 챔피언 변경시 데미지로그 초기화
@@ -1430,6 +1855,19 @@ championButton.addEventListener('click', function () {
     // 여기서 log_pan의 내용을 초기화
     logPanElement.innerHTML = '';
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
