@@ -1648,15 +1648,15 @@ function calculateDamage(championIndex, skillIndex, level, values, valuesR) {
     let damageText = "";
 
     if (skillIndex === 0) {
-        const damage = Math.round((Number(championsArray[championIndex].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0]) * 0.01) * Number(values[1])) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        const damage = Math.round((Number(championsArray[championIndex].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0]) * 0.01) * Number(values[1])) * 100 / (100 + Number(valuesR[3]) - (Number(valuesR[3]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
         damageText = `(Q) ${damage}의 데미지를 입혔습니다.<br>`;
     } else if (skillIndex === 1) {
         damageText = "(W) 0의 데미지를 입혔습니다.<br>";
     } else if (skillIndex === 2) {
-        const damage = Math.round((Number(championsArray[championIndex].abilities.E[0].effects[2].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.E[0].effects[2].leveling[0].modifiers[1].values[0]) * 0.01) * Number(values[1])) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        const damage = Math.round((Number(championsArray[championIndex].abilities.E[0].effects[2].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.E[0].effects[2].leveling[0].modifiers[1].values[0]) * 0.01) * Number(values[1])) * 100 / (100 + Number(valuesR[3]) - (Number(valuesR[3]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
         damageText = `(E) ${damage}의 데미지를 입혔습니다.<br>`;
     } else if (skillIndex === 3) {
-        const damage = Math.round((Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01)) * Number(values[1])) * 100 / (100 + Number(valuesR[2]) - (Number(valuesR[2]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        const damage = Math.round((Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01)) * Number(values[1])) * 100 / (100 + Number(valuesR[3]) - (Number(valuesR[3]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
         damageText = `(R) ${damage}의 데미지를 입혔습니다.<br>`;
     }
 
@@ -1821,16 +1821,16 @@ for (let i = 0; i < skillButtons.length; i++) {
 
 //평타버튼
 leftBAButton.addEventListener('click', function() {
-    const values = getValues();
-    const valuesR = getValuesR();
+    const values = getValues(); // 선택한 챔 능력치
+    const valuesR = getValuesR(); // 허수아비 능력치
+    const selectedLevel = test.getSelectedLevel(); // 레벨 불러오기
     var imgElement = document.querySelector('.portrait');
     var src = imgElement.getAttribute('src');
     var championName = src.split('/').pop().split('.')[0];
 
     console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
-    //데미지 로그에 값 출력 values[0]에 저장된 데미지 값을 가져와 데미지 로그에 평타출력
     const logPan = document.getElementById('left-log_pan');
-    const damage = Math.round(Number(values[0]) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + Number(values[8])))));
+    const damage = Math.round(Number(values[0]) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6*Number(values[8])+(0.4*(selectedLevel/18)*Number(values[8]))))))));
 
     console.log(Number(values[0])); // 164
     console.log(Number(valuesR[2])); // 30
@@ -1843,7 +1843,7 @@ leftBAButton.addEventListener('click', function() {
     console.log(Number(values[0]) * 100 / (100 + Number(valuesR[2])));
 
 
-    logPan.innerHTML +=  damage + "의 데미지를 입혔습니다.<br>";
+    logPan.innerHTML +=  "(평타)" + damage + "의 데미지를 입혔습니다.<br>";
 });
 
 
