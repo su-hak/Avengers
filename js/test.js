@@ -1849,9 +1849,12 @@ championButton.addEventListener('click', function () {
     logPanElement.innerHTML = '';
 });
 
-
-
-
+// 데이미 로그 하단 갱신
+function scrollToBottom() {
+    var chatContainer = document.getElementById("left-log_pan");
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+setInterval(scrollToBottom, 1000); // 1초마다 스크롤을 맨 아래로 이동
 
 
 
