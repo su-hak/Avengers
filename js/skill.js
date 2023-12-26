@@ -442,10 +442,11 @@ function setChampStats(id) {
             hpBar.style.width = currentWidth + "%"; // width 값 업데이트
         }
 
+        let cost = 0;
         test.setRealMp = function(getCost){
             // console.log("mp :::",statValues['mp']);
             var realMp = statValues['mp'];
-            var cost = getCost;
+            cost += getCost;
             const targetMp = document.getElementById("left-rsc-value");
             var costMp = statValues['mp'] - cost;// 데미지 입은만큼 빼기
             targetMp.textContent = costMp;
@@ -545,10 +546,12 @@ rArea.updateHpStatsR = function() {
     rArea.r_SetRealHp(0);
 }
 
+var damage = 0;
 rArea.r_SetRealHp = function(getDamage){
     // console.log("hp :::",statValues['hp']);
     var realHp = parseInt(document.getElementById('right-hp-total').innerText);
-    let damage = getDamage;
+    damage += getDamage;
+    console.log("입은 데미지 총량 :::" , damage);
     const targetHp = document.getElementById("right-hp-value");
     var damageHp = realHp - damage;// 데미지 입은만큼 빼기
     targetHp.textContent = damageHp;
@@ -1652,14 +1655,26 @@ function calculateDamage(championIndex, skillIndex, level, values, valuesR) {
 
     if (skillIndex === 0) {
         const damage = Math.round((Number(championsArray[championIndex].abilities.Q[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.Q[0].effects[0].leveling[0].modifiers[1].values[0]) * 0.01) * Number(values[1])) * 100 / (100 + Number(valuesR[3]) - (Number(valuesR[3]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        const skillMp = championsArray[74].abilities.Q[0].cost.modifiers[0].values[level - 1];
+        rArea.r_SetRealHp(damage);
+        test.setRealMp(skillMp);
         damageText = `(Q) ${damage}의 데미지를 입혔습니다.<br>`;
     } else if (skillIndex === 1) {
+        const skillMp = championsArray[74].abilities.W[0].cost.modifiers[0].values[level - 1];
         damageText = "(W) 0의 데미지를 입혔습니다.<br>";
+        rArea.r_SetRealHp(damage);
+        test.setRealMp(skillMp);
     } else if (skillIndex === 2) {
         const damage = Math.round((Number(championsArray[championIndex].abilities.E[0].effects[2].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.E[0].effects[2].leveling[0].modifiers[1].values[0]) * 0.01) * Number(values[1])) * 100 / (100 + Number(valuesR[3]) - (Number(valuesR[3]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        const skillMp = championsArray[74].abilities.E[0].cost.modifiers[0].values[level - 1];
+        rArea.r_SetRealHp(damage);
+        test.setRealMp(skillMp);
         damageText = `(E) ${damage}의 데미지를 입혔습니다.<br>`;
     } else if (skillIndex === 3) {
         const damage = Math.round((Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01)) * Number(values[1])) * 100 / (100 + Number(valuesR[3]) - (Number(valuesR[3]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
+        const skillMp = championsArray[74].abilities.R[0].cost.modifiers[0].values[level - 1];
+        rArea.r_SetRealHp(damage);
+        test.setRealMp(skillMp);
         damageText = `(R) ${damage}의 데미지를 입혔습니다.<br>`;
     }
 
@@ -1838,15 +1853,15 @@ leftBAButton.addEventListener('click', function() {
     let damage;
     if (values[11] === "100") { // 치명타 구현
         damage = Math.round(Number(values[0] * 1.75) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6 * Number(values[8]) + (0.4 * (selectedLevel / 18) * Number(values[8]))))))));
+        rArea.r_SetRealHp(damage);
     } else {
         damage = Math.round(Number(values[0]) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6 * Number(values[8]) + (0.4 * (selectedLevel / 18) * Number(values[8]))))))));
+        rArea.r_SetRealHp(damage);
     }
 
     console.log(Number(valuesR[15]) - Number(damage));
     logPan.innerHTML += "(평타)" + damage + "의 데미지를 입혔습니다.<br>";
 });
-
-
 
 
 
@@ -1857,22 +1872,6 @@ championButton.addEventListener('click', function () {
     // 여기서 log_pan의 내용을 초기화
     logPanElement.innerHTML = '';
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1929,5 +1928,9 @@ saveFileToArray(filePath, function (error, jsonData) {
         championsArray = Object.values(jsonData); // jsonData의 값들을 배열로 변환하여 저장
         console.log(championsArray);
         console.log(championsArray[49].abilities.Q[0].effects[1].leveling[0].modifiers[0].values[0]);
+        console.log(championsArray[74].abilities.Q[0].cost.modifiers[0].values[0]);
+        console.log(championsArray[74].abilities.W[0].cost.modifiers[0].values[0]);
+        console.log(championsArray[74].abilities.E[0].cost.modifiers[0].values[0]);
+        console.log(championsArray[74].abilities.R[0].cost.modifiers[0].values[0]);
     }
 });
