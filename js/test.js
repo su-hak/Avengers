@@ -744,8 +744,8 @@ function setChampSpells(id) {
                 skillLevelInput.value = 0;
             }
 
-            // 스킬 정보 불러올 때 스킬 레벨을 1로 설정
-            skillLevelInput.value = 1;
+            // 스킬 정보 불러올 때 스킬 레벨을 0로 설정
+            skillLevelInput.value = 0;
 
             // 각 스킬 버튼에 대한 Popover 제거
             $("#" + skillButtonId).popover('dispose');
@@ -767,6 +767,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+// function setupSkillControls(skillIndex) {
+//     var skillInputId = "left-skill" + skillIndex + "-num";
+//     var skillLevelInput = document.getElementById(skillInputId);
+//     // 초기 변수 설정
+//
+//     // 레벨 다운 버튼 이벤트 처리
+//     document.getElementById("left-skill" + skillIndex + "-numDown").addEventListener("click", function () {
+//         if (skillLevelInput.value > 0) {
+//             console.log("totalSkillLevel :::", totalSkillLevel);
+//             skillLevelInput.value = parseInt(skillLevelInput.value) - 1;
+//         }
+//     });
+//     // 레벨 업 버튼 이벤트 처리
+//     document.getElementById("left-skill" + skillIndex + "-numUp").addEventListener("click", function () {
+//         if (skillLevelInput.value < parseInt(skillLevelInput.getAttribute("max"))) {
+//             skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+//             // console.log("현재 스킬레벨은 :::",skillLevelInput.value);
+//
+//         }
+//     });
+// }
 function setupSkillControls(skillIndex) {
     var skillInputId = "left-skill" + skillIndex + "-num";
     var skillLevelInput = document.getElementById(skillInputId);
@@ -775,16 +796,56 @@ function setupSkillControls(skillIndex) {
     document.getElementById("left-skill" + skillIndex + "-numDown").addEventListener("click", function () {
         if (skillLevelInput.value > 0) {
             skillLevelInput.value = parseInt(skillLevelInput.value) - 1;
+            calculateTotalSkillLevel();
         }
     });
 
     // 레벨 업 버튼 이벤트 처리
     document.getElementById("left-skill" + skillIndex + "-numUp").addEventListener("click", function () {
         if (skillLevelInput.value < parseInt(skillLevelInput.getAttribute("max"))) {
-            skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+            var totalLevel = calculateTotalSkillLevel();
+            var level = test.getSelectedLevel();
+            if (totalLevel > level) {
+                Swal.fire("스킬의 레벨합이 선택한 레벨보다 높습니다. \n 챔피언 레벨을 더 올려주세요.");
+            } else {
+                skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+            }
         }
     });
 }
+
+// 스킬 레벨의 합 계산 함수
+function calculateTotalSkillLevel() {
+    var totalSkillLevel = 1;
+    for (var i = 1; i <= 4; i++) {
+        var skillInputId = "left-skill" + i + "-num";
+        var skillLevelInput = document.getElementById(skillInputId);
+        totalSkillLevel += parseInt(skillLevelInput.value);
+    }
+    console.log("4개 스킬 레벨의 합은", totalSkillLevel);
+    return totalSkillLevel;
+}
+
+
+
+// function totalSkillLevel(){
+//     let totalSkillLevel = 0;
+//
+// // 스킬 버튼들의 id를 배열로 저장
+//     const skillIds = ['left-skill1', 'left-skill2', 'left-skill3', 'left-skill4'];
+//
+// // for문을 사용하여 각 스킬 버튼에 이벤트 처리
+//     for (let i = 0; i < skillIds.length; i++) {
+//         const skillId = skillIds[i];
+//         const skillButton = document.getElementById(`${skillId}-numUp`);
+//
+//         skillButton.addEventListener('click', function() {
+//             const skillLevel = parseInt(document.getElementById(`${skillId}-num`).value);
+//             return totalSkillLevel += skillLevel;
+//         });
+//     }
+// }
+
 // 스킬 레벨 업 다운 버튼 E --------------------
 // 스킬 정보 업데이트 E ------------------------------
 
@@ -1281,7 +1342,7 @@ $.ajax({
                 && !allitemsR.tags.includes("Consumable")
                 && !allitemsR.description.includes('퀘스트')
                 && !allitemsR.description.includes('장신구')
-                && allitemsR.description.indexOf('<stats></stats>') === -1; // <stats></stats> 값이 null인 경우 출력하지 않음
+                && allitemsR.description.indexOf('<stats></stats>') === -1;
         });
 
 
