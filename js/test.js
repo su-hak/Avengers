@@ -1077,6 +1077,7 @@ $("#item-list").click(function (e) {
         deleteItem();
         // console.log("savedItems", savedItems);
         itemGoldUpdate();
+        itemFilterControl();
     }
 
 });
@@ -1502,6 +1503,7 @@ $("#item-listR").click(function (e) {
         deleteItemR();
         // console.log("saveditemsR", saveditemsR);
         itemGoldUpdateR();
+        itemFilterControlR();
         console.log("itemsR ::::", itemsR);
     }
 
