@@ -1415,7 +1415,7 @@ $("#item-list").mouseout(function(e){     // 마우스 내리면 이벤트
 // 오른쪽 아이템 추가
 // let saveditemsR = []; // 아이템 저장 배열
 var saveditemsR = new Array(6);
-var itemGoldR = new Array(6);
+var  itemGoldR = new Array(6);
 itemGoldR.fill(0);
 let allitemsR = {};
 let filteritemsR = {};
@@ -1559,7 +1559,7 @@ $("#item-listR").click(function (e) {
         console.log("삭제 버튼 클릭하였습니다.");
 
         delete saveditemsR[callIdxR];
-        itemGoldR[callIdxR] = 0;
+        itemGoldR[callIdxR-6] = 0;
 
         itemstatCalcR();
         isSaveditemsDefaultR();
@@ -1587,7 +1587,7 @@ $("#item-listR").click(function (e) {
         });
         saveditemsR[callIdxR] = itemDataR;
         console.log(saveditemsR[callIdxR].gold.total);
-        itemGoldR[callIdxR] = saveditemsR[callIdxR].gold.total; // 아이템의 total값을 누산
+        itemGoldR[callIdxR-6] = saveditemsR[callIdxR].gold.total; // 아이템의 total값을 누산
         const searchInputR = document.getElementById('right-item-search');
         searchInputR.value = '';
         searchItemR();
