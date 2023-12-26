@@ -1836,7 +1836,7 @@ leftBAButton.addEventListener('click', function() {
     }
 
     console.log(Number(valuesR[15]) - Number(damage));
-    logPan.innerHTML += "(평타)" + damage + "의 데미지를 입혔습니다. <br>";
+    logPan.innerHTML += "(평타) <span style='color: #eeff00;'>" + damage + "</span>" + "의 데미지를 입혔습니다. <br>";
 });
 
 
