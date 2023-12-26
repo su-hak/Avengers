@@ -1720,7 +1720,7 @@ function calculateDamage(championName, skillIndex, level, values, valuesR, ) {
             const skillMp = championsArray[74].abilities.Q[0].cost.modifiers[0].values[level - 1];
             rArea.r_SetRealHp(damage);
             test.setRealMp(skillMp);
-            damageText = `(Q) ${damage}의 데미지를 입혔습니다.<br>`;
+            damageText = `(Q) <span style='color: #eeff00;'>${damage}</span>의 데미지를 입혔습니다.<br>`;
         } else if (skillIndex === 1) {
             const skillMp = championsArray[74].abilities.W[0].cost.modifiers[0].values[level - 1];
             damageText = "(W) 0의 데미지를 입혔습니다.<br>";
@@ -1731,13 +1731,13 @@ function calculateDamage(championName, skillIndex, level, values, valuesR, ) {
             const skillMp = championsArray[74].abilities.E[0].cost.modifiers[0].values[level - 1];
             rArea.r_SetRealHp(damage);
             test.setRealMp(skillMp);
-            damageText = `(E) ${damage}의 데미지를 입혔습니다.<br>`;
+            damageText = `(E) <span style='color: #eeff00;'>${damage}</span>의 데미지를 입혔습니다.<br>`;
         } else if (skillIndex === 3) {
             const damage = Math.round((Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01)) * Number(values[1])) * 100 / (100 + Number(valuesR[3]) - (Number(valuesR[3]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
             const skillMp = championsArray[74].abilities.R[0].cost.modifiers[0].values[level - 1];
             rArea.r_SetRealHp(damage);
             test.setRealMp(skillMp);
-            damageText = `(R) ${damage}의 데미지를 입혔습니다.<br>`;
+            damageText = `(R) <span style='color: #eeff00;'>${damage}</span>의 데미지를 입혔습니다.<br>`;
         }
     }
 
