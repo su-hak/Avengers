@@ -98,6 +98,15 @@ body {
 
 /* 초기화  E */
 
+
+/* 기본 클래스 */
+.red-text {
+    color: #ff0000;
+}
+.yellow-text {
+    color: #eeff00;
+}
+
 /* 헤더영역 */
 #header {
     width: 100%;
@@ -889,10 +898,6 @@ body {
     /* background: #b1daff; */
     background: #525975;
     color: #ffe600;
-}
-
-.red-text {
-    color: #ff0000;
 }
 
 /* 아이템 & 로그 패널 */
