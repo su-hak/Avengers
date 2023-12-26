@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올챔피언</title>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+<div class="dropright"> <!-- 챔피언 박스 -->
+    <button class="btn btn-red mt-1" type="button" id="right-champ-dropdown" data-toggle="dropdown" onclick="createBoxes()" aria-haspopup="true" aria-expanded="false">
+        <img class="portrait img-fluid mx-auto champ-img" src="" name="" id="right-champ-portrait" data-toggle="tooltip" data-placement="bottom">
+        챔피언
+    </button>
+    <img src="허수아비.jpg">
+    체력<input type="number" id="hp" name="numberInput" min="1" max="1000" oninput="checkMaxValue('hp', 1000)">
+    방어력<input type="number" id="armor" name="numberInput" min="1" max="1000" oninput="checkMaxValue('armor', 1000)">
+    마법저항력<input type="number" id="magicResistance" name="numberInput" min="1" max="1000" oninput="checkMaxValue('magicResistance', 1000)">
+</div>
+
+<div class="champion-container">
+    <!-- 챔피언 이미지가 동적으로 생성될 공간 -->
+</div>
+
+<div class="all-images-container">
+    <!-- 모든 배열의 사진을 보여주는 박스 -->
+</div>
+
+<!-- 스킬 박스 -->
+<ul class="skill_pan">
+    <li class="skill">
+        <button type="button" id="skill0" class="skill_Btn"></button> <span>패시브</span>
+        <ul>
+            <li class="skill">
+            </li>
+        </ul>
+    </li>
+    <li class="skill">
+        <button type="button" id="skill1" class="skill_Btn"></button>
+        <button id="skill1-level1">1</button>
+        <button id="skill1-level2">2</button>
+        <button id="skill1-level3">3</button>
+        <button id="skill1-level4">4</button>
+        <button id="skill1-level5">5</button>
+        <p id="q-skill-damage"></p>
+        <ul>
+            <li class="skill">
+            </li>
+        </ul>
+    </li>
+    <li class="skill">
+        <button type="button" id="skill2" class="skill_Btn"></button>
+        <button id="skill2-level1">1</button>
+        <button id="skill2-level2">2</button>
+        <button id="skill2-level3">3</button>
+        <button id="skill2-level4">4</button>
+        <button id="skill2-level5">5</button>
+        <p id="w-skill-damage"></p>
+        <ul>
+            <li class="skill">
+            </li>
+        </ul>
+    </li>
+    <li class="skill">
+        <button type="button" id="skill3" class="skill_Btn"></button>
+        <button id="skill3-level1">1</button>
+        <button id="skill3-level2">2</button>
+        <button id="skill3-level3">3</button>
+        <button id="skill3-level4">4</button>
+        <button id="skill3-level5">5</button>
+        <p id="e-skill-damage"></p>
+        <ul>
+            <li class="skill">
+            </li>
+        </ul>
+    </li>
+    <li class="skill">
+        <button type="button" id="skill4" class="skill_Btn"></button>
+        <button id="skill4-level1">1</button>
+        <button id="skill4-level2">2</button>
+        <button id="skill4-level3">3</button>
+        <p id="r-skill-damage"></p>
+        <ul>
+            <li class="skill">
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<!--공격력-->
+<div class="BasicAttack">
+    <button onclick="recordDamage()">BasicAttack</button>
+    <p>공격력 : <span id="attack-damage"></span> 주문력 : <span id="magic-damage"></span> 물리관통력 : <span id="Physical-Penetration"></span> 방어구관통력 : <span id="Armor-Penetration">%</span> 마법관통력 <span id="Magic-Penetration"></span> | <span id="Magic-PenetrationPercent"></span></span>%</p>
+</div>
+<!--데미지로그 킬로그-->
+<div class="DamageRecord">
+    <p id="damage-log"></p>
+</div>
+<button onclick="resetDamageRecord()" class="fixed-button">초기화</button>
+
+<script src="skill.js"></script>
+</body>
+
+</html>
+
+

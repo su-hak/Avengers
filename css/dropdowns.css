@@ -30,10 +30,12 @@ input[type="number"] {
 }
 
 /* Popover */
+/* 아이템 설명창 팝오버 */
 .popover {
     border: 2px solid black;
     background-color: rgba(255, 255, 255, 0.9);
     max-width: 25em;
+    font-size: 12px;
 }
 
 /* Background */
@@ -194,10 +196,14 @@ input[type="number"] {
     display: flex;
     gap: 1rem;
 }
-
-#item-list p {
-    line-height : 1.5;
+#item-listR {
+    display: flex;
+    gap: 1rem;
 }
+/* 
+#item-list p {
+    
+} */
 
 .item-img {
     width: 100%;
@@ -205,9 +211,12 @@ input[type="number"] {
 
 
 .item-name {
+    margin-top: 2px;
     width: 68px;
     text-align: center;
     text-wrap: balance;
+    font-size: 11px;
+    line-height : 1.2;
 }
 /* 아이템 마우스 오버 시 나오는 아이템 설명창 */
 .desBox {
@@ -286,7 +295,7 @@ input[type="number"] {
 
 #right-item-filter-options {
     position: absolute;
-    max-height: 22.65em;
+    max-height: 60em;
     width: 15em;
     margin-top: 2.5em;
     overflow-x: auto;

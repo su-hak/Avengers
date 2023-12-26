@@ -1,0 +1,116 @@
+/* 스킬창 */
+.skill_pan {
+    padding: 0 0 10px 0;
+}
+
+ul {
+    list-style: none; /* 목록의 기본 마커를 제거합니다. */
+}
+
+/* 스킬버튼 */
+.skill_Btn {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: #598EFF;
+    background-size: cover;
+    background-position: center;
+}
+/* 스킬 레벨 업다운 버튼 */
+.skill_Lv_Btn {
+    margin-top: 5px;
+    width: 10px;
+    height: 20px;
+    background: #598EFF;
+    color: #fff;
+    font-size: 10px;
+    font-size: 15px;
+}
+/* 스킬 레벨 표시창 */
+.LV_Num {
+    margin-top: 5px;
+    border: 1px solid #000;
+    width: 20px;
+    height: 20px;
+}
+
+/*스킬 설명창*/
+#tooltip {
+    position: absolute;
+    z-index: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+}
+
+.btn {
+    width: 200px;
+    height: 200px;
+}
+
+.champion-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.champion-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.champion-img {
+    max-width: 100px;
+    height: auto;
+}
+
+.selected-champion-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.all-images-container {
+    display: none;
+}
+
+.DamageRecord {
+    width: 700px;
+    height: 500px;
+    background-color: black;
+    color: yellow;
+    position: relative;
+    overflow: auto;
+}
+
+.DamageRecord button {
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
+.BasicAttack {
+    width: 700px;
+    height: 80px;
+    background-color: #00ddff;
+}
+
+.BasicAttack button {
+    width: 100px;
+    height: 30px;
+}
+
+.fixed-button {
+    width: 100px;
+}
+
+
