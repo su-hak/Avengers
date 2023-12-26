@@ -36,6 +36,8 @@ function calculateDamage(championName, skillIndex, level, values, valuesR, ) {
             test.setRealMp(skillMp);
             damageText = `(R) ${damage}의 데미지를 입혔습니다.<br>`;
         }
+    }else {
+        damageText = `럭스만 스킬사용이 가능합니다.<br>`;
     }
 
 
