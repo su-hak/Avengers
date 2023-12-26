@@ -1644,6 +1644,9 @@ function itemstatCalcR() {
 function calculateDamage(championIndex, skillIndex, level, values, valuesR) {
     const logPan = document.getElementById('left-log_pan');
     const Magic_Penetration = values[7].match(/\((.*?)\)/)[1];
+    console.log("재재재재재재재ㅐ재재재재재재" + championIndex);
+
+
 
     let damageText = "";
 
@@ -1824,27 +1827,26 @@ leftBAButton.addEventListener('click', function() {
     const values = getValues(); // 선택한 챔 능력치
     const valuesR = getValuesR(); // 허수아비 능력치
     const selectedLevel = test.getSelectedLevel(); // 레벨 불러오기
+
     var imgElement = document.querySelector('.portrait');
     var src = imgElement.getAttribute('src');
     var championName = src.split('/').pop().split('.')[0];
 
     console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
     const logPan = document.getElementById('left-log_pan');
-    const damage = Math.round(Number(values[0]) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6*Number(values[8])+(0.4*(selectedLevel/18)*Number(values[8]))))))));
 
-    console.log(Number(values[0])); // 164
-    console.log(Number(valuesR[2])); // 30
-    console.log(Number(values[6])); // 30
-    console.log(Number(values[6])*0.01); //0.3
-    console.log(Number(values[8])); // 18
-    console.log(Number(values[6])*0.01) + Number(values[8]); //18.3
-    console.log(Number(values[6]) * 0.01 + Number(values[8])); // 올바른 식
-    console.log((Number(valuesR[2]) * (Number(values[6])*0.01) + Number(values[8]))); //18.3
-    console.log(Number(values[0]) * 100 / (100 + Number(valuesR[2])));
+    let damage;
+    if (values[11] === "100") { // 치명타 구현
+        damage = Math.round(Number(values[0] * 1.75) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6 * Number(values[8]) + (0.4 * (selectedLevel / 18) * Number(values[8]))))))));
+    } else {
+        damage = Math.round(Number(values[0]) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6 * Number(values[8]) + (0.4 * (selectedLevel / 18) * Number(values[8]))))))));
+    }
 
-
-    logPan.innerHTML +=  "(평타)" + damage + "의 데미지를 입혔습니다.<br>";
+    console.log(Number(valuesR[15]) - Number(damage));
+    logPan.innerHTML += "(평타)" + damage + "의 데미지를 입혔습니다.<br>";
 });
+
+
 
 
 
