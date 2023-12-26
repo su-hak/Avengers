@@ -977,7 +977,7 @@ body {
     background: #2c2e3e;
     color: #ffffff;
     font-size: 12px;
-    /* overflow: scroll; 무조건 스크롤바를 표시 */
+    overflow: scroll; /* 무조건 스크롤바를 표시 */
     scrollbar-width: 6px; /* 스크롤바의 너비를 얇게 설정 (크롬, 파이어폭스 등 최신 브라우저에서 적용) */
     scrollbar-color: transparent transparent; /* 스크롤바 색상을 투명으로 설정 */
 }
