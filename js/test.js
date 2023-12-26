@@ -855,7 +855,8 @@ $.ajax({
                 && !allItems.tags.includes("Jungle")
                 && !allItems.tags.includes("Consumable")
                 && !allItems.description.includes('퀘스트')
-                && !allItems.description.includes('장신구');
+                && !allItems.description.includes('장신구')
+                && allItems.description.indexOf('<stats></stats>') === -1; // <stats></stats> 값이 null인 경우 출력하지 않음
         });
 
 
@@ -1279,7 +1280,8 @@ $.ajax({
                 && !allitemsR.tags.includes("Jungle")
                 && !allitemsR.tags.includes("Consumable")
                 && !allitemsR.description.includes('퀘스트')
-                && !allitemsR.description.includes('장신구');
+                && !allitemsR.description.includes('장신구')
+                && allItems.description.indexOf('<stats></stats>') === -1; // <stats></stats> 값이 null인 경우 출력하지 않음
         });
 
 
