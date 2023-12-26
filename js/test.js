@@ -1825,7 +1825,7 @@ leftBAButton.addEventListener('click', function() {
 
     console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
     const logPan = document.getElementById('left-log_pan');
-
+    
     let damage;
     if (values[11] === "100") { // 치명타 구현
         damage = Math.round(Number(values[0] * 1.75) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6 * Number(values[8]) + (0.4 * (selectedLevel / 18) * Number(values[8]))))))));
