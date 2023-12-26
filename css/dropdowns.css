@@ -98,6 +98,17 @@ input[type="number"] {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+@media (max-width : 768px) {
+    #left-item-filter-options{
+        top: 28%;
+    }
+    #right-item-filter-options {
+        top: 125%;
+    }
+}
+
+
 /* 임시 */
 .champion-box {
     max-height: 50em;
