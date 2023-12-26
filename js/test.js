@@ -565,7 +565,7 @@ rArea.r_SetRealHp = function(getDamage){
 function getChampionList() {
     $.ajax({
         type: "get",
-        url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion.json",
+        url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion.json",
         success: function (data) {
             var champions = Object.values(data.data);
             // 챔피언 이름을 기준으로 정렬
@@ -583,7 +583,7 @@ function detailedChamp(id, callback){
     let detail;
     $.ajax({
         type: "get",
-        url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion/"+id+".json",
+        url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion/"+id+".json",
         success: function (data) {
             var dtch = Object.values(data.data); // 챔피언 데이터 배열 추출
             console.log("dtch :" + dtch);
@@ -888,7 +888,7 @@ items.fullMp= 0;
 // API 가져오기
 $.ajax({
     type: "get",
-    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+    url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
     success: function (data) {
         allItems = Object.values(data.data); //아이템 데이터 배열 추출
 
@@ -1314,7 +1314,7 @@ itemsR.fullMp= 0;
 // API 가져오기
 $.ajax({
     type: "get",
-    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+    url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
     success: function (data) {
         allitemsR = Object.values(data.data); //아이템 데이터 배열 추출
 
