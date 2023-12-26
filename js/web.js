@@ -43,3 +43,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 });
+
+
+
+// 작은 화면일때 아이템 리스트 위치 변경
+window.addEventListener('resize', function() {
+    var plusItem = document.getElementById('plusItem');
+
+    // 현재 윈도우의 너비 가져오기
+    var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    // 너비가 768px 이하인 경우 dropright 클래스 제거
+    if (windowWidth <= 768) {
+        plusItem.classList.remove('dropright');
+        plusItemR.classList.remove('dropleft');
+        plusItem.classList.add('dropcenter');
+        plusItemR.classList.add('dropcenter');
+    } else {
+        // 너비가 768px 초과인 경우 dropright 클래스 추가 (선택적)
+        plusItem.classList.remove('dropcenter');
+        plusItemR.classList.remove('dropcenter');
+        plusItem.classList.add('dropright');
+        plusItemR.classList.add('dropleft');
+    }
+});
+
+// 초기 로딩 시 한 번 실행
+window.dispatchEvent(new Event('resize'));
+
+// 작은 화면일때 아이템 리스트 위치 변경 End
