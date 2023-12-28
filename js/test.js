@@ -888,6 +888,8 @@ function calculateTotalSkillLevel() {
 
 
 // 수학 햄 js
+
+// 왼쪽 아이템 시작
 let items = {};
 // let savedItems = []; // 아이템 저장 배열
 var savedItems = new Array(6);
@@ -1085,7 +1087,7 @@ $("#item-list").click(function (e) {
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
         console.log("저장된 스탯::: ", items);
         itemGoldUpdate();
-
+        itemFilterControl();
 
 
     } else if (e.target.classList.contains('item-img')) {
@@ -1317,6 +1319,28 @@ function itemStatCalc() {
     })
 }
 
+// 아이템 박스 이 외의 위치 찍을 시에 박스 닫기
+$(document).mouseup(function(e){
+    var containerL=$("#left-item-filter-options");
+    var containerR=$("#right-item-filter-options");
+
+// newBox와 item_pan를 제외한 부분을 클릭 했을 경우 newBox닫기
+    if(!containerL.is(e.target)
+        && containerL.has(e.target).length===0
+        && !$("#plusItem").is(e.target)
+        && $("#plusItem").has(e.target).length===0){
+        $("#left-item-filter-options").css("display", "none");
+    }
+    if(!containerR.is(e.target)
+        && containerR.has(e.target).length===0
+        && !$("#plusItemR").is(e.target)
+        && $("#plusItemR").has(e.target).length===0){
+        $("#right-item-filter-options").css("display", "none");
+    }
+});
+
+// 왼쪽 아이템 끝
+
 // 오른쪽 아이템 추가
 // let saveditemsR = []; // 아이템 저장 배열
 var saveditemsR = new Array(6);
@@ -1512,7 +1536,7 @@ $("#item-listR").click(function (e) {
         $("#iBox" + callIdxR).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
         console.log("저장된 스탯::: ", itemsR);
         itemGoldUpdateR();
-
+        itemFilterControlR();
 
 
     } else if (e.target.classList.contains('item-img')) {
@@ -1735,6 +1759,7 @@ function itemstatCalcR() {
     })
 
 }
+// 오른쪽 아이템 끝
 
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
