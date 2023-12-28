@@ -448,12 +448,31 @@ function setChampStats(id) {
             cost += getCost;
             const targetMp = document.getElementById("left-rsc-value");
             var costMp = statValues['mp'] - cost;// 데미지 입은만큼 빼기
-            targetMp.textContent = costMp;
-            var maxWidth = 100; // 최대 width 값 (100%)
-            var currentWidth = (costMp / realMp) * maxWidth; // 현재 width 값 계산
-            var mpBar = document.getElementById("left-rsc-bar"); // hp 바 엘리먼트 가져오기
-            mpBar.style.width = currentWidth + "%"; // width 값 업데이트
+            if (costMp <= 0 && statValues['mp'] != 0) {
+                Swal.fire({
+                    text: "마나를 다 써버리셨군요... \n 리필 해드릴게요!!",
+                    showCancelButton: true,
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        costMp = realMp;
+                        cost = 0;
+                        targetMp.textContent = costMp;
+                        var maxWidth = 100; // 최대 width 값 (100%)
+                        var currentWidth = (costMp / realMp) * maxWidth; // 현재 width 값 계산
+                        var mpBar = document.getElementById("left-rsc-bar"); // mp 바 엘리먼트 가져오기
+                        mpBar.style.width = currentWidth + "%"; // width 값 업데이트
+                    }
+                });
+            } else {
+                targetMp.textContent = costMp;
+                var maxWidth = 100; // 최대 width 값 (100%)
+                var currentWidth = (costMp / realMp) * maxWidth; // 현재 width 값 계산
+                var mpBar = document.getElementById("left-rsc-bar"); // mp 바 엘리먼트 가져오기
+                mpBar.style.width = currentWidth + "%"; // width 값 업데이트
+            }
         }
+
 
 // 초기 레벨 설정
         const selectedLevel = test.getSelectedLevel();
@@ -545,18 +564,57 @@ rArea.updateHpStatsR = function() {
     rArea.r_SetRealHp(0);
 }
 let damage = 0;
+// rArea.r_SetRealHp = function(getDamage){
+//     // console.log("hp :::",statValues['hp']);
+//     var realHp = parseInt(document.getElementById('right-hp-total').innerText);
+//     damage += getDamage;
+//     const targetHp = document.getElementById("right-hp-value");
+//     var damageHp = realHp - damage;// 데미지 입은만큼 빼기
+//     if (damageHp <= 0) {
+//         Swal.fire("적을 처치 하였슴둥 \n 체력을 회복합니다.");
+//         damageHp = realHp;
+//         damage = 0;
+//     }
+//     targetHp.textContent = damageHp;
+//     var maxWidth = 100; // 최대 width 값 (100%)
+//     var currentWidth = (damageHp / realHp) * maxWidth; // 현재 width 값 계산
+//     var hpBar = document.getElementById("right-hp-bar"); // hp 바 엘리먼트 가져오기
+//     hpBar.style.width = currentWidth + "%"; // width 값 업데이트
+//
+// }
 rArea.r_SetRealHp = function(getDamage){
     // console.log("hp :::",statValues['hp']);
     var realHp = parseInt(document.getElementById('right-hp-total').innerText);
     damage += getDamage;
     const targetHp = document.getElementById("right-hp-value");
     var damageHp = realHp - damage;// 데미지 입은만큼 빼기
-    targetHp.textContent = damageHp;
-    var maxWidth = 100; // 최대 width 값 (100%)
-    var currentWidth = (damageHp / realHp) * maxWidth; // 현재 width 값 계산
-    var hpBar = document.getElementById("right-hp-bar"); // hp 바 엘리먼트 가져오기
-    hpBar.style.width = currentWidth + "%"; // width 값 업데이트
+    if (damageHp <= 0) {
+        Swal.fire({
+            title: "적을 처치 하였슴둥",
+            text: "체력을 회복합니다.",
+            showCancelButton: true,
+            confirmButtonText: "OK",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                damageHp = realHp;
+                damage = 0;
+                targetHp.textContent = damageHp;
+                var maxWidth = 100; // 최대 width 값 (100%)
+                var currentWidth = (damageHp / realHp) * maxWidth; // 현재 width 값 계산
+                var hpBar = document.getElementById("right-hp-bar"); // hp 바 엘리먼트 가져오기
+                hpBar.style.width = currentWidth + "%"; // width 값 업데이트
+            }
+        });
+    } else {
+        targetHp.textContent = damageHp;
+        var maxWidth = 100; // 최대 width 값 (100%)
+        var currentWidth = (damageHp / realHp) * maxWidth; // 현재 width 값 계산
+        var hpBar = document.getElementById("right-hp-bar"); // hp 바 엘리먼트 가져오기
+        hpBar.style.width = currentWidth + "%"; // width 값 업데이트
+    }
 }
+
+
 
 
 
@@ -801,38 +859,38 @@ function setupSkillControls(skillIndex) {
     });
 
     // 레벨 업 버튼 이벤트 처리
-    document.getElementById("left-skill" + skillIndex + "-numUp").addEventListener("click", function () {
-        if (skillLevelInput.value < parseInt(skillLevelInput.getAttribute("max"))) {
-            var totalLevel = calculateTotalSkillLevel();
-            var level = test.getSelectedLevel();
-            if (totalLevel > level) {
-                Swal.fire("스킬의 레벨합이 선택한 레벨보다 높습니다. \n 챔피언 레벨을 더 올려주세요.");
-            } else {
-                if (skillIndex === 4){
-                    if(level === 6 || level === 11 || level === 16){
-                        console.log("조건 충족");
-                        skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
-                    }
-                    // else{
-                    //     Swal.fire("궁극기 찍을 레벨이 아니다");
-                    // }
-                }else{
-
-                    skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
-                }
-            }
-        }
-    });
+    // document.getElementById("left-skill" + skillIndex + "-numUp").addEventListener("click", function () {
+    //     if (skillLevelInput.value < parseInt(skillLevelInput.getAttribute("max"))) {
+    //         var totalLevel = calculateTotalSkillLevel();
+    //         var level = test.getSelectedLevel();
+    //         if (totalLevel > level) {
+    //             Swal.fire("스킬의 레벨합이 선택한 레벨보다 높습니다. \n 챔피언 레벨을 더 올려주세요.");
+    //         } else {
+    //             if (skillIndex === 4){
+    //                 if(level === 6 || level === 11 || level === 16){
+    //                     console.log("조건 충족");
+    //                     skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+    //                 }
+    //                 // else{
+    //                 //     Swal.fire("궁극기 찍을 레벨이 아니다");
+    //                 // }
+    //             }else{
+    //
+    //                 skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+    //             }
+    //         }
+    //     }
+    // });
     document.getElementById("left-skill" + skillIndex + "-numUp").addEventListener("click", function () {
         if (skillLevelInput.value < parseInt(skillLevelInput.getAttribute("max"))) {
             var totalLevel = calculateTotalSkillLevel();
             var level = test.getSelectedLevel();
             if (skillIndex === 4) {
-                if (level == 6 && skillLevelInput.value == 0) {
+                if (level >= 6 && skillLevelInput.value == 0) {
                     skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
-                } else if (level == 11 && skillLevelInput.value == 1) {
+                } else if (level >= 11 && skillLevelInput.value == 1) {
                     skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
-                } else if (level == 16 && skillLevelInput.value == 2) {
+                } else if (level >= 16 && skillLevelInput.value == 2) {
                     skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
                 } else {
                     Swal.fire("궁 찍을수 있는 레벨이 아니지렁~");
@@ -846,6 +904,7 @@ function setupSkillControls(skillIndex) {
             }
         }
     });
+
 
 
 }
