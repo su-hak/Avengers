@@ -808,10 +808,46 @@ function setupSkillControls(skillIndex) {
             if (totalLevel > level) {
                 Swal.fire("스킬의 레벨합이 선택한 레벨보다 높습니다. \n 챔피언 레벨을 더 올려주세요.");
             } else {
-                skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+                if (skillIndex === 4){
+                    if(level === 6 || level === 11 || level === 16){
+                        console.log("조건 충족");
+                        skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+                    }
+                    // else{
+                    //     Swal.fire("궁극기 찍을 레벨이 아니다");
+                    // }
+                }else{
+
+                    skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+                }
             }
         }
     });
+    document.getElementById("left-skill" + skillIndex + "-numUp").addEventListener("click", function () {
+        if (skillLevelInput.value < parseInt(skillLevelInput.getAttribute("max"))) {
+            var totalLevel = calculateTotalSkillLevel();
+            var level = test.getSelectedLevel();
+            if (skillIndex === 4) {
+                if (level == 6 && skillLevelInput.value == 0) {
+                    skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+                } else if (level == 11 && skillLevelInput.value == 1) {
+                    skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+                } else if (level == 16 && skillLevelInput.value == 2) {
+                    skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+                } else {
+                    Swal.fire("궁 찍을수 있는 레벨이 아니지렁~");
+                }
+            } else {
+                if (totalLevel > level) {
+                    Swal.fire("스킬의 레벨합이 선택한 레벨보다 높습니다. \n 챔피언 레벨을 더 올려주세요.");
+                } else {
+                    skillLevelInput.value = parseInt(skillLevelInput.value) + 1;
+                }
+            }
+        }
+    });
+
+
 }
 
 // 스킬 레벨의 합 계산 함수
@@ -1825,7 +1861,7 @@ leftBAButton.addEventListener('click', function() {
 
     console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
     const logPan = document.getElementById('left-log_pan');
-    
+
     let damage;
     if (values[11] === "100") { // 치명타 구현
         damage = Math.round(Number(values[0] * 1.75) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6 * Number(values[8]) + (0.4 * (selectedLevel / 18) * Number(values[8]))))))));
