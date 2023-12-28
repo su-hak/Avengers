@@ -91,6 +91,7 @@
         <section id="sectionF" >
             <!-- 왼쪽 챔피언 전체 패널 -->
             <div id="dealmeterL" class="">
+                <button type="button" id="defaultAll">초기화</button>
                 <ul class="ul_top">
                     <!-- 왼쪽 게이지 박스 -->
                     <li>
@@ -213,7 +214,7 @@
                         </ul>
 
                         <!-- 왼쪽 스킬 박스 -->
-                        
+
                         <ul class="skill_pan ds_flex">
                             <li class="skill">
                                 <!-- 스킬 이미지1 -->
@@ -331,24 +332,24 @@
                                     <td class="stat_name" id="mpRegenL" title="기본 마나 재생">마나 재생</td>
                                     <td class="stat_value">0</td>
                                 </tr>
-<!--                                <tr>-->
-<!--                                    <td class="stat_name" id="temp1L"></td>-->
-<!--                                    <td class="stat_value">0</td>-->
-<!--                                    <td class="stat_name" id="temp2L"></td>-->
-<!--                                    <td class="stat_value">0</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td class="stat_name" id="temp3L"></td>-->
-<!--                                    <td class="stat_value">0</td>-->
-<!--                                    <td class="stat_name" id="temp4L"></td>-->
-<!--                                    <td class="stat_value">0</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td class="stat_name" id="temp5L"></td>-->
-<!--                                    <td class="stat_value">0</td>-->
-<!--                                    <td class="stat_name" id="temp6L"></td>-->
-<!--                                    <td class="stat_value">0</td>-->
-<!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="stat_name" id="temp1L"></td>-->
+                                <!--                                    <td class="stat_value">0</td>-->
+                                <!--                                    <td class="stat_name" id="temp2L"></td>-->
+                                <!--                                    <td class="stat_value">0</td>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="stat_name" id="temp3L"></td>-->
+                                <!--                                    <td class="stat_value">0</td>-->
+                                <!--                                    <td class="stat_name" id="temp4L"></td>-->
+                                <!--                                    <td class="stat_value">0</td>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="stat_name" id="temp5L"></td>-->
+                                <!--                                    <td class="stat_value">0</td>-->
+                                <!--                                    <td class="stat_name" id="temp6L"></td>-->
+                                <!--                                    <td class="stat_value">0</td>-->
+                                <!--                                </tr>-->
                             </table>
                         </div>
                     </li>
@@ -357,15 +358,15 @@
                     <li class="left_panel_ul_main_R">
                         <ul>
                             <li>
-                                 <!-- 아이템 선택 전체창 -->
+                                <!-- 아이템 선택 전체창 -->
                                 <ul class="item_pan dropright" id="plusItem">
-                                     <!-- 아이템 목록 전체창 -->
+                                    <!-- 아이템 목록 전체창 -->
                                     <div class="dropdown-menu dropdown-multicol" id="left-item-filter-options"
                                          aria-labelledby="dropdownMenuButton"
                                          style="display: none;">
-                                          <!-- 아이템 검색창 -->
+                                        <!-- 아이템 검색창 -->
                                         <input class="form-control mx-auto my-0 sticky" type="text" placeholder="아이템 검색..." id="left-item-search" autocomplete="on">
-                                         <!-- 아이템 목록창 -->
+                                        <!-- 아이템 목록창 -->
                                         <div class="row mx-auto" id="item-list">
                                             <button type="button" class="itemRemoveBtn" id="emptyBtn" onclick="deleteItem()">delete</button>
                                         </div>
@@ -520,7 +521,7 @@
 
                             <!-- 데이지 로그창 -->
                             <div id="right-log_pan" class="log_pan_css" name="">
-                                
+
                             </div>
                         </ul>
 
@@ -585,24 +586,24 @@
                                 <!-- 챔피언 레벨표시 -->
                                 <select name="LV" id="right_champ_lv" class="chmap_Lv" style="width: 100%; height: 100%">
                                     <option value="1">default</option>
-<!--                                    <option value="1">01</option>-->
-<!--                                    <option value="2">02</option>-->
-<!--                                    <option value="3">03</option>-->
-<!--                                    <option value="4">04</option>-->
-<!--                                    <option value="5">05</option>-->
-<!--                                    <option value="6">06</option>-->
-<!--                                    <option value="7">07</option>-->
-<!--                                    <option value="8">08</option>-->
-<!--                                    <option value="9">09</option>-->
-<!--                                    <option value="10">10</option>-->
-<!--                                    <option value="11">11</option>-->
-<!--                                    <option value="12">12</option>-->
-<!--                                    <option value="13">13</option>-->
-<!--                                    <option value="14">14</option>-->
-<!--                                    <option value="15">15</option>-->
-<!--                                    <option value="16">16</option>-->
-<!--                                    <option value="17">17</option>-->
-<!--                                    <option value="18">18</option>-->
+                                    <!--                                    <option value="1">01</option>-->
+                                    <!--                                    <option value="2">02</option>-->
+                                    <!--                                    <option value="3">03</option>-->
+                                    <!--                                    <option value="4">04</option>-->
+                                    <!--                                    <option value="5">05</option>-->
+                                    <!--                                    <option value="6">06</option>-->
+                                    <!--                                    <option value="7">07</option>-->
+                                    <!--                                    <option value="8">08</option>-->
+                                    <!--                                    <option value="9">09</option>-->
+                                    <!--                                    <option value="10">10</option>-->
+                                    <!--                                    <option value="11">11</option>-->
+                                    <!--                                    <option value="12">12</option>-->
+                                    <!--                                    <option value="13">13</option>-->
+                                    <!--                                    <option value="14">14</option>-->
+                                    <!--                                    <option value="15">15</option>-->
+                                    <!--                                    <option value="16">16</option>-->
+                                    <!--                                    <option value="17">17</option>-->
+                                    <!--                                    <option value="18">18</option>-->
                                 </select>
                             </li>
                             <li>
@@ -727,24 +728,24 @@
                                     <td class="stat_name" id="mpRegenR">마나 재생</td>
                                     <td class="stat_value_R">0</td>
                                 </tr>
-<!--                                <tr>-->
-<!--                                    <td class="stat_name" id="temp1R"></td>-->
-<!--                                    <td class="stat_value_R">0</td>-->
-<!--                                    <td class="stat_name" id="temp2R"></td>-->
-<!--                                    <td class="stat_value_R">0</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td class="stat_name" id="temp3R"></td>-->
-<!--                                    <td class="stat_value_R">0</td>-->
-<!--                                    <td class="stat_name" id="temp4R"></td>-->
-<!--                                    <td class="stat_value_R">0</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td class="stat_name" id="temp5R"></td>-->
-<!--                                    <td class="stat_value_R">0</td>-->
-<!--                                    <td class="stat_name" id="temp6R"></td>-->
-<!--                                    <td class="stat_value_R">0</td>-->
-<!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="stat_name" id="temp1R"></td>-->
+                                <!--                                    <td class="stat_value_R">0</td>-->
+                                <!--                                    <td class="stat_name" id="temp2R"></td>-->
+                                <!--                                    <td class="stat_value_R">0</td>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="stat_name" id="temp3R"></td>-->
+                                <!--                                    <td class="stat_value_R">0</td>-->
+                                <!--                                    <td class="stat_name" id="temp4R"></td>-->
+                                <!--                                    <td class="stat_value_R">0</td>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="stat_name" id="temp5R"></td>-->
+                                <!--                                    <td class="stat_value_R">0</td>-->
+                                <!--                                    <td class="stat_name" id="temp6R"></td>-->
+                                <!--                                    <td class="stat_value_R">0</td>-->
+                                <!--                                </tr>-->
                             </table>
                         </div>
                     </li>
