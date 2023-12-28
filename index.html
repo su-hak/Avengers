@@ -23,7 +23,7 @@
 
 
 
-    <title>Calc.lol</title> <!-- 타이틀 -->
+    <title>Carry.kr</title> <!-- 타이틀 -->
 </head>
 
 <body>
@@ -33,7 +33,7 @@
         <div class="inner">
             <!-- 로고 -->
             <a href="#">
-                <h1>calc.lol</h1>
+                <h1>carry.kr</h1>
             </a>
 
             <!-- 메뉴 -->
@@ -91,6 +91,7 @@
         <section id="sectionF" >
             <!-- 왼쪽 챔피언 전체 패널 -->
             <div id="dealmeterL" class="">
+                <button type="button" id="defaultAll">초기화</button>
                 <ul class="ul_top">
                     <!-- 왼쪽 게이지 박스 -->
                     <li>
@@ -137,8 +138,8 @@
                                     <li>
                                         <button id="left_save_btn1" type="button" class="saveItemBtn btn_green">S1</button>
                                         <div id="left_save_box1" style="position: absolute; display: none; border: 1px dotted black">
-                                            <button type="button" class="saveHere" >저장하기</button></br>
-                                            <button type="button" class="loadThere" >불러오기</button>
+                                            <button type="button" id="saveHere" >저장하기</button></br>
+                                            <button type="button" id="loadThere" >불러오기</button>
                                         </div>
                                     </li>
                                     <li>
@@ -154,7 +155,7 @@
                             <li>
                                 <div class="">
                                     <!-- 왼쪽 챔피언 박스 -->
-                                    <div class="dropright">
+                                    <div id="left-champion-box" class="dropright">
                                         <button class="btn btn-blue mt-1" type="button" id="champion-btn" data-toggle="dropdown">
                                             <img class="portrait img-fluid mx-auto champion-img" src="" name="" id="left-champ-portrait"
                                                  data-toggle="tooltip" data-placement="bottom" />
@@ -162,7 +163,7 @@
                                         <!-- 왼쪽 챔피언 목록 -->
                                         <div class="dropdown-menu" id="champion-dropdown">
                                             <!-- 왼쪽 챔피언 목록 속 검색창 -->
-                                            <input class="form-control mx-auto my-2" type="text" placeholder="챔피언 검색"
+                                            <input class="form-control mx-auto my-2 sticky" type="text" placeholder="챔피언 검색"
                                                    id="champion-search" />
                                             <div id="champion-list" class="mx-auto">
                                                 <!-- 왼쪽 챔피언 목록이 들어갈 자리 -->
@@ -205,14 +206,15 @@
                                 <button id="left_BA_button" type="button" class="BA_button btn_green">BasicAttack</button>
                                 <!-- 베이직 어택 -->
                             </li>
-                            <!-- 크리티컬 체크박스 -->
+                            <!-- 왼쪽 크리티컬 체크박스 -->
                             <li class="cri_check btn_green">
-                                <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
+                                <span title="체크시 치명타 확률이 100가 됩니다.">Cri</span>
                                 <input type="checkbox" id="critical" name="critical" value="critical">
                             </li>
                         </ul>
 
                         <!-- 왼쪽 스킬 박스 -->
+                        
                         <ul class="skill_pan ds_flex">
                             <li class="skill">
                                 <!-- 스킬 이미지1 -->
@@ -223,7 +225,7 @@
                                         <button type="button" id="left-skill1-numDown" class="skill_Q skill_Lv_Btn">
                                             -
                                         </button>
-                                        <input id="left-skill1-num" class="skill_Q LV_Num" type="number" min="0" max="5" />
+                                        <input id="left-skill1-num" class="skill_Q LV_Num" type="number" value=""  min="0" max="5" />
                                         <!-- 스킬1 레벨 업 -->
                                         <button id="left-skill1-numUp"  type="button" class="skill_Q skill_Lv_Btn">
                                             +
@@ -240,7 +242,7 @@
                                         <button type="button" id="left-skill2-numDown" class="skill_W skill_Lv_Btn">
                                             -
                                         </button>
-                                        <input id="left-skill2-num"  class="skill_W LV_Num" type="number" min="0" max="5" />
+                                        <input id="left-skill2-num"  class="skill_W LV_Num" type="number" value="" min="0" max="5" />
                                         <!-- 스킬2 레벨 업 -->
                                         <button type="button" id="left-skill2-numUp"  class="skill_W skill_Lv_Btn">
                                             +
@@ -257,7 +259,7 @@
                                         <button type="button" id="left-skill3-numDown" class="skill_E skill_Lv_Btn">
                                             -
                                         </button>
-                                        <input id="left-skill3-num"  class="skill_E LV_Num" type="number" min="0" max="5" />
+                                        <input id="left-skill3-num"  class="skill_E LV_Num" type="number" value="" min="0" max="5" />
                                         <!-- 스킬3 레벨 업 -->
                                         <button type="button" id="left-skill3-numUp" class="skill_E skill_Lv_Btn">
                                             +
@@ -274,7 +276,7 @@
                                         <button type="button" id="left-skill4-numDown" class="skill_R skill_Lv_Btn">
                                             -
                                         </button>
-                                        <input id="left-skill4-num" class="skill_R LV_Num" type="number" min="0" max="3" />
+                                        <input id="left-skill4-num" class="skill_R LV_Num" type="number" value="" min="0" max="3" />
                                         <!-- 스킬4 레벨 업 -->
                                         <button id="left-skill4-numUp" type="button" class="skill_R skill_Lv_Btn">
                                             +
@@ -283,11 +285,6 @@
                                 </ul>
                             </li>
                         </ul>
-                        <!-- 스킬 박스 E -->
-                        <!--스킬 설명창-->
-                        <div id="left-tooltip" class="hidden">
-                            <p id="left-tooltip-content"></p>
-                        </div>
                         <!-- 스킬 박스 E -->
 
                         <div class="stat">
@@ -302,74 +299,79 @@
                                 <tr>
                                     <td class="stat_name" id="armorL">방어력</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="spellBlockL">마법방어력</td>
+                                    <td class="stat_name" id="spellBlockL" title="마법방어력">마 저</td>
                                     <td class="stat_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="attackSpeedL">공격속도</td>
+                                    <td class="stat_name" id="attackSpeedL" title="공격속도">공격 속도</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="moveSpeedL">이동속도</td>
+                                    <td class="stat_name" id="moveSpeedL" title="이동속도">이동 속도</td>
                                     <td class="stat_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="arPenL">방어구 관통력</td>
+                                    <td class="stat_name" id="arPenL" title="방어구 관통력">방 관</td>
                                     <td class="stat_value">0%</td>
-                                    <td class="stat_name" id="spPenL">마법 관통력</td>
+                                    <td class="stat_name" id="spPenL" title="마법 관통력">마 관</td>
                                     <td class="stat_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="adPenL">물리 관통력</td>
+                                    <td class="stat_name" id="adPenL" title="물리 관통력">물 관</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="vampL">모든 피해 흡혈</td>
+                                    <td class="stat_name" id="vampL" title="모든 피해 흡혈">피해 흡혈</td>
                                     <td class="stat_value">0%</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="coolTimeL">스킬 가속</td>
+                                    <td class="stat_name" id="coolTimeL" title="스킬 가속">스킬 가속</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="critL">치명타 확률</td>
+                                    <td class="stat_name" id="critL" title="치명타 확률">치명타율</td>
                                     <td class="stat_value" id="critL_value">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="hpRegenL">기본 체력 재생</td>
+                                    <td class="stat_name" id="hpRegenL" title="기본 체력 재생">체력 재생</td>
                                     <td class="stat_value">0</td>
-                                    <td class="stat_name" id="mpRegenL">기본 마나 재생</td>
+                                    <td class="stat_name" id="mpRegenL" title="기본 마나 재생">마나 재생</td>
                                     <td class="stat_value">0</td>
                                 </tr>
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp1L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp2L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp3L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp4L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp5L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp6L"></td>-->
-                                <!--                                    <td class="stat_value">0</td>-->
-                                <!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp1L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp2L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp3L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp4L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp5L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                    <td class="stat_name" id="temp6L"></td>-->
+<!--                                    <td class="stat_value">0</td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                     </li>
 
-                    <!-- 아이템 & 로그 패널 -->
+                    <!-- 왼쪽아이템 & 로그 패널 -->
                     <li class="left_panel_ul_main_R">
                         <ul>
                             <li>
+                                 <!-- 아이템 선택 전체창 -->
                                 <ul class="item_pan dropright" id="plusItem">
+                                     <!-- 아이템 목록 전체창 -->
                                     <div class="dropdown-menu dropdown-multicol" id="left-item-filter-options"
                                          aria-labelledby="dropdownMenuButton"
                                          style="display: none;">
-                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="left-item-search" autocomplete="on">
-                                        <div class="row mx-auto" id="item-list" class="item-list-css">
+                                          <!-- 아이템 검색창 -->
+                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="아이템 검색..." id="left-item-search" autocomplete="on">
+                                         <!-- 아이템 목록창 -->
+                                        <div class="row mx-auto" id="item-list">
                                             <button type="button" class="itemRemoveBtn" id="emptyBtn" onclick="deleteItem()">delete</button>
                                         </div>
                                     </div>
+                                    <!-- 아이템 선택 개별창 -->
                                     <li>
                                         <button type="button" id="iBox0" class="item_box" data-idx ="0">
                                             <iconify-icon  icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>
@@ -413,16 +415,10 @@
                                     </li>
                                 </ul>
                             </li>
-                            <textarea id="left-log_pan" class="log_pan_css" name="" cols="30" rows="10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta provident magnam eveniet nobis sed. Deleniti, perferendis. Optio accusantium laboriosam architecto deleniti assumenda? Tempore.
-                            </textarea>
+                            <!-- 데이지 로그창 -->
+                            <div id="left-log_pan" class="log_pan_css" name="">
+
+                            </div>
                         </ul>
 
                     </li>
@@ -459,8 +455,6 @@
                 <!-- 게이지 박스 E -->
 
                 <ul class="ul_main ds_flex float-right">
-
-
                     <!-- 아이템 & 로그 창 -->
                     <li class="right_panel_ul_main_L">
                         <ul>
@@ -469,7 +463,7 @@
                                     <div class="dropdown-menu dropdown-multicol" id="right-item-filter-options"
                                          aria-labelledby="dropdownMenuButton"
                                          style="display: none;">
-                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="Search..." id="right-item-search" autocomplete="off">
+                                        <input class="form-control mx-auto my-0 sticky" type="text" placeholder="아이템 검색..." id="right-item-search" autocomplete="off">
                                         <div class="row mx-auto" id="item-listR" class="item-list-css">
                                             <button type="button" class="itemRemoveBtn" id="emptyBtnR" onclick="deleteItemR()">delete</button>
                                         </div>
@@ -524,33 +518,11 @@
                                 </ul>
 
                             </li>
-                            <textarea id="right-log_pan" class="log_pan_css" name="" cols="30" rows="10">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                                quod, distinctio perferendis provident ipsum quis. Soluta
-                                provident magnam eveniet nobis sed. Deleniti, perferendis.
-                                Optio accusantium laboriosam architecto deleniti assumenda?
-                                Tempore.
-                            </textarea>
+
+                            <!-- 데이지 로그창 -->
+                            <div id="right-log_pan" class="log_pan_css" name="">
+                                
+                            </div>
                         </ul>
 
                     </li>
@@ -576,7 +548,7 @@
                                     <!-- 오른쪽 챔피언 박스 -->
                                     <div class="">
                                         <div class="btn btn-red mt-1" type="button" id="right-champion-btn" data-toggle="">
-                                            <img class="portrait img-fluid mx-auto right-champion-img" src="img/dummy.png" name="" id="right-champ-portrait"
+                                            <img class="portrait img-fluid mx-auto right-champion-img" src="./resource/img/dummy.png" name="" id="right-champ-portrait"
                                                  data-toggle="tooltip" data-placement="bottom" />
                                         </div>
                                         <!-- 오른쪽 챔피언 목록 -->
@@ -614,24 +586,24 @@
                                 <!-- 챔피언 레벨표시 -->
                                 <select name="LV" id="right_champ_lv" class="chmap_Lv" style="width: 100%; height: 100%">
                                     <option value="1">default</option>
-                                    <!--                                    <option value="1">01</option>-->
-                                    <!--                                    <option value="2">02</option>-->
-                                    <!--                                    <option value="3">03</option>-->
-                                    <!--                                    <option value="4">04</option>-->
-                                    <!--                                    <option value="5">05</option>-->
-                                    <!--                                    <option value="6">06</option>-->
-                                    <!--                                    <option value="7">07</option>-->
-                                    <!--                                    <option value="8">08</option>-->
-                                    <!--                                    <option value="9">09</option>-->
-                                    <!--                                    <option value="10">10</option>-->
-                                    <!--                                    <option value="11">11</option>-->
-                                    <!--                                    <option value="12">12</option>-->
-                                    <!--                                    <option value="13">13</option>-->
-                                    <!--                                    <option value="14">14</option>-->
-                                    <!--                                    <option value="15">15</option>-->
-                                    <!--                                    <option value="16">16</option>-->
-                                    <!--                                    <option value="17">17</option>-->
-                                    <!--                                    <option value="18">18</option>-->
+<!--                                    <option value="1">01</option>-->
+<!--                                    <option value="2">02</option>-->
+<!--                                    <option value="3">03</option>-->
+<!--                                    <option value="4">04</option>-->
+<!--                                    <option value="5">05</option>-->
+<!--                                    <option value="6">06</option>-->
+<!--                                    <option value="7">07</option>-->
+<!--                                    <option value="8">08</option>-->
+<!--                                    <option value="9">09</option>-->
+<!--                                    <option value="10">10</option>-->
+<!--                                    <option value="11">11</option>-->
+<!--                                    <option value="12">12</option>-->
+<!--                                    <option value="13">13</option>-->
+<!--                                    <option value="14">14</option>-->
+<!--                                    <option value="15">15</option>-->
+<!--                                    <option value="16">16</option>-->
+<!--                                    <option value="17">17</option>-->
+<!--                                    <option value="18">18</option>-->
                                 </select>
                             </li>
                             <li>
@@ -639,8 +611,9 @@
                                 <button id="right_BA_button" type="button" class="BA_button btn_green">BasicAttack</button>
                                 <!-- 베이직 어택 -->
                             </li>
+                            <!-- 오른쪽 크리티컬 체크 박스 -->
                             <li class="cri_check btn_green">
-                                <span title="체크시 크리티컬 어쩌구가 저쩌구 됩니다.">Cri</span>
+                                <span title="체크시 치명타 확률이 100가 됩니다.">Cri</span>
                                 <input type="checkbox" id="right_critical" name="critical" value="critical" />
                             </li>
                         </ul>
@@ -722,7 +695,7 @@
                                 <tr>
                                     <td class="stat_name" id="armorR">방어력</td>
                                     <td class="stat_value_R">30</td>
-                                    <td class="stat_name" id="spellBlockR">마법 저항력</td>
+                                    <td class="stat_name" id="spellBlockR">마 저</td>
                                     <td class="stat_value_R">30</td>
                                 </tr>
                                 <tr>
@@ -732,47 +705,47 @@
                                     <td class="stat_value_R">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="arPenR">방어구 관통력</td>
+                                    <td class="stat_name" id="arPenR">방 관</td>
                                     <td class="stat_value_R">0%</td>
-                                    <td class="stat_name" id="spPenR">마법 관통력</td>
+                                    <td class="stat_name" id="spPenR">마 관</td>
                                     <td class="stat_value_R">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="adPenR">물리 관통력</td>
+                                    <td class="stat_name" id="adPenR">물 관</td>
                                     <td class="stat_value_R">0</td>
-                                    <td class="stat_name" id="vampR">모든 피해 흡혈</td>
+                                    <td class="stat_name" id="vampR">피해 흡혈</td>
                                     <td class="stat_value_R">0%</td>
                                 </tr>
                                 <tr>
                                     <td class="stat_name" id="coolTimeR">스킬 가속</td>
                                     <td class="stat_value_R">0</td>
-                                    <td class="stat_name" id="critR">치명타 확률</td>
+                                    <td class="stat_name" id="critR">치명타율</td>
                                     <td class="stat_value_R">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="stat_name" id="hpRegenR">기본 체력 재생</td>
+                                    <td class="stat_name" id="hpRegenR">체력 재생</td>
                                     <td class="stat_value_R">0</td>
-                                    <td class="stat_name" id="mpRegenR">기본 마나 재생</td>
+                                    <td class="stat_name" id="mpRegenR">마나 재생</td>
                                     <td class="stat_value_R">0</td>
                                 </tr>
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp1R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp2R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp3R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp4R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td class="stat_name" id="temp5R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                    <td class="stat_name" id="temp6R"></td>-->
-                                <!--                                    <td class="stat_value_R">0</td>-->
-                                <!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp1R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp2R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp3R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp4R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="stat_name" id="temp5R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                    <td class="stat_name" id="temp6R"></td>-->
+<!--                                    <td class="stat_value_R">0</td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                     </li>
@@ -790,7 +763,7 @@
         <div>
             <div id="modal_contents" class="modal_contents">
                 <div class="modal_content">
-                    <h3 class="notice-title">calclol은?</h3><br/>
+                    <h3 class="notice-title">carry.kr은?</h3><br/>
                     <p>&nbsp;&nbsp;
                         League of Legends 빌드 및 통계 계산기이자 간단한 결투 시뮬레이터입니다. LoL 연습 도구 밖에서 빠르고 쉽게 챔피언, 아이템, 파워 구축을 테스트하고 측정할 수 있도록 돕는 것이 목표입니다. 이는 진공 상태에서 상대 빌드 강도를 테스트하는 쉬운 방법을 제공하므로 게임 내 연습에 더 많은 시간을 할애할 수 있습니다. 챔피언과 아이템 패시브를 모두 고려한 능력 쿨다운, 기본 공격, 활성 능력에 대한 대략적인 통계를 볼 수 있도록 하는 것이 아이디어입니다. 또한 체력/마나 재생 및 기타 시간 기반 효과(DoT, 감속 등)의 가시적인 효과를 허용하는 시간의 흐름을 처리하여 거래 및 결투의 보다 정확한 결과를 허용합니다.
                         <br/>&nbsp;&nbsp;
@@ -813,6 +786,7 @@
                 <div class="modal_content">
                     <h3 class="notice-title">사용설명서</h3><br/>
                     <p>
+                        <span class="yellow-text">아이템의 능력치는 적용되지만, 특수효과는 적용되지 않습니다. (예, 루덴데미지 혹은 도미닉경의 거인학살자 데미지 등)</span><br/>
                         드롭다운에서 챔피언을 선택하거나 자동으로 챔피언을 검색하세요.<br/>
                         챔피언 레벨을 원하는 대로 조정하세요.<br/>
                         룬/마스터리를 선택하세요(아직 구현되지 않음).<br/>
@@ -828,10 +802,10 @@
     </div>
     <!-- about us 모달창 E -->
 
-    <script src="./js/test.js"></script>
-    <script src="./js/decimal.js"></script>
-    <script src="./js/web.js"></script> <!-- 원래 따로 만들었는데 재홍이가 test.js 에 붙여넣음 -->
-    <!--    <script> let test ={}; </script>-->
+    <script src="./js/test.js"></script> <!-- 모든 기능 이벤트  -->
+    <script src="./js/decimal.js"></script> <!-- 계산식 -->
+    <script src="./js/web.js"></script> <!-- 웹페이지 이벤트 관련 -->
+
     <!-- 메인영역 E -->
 
     <!-- 푸터영역 -->

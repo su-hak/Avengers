@@ -98,6 +98,15 @@ body {
 
 /* 초기화  E */
 
+
+/* 기본 클래스 */
+.red-text {
+    color: #ff0000;
+}
+.yellow-text {
+    color: #eeff00;
+}
+
 /* 헤더영역 */
 #header {
     width: 100%;
@@ -511,7 +520,7 @@ body {
 /* 배경 위 메인 페이지 */
 #main #sectionF {
     position: absolute;
-    top: 120px;
+    top: 120px;        
     width: 1153px;
     height: 800px;
     display: flex;
@@ -521,7 +530,7 @@ body {
 
 @media (max-width : 768px) {
     #main {
-        background-color: #d5ecaf;
+        background-color: #888888;
     }
     #main #sectionB {
         display: none;
@@ -790,11 +799,25 @@ body {
 }
 
 /* 스킬창 */
+.skill-description {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
+
 .skill_pan {
     margin-bottom: 10px;
 }
 
 /* 스킬버튼 */
+.skill {
+    position: relative;
+    display: inline-block;
+}
+
 .skill_Btn {
     position: relative;
     width: 50px;
@@ -856,7 +879,7 @@ body {
     width: 215px;
     height: 300px;
     background-color: rgb(255, 255, 255);
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .stat td {
@@ -864,14 +887,14 @@ body {
 }
 
 .stat_name {
-    width: 65.5px;    /* 기본 54px */
+    width: 55.5px;    /* 기본 54px */
     /* background: #7cc0ff; */
     background: #323749;
     color: #ffffff;
 }
 
 .stat_value, .stat_value_R {
-    width: 45px;
+    width: 55px;
     /* background: #b1daff; */
     background: #525975;
     color: #ffe600;
@@ -924,9 +947,10 @@ body {
     width: 70px !important;
     height: 70px;
     background: #c7c7c7;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border: 2px solid #c9b92f;
     text-wrap: balance;
+    align-items: center;
 }
 .item_box_list:hover {
     border: 2px solid #eeff00;
@@ -953,7 +977,7 @@ body {
     background: #2c2e3e;
     color: #ffffff;
     font-size: 12px;
-    /* overflow: scroll; 무조건 스크롤바를 표시 */
+    overflow: scroll; /* 무조건 스크롤바를 표시 */
     scrollbar-width: 6px; /* 스크롤바의 너비를 얇게 설정 (크롬, 파이어폭스 등 최신 브라우저에서 적용) */
     scrollbar-color: transparent transparent; /* 스크롤바 색상을 투명으로 설정 */
 }
