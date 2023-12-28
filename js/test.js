@@ -1144,7 +1144,7 @@ $("#item-list").click(function (e) {
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
         console.log("저장된 스탯::: ", items);
         itemGoldUpdate();
-
+        itemFilterControl();
 
 
     } else if (e.target.classList.contains('item-img')) {
