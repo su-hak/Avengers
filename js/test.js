@@ -464,6 +464,14 @@ function setChampStats(id) {
                         mpBar.style.width = currentWidth + "%"; // width 값 업데이트
                     }
                 });
+            } else if(getCost == "reset"){
+                costMp = realMp;
+                cost = 0;
+                targetMp.textContent = costMp;
+                var maxWidth = 100; // 최대 width 값 (100%)
+                var currentWidth = (costMp / realMp) * maxWidth; // 현재 width 값 계산
+                var mpBar = document.getElementById("left-rsc-bar"); // mp 바 엘리먼트 가져오기
+                mpBar.style.width = currentWidth + "%"; // width 값 업데이트
             } else {
                 targetMp.textContent = costMp;
                 var maxWidth = 100; // 최대 width 값 (100%)
@@ -2037,15 +2045,16 @@ $('#defaultAll').click(function (){
     itemStatCalc();
     isSavedItemsDefault();
     itemGoldUpdate();
-    console.log()
+
 })
 
 function defaultAll() {
     const resetLevel = document.getElementById('champ_lv');
     resetLevel.value = 1;
 
-    delete savedItems[callIdx]; // 저장된 아이템
-    itemGold[callIdx] = 0; // 아이템 골드
+    savedItems = Array(6); // 아이템 초기화
+    itemGold = Array(6); // 아이템 골드 초기화 (nan으로 표시)
+    itemGold.fill(0); // 골드를 0 으로 초기화
 
     // 저장 된 스킬 레벨
     for (var i = 0; i < 4; i++) {
@@ -2054,8 +2063,12 @@ function defaultAll() {
         skillLevelInput.value = 0;
     }
 
-    console.log("아이템 잔여 확인 :: ", savedItems);
-    $("#iBox" + callIdx).css("background-image", "none");
-    $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
-    console.log("저장된 스탯::: ", items);
+    // for문 돌면서 모든 iBox 선택
+    for (let callIdx = 0; callIdx < 6; callIdx++) {
+        $("#iBox" + callIdx).css("background-image", "none");
+        $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+    }
+    test.setRealMp("reset");
+
+
 }
