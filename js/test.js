@@ -2040,9 +2040,13 @@ $('#defaultAll').click(function (){
     console.log()
 })
 
-function defaultAll(){
+function defaultAll() {
+    const resetLevel = document.getElementById('champ_lv');
+    resetLevel.value = 1;
+
     delete savedItems[callIdx]; // 저장된 아이템
     itemGold[callIdx] = 0; // 아이템 골드
+
     // 저장 된 스킬 레벨
     for (var i = 0; i < 4; i++) {
         var skillInputId = "left-skill" + (i + 1) + "-num"; // 스킬 레벨 표시 id 변수선언
@@ -2050,15 +2054,8 @@ function defaultAll(){
         skillLevelInput.value = 0;
     }
 
-
-    console.log("아이템 잔여 확인 :: ",savedItems);
+    console.log("아이템 잔여 확인 :: ", savedItems);
     $("#iBox" + callIdx).css("background-image", "none");
     $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
     console.log("저장된 스탯::: ", items);
-
-}
-test.getSelectedLevel = function() {
-    const selectElement = document.getElementById('champ_lv');
-    test.selectedValue = selectElement.value;
-    return test.selectedValue;
 }
