@@ -2008,3 +2008,4 @@ saveFileToArray(filePath, function (error, jsonData) {
         console.log(championsArray[74].abilities.R[0].cost.modifiers[0].values[0]);
     }
 });
+
