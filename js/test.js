@@ -565,7 +565,7 @@ rArea.r_SetRealHp = function(getDamage){
 function getChampionList() {
     $.ajax({
         type: "get",
-        url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion.json",
+        url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion.json",
         success: function (data) {
             var champions = Object.values(data.data);
             // 챔피언 이름을 기준으로 정렬
@@ -583,7 +583,7 @@ function detailedChamp(id, callback){
     let detail;
     $.ajax({
         type: "get",
-        url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion/"+id+".json",
+        url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion/"+id+".json",
         success: function (data) {
             var dtch = Object.values(data.data); // 챔피언 데이터 배열 추출
             console.log("dtch :" + dtch);
@@ -888,7 +888,7 @@ items.fullMp= 0;
 // API 가져오기
 $.ajax({
     type: "get",
-    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+    url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
     success: function (data) {
         allItems = Object.values(data.data); //아이템 데이터 배열 추출
 
@@ -1314,7 +1314,7 @@ itemsR.fullMp= 0;
 // API 가져오기
 $.ajax({
     type: "get",
-    url: "http://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
+    url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
     success: function (data) {
         allitemsR = Object.values(data.data); //아이템 데이터 배열 추출
 
@@ -1720,7 +1720,7 @@ function calculateDamage(championName, skillIndex, level, values, valuesR, ) {
             const skillMp = championsArray[74].abilities.Q[0].cost.modifiers[0].values[level - 1];
             rArea.r_SetRealHp(damage);
             test.setRealMp(skillMp);
-            damageText = `(Q) ${damage}의 데미지를 입혔습니다.<br>`;
+            damageText = `(Q) <span style='color: #eeff00;'>${damage}</span>의 데미지를 입혔습니다.<br>`;
         } else if (skillIndex === 1) {
             const skillMp = championsArray[74].abilities.W[0].cost.modifiers[0].values[level - 1];
             damageText = "(W) 0의 데미지를 입혔습니다.<br>";
@@ -1731,13 +1731,13 @@ function calculateDamage(championName, skillIndex, level, values, valuesR, ) {
             const skillMp = championsArray[74].abilities.E[0].cost.modifiers[0].values[level - 1];
             rArea.r_SetRealHp(damage);
             test.setRealMp(skillMp);
-            damageText = `(E) ${damage}의 데미지를 입혔습니다.<br>`;
+            damageText = `(E) <span style='color: #eeff00;'>${damage}</span>의 데미지를 입혔습니다.<br>`;
         } else if (skillIndex === 3) {
             const damage = Math.round((Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[0].values[level - 1]) + (Number(championsArray[championIndex].abilities.R[0].effects[0].leveling[0].modifiers[1].values[0] * 0.01)) * Number(values[1])) * 100 / (100 + Number(valuesR[3]) - (Number(valuesR[3]) * (Number(parseInt(values[7])) * 0.01) + Number(Magic_Penetration))));
             const skillMp = championsArray[74].abilities.R[0].cost.modifiers[0].values[level - 1];
             rArea.r_SetRealHp(damage);
             test.setRealMp(skillMp);
-            damageText = `(R) ${damage}의 데미지를 입혔습니다.<br>`;
+            damageText = `(R) <span style='color: #eeff00;'>${damage}</span>의 데미지를 입혔습니다.<br>`;
         }
     }
 
@@ -1825,7 +1825,7 @@ leftBAButton.addEventListener('click', function() {
 
     console.log(championName, values, valuesR); // 배열 출력 또는 원하는 작업 수행
     const logPan = document.getElementById('left-log_pan');
-
+    
     let damage;
     if (values[11] === "100") { // 치명타 구현
         damage = Math.round(Number(values[0] * 1.75) * 100 / (100 + Number(valuesR[2]) - ((Number(valuesR[2]) * Number(values[6]) * 0.01 + ((0.6 * Number(values[8]) + (0.4 * (selectedLevel / 18) * Number(values[8]))))))));
@@ -1836,7 +1836,7 @@ leftBAButton.addEventListener('click', function() {
     }
 
     console.log(Number(valuesR[15]) - Number(damage));
-    logPan.innerHTML += "(평타)" + damage + "의 데미지를 입혔습니다. <br>";
+    logPan.innerHTML += "(평타) <span style='color: #eeff00;'>" + damage + "</span>" + "의 데미지를 입혔습니다. <br>";
 });
 
 
@@ -1849,9 +1849,12 @@ championButton.addEventListener('click', function () {
     logPanElement.innerHTML = '';
 });
 
-
-
-
+// 데이미 로그 하단 갱신
+function scrollToBottom() {
+    var chatContainer = document.getElementById("left-log_pan");
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+setInterval(scrollToBottom, 1000); // 1초마다 스크롤을 맨 아래로 이동
 
 
 
