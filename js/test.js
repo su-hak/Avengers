@@ -888,6 +888,8 @@ function calculateTotalSkillLevel() {
 
 
 // 수학 햄 js
+
+// 왼쪽 아이템 시작
 let items = {};
 // let savedItems = []; // 아이템 저장 배열
 var savedItems = new Array(6);
@@ -1085,6 +1087,7 @@ $("#item-list").click(function (e) {
         $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
         console.log("저장된 스탯::: ", items);
         itemGoldUpdate();
+        itemFilterControl();
 
 
 
@@ -1317,7 +1320,30 @@ function itemStatCalc() {
     })
 }
 
+// 아이템 생성 컨테이너 바깥 영역 클릭 시 닫기
+$(document).mouseup(function(e){
+    var containerL=$("#left-item-filter-options");
+    var containerR=$("#right-item-filter-options");
+
+// newBox와 item_pan를 제외한 부분을 클릭 했을 경우 newBox닫기
+    if(!containerL.is(e.target)
+        && containerL.has(e.target).length===0
+        && !$("#plusItem").is(e.target)
+        && $("#plusItem").has(e.target).length===0){
+        $("#left-item-filter-options").css("display", "none");
+    }
+    if(!containerR.is(e.target)
+        && containerR.has(e.target).length===0
+        && !$("#plusItemR").is(e.target)
+        && $("#plusItemR").has(e.target).length===0){
+        $("#right-item-filter-options").css("display", "none");
+    }
+});
+
+// 왼쪽 아이템 끝
+
 // 오른쪽 아이템 추가
+
 // let saveditemsR = []; // 아이템 저장 배열
 var saveditemsR = new Array(6);
 var itemGoldR = new Array(6);
@@ -1347,7 +1373,7 @@ itemsR.fullHp= 0;
 itemsR.fullMp= 0;
 
 
-// API 가져오기
+// 우측 아이템 API 가져오기
 $.ajax({
     type: "get",
     url: "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/item.json",
@@ -1512,6 +1538,7 @@ $("#item-listR").click(function (e) {
         $("#iBox" + callIdxR).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
         console.log("저장된 스탯::: ", itemsR);
         itemGoldUpdateR();
+        itemFilterControlR();
 
 
 
@@ -1736,7 +1763,9 @@ function itemstatCalcR() {
 
 }
 
-// HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
+// 오른쪽 아이템 끝
+
+
 // HTML 테이블에서 stat_value의 값을 가져와 배열에 넣는 함수
 // HTML 테이블에서 stat_value, left-rsc-value, left-hp-value의 값을 가져와 배열에 넣는 함수
 
@@ -1949,3 +1978,34 @@ saveFileToArray(filePath, function (error, jsonData) {
         console.log(championsArray[74].abilities.R[0].cost.modifiers[0].values[0]);
     }
 });
+
+$('#defaultAll').click(function (){
+    defaultAll();
+    itemStatCalc();
+    isSavedItemsDefault();
+    itemGoldUpdate();
+    console.log()
+})
+
+function defaultAll(){
+    delete savedItems[callIdx]; // 저장된 아이템
+    itemGold[callIdx] = 0; // 아이템 골드
+    // 저장 된 스킬 레벨
+    for (var i = 0; i < 4; i++) {
+        var skillInputId = "left-skill" + (i + 1) + "-num"; // 스킬 레벨 표시 id 변수선언
+        var skillLevelInput = document.getElementById(skillInputId);
+        skillLevelInput.value = 0;
+    }
+
+
+    console.log("아이템 잔여 확인 :: ",savedItems);
+    $("#iBox" + callIdx).css("background-image", "none");
+    $("#iBox" + callIdx).html('<iconify-icon icon="ic:baseline-plus" style="color: #ff00e1;" width="50" height="50"></iconify-icon>');
+    console.log("저장된 스탯::: ", items);
+
+}
+test.getSelectedLevel = function() {
+    const selectElement = document.getElementById('champ_lv');
+    test.selectedValue = selectElement.value;
+    return test.selectedValue;
+}
